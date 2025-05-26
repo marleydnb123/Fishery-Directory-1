@@ -166,7 +166,7 @@ const FisheryDetail: React.FC = () => {
         <div className="container mx-auto h-full flex items-end">
           <div className="text-white p-6 md:p-8 relative z-10">
             <motion.h1 
-              className="text-6xl font-bebas font-bold font-bold mb-2"
+              className="font-bebas font-bold mb-2 text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}

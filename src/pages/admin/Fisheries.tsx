@@ -10,7 +10,7 @@ const emptyFishery: Omit<Fishery, 'id'> = {
   district: '',
   image: '',
   species: [],
-  features: [], // Added missing features array
+  features: [],
   isFeatured: false,
   hasAccommodation: false,
   description: '',
@@ -20,6 +20,23 @@ const emptyFishery: Omit<Fishery, 'id'> = {
   day_ticket_price: 0,
   descriptionpage: '',
   rules: '',
+  night_fishing_allowed: false,
+  fishing_type: '',
+  match_fishing_friendly: false,
+  disabled_access: false,
+  facilities: [],
+  dog_friendly: false,
+  price_range: '',
+  fire_pits_allowed: false,
+  booking_type: '',
+  parking_close: false,
+  camping_allowed: false,
+  catch_photos: false,
+  wifi_signal: '',
+  fisheryimages1: '',
+  fisheryimages2: '',
+  fisheryimages3: '',
+  fisheryvideo: '',
 };
 
 const AdminFisheries: React.FC = () => {
@@ -49,8 +66,8 @@ const AdminFisheries: React.FC = () => {
             isFeatured: f.isfeatured,
             hasAccommodation: f.hasaccommodation,
             species: Array.isArray(f.species) ? f.species : [],
-            features: Array.isArray(f.features) ? f.features : [], // Ensure features is always an array
-            description: f.description || '', // Defensive for null
+            features: Array.isArray(f.features) ? f.features : [],
+            description: f.description || '',
           }))
         );
       }
@@ -103,10 +120,10 @@ const AdminFisheries: React.FC = () => {
       .insert([{
         name: formFishery.name,
         slug,
-        district: formFishery.district, 
+        district: formFishery.district,
         image: formFishery.image,
         species: formFishery.species,
-        features: formFishery.features, // Include features in insert
+        features: formFishery.features,
         description: formFishery.description,
         isfeatured: formFishery.isFeatured,
         hasaccommodation: formFishery.hasAccommodation,
@@ -116,16 +133,33 @@ const AdminFisheries: React.FC = () => {
         day_ticket_price: formFishery.day_ticket_price,
         descriptionpage: formFishery.descriptionpage,
         rules: formFishery.rules,
+        night_fishing_allowed: formFishery.night_fishing_allowed,
+        fishing_type: formFishery.fishing_type,
+        match_fishing_friendly: formFishery.match_fishing_friendly,
+        disabled_access: formFishery.disabled_access,
+        facilities: formFishery.facilities,
+        dog_friendly: formFishery.dog_friendly,
+        price_range: formFishery.price_range,
+        fire_pits_allowed: formFishery.fire_pits_allowed,
+        booking_type: formFishery.booking_type,
+        parking_close: formFishery.parking_close,
+        camping_allowed: formFishery.camping_allowed,
+        catch_photos: formFishery.catch_photos,
+        wifi_signal: formFishery.wifi_signal,
+        fisheryimages1: formFishery.fisheryimages1,
+        fisheryimages2: formFishery.fisheryimages2,
+        fisheryimages3: formFishery.fisheryimages3,
+        fisheryvideo: formFishery.fisheryvideo,
       }])
       .select()
       .single();
     if (!error && data) {
-      setFisheries([{ 
-        ...data, 
-        isFeatured: data.isfeatured, 
+      setFisheries([{
+        ...data,
+        isFeatured: data.isfeatured,
         hasAccommodation: data.hasaccommodation,
         species: Array.isArray(data.species) ? data.species : [],
-        features: Array.isArray(data.features) ? data.features : [], // Ensure features is always an array
+        features: Array.isArray(data.features) ? data.features : [],
         description: data.description || '',
       }, ...fisheries]);
     }
@@ -144,7 +178,7 @@ const AdminFisheries: React.FC = () => {
         district: formFishery.district,
         image: formFishery.image,
         species: formFishery.species,
-        features: formFishery.features, // Include features in update
+        features: formFishery.features,
         description: formFishery.description,
         isfeatured: formFishery.isFeatured,
         hasaccommodation: formFishery.hasAccommodation,
@@ -154,6 +188,23 @@ const AdminFisheries: React.FC = () => {
         day_ticket_price: formFishery.day_ticket_price,
         descriptionpage: formFishery.descriptionpage,
         rules: formFishery.rules,
+        night_fishing_allowed: formFishery.night_fishing_allowed,
+        fishing_type: formFishery.fishing_type,
+        match_fishing_friendly: formFishery.match_fishing_friendly,
+        disabled_access: formFishery.disabled_access,
+        facilities: formFishery.facilities,
+        dog_friendly: formFishery.dog_friendly,
+        price_range: formFishery.price_range,
+        fire_pits_allowed: formFishery.fire_pits_allowed,
+        booking_type: formFishery.booking_type,
+        parking_close: formFishery.parking_close,
+        camping_allowed: formFishery.camping_allowed,
+        catch_photos: formFishery.catch_photos,
+        wifi_signal: formFishery.wifi_signal,
+        fisheryimages1: formFishery.fisheryimages1,
+        fisheryimages2: formFishery.fisheryimages2,
+        fisheryimages3: formFishery.fisheryimages3,
+        fisheryvideo: formFishery.fisheryvideo,
       })
       .eq('id', currentFishery.id)
       .select()
@@ -161,12 +212,12 @@ const AdminFisheries: React.FC = () => {
     if (!error && data) {
       setFisheries(fisheries.map(f =>
         f.id === currentFishery.id
-          ? { 
-              ...data, 
-              isFeatured: data.isfeatured, 
+          ? {
+              ...data,
+              isFeatured: data.isfeatured,
               hasAccommodation: data.hasaccommodation,
               species: Array.isArray(data.species) ? data.species : [],
-              features: Array.isArray(data.features) ? data.features : [], // Ensure features is always an array
+              features: Array.isArray(data.features) ? data.features : [],
               description: data.description || '',
             }
           : f
@@ -342,7 +393,7 @@ const AdminFisheries: React.FC = () => {
                           district: fishery.district,
                           image: fishery.image,
                           species: fishery.species,
-                          features: fishery.features, // Include features when editing
+                          features: fishery.features,
                           isFeatured: fishery.isFeatured,
                           hasAccommodation: fishery.hasAccommodation,
                           description: fishery.description,
@@ -352,6 +403,23 @@ const AdminFisheries: React.FC = () => {
                           day_ticket_price: fishery.day_ticket_price,
                           descriptionpage: fishery.descriptionpage,
                           rules: fishery.rules,
+                          night_fishing_allowed: fishery.night_fishing_allowed,
+                          fishing_type: fishery.fishing_type,
+                          match_fishing_friendly: fishery.match_fishing_friendly,
+                          disabled_access: fishery.disabled_access,
+                          facilities: fishery.facilities,
+                          dog_friendly: fishery.dog_friendly,
+                          price_range: fishery.price_range,
+                          fire_pits_allowed: fishery.fire_pits_allowed,
+                          booking_type: fishery.booking_type,
+                          parking_close: fishery.parking_close,
+                          camping_allowed: fishery.camping_allowed,
+                          catch_photos: fishery.catch_photos,
+                          wifi_signal: fishery.wifi_signal,
+                          fisheryimages1: fishery.fisheryimages1,
+                          fisheryimages2: fishery.fisheryimages2,
+                          fisheryimages3: fishery.fisheryimages3,
+                          fisheryvideo: fishery.fisheryvideo,
                         });
                         setIsEditModalOpen(true);
                       }}
@@ -385,7 +453,7 @@ const AdminFisheries: React.FC = () => {
       {/* Add Modal */}
       {isAddModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 max-w-4xl w-full mx-4">
+          <div className="bg-white rounded-xl p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
             <h3 className="text-xl font-semibold mb-4">Add New Fishery</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Basic Information */}
@@ -439,74 +507,144 @@ const AdminFisheries: React.FC = () => {
                     onChange={e => setFormFishery(f => ({ ...f, features: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
-              </div>
-              
-              {/* Additional Information */}
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Contact Phone</label>
-                  <input
-                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
-                    placeholder="Contact phone number"
-                    value={formFishery.contact_phone || ''}
-                    onChange={e => setFormFishery(f => ({ ...f, contact_phone: e.target.value }))}
-                  />
-                </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Facilities</label>
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
-                    placeholder="Contact email"
-                    type="email"
-                    value={formFishery.contact_email || ''}
-                    onChange={e => setFormFishery(f => ({ ...f, contact_email: e.target.value }))}
+                    placeholder="Facilities (comma separated)"
+                    value={formFishery.facilities?.join(',') || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, facilities: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Fishing Type</label>
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
-                    placeholder="Website URL"
-                    type="url"
-                    value={formFishery.website || ''}
-                    onChange={e => setFormFishery(f => ({ ...f, website: e.target.value }))}
+                    placeholder="e.g., Match, Pleasure, Specimen"
+                    value={formFishery.fishing_type || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, fishing_type: e.target.value }))}
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Day Ticket Price</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
-                    placeholder="Day ticket price"
-                    type="number"
-                    step="0.01"
-                    value={formFishery.day_ticket_price || ''}
-                    onChange={e => setFormFishery(f => ({ ...f, day_ticket_price: parseFloat(e.target.value) }))}
+                    placeholder="e.g., £10-25"
+                    value={formFishery.price_range || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, price_range: e.target.value }))}
                   />
                 </div>
-                
-                <div className="flex space-x-4">
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Booking Type</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="e.g., Day Ticket, Members Only"
+                    value={formFishery.booking_type || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, booking_type: e.target.value }))}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Wi-Fi Signal</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="e.g., Strong, Weak, None"
+                    value={formFishery.wifi_signal || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, wifi_signal: e.target.value }))}
+                  />
+                </div>
+
+                <div className="space-y-4">
                   <div className="flex items-center">
                     <input
                       type="checkbox"
-                      checked={formFishery.isFeatured}
-                      onChange={e => setFormFishery(f => ({ ...f, isFeatured: e.target.checked }))}
+                      checked={formFishery.night_fishing_allowed || false}
+                      onChange={e => setFormFishery(f => ({ ...f, night_fishing_allowed: e.target.checked }))}
                       className="mr-2"
-                      id="isFeatured"
+                      id="nightFishing"
                     />
-                    <label htmlFor="isFeatured" className="text-sm">Featured</label>
+                    <label htmlFor="nightFishing" className="text-sm">Night Fishing Allowed</label>
                   </div>
+
                   <div className="flex items-center">
                     <input
                       type="checkbox"
-                      checked={formFishery.hasAccommodation}
-                      onChange={e => setFormFishery(f => ({ ...f, hasAccommodation: e.target.checked }))}
+                      checked={formFishery.match_fishing_friendly || false}
+                      onChange={e => setFormFishery(f => ({ ...f, match_fishing_friendly: e.target.checked }))}
                       className="mr-2"
-                      id="hasAccommodation"
+                      id="matchFishing"
                     />
-                    <label htmlFor="hasAccommodation" className="text-sm">Accommodation</label>
+                    <label htmlFor="matchFishing" className="text-sm">Match Fishing Friendly</label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.disabled_access || false}
+                      onChange={e => setFormFishery(f => ({ ...f, disabled_access: e.target.checked }))}
+                      className="mr-2"
+                      id="disabledAccess"
+                    />
+                    <label htmlFor="disabledAccess" className="text-sm">Disabled Access</label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.dog_friendly || false}
+                      onChange={e => setFormFishery(f => ({ ...f, dog_friendly: e.target.checked }))}
+                      className="mr-2"
+                      id="dogFriendly"
+                    />
+                    <label htmlFor="dogFriendly" className="text-sm">Dog Friendly</label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.fire_pits_allowed || false}
+                      onChange={e => setFormFishery(f => ({ ...f, fire_pits_allowed: e.target.checked }))}
+                      className="mr-2"
+                      id="firePits"
+                    />
+                    <label htmlFor="firePits" className="text-sm">Fire Pits Allowed</label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.parking_close || false}
+                      onChange={e => setFormFishery(f => ({ ...f, parking_close: e.target.checked }))}
+                      className="mr-2"
+                      id="parkingClose"
+                    />
+                    <label htmlFor="parkingClose" className="text-sm">Close Parking</label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.camping_allowed || false}
+                      onChange={e => setFormFishery(f => ({ ...f, camping_allowed: e.target.checked }))}
+                      className="mr-2"
+                      id="campingAllowed"
+                    />
+                    <label htmlFor="campingAllowed" className="text-sm">Camping Allowed</label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.catch_photos || false}
+                      onChange={e => setFormFishery(f => ({ ...f, catch_photos: e.target.checked }))}
+                      className="mr-2"
+                      id="catchPhotos"
+                    />
+                    <label htmlFor="catchPhotos" className="text-sm">Catch Photos Available</label>
                   </div>
                 </div>
               </div>
@@ -546,22 +684,63 @@ const AdminFisheries: React.FC = () => {
                   rows={4}
                 />
               </div>
-            </div>
+
+              {/* Image Fields */}
+              <div className="mt-4 space-y-4">
+                <h4 className="font-medium text-gray-900">Additional Images</h4>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Image 1</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="Image URL"
+                    value={formFishery.fisheryimages1 || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, fisheryimages1: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Image 2</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="Image URL"
+                    value={formFishery.fisheryimages2 || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, fisheryimages2: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Image 3</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="Image URL"
+                    value={formFishery.fisheryimages3 || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, fisheryimages3: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Video URL</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="YouTube, Vimeo, or other video URL"
+                    value={formFishery.fisheryvideo || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, fisheryvideo: e.target.value }))}
+                  />
+                </div>
+              </div>
             
-            <div className="flex justify-end space-x-3 mt-4">
-              <button
-                onClick={() => setIsAddModalOpen(false)}
-                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleAddFishery}
-                className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
-                disabled={!formFishery.name}
-              >
-                Save
-              </button>
+              <div className="flex justify-end space-x-3 mt-4">
+                <button
+                  onClick={() => setIsAddModalOpen(false)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleAddFishery}
+                  className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+                  disabled={!formFishery.name}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -599,46 +599,57 @@ const FisheryDetail: React.FC = () => {
         )}
 
         {activeTab === 'accommodation' && fishery.hasaccommodation && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2 className="text-2xl font-semibold mb-6">Accommodation at {fishery.name}</h2>
-            
-            {accommodation.length > 0 ? (
-              <div className="space-y-6">
-                {accommodation.map((acc) => (
-                  <div key={acc.id} className="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div className="p-6">
-                      <div className="flex justify-between items-start mb-3">
-                        <h3 className="text-xl font-semibold">{acc.type}</h3>
-                        <div className="text-primary-600 font-bold">
-                          £{acc.price}
-                          <span className="text-gray-500 text-sm font-normal">/night</span>
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-700 mb-4">{acc.notes}</p>
-                      
-                      <a
-                        href={`mailto:${fishery.contact_email || ''}`}
-                        className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors"
-                      >
-                        <Book className="h-4 w-4 mr-2 inline" />
-                        Book Now
-                      </a>
-                    </div>
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
+  >
+    <h2 className="text-2xl font-semibold mb-6">Accommodation at {fishery.name}</h2>
+    
+    {accommodation.length > 0 ? (
+      <div className="space-y-6">
+        {accommodation.map((acc) => (
+          <div key={acc.id} className="bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="flex">
+              {/* Larger, rounded image on the left */}
+              <div className="w-56 h-44 flex-shrink-0 bg-gray-100 m-4 rounded-xl overflow-hidden">
+                <img
+                  src={acc.image}
+                  alt={acc.type}
+                  className="w-full h-full object-cover rounded-xl"
+                />
+              </div>
+              {/* Details on the right */}
+              <div className="flex-1 p-6">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-xl font-semibold">{acc.type}</h3>
+                  <div className="text-primary-600 font-bold">
+                    £{acc.price}
+                    <span className="text-gray-500 text-sm font-normal">/night</span>
                   </div>
-                ))}
+                </div>
+                <p className="text-gray-700 mb-4">{acc.notes}</p>
+                <a
+                  href={`mailto:${fishery.contact_email || ''}`}
+                  className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors"
+                >
+                  <Book className="h-4 w-4 mr-2 inline" />
+                  Book Now
+                </a>
               </div>
-            ) : (
-              <div className="bg-white rounded-xl shadow-md p-6 text-center">
-                <p className="text-gray-700">No accommodation information available.</p>
-              </div>
-            )}
-          </motion.div>
-        )}
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="bg-white rounded-xl shadow-md p-6 text-center">
+        <p className="text-gray-700">No accommodation information available.</p>
+      </div>
+    )}
+  </motion.div>
+)}
+
+
 
         {activeTab === 'rules' && (
           <motion.div

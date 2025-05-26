@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AccommodationCard from '../components/common/AccommodationCard';
-import { mockAccommodation, mockFisheries } from '../data/mockData';
 import { Accommodation, UKDistrict, FishSpecies } from '../types/schema';
+import { supabase } from '../lib/supabase';
 
 // --- HoverBannerCard component ---
 function HoverBannerCard({ image, title, subtitle, href }) {
@@ -92,8 +92,11 @@ function CardGrid() {
 
 // --- Main Page ---
 const AccommodationPage: React.FC = () => {
-  const [accommodations, setAccommodations] = useState<Accommodation[]>(mockAccommodation);
-  const [filteredAccommodations, setFilteredAccommodations] = useState<Accommodation[]>(mockAccommodation);
+  const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
+  const [filteredAccommodations, setFilteredAccommodations] = useState<Accommodation[]>([]);
+  const [fisheries, setFisheries] = useState<{[key: string]: any}>({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<UKDistrict | ''>('');
   const [selectedSpecies, setSelectedSpecies] = useState<FishSpecies | ''>('');
   
@@ -131,38 +134,69 @@ const AccommodationPage: React.FC = () => {
     'Barbel'
   ];
   
+  // Fetch accommodations and related fisheries
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      
+      try {
+        // Fetch all accommodations
+        const { data: accommodationsData, error: accommodationsError } = await supabase
+          .from('accommodation')
+          .select('*');
+          
+        if (accommodationsError) throw accommodationsError;
+
+        // Get unique fishery IDs
+        const fisheryIds = [...new Set(accommodationsData.map(acc => acc.fishery_id))];
+        
+        // Fetch related fisheries
+        const { data: fisheriesData, error: fisheriesError } = await supabase
+          .from('fisheries')
+          .select('id, name, district, species, image')
+          .in('id', fisheryIds);
+          
+        if (fisheriesError) throw fisheriesError;
+        
+        // Create fisheries lookup object
+        const fisheriesLookup = fisheriesData.reduce((acc, fishery) => {
+          acc[fishery.id] = fishery;
+          return acc;
+        }, {});
+        
+        setAccommodations(accommodationsData);
+        setFisheries(fisheriesLookup);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, []);
+  
   // Apply filters
   useEffect(() => {
     let results = [...accommodations];
     
     // Apply district filter
     if (selectedDistrict) {
-      // We need to get fisheries in this district first
-      const fisheryIds = mockFisheries
-        .filter(fishery => fishery.district === selectedDistrict)
-        .map(fishery => fishery.id);
-      
-      // Then filter accommodations that belong to these fisheries
       results = results.filter(acc => 
-        fisheryIds.includes(acc.fishery_id)
+        fisheries[acc.fishery_id]?.district === selectedDistrict
       );
     }
     
     // Apply species filter
     if (selectedSpecies) {
-      // We need to get fisheries with this species first
-      const fisheryIds = mockFisheries
-        .filter(fishery => fishery.species.includes(selectedSpecies))
-        .map(fishery => fishery.id);
-      
-      // Then filter accommodations that belong to these fisheries
-      results = results.filter(acc => 
-        fisheryIds.includes(acc.fishery_id)
+      results = results.filter(acc =>
+        fisheries[acc.fishery_id]?.species?.includes(selectedSpecies)
       );
     }
     
     setFilteredAccommodations(results);
-  }, [accommodations, selectedDistrict, selectedSpecies]);
+  }, [accommodations, fisheries, selectedDistrict, selectedSpecies]);
   
   // Animation variants
   const containerVariants = {
@@ -273,7 +307,10 @@ const AccommodationPage: React.FC = () => {
           >
             {filteredAccommodations.map((accommodation) => (
               <motion.div key={accommodation.id} variants={itemVariants}>
-                <AccommodationCard accommodation={accommodation} />
+                <AccommodationCard 
+                  accommodation={accommodation}
+                  fishery={fisheries[accommodation.fishery_id]}
+                />
               </motion.div>
             ))} 
           </motion.div>

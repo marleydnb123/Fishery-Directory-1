@@ -612,7 +612,7 @@ const FisheryDetail: React.FC = () => {
           <div key={acc.id} className="bg-white rounded-xl shadow-md overflow-hidden">
             <div className="flex">
               {/* Larger, rounded image on the left */}
-              <div className="w-56 h-44 flex-shrink-0 bg-gray-100 m-4 rounded-xl overflow-hidden">
+              <div className="w-56 h-44 flex-shrink-0 bg-gray-100 m-4 rounded-xl ml-6 overflow-hidden">
                 <img
                   src={acc.image}
                   alt={acc.type}

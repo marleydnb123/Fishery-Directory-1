@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Home, PoundSterling } from 'lucide-react';
 import { Accommodation } from '../../types/schema';
 import { mockFisheries } from '../../data/mockData';
+import { supabase } from '../lib/supabase';
 
 interface AccommodationCardProps {
   accommodation: Accommodation;

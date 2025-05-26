@@ -5,13 +5,10 @@ import { Accommodation, UKDistrict, FishSpecies } from '../types/schema';
 import { supabase } from '../lib/supabase';
 
 // --- HoverBannerCard component ---
-function HoverBannerCard({ image, title, subtitle, href }) {
+function HoverBannerCard({ image, title, subtitle }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative block w-full aspect-[4/3]  overflow-hidden shadow-lg"
+    <div
+      className="group relative block w-full aspect-[4/3] overflow-hidden shadow-lg"
       title={title}
     >
       {/* Image */}
@@ -36,7 +33,7 @@ function HoverBannerCard({ image, title, subtitle, href }) {
         <h4 className="text-xl font-bold text-white mb-1">{title}</h4>
         <h6 className="text-base text-white">{subtitle}</h6>
       </div>
-    </a>
+    </div>
   );
 }
 
@@ -46,37 +43,31 @@ const hoverCards = [
     image: "https://www.yorklakesidelodges.co.uk/wp-content/uploads/2018/06/holly-lodge-york-lakeside-lodges.jpg",
     title: "Lodges",
     subtitle: "Peaceful waters",
-    href: "#",
   },
   {
     image: "https://lakeviewholidays.co.uk/wp-content/uploads/2019/05/Willow-800-x-600.jpg",
     title: "Holiday homes",
     subtitle: "Explore the woods",
-    href: "#",
   },
   {
     image: "https://tacklebox.co.uk/wp-content/uploads/2023/08/carp-fishing.webp",
     title: "Camping",
     subtitle: "Sandy adventures",
-    href: "#",
   },
   {
     image: "https://assets.parkholidays.com/assets/8a1e89800f1291cff561ee405e484b5b.jpg",
     title: "Caravan Parks",
     subtitle: "Urban exploration",
-    href: "#",
   },
   {
     image: "https://www.fisheries.co.uk/wp-content/uploads/2022/03/outpost1-600x563.jpg",
     title: "Cabins & Pods",
     subtitle: "Feel the breeze",
-    href: "#",
   },
   {
     image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
     title: "Hotels",
     subtitle: "Rolling hills",
-    href: "#",
   },
 ];
 
@@ -315,7 +306,7 @@ const AccommodationPage: React.FC = () => {
               </motion.div>
             ))} 
           </motion.div>
-        ) : ( 
+        ) : (
           <div className="text-center py-12">
             <h3 className="text-xl font-semibold mb-2">No accommodation found</h3>
             <p className="text-gray-600">

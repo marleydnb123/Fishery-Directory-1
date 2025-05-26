@@ -110,3 +110,4 @@ const AccommodationList: React.FC = () => {
 };
 
 export default AccommodationList;
+ 

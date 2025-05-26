@@ -2,18 +2,22 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Home, PoundSterling } from 'lucide-react';
 import { Accommodation } from '../../types/schema';
-import { mockFisheries } from '../../data/mockData';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../../lib/supabase';
 
 interface AccommodationCardProps {
   accommodation: Accommodation;
+  fishery?: {
+    name: string;
+    district: string;
+    species: string[];
+    image: string;
+  };
 }
 
-const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation }) => {
-  // Find the fishery this accommodation belongs to
-  const fishery = mockFisheries.find(f => f.id === accommodation.fishery_id);
-  
-  if (!fishery) return null;
+const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fishery }) => {
+  if (!fishery) {
+    return null;
+  }
   
   return (
     <motion.div

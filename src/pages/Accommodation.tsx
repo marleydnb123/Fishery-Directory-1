@@ -14,17 +14,20 @@ function HoverBannerCard({ image, title, subtitle, href }) {
       className="group relative block w-full aspect-[4/5]  overflow-hidden shadow-lg"
       title={title}
     >
+      {/* Image */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
         style={{ backgroundImage: `url(${image})` }}
         aria-hidden="true"
       />
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/30 z-10" />
       {/* Animated Borders */}
       <span className="pointer-events-none absolute left-[5px] right-[5px] top-[5px] h-0.5 w-0 bg-blue-400 opacity-90 transition-all duration-500 group-hover:w-[calc(100%-10px)] z-20" /> 
       <span className="pointer-events-none absolute left-[5px] top-[5px] bottom-[5px] w-0.5 h-0 bg-blue-400 opacity-90 transition-all duration-500 group-hover:h-[calc(100%-10px)] z-20" />
       <span className="pointer-events-none absolute left-[5px] right-[5px] bottom-[5px] h-0.5 w-0 bg-blue-400 opacity-90 transition-all duration-500 group-hover:w-[calc(100%-10px)] z-20" />
       <span className="pointer-events-none absolute right-[5px] top-[5px] bottom-[5px] w-0.5 h-0 bg-blue-400 opacity-90 transition-all duration-500 group-hover:h-[calc(100%-10px)] z-20" />
+      {/* Card Content */}
       <div className="relative z-30 flex flex-col items-center justify-end h-full p-6 text-center">
         <h4 className="text-xl font-bold text-white mb-1">{title}</h4>
         <h6 className="text-base text-white">{subtitle}</h6>
@@ -124,7 +127,6 @@ const AccommodationPage: React.FC = () => {
   const districts: UKDistrict[] = Array.from(
     new Set(accommodations.map(acc => acc.fishery?.district).filter(Boolean))
   ) as UKDistrict[];
-
   const species: FishSpecies[] = Array.from(
     new Set(
       accommodations
@@ -157,7 +159,6 @@ const AccommodationPage: React.FC = () => {
       transition: { staggerChildren: 0.1 }
     }
   };
-
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {

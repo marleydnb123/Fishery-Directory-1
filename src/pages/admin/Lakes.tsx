@@ -1,54 +1,194 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Search, Fish } from 'lucide-react';
-import { mockLakes, mockFisheries } from '../../data/mockData';
-import { Lake, Fishery } from '../../types/schema';
+import { supabase } from '../../lib/supabase';
+import { Lake } from '../../types/schema';
+
+interface AddLakeForm {
+  name: string;
+  fishery_id: string;
+  description: string;
+  species: string[];
+  size_acres?: number;
+  max_depth_ft?: number;
+  pegs?: number;
+  image?: string;
+}
+
+const initialFormState: AddLakeForm = {
+  name: '',
+  fishery_id: '',
+  description: '',
+  species: [],
+  size_acres: undefined,
+  max_depth_ft: undefined,
+  pegs: undefined,
+  image: '',
+};
 
 const AdminLakes: React.FC = () => {
-  const [lakes, setLakes] = useState<Lake[]>(mockLakes);
+  const [lakes, setLakes] = useState<Lake[]>([]);
+  const [fisheries, setFisheries] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [currentLake, setCurrentLake] = useState<Lake | null>(null);
-  
+  const [formData, setFormData] = useState<AddLakeForm>(initialFormState);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch data from Supabase
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Fetch lakes
+        const { data: lakesData, error: lakesError } = await supabase
+          .from('lakes')
+          .select('*');
+
+        if (lakesError) throw lakesError;
+
+        // Fetch fisheries for the dropdown
+        const { data: fisheriesData, error: fisheriesError } = await supabase
+          .from('fisheries')
+          .select('id, name');
+
+        if (fisheriesError) throw fisheriesError;
+
+        setLakes(lakesData || []);
+        setFisheries(fisheriesData || []);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   // Filter lakes based on search term
-  const filteredLakes = lakes.filter(lake => 
-    lake.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
+  const filteredLakes = lakes.filter(lake => {
+    const fishery = fisheries.find(f => f.id === lake.fishery_id);
+    return fishery?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           lake.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   // Find fishery name by id
   const getFisheryName = (fisheryId: string): string => {
-    const fishery = mockFisheries.find(f => f.id === fisheryId);
+    const fishery = fisheries.find(f => f.id === fisheryId);
     return fishery ? fishery.name : 'Unknown Fishery';
   };
-  
+
+  // Handle add lake
+  const handleAddLake = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    try {
+      const { data, error } = await supabase
+        .from('lakes')
+        .insert([formData])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setLakes([...lakes, data]);
+      setIsAddModalOpen(false);
+      setFormData(initialFormState);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle edit lake
+  const handleEditLake = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentLake) return;
+    
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('lakes')
+        .update(formData)
+        .eq('id', currentLake.id)
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setLakes(lakes.map(lake => 
+        lake.id === currentLake.id ? data : lake
+      ));
+      setIsEditModalOpen(false);
+      setCurrentLake(null);
+      setFormData(initialFormState);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Handle delete lake
-  const handleDeleteLake = (id: string) => {
-    setLakes(lakes.filter(lake => lake.id !== id));
-    setIsDeleteModalOpen(false);
-    setCurrentLake(null);
-  };
-  
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05
-      }
+  const handleDeleteLake = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('lakes')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setLakes(lakes.filter(lake => lake.id !== id));
+      setIsDeleteModalOpen(false);
+      setCurrentLake(null);
+    } catch (err: any) {
+      setError(err.message);
     }
   };
-  
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.3
-      }
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    if (name === 'species') {
+      setFormData(prev => ({
+        ...prev,
+        species: value.split(',').map(s => s.trim())
+      }));
+    } else if (['size_acres', 'max_depth_ft', 'pegs'].includes(name)) {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value ? parseFloat(value) : undefined
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-red-600 p-4">
+        Error: {error}
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -60,6 +200,7 @@ const AdminLakes: React.FC = () => {
       >
         <h1 className="text-2xl font-bold mb-4 md:mb-0">Manage Lakes</h1>
         <button 
+          onClick={() => setIsAddModalOpen(true)}
           className="bg-primary-600 hover:bg-primary-800 text-white py-2 px-4 rounded-lg transition-colors flex items-center"
         >
           <Plus className="h-5 w-5 mr-2" />
@@ -113,14 +254,8 @@ const AdminLakes: React.FC = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredLakes.map((lake, index) => (
-                <motion.tr 
-                  key={lake.id}
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  transition={{ delay: index * 0.05 }}
-                >
+              {filteredLakes.map((lake) => (
+                <tr key={lake.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">{lake.name}</div>
                   </td>
@@ -147,6 +282,20 @@ const AdminLakes: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <button 
+                      onClick={() => {
+                        setCurrentLake(lake);
+                        setFormData({
+                          name: lake.name,
+                          fishery_id: lake.fishery_id,
+                          description: lake.description,
+                          species: lake.species,
+                          size_acres: lake.size_acres,
+                          max_depth_ft: lake.max_depth_ft,
+                          pegs: lake.pegs,
+                          image: lake.image,
+                        });
+                        setIsEditModalOpen(true);
+                      }}
                       className="text-primary-600 hover:text-primary-900 mr-3"
                     >
                       <Edit className="h-5 w-5" />
@@ -161,7 +310,7 @@ const AdminLakes: React.FC = () => {
                       <Trash2 className="h-5 w-5" />
                     </button>
                   </td>
-                </motion.tr>
+                </tr>
               ))}
             </tbody>
           </table>
@@ -174,6 +323,159 @@ const AdminLakes: React.FC = () => {
         )}
       </motion.div>
       
+      {/* Add/Edit Lake Modal */}
+      {(isAddModalOpen || isEditModalOpen) && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-md w-full">
+            <h3 className="text-xl font-semibold mb-4">
+              {isAddModalOpen ? 'Add New Lake' : 'Edit Lake'}
+            </h3>
+            <form onSubmit={isAddModalOpen ? handleAddLake : handleEditLake}>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Fishery
+                  </label>
+                  <select
+                    name="fishery_id"
+                    value={formData.fishery_id}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400"
+                    required
+                  >
+                    <option value="">Select a fishery</option>
+                    {fisheries.map(fishery => (
+                      <option key={fishery.id} value={fishery.id}>
+                        {fishery.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Lake Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Species
+                  </label>
+                  <input
+                    type="text"
+                    name="species"
+                    value={formData.species.join(',')}
+                    onChange={handleInputChange}
+                    placeholder="Comma separated species"
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Size (acres)
+                  </label>
+                  <input
+                    type="number"
+                    name="size_acres"
+                    value={formData.size_acres || ''}
+                    onChange={handleInputChange}
+                    step="0.1"
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Maximum Depth (ft)
+                  </label>
+                  <input
+                    type="number"
+                    name="max_depth_ft"
+                    value={formData.max_depth_ft || ''}
+                    onChange={handleInputChange}
+                    step="0.1"
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Number of Pegs
+                  </label>
+                  <input
+                    type="number"
+                    name="pegs"
+                    value={formData.pegs || ''}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Image URL
+                  </label>
+                  <input
+                    type="url"
+                    name="image"
+                    value={formData.image || ''}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end space-x-3 mt-6">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsAddModalOpen(false);
+                    setIsEditModalOpen(false);
+                    setFormData(initialFormState);
+                    setCurrentLake(null);
+                  }}
+                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+                  disabled={loading}
+                >
+                  {loading ? 'Saving...' : (isAddModalOpen ? 'Add Lake' : 'Save Changes')}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && currentLake && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

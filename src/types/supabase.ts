@@ -110,6 +110,7 @@ export interface Database {
           type: string
           price: number
           notes: string
+          image?: string
           created_at: string
         }
         Insert: {
@@ -118,6 +119,7 @@ export interface Database {
           type: string
           price: number
           notes: string
+          image?: string
           created_at?: string
         }
         Update: {
@@ -126,6 +128,7 @@ export interface Database {
           type?: string
           price?: number
           notes?: string
+          image?: string
           created_at?: string
         }
       }

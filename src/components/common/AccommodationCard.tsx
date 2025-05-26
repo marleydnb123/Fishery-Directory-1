@@ -41,7 +41,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
             <span className="text-gray-500 text-sm font-normal">/night</span>
           </div>
         </div>
-        <div className="flex items-center text-gray-600 mb-3">
+        <div className="flex items-center text-gray-600 mb-1">
           <Home className="h-4 w-4 mr-1 text-primary-600" />
           <span className="text-sm truncate">{fishery.name}, {fishery.district}</span>
         </div>

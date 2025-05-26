@@ -205,7 +205,7 @@ const Directory: React.FC = () => {
   const featuredFisheries = fisheries.filter(f => f.isFeatured).slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100 pb-16">
       {/* --- Image Banner Start --- */}
       <div className="relative w-full h-56 md:h-[380px] lg:h-[500px] mb-12">
         <img

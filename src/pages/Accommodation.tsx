@@ -88,6 +88,7 @@ const AccommodationPage: React.FC = () => {
   const [filteredAccommodations, setFilteredAccommodations] = useState<Accommodation[]>([]);
   const [selectedDistrict, setSelectedDistrict] = useState<UKDistrict | ''>('');
   const [selectedSpecies, setSelectedSpecies] = useState<FishSpecies | ''>('');
+  const [selectedType, setSelectedType] = useState<string>(''); // New for type filter
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -153,7 +154,10 @@ const AccommodationPage: React.FC = () => {
     'Eel',
     'Barbel'
   ];
-  
+
+  // Get unique accommodation types
+  const types = Array.from(new Set(accommodations.map(acc => acc.type))).filter(Boolean);
+
   // Apply filters
   useEffect(() => {
     let results = [...accommodations];
@@ -177,9 +181,13 @@ const AccommodationPage: React.FC = () => {
         fisheryIds.includes(acc.fishery_id)
       );
     }
+
+    if (selectedType) {
+      results = results.filter(acc => acc.type === selectedType);
+    }
     
     setFilteredAccommodations(results);
-  }, [accommodations, fisheries, selectedDistrict, selectedSpecies]);
+  }, [accommodations, fisheries, selectedDistrict, selectedSpecies, selectedType]);
   
   // Animation variants
   const containerVariants = {
@@ -242,7 +250,7 @@ const AccommodationPage: React.FC = () => {
         </motion.div>
 
         <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* District Filter */}
             <div>
               <label htmlFor="district" className="block text-sm font-medium text-gray-700 mb-1">
@@ -275,6 +283,24 @@ const AccommodationPage: React.FC = () => {
                 <option value="">All Species</option>
                 {species.map((specie) => (
                   <option key={specie} value={specie}>{specie}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Type Filter */}
+            <div>
+              <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
+                Accommodation Type
+              </label>
+              <select
+                id="type"
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400"
+              >
+                <option value="">All Types</option>
+                {types.map((type) => (
+                  <option key={type} value={type}>{type}</option>
                 ))}
               </select>
             </div>

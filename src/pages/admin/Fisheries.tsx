@@ -10,9 +10,16 @@ const emptyFishery: Omit<Fishery, 'id'> = {
   district: '',
   image: '',
   species: [],
+  features: [], // Added missing features array
   isFeatured: false,
   hasAccommodation: false,
-  description: '', // NEW FIELD
+  description: '',
+  contact_phone: '',
+  contact_email: '',
+  website: '',
+  day_ticket_price: 0,
+  descriptionpage: '',
+  rules: '',
 };
 
 const AdminFisheries: React.FC = () => {
@@ -42,6 +49,7 @@ const AdminFisheries: React.FC = () => {
             isFeatured: f.isfeatured,
             hasAccommodation: f.hasaccommodation,
             species: Array.isArray(f.species) ? f.species : [],
+            features: Array.isArray(f.features) ? f.features : [], // Ensure features is always an array
             description: f.description || '', // Defensive for null
           }))
         );
@@ -98,9 +106,16 @@ const AdminFisheries: React.FC = () => {
         district: formFishery.district, 
         image: formFishery.image,
         species: formFishery.species,
+        features: formFishery.features, // Include features in insert
         description: formFishery.description,
         isfeatured: formFishery.isFeatured,
         hasaccommodation: formFishery.hasAccommodation,
+        contact_phone: formFishery.contact_phone,
+        contact_email: formFishery.contact_email,
+        website: formFishery.website,
+        day_ticket_price: formFishery.day_ticket_price,
+        descriptionpage: formFishery.descriptionpage,
+        rules: formFishery.rules,
       }])
       .select()
       .single();
@@ -110,6 +125,7 @@ const AdminFisheries: React.FC = () => {
         isFeatured: data.isfeatured, 
         hasAccommodation: data.hasaccommodation,
         species: Array.isArray(data.species) ? data.species : [],
+        features: Array.isArray(data.features) ? data.features : [], // Ensure features is always an array
         description: data.description || '',
       }, ...fisheries]);
     }
@@ -128,9 +144,16 @@ const AdminFisheries: React.FC = () => {
         district: formFishery.district,
         image: formFishery.image,
         species: formFishery.species,
+        features: formFishery.features, // Include features in update
         description: formFishery.description,
         isfeatured: formFishery.isFeatured,
         hasaccommodation: formFishery.hasAccommodation,
+        contact_phone: formFishery.contact_phone,
+        contact_email: formFishery.contact_email,
+        website: formFishery.website,
+        day_ticket_price: formFishery.day_ticket_price,
+        descriptionpage: formFishery.descriptionpage,
+        rules: formFishery.rules,
       })
       .eq('id', currentFishery.id)
       .select()
@@ -143,6 +166,7 @@ const AdminFisheries: React.FC = () => {
               isFeatured: data.isfeatured, 
               hasAccommodation: data.hasaccommodation,
               species: Array.isArray(data.species) ? data.species : [],
+              features: Array.isArray(data.features) ? data.features : [], // Ensure features is always an array
               description: data.description || '',
             }
           : f
@@ -318,9 +342,16 @@ const AdminFisheries: React.FC = () => {
                           district: fishery.district,
                           image: fishery.image,
                           species: fishery.species,
+                          features: fishery.features, // Include features when editing
                           isFeatured: fishery.isFeatured,
                           hasAccommodation: fishery.hasAccommodation,
                           description: fishery.description,
+                          contact_phone: fishery.contact_phone,
+                          contact_email: fishery.contact_email,
+                          website: fishery.website,
+                          day_ticket_price: fishery.day_ticket_price,
+                          descriptionpage: fishery.descriptionpage,
+                          rules: fishery.rules,
                         });
                         setIsEditModalOpen(true);
                       }}
@@ -564,6 +595,12 @@ const AdminFisheries: React.FC = () => {
               placeholder="Species (comma separated)"
               value={formFishery.species.join(',')}
               onChange={e => setFormFishery(f => ({ ...f, species: e.target.value.split(',').map(s => s.trim()) }))}
+            />
+            <input
+              className="w-full mb-2 border p-2 rounded"
+              placeholder="Features (comma separated)"
+              value={formFishery.features.join(',')}
+              onChange={e => setFormFishery(f => ({ ...f, features: e.target.value.split(',').map(s => s.trim()) }))}
             />
             <textarea
               className="w-full mb-2 border p-2 rounded"

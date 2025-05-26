@@ -16,6 +16,25 @@ export interface Fishery {
   address?: string;
   postcode?: string;
   day_ticket_price?: number;
+  features: string[];
+  night_fishing_allowed?: boolean;
+  fishing_type?: string;
+  match_fishing_friendly?: boolean;
+  disabled_access?: boolean;
+  facilities?: string[];
+  dog_friendly?: boolean;
+  price_range?: string;
+  fire_pits_allowed?: boolean;
+  booking_type?: string;
+  parking_close?: boolean;
+  camping_allowed?: boolean;
+  catch_photos?: boolean;
+  wifi_signal?: string;
+  descriptionpage?: string;
+  fisheryimages1?: string;
+  fisheryimages2?: string;
+  fisheryimages3?: string;
+  fisheryvideo?: string;
 }
 
 export interface Lake {

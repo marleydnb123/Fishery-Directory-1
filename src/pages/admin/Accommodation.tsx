@@ -116,7 +116,6 @@ const AdminAccommodation: React.FC = () => {
       setError(err.message);
     }
   };
-
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -126,24 +125,6 @@ const AdminAccommodation: React.FC = () => {
     }));
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-red-600 p-4">
-        Error: {error}
-      </div>
-    );
-  }
-    setIsDeleteModalOpen(false);
-    setCurrentAccommodation(null);
-  };
   
   // Animation variants
   const containerVariants = {
@@ -166,6 +147,22 @@ const AdminAccommodation: React.FC = () => {
       }
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-red-600 p-4">
+        Error: {error}
+      </div>
+    );
+  }
 
   return (
     <div>

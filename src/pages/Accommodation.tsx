@@ -7,13 +7,11 @@ import { supabase } from '../lib/supabase';
 // --- HoverBannerCard component ---
 function HoverBannerCard({ image, title, subtitle, href }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative block w-full aspect-[4/3]  overflow-hidden shadow-lg"
-      title={title}
-    >
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-7xl mx-auto py-8">
+      {hoverCards.map((card, idx) => (
+        <HoverBannerCard key={idx} image={card.image} title={card.title} subtitle={card.subtitle} />
+      ))}
+    </div>
       {/* Image */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"

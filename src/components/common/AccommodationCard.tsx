@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, PoundSterling } from 'lucide-react';
 import { Accommodation } from '../../types/schema';
@@ -8,6 +9,7 @@ interface AccommodationCardProps {
   fishery?: {
     name: string;
     district: string;
+    slug: string;
     species: string[];
     image: string;
   };
@@ -56,9 +58,12 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
             </span>
           ))}
         </div>
-        <button className="w-full bg-primary-600 hover:bg-primary-800 text-white py-2 px-4 rounded-lg transition-colors">
+        <Link 
+          to={`/directory/${fishery.slug}`}
+          className="block w-full bg-primary-600 hover:bg-primary-800 text-white py-2 px-4 rounded-lg transition-colors text-center"
+        >
           View Details
-        </button>
+        </Link>
       </div>
     </motion.div>
   );

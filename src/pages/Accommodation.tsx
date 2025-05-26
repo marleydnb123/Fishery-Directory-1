@@ -212,7 +212,7 @@ const AccommodationPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 via-blue-50 to-blue-100 pb-16">
       {/* --- Image Banner Start --- */}
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen h-56 md:h-[380px] lg:h-[500px] mb-12">
         <img

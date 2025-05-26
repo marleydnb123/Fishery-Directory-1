@@ -159,7 +159,7 @@ const FisheryDetail: React.FC = () => {
     <div className="min-h-screen pb-16 bg-gray-50">
       {/* Hero Image */}
       <div 
-        className="h-80 bg-cover bg-center relative"
+        className="h-100 bg-cover bg-center relative"
         style={{ backgroundImage: `url(${fishery.image || 'https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg'})` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>

@@ -4,6 +4,23 @@ import { motion } from 'framer-motion';
 import { Home, PoundSterling } from 'lucide-react';
 import { Accommodation } from '../../types/schema';
 
+// Backup images from Unsplash for different accommodation types
+const backupImages = {
+  'Cabin': 'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9',
+  'Lodge': 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e',
+  'Pod': 'https://images.unsplash.com/photo-1510798831971-661eb04b3739',
+  'Tent': 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4',
+  'Caravan': 'https://images.unsplash.com/photo-1520101244246-293f77ffc39e',
+  'default': 'https://images.unsplash.com/photo-1566073771259-6a8506099945'
+};
+
+const getBackupImage = (type: string) => {
+  const key = Object.keys(backupImages).find(k => 
+    type.toLowerCase().includes(k.toLowerCase())
+  ) || 'default';
+  return `${backupImages[key]}?auto=format&fit=crop&w=800&q=80`;
+};
+
 interface AccommodationCardProps {
   accommodation: Accommodation;
   fishery?: {
@@ -31,7 +48,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
     >
       <div className="h-48 overflow-hidden flex-shrink-0">
         <img
-          src={fishery.image}
+          src={accommodation.image || getBackupImage(accommodation.type)}
           alt={`${accommodation.type} at ${fishery.name}`}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />

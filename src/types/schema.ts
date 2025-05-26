@@ -36,6 +36,7 @@ export interface Accommodation {
   type: string;
   price: number;
   notes: string;
+  image?: string;
   created_at: string;
 }
 

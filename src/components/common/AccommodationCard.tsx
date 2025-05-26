@@ -45,7 +45,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
           <Home className="h-4 w-4 mr-1 text-primary-600" />
           <span className="text-sm truncate">{fishery.name}, {fishery.district}</span>
         </div>
-        <p className="text-gray-600 mb-0 line-clamp-2 flex-1">
+        <p className="text-gray-600 mb-4 line-clamp-2 flex-1">
           {accommodation.notes || <span className="opacity-50">No notes</span>}
         </p>
         <div className="flex flex-wrap gap-2 mt-auto mb-4 min-h-[32px]">

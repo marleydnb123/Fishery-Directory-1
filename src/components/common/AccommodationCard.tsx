@@ -18,12 +18,16 @@ interface AccommodationCardProps {
 const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fishery }) => {
   if (!fishery) return null;
 
+  const handleScrollTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full"
-      style={{ minHeight: 480, maxHeight: 480 }} // Fixed height for uniform grid
+      style={{ minHeight: 480, maxHeight: 480 }}
     >
       <div className="h-48 overflow-hidden flex-shrink-0">
         <img
@@ -58,8 +62,9 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
             </span>
           ))}
         </div>
-        <Link 
-          to={`/directory/${fishery.slug}`} 
+        <Link
+          to={`/directory/${fishery.slug}`}
+          onClick={handleScrollTop}
           className="block w-full bg-primary-600 hover:bg-primary-800 text-white py-2 px-4 rounded-lg transition-colors text-center"
         >
           View Details
@@ -70,4 +75,3 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
 };
 
 export default AccommodationCard;
- 

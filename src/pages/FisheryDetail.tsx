@@ -604,30 +604,70 @@ const FisheryDetail: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl font-semibold mb-6">Accommodation at {fishery.name}</h2>
+            <h2 className="text-3xl font-bebas font-bold mb-6">Accommodation at {fishery.name}</h2>
             
             {accommodation.length > 0 ? (
               <div className="space-y-6">
                 {accommodation.map((acc) => (
                   <div key={acc.id} className="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div className="p-6">
-                      <div className="flex justify-between items-start mb-3">
-                        <h3 className="text-xl font-semibold">{acc.type}</h3>
-                        <div className="text-primary-600 font-bold">
-                          £{acc.price}
-                          <span className="text-gray-500 text-sm font-normal">/night</span>
+                    <div className="flex flex-col md:flex-row">
+                      {/* Image Section */}
+                      <div className="md:w-1/3 relative">
+                        <img
+                          src={acc.image || `https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=800&q=80`}
+                          alt={acc.type}
+                          className="w-full h-full object-cover"
+                          style={{ minHeight: '300px' }}
+                        />
+                        <div className="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          £{acc.price}/night
                         </div>
                       </div>
                       
-                      <p className="text-gray-700 mb-4">{acc.notes}</p>
-                      
-                      <a
-                        href={`mailto:${fishery.contact_email || ''}`}
-                        className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors"
-                      >
-                        <Book className="h-4 w-4 mr-2 inline" />
-                        Book Now
-                      </a>
+                      {/* Content Section */}
+                      <div className="md:w-2/3 p-6">
+                        <div className="mb-4">
+                          <h3 className="text-2xl font-semibold text-gray-900 mb-2">{acc.type}</h3>
+                          <div className="flex items-center text-gray-600 mb-4">
+                            <Home className="h-5 w-5 mr-2 text-primary-600" />
+                            <span>Lakeside Accommodation</span>
+                          </div>
+                          <div className="prose max-w-none text-gray-700 mb-6">
+                            {acc.notes}
+                          </div>
+                        </div>
+                        
+                        <div className="flex flex-wrap gap-4 mb-6">
+                          <div className="flex items-center px-3 py-1 bg-primary-50 text-primary-700 rounded-full">
+                            <span className="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
+                            Electric Hook-up
+                          </div>
+                          <div className="flex items-center px-3 py-1 bg-primary-50 text-primary-700 rounded-full">
+                            <span className="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
+                            Parking Available
+                          </div>
+                          <div className="flex items-center px-3 py-1 bg-primary-50 text-primary-700 rounded-full">
+                            <span className="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
+                            Shower Facilities
+                          </div>
+                        </div>
+                        
+                        <div className="flex gap-4">
+                          <a
+                            href={`mailto:${fishery.contact_email || ''}`}
+                            className="flex-1 inline-flex justify-center items-center bg-primary-600 hover:bg-primary-700 text-white py-3 px-6 rounded-lg transition-colors"
+                          >
+                            <Book className="h-5 w-5 mr-2" />
+                            Book Now
+                          </a>
+                          <button
+                            className="px-6 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                            onClick={() => window.location.href = `tel:${fishery.contact_phone || ''}`}
+                          >
+                            <Phone className="h-5 w-5" />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}

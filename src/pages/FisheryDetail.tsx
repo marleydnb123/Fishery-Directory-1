@@ -559,44 +559,55 @@ const FisheryDetail: React.FC = () => {
         )} 
 
         {activeTab === 'lakes' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2 className="text-2xl font-semibold mb-6">Lakes at {fishery.name}</h2>
-            
-            {lakes.length > 0 ? (
-              <div className="space-y-6">
-                {lakes.map((lake) => (
-                  <div key={lake.id} className="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">{lake.name}</h3>
-                      <p className="text-gray-700 mb-4">{lake.description}</p>
-                      
-                      <div className="mb-2 font-medium">Available Species:</div>
-                      <div className="flex flex-wrap gap-2">
-                        {(lake.species || []).map((species, index) => (
-                          <span 
-                            key={index}
-                            className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                          >
-                            <Fish className="h-4 w-4 mr-1" />
-                            {species}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
+  >
+    <h2 className="text-2xl font-semibold mb-6">Lakes at {fishery.name}</h2>
+    
+    {lakes.length > 0 ? (
+      <div className="space-y-6">
+        {lakes.map((lake) => (
+          <div key={lake.id} className="bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="flex">
+              {/* Lake image on the left, styled like accommodation */}
+              <div className="w-56 h-44 flex-shrink-0 bg-gray-100 m-4 rounded-xl ml-6 overflow-hidden">
+                <img
+                  src={lake.image}
+                  alt={lake.name}
+                  className="w-full h-full object-cover rounded-xl"
+                />
               </div>
-            ) : (
-              <div className="bg-white rounded-xl shadow-md p-6 text-center">
-                <p className="text-gray-700">No lake information available.</p>
+              {/* Lake details on the right */}
+              <div className="flex-1 p-6">
+                <h3 className="text-xl font-semibold mb-2">{lake.name}</h3>
+                <p className="text-gray-700 mb-4">{lake.description}</p>
+                <div className="mb-2 font-medium">Available Species:</div>
+                <div className="flex flex-wrap gap-2">
+                  {(lake.species || []).map((species, index) => (
+                    <span 
+                      key={index}
+                      className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
+                    >
+                      <Fish className="h-4 w-4 mr-1" />
+                      {species}
+                    </span>
+                  ))}
+                </div>
               </div>
-            )}
-          </motion.div>
-        )}
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="bg-white rounded-xl shadow-md p-6 text-center">
+        <p className="text-gray-700">No lake information available.</p>
+      </div>
+    )}
+  </motion.div>
+)}
+
 
         {activeTab === 'accommodation' && fishery.hasaccommodation && (
   <motion.div

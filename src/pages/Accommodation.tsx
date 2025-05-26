@@ -44,37 +44,37 @@ function HoverBannerCard({ image, title, subtitle, href }) {
 const hoverCards = [
   {
     image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-    title: "Mountain Lake",
+    title: "Lodges",
     subtitle: "Peaceful waters",
     href: "#",
   },
   {
     image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-    title: "Forest Trail",
+    title: "Holiday homes",
     subtitle: "Explore the woods",
     href: "#",
   },
   {
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80",
-    title: "Desert Dunes",
+    title: "Camping",
     subtitle: "Sandy adventures",
     href: "#",
   },
   {
     image: "https://images.unsplash.com/photo-1465101178521-c1a9136a3d41?auto=format&fit=crop&w=600&q=80",
-    title: "City Nights",
+    title: "Caravan Parks",
     subtitle: "Urban exploration",
     href: "#",
   },
   {
     image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=80",
-    title: "Ocean View",
+    title: "Cabins & Pods",
     subtitle: "Feel the breeze",
     href: "#",
   },
   {
     image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
-    title: "Countryside",
+    title: "Hotels",
     subtitle: "Rolling hills",
     href: "#",
   },

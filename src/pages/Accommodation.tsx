@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AccommodationCard from '../components/common/AccommodationCard';
-import { mockAccommodation, mockFisheries } from '../data/mockData';
 import { Accommodation, UKDistrict, FishSpecies } from '../types/schema';
+import { supabase } from '../lib/supabase';
 
 // --- HoverBannerCard component ---
 function HoverBannerCard({ image, title, subtitle, href }) {
@@ -14,24 +14,17 @@ function HoverBannerCard({ image, title, subtitle, href }) {
       className="group relative block w-full aspect-[4/5]  overflow-hidden shadow-lg"
       title={title}
     >
-      {/* Image */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
         style={{ backgroundImage: `url(${image})` }}
         aria-hidden="true"
       />
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/30 z-10" />
-      {/* Animated Borders (inset by 5px) */}
-      {/* Top border */}
+      {/* Animated Borders */}
       <span className="pointer-events-none absolute left-[5px] right-[5px] top-[5px] h-0.5 w-0 bg-blue-400 opacity-90 transition-all duration-500 group-hover:w-[calc(100%-10px)] z-20" /> 
-      {/* Left border */}
       <span className="pointer-events-none absolute left-[5px] top-[5px] bottom-[5px] w-0.5 h-0 bg-blue-400 opacity-90 transition-all duration-500 group-hover:h-[calc(100%-10px)] z-20" />
-      {/* Bottom border */}
       <span className="pointer-events-none absolute left-[5px] right-[5px] bottom-[5px] h-0.5 w-0 bg-blue-400 opacity-90 transition-all duration-500 group-hover:w-[calc(100%-10px)] z-20" />
-      {/* Right border */}
       <span className="pointer-events-none absolute right-[5px] top-[5px] bottom-[5px] w-0.5 h-0 bg-blue-400 opacity-90 transition-all duration-500 group-hover:h-[calc(100%-10px)] z-20" />
-      {/* Card Content */}
       <div className="relative z-30 flex flex-col items-center justify-end h-full p-6 text-center">
         <h4 className="text-xl font-bold text-white mb-1">{title}</h4>
         <h6 className="text-base text-white">{subtitle}</h6>
@@ -92,97 +85,85 @@ function CardGrid() {
 
 // --- Main Page ---
 const AccommodationPage: React.FC = () => {
-  const [accommodations, setAccommodations] = useState<Accommodation[]>(mockAccommodation);
-  const [filteredAccommodations, setFilteredAccommodations] = useState<Accommodation[]>(mockAccommodation);
+  const [accommodations, setAccommodations] = useState<any[]>([]);
+  const [filteredAccommodations, setFilteredAccommodations] = useState<any[]>([]);
   const [selectedDistrict, setSelectedDistrict] = useState<UKDistrict | ''>('');
   const [selectedSpecies, setSelectedSpecies] = useState<FishSpecies | ''>('');
-  
-  // Available districts
-  const districts: UKDistrict[] = [
-    'Cumbria',
-    'Dumfries & Galloway',
-    'Yorkshire',
-    'Hampshire',
-    'Kent',
-    'Essex',
-    'Sussex',
-    'Dorset',
-    'Wiltshire',
-    'Devon',
-    'Cornwall',
-    'Norfolk',
-    'Suffolk',
-    'Lancashire',
-    'Cheshire',
-    'Wales'
-  ];
-  
-  // Available species
-  const species: FishSpecies[] = [
-    'Carp',
-    'Pike',
-    'Tench',
-    'Bream',
-    'Roach',
-    'Perch',
-    'Trout',
-    'Catfish',
-    'Eel',
-    'Barbel'
-  ];
-  
+  const [loading, setLoading] = useState(true);
+
+  // Fetch accommodation from Supabase
+  useEffect(() => {
+    const fetchAccommodations = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('accommodation')
+        .select(`
+          id,
+          type,
+          price,
+          notes,
+          created_at,
+          fishery:fishery_id (
+            id,
+            name,
+            district,
+            species
+          )
+        `);
+      if (error) {
+        setAccommodations([]);
+      } else if (data) {
+        setAccommodations(data);
+      }
+      setLoading(false);
+    };
+    fetchAccommodations();
+  }, []);
+
+  // Get unique districts and species for filters
+  const districts: UKDistrict[] = Array.from(
+    new Set(accommodations.map(acc => acc.fishery?.district).filter(Boolean))
+  ) as UKDistrict[];
+
+  const species: FishSpecies[] = Array.from(
+    new Set(
+      accommodations
+        .flatMap(acc => Array.isArray(acc.fishery?.species) ? acc.fishery.species : (acc.fishery?.species ? acc.fishery.species.split(',') : []))
+        .filter(Boolean)
+    )
+  ) as FishSpecies[];
+
   // Apply filters
   useEffect(() => {
     let results = [...accommodations];
-    
-    // Apply district filter
     if (selectedDistrict) {
-      // We need to get fisheries in this district first
-      const fisheryIds = mockFisheries
-        .filter(fishery => fishery.district === selectedDistrict)
-        .map(fishery => fishery.id);
-      
-      // Then filter accommodations that belong to these fisheries
-      results = results.filter(acc => 
-        fisheryIds.includes(acc.fishery_id)
-      );
+      results = results.filter(acc => acc.fishery?.district === selectedDistrict);
     }
-    
-    // Apply species filter
     if (selectedSpecies) {
-      // We need to get fisheries with this species first
-      const fisheryIds = mockFisheries
-        .filter(fishery => fishery.species.includes(selectedSpecies))
-        .map(fishery => fishery.id);
-      
-      // Then filter accommodations that belong to these fisheries
-      results = results.filter(acc => 
-        fisheryIds.includes(acc.fishery_id)
+      results = results.filter(acc =>
+        Array.isArray(acc.fishery?.species)
+          ? acc.fishery.species.includes(selectedSpecies)
+          : acc.fishery?.species?.split(',').includes(selectedSpecies)
       );
     }
-    
     setFilteredAccommodations(results);
   }, [accommodations, selectedDistrict, selectedSpecies]);
-  
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   };
-  
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.3
-      }
+      transition: { duration: 0.3 }
     }
   };
 
@@ -234,16 +215,15 @@ const AccommodationPage: React.FC = () => {
               <select
                 id="district"
                 value={selectedDistrict}
-                onChange={(e) => setSelectedDistrict(e.target.value as UKDistrict | '')}
+                onChange={e => setSelectedDistrict(e.target.value as UKDistrict | '')}
                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400"
               >
                 <option value="">All Districts</option>
-                {districts.map((district) => (
+                {districts.map(district => (
                   <option key={district} value={district}>{district}</option>
                 ))}
               </select>
             </div>
-            
             {/* Species Filter */}
             <div>
               <label htmlFor="species" className="block text-sm font-medium text-gray-700 mb-1">
@@ -252,11 +232,11 @@ const AccommodationPage: React.FC = () => {
               <select
                 id="species"
                 value={selectedSpecies}
-                onChange={(e) => setSelectedSpecies(e.target.value as FishSpecies | '')}
+                onChange={e => setSelectedSpecies(e.target.value as FishSpecies | '')}
                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400"
               >
                 <option value="">All Species</option>
-                {species.map((specie) => (
+                {species.map(specie => (
                   <option key={specie} value={specie}>{specie}</option>
                 ))}
               </select>
@@ -264,18 +244,20 @@ const AccommodationPage: React.FC = () => {
           </div>
         </div>
         
-        {filteredAccommodations.length > 0 ? (
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
+        {loading ? (
+          <div className="text-center py-12">Loading...</div>
+        ) : filteredAccommodations.length > 0 ? (
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={containerVariants}
-            initial="hidden" 
+            initial="hidden"
             animate="visible"
           >
-            {filteredAccommodations.map((accommodation) => (
+            {filteredAccommodations.map(accommodation => (
               <motion.div key={accommodation.id} variants={itemVariants}>
                 <AccommodationCard accommodation={accommodation} />
               </motion.div>
-            ))} 
+            ))}
           </motion.div>
         ) : (
           <div className="text-center py-12">
@@ -286,8 +268,8 @@ const AccommodationPage: React.FC = () => {
           </div>
         )}
       </div>
-    </div> 
-  ); 
-}; 
+    </div>
+  );
+};
 
 export default AccommodationPage;

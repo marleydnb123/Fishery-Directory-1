@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Home, PoundSterling } from 'lucide-react';
 import { Accommodation } from '../../types/schema';
 import { supabase } from '../../lib/supabase';
 
+// Card component with fixed layout and consistent row heights
 interface AccommodationCardProps {
   accommodation: Accommodation;
   fishery?: {
@@ -15,44 +16,41 @@ interface AccommodationCardProps {
 }
 
 const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fishery }) => {
-  if (!fishery) {
-    return null;
-  }
-  
+  if (!fishery) return null;
+
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="bg-white rounded-xl shadow-md overflow-hidden h-full"
+      className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full"
+      style={{ minHeight: 480, maxHeight: 480 }} // Fixed height for uniform grid
     >
-      <div className="h-48 overflow-hidden">
+      <div className="h-48 overflow-hidden flex-shrink-0">
         <img
           src={fishery.image}
           alt={`${accommodation.type} at ${fishery.name}`}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
       </div>
-      
-      <div className="p-6">
+      <div className="flex flex-col flex-1 p-6">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-xl font-semibold text-gray-900">{accommodation.type}</h3>
+          <h3 className="text-xl font-semibold text-gray-900 truncate">{accommodation.type}</h3>
           <div className="flex items-center text-primary-600 font-bold">
             <PoundSterling className="h-4 w-4 mr-1" />
             <span>{accommodation.price}</span>
             <span className="text-gray-500 text-sm font-normal">/night</span>
           </div>
         </div>
-        
         <div className="flex items-center text-gray-600 mb-3">
           <Home className="h-4 w-4 mr-1 text-primary-600" />
-          <span className="text-sm">{fishery.name}, {fishery.district}</span>
+          <span className="text-sm truncate">{fishery.name}, {fishery.district}</span>
         </div>
-        
-        <p className="text-gray-600 mb-4">{accommodation.notes}</p>
-        
-        <div className="flex flex-wrap gap-2 mt-4">
+        <p className="text-gray-600 mb-4 line-clamp-2 flex-1">
+          {accommodation.notes || <span className="opacity-50">No notes</span>}
+        </p>
+        <div className="flex flex-wrap gap-2 mt-auto mb-4 min-h-[32px]">
           {fishery.species.map((species, index) => (
-            <span 
+            <span
               key={index}
               className="text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
             >
@@ -60,8 +58,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
             </span>
           ))}
         </div>
-        
-        <button className="mt-4 w-full bg-primary-600 hover:bg-primary-800 text-white py-2 px-4 rounded-lg transition-colors">
+        <button className="w-full bg-primary-600 hover:bg-primary-800 text-white py-2 px-4 rounded-lg transition-colors">
           View Details
         </button>
       </div>
@@ -69,4 +66,47 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
   );
 };
 
-export default AccommodationCard; 
+// Main list component fetching from Supabase and rendering a fixed grid
+const AccommodationList: React.FC = () => {
+  const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
+  const [fisheries, setFisheries] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const [
+        { data: accommodationData, error: accommodationError },
+        { data: fisheriesData, error: fisheriesError }
+      ] = await Promise.all([
+        supabase.from('accommodation').select('*'),
+        supabase.from('fisheries').select('*')
+      ]);
+      if (accommodationError) console.error(accommodationError);
+      if (fisheriesError) console.error(fisheriesError);
+      setAccommodations(accommodationData || []);
+      setFisheries(fisheriesData || []);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  if (loading) return <div className="text-center py-8">Loading accommodations...</div>;
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {accommodations.map(accommodation => {
+        const fishery = fisheries.find(f => f.id === accommodation.fishery_id);
+        return (
+          <AccommodationCard
+            key={accommodation.id}
+            accommodation={accommodation}
+            fishery={fishery}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+export default AccommodationList;

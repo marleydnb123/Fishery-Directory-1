@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import AccommodationCard from '../components/common/AccommodationCard'; 
-import { mockAccommodation, mockFisheries } from '../data/mockData';
+import AccommodationCard from '../components/common/AccommodationCard';
 import { Accommodation, UKDistrict, FishSpecies } from '../types/schema';
+import { supabase } from '../lib/supabase';
 
 // --- HoverBannerCard component ---
 function HoverBannerCard({ image, title, subtitle, href }) {
@@ -92,10 +92,42 @@ function CardGrid() {
 
 // --- Main Page ---
 const AccommodationPage: React.FC = () => {
-  const [accommodations, setAccommodations] = useState<Accommodation[]>(mockAccommodation);
-  const [filteredAccommodations, setFilteredAccommodations] = useState<Accommodation[]>(mockAccommodation);
+  const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
+  const [fisheries, setFisheries] = useState<any[]>([]);
+  const [filteredAccommodations, setFilteredAccommodations] = useState<Accommodation[]>([]);
   const [selectedDistrict, setSelectedDistrict] = useState<UKDistrict | ''>('');
   const [selectedSpecies, setSelectedSpecies] = useState<FishSpecies | ''>('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch data from Supabase
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const [
+          { data: accommodationData, error: accommodationError },
+          { data: fisheriesData, error: fisheriesError }
+        ] = await Promise.all([
+          supabase.from('accommodation').select('*'),
+          supabase.from('fisheries').select('*')
+        ]);
+
+        if (accommodationError) throw accommodationError;
+        if (fisheriesError) throw fisheriesError;
+
+        setAccommodations(accommodationData || []);
+        setFisheries(fisheriesData || []);
+        setFilteredAccommodations(accommodationData || []);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
   
   // Available districts
   const districts: UKDistrict[] = [
@@ -135,34 +167,28 @@ const AccommodationPage: React.FC = () => {
   useEffect(() => {
     let results = [...accommodations];
     
-    // Apply district filter
     if (selectedDistrict) {
-      // We need to get fisheries in this district first
-      const fisheryIds = mockFisheries
+      const fisheryIds = fisheries
         .filter(fishery => fishery.district === selectedDistrict)
         .map(fishery => fishery.id);
       
-      // Then filter accommodations that belong to these fisheries
       results = results.filter(acc => 
         fisheryIds.includes(acc.fishery_id)
       );
     }
     
-    // Apply species filter
     if (selectedSpecies) {
-      // We need to get fisheries with this species first
-      const fisheryIds = mockFisheries
+      const fisheryIds = fisheries
         .filter(fishery => fishery.species.includes(selectedSpecies))
         .map(fishery => fishery.id);
       
-      // Then filter accommodations that belong to these fisheries
       results = results.filter(acc => 
         fisheryIds.includes(acc.fishery_id)
       );
     }
     
     setFilteredAccommodations(results);
-  }, [accommodations, selectedDistrict, selectedSpecies]);
+  }, [accommodations, fisheries, selectedDistrict, selectedSpecies]);
   
   // Animation variants
   const containerVariants = {
@@ -264,7 +290,16 @@ const AccommodationPage: React.FC = () => {
           </div>
         </div>
         
-        {filteredAccommodations.length > 0 ? (
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+            <p className="mt-4 text-gray-600">Loading accommodations...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-red-600">{error}</p>
+          </div>
+        ) : filteredAccommodations.length > 0 ? (
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
             variants={containerVariants}
@@ -273,7 +308,10 @@ const AccommodationPage: React.FC = () => {
           >
             {filteredAccommodations.map((accommodation) => (
               <motion.div key={accommodation.id} variants={itemVariants}>
-                <AccommodationCard accommodation={accommodation} />
+                <AccommodationCard 
+                  accommodation={accommodation}
+                  fishery={fisheries.find(f => f.id === accommodation.fishery_id)}
+                />
               </motion.div>
             ))} 
           </motion.div>

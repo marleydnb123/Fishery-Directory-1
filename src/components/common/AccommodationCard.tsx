@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Home, PoundSterling } from 'lucide-react';
 import { Accommodation } from '../../types/schema';
-import { supabase } from '../../lib/supabase';
 
-// Card component with fixed layout and consistent row heights
 interface AccommodationCardProps {
   accommodation: Accommodation;
   fishery?: {
@@ -66,48 +64,5 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
   );
 };
 
-// Main list component fetching from Supabase and rendering a fixed grid
-const AccommodationList: React.FC = () => {
-  const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
-  const [fisheries, setFisheries] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const [
-        { data: accommodationData, error: accommodationError },
-        { data: fisheriesData, error: fisheriesError }
-      ] = await Promise.all([
-        supabase.from('accommodation').select('*'),
-        supabase.from('fisheries').select('*')
-      ]);
-      if (accommodationError) console.error(accommodationError);
-      if (fisheriesError) console.error(fisheriesError);
-      setAccommodations(accommodationData || []);
-      setFisheries(fisheriesData || []);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  if (loading) return <div className="text-center py-8">Loading accommodations...</div>;
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {accommodations.map(accommodation => {
-        const fishery = fisheries.find(f => f.id === accommodation.fishery_id);
-        return (
-          <AccommodationCard
-            key={accommodation.id}
-            accommodation={accommodation}
-            fishery={fishery}
-          />
-        );
-      })}
-    </div>
-  );
-};
-
-export default AccommodationList;
+export default AccommodationCard;
  

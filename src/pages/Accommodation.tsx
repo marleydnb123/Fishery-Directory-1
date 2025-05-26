@@ -11,7 +11,7 @@ function HoverBannerCard({ image, title, subtitle, href }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative block w-full aspect-[4/5]  overflow-hidden shadow-lg"
+      className="group relative block w-full aspect-[4/3]  overflow-hidden shadow-lg"
       title={title}
     >
       {/* Image */}
@@ -43,31 +43,31 @@ function HoverBannerCard({ image, title, subtitle, href }) {
 // --- CardGrid component ---
 const hoverCards = [
   {
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    image: "https://www.yorklakesidelodges.co.uk/wp-content/uploads/2018/06/holly-lodge-york-lakeside-lodges.jpg",
     title: "Lodges",
     subtitle: "Peaceful waters",
     href: "#",
   },
   {
-    image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+    image: "https://lakeviewholidays.co.uk/wp-content/uploads/2019/05/Willow-800-x-600.jpg",
     title: "Holiday homes",
     subtitle: "Explore the woods",
     href: "#",
   },
   {
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80",
+    image: "https://tacklebox.co.uk/wp-content/uploads/2023/08/carp-fishing.webp",
     title: "Camping",
     subtitle: "Sandy adventures",
     href: "#",
   },
   {
-    image: "https://images.unsplash.com/photo-1465101178521-c1a9136a3d41?auto=format&fit=crop&w=600&q=80",
+    image: "https://assets.parkholidays.com/assets/8a1e89800f1291cff561ee405e484b5b.jpg",
     title: "Caravan Parks",
     subtitle: "Urban exploration",
     href: "#",
   },
   {
-    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=80",
+    image: "https://www.fisheries.co.uk/wp-content/uploads/2022/03/outpost1-600x563.jpg",
     title: "Cabins & Pods",
     subtitle: "Feel the breeze",
     href: "#",

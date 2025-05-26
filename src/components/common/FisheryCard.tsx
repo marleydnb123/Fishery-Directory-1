@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Fish, Home, Waves } from 'lucide-react'; // Add an icon for features!
+import { MapPin, Fish, Home, Waves } from 'lucide-react';
 import { Fishery } from '../../types/schema';
 
 interface FisheryCardProps {
@@ -9,13 +9,17 @@ interface FisheryCardProps {
 }
 
 const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
+  const handleScrollTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <motion.div 
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="bg-white rounded-xl shadow-md overflow-hidden h-full"
     >
-      <Link to={`/directory/${fishery.slug}`} className="block h-full">
+      <Link to={`/directory/${fishery.slug}`} className="block h-full" onClick={handleScrollTop}>
         <div className="h-48 overflow-hidden relative">
           <img
             src={fishery.image}

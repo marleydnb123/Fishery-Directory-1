@@ -166,7 +166,7 @@ const FisheryDetail: React.FC = () => {
         <div className="container mx-auto h-full flex items-end">
           <div className="text-white p-6 md:p-8 relative z-10">
             <motion.h1 
-              className="font-bebas font-bold mb-2 text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
+              className="text-6xl font-display font-bebas font-bold font-bold mb-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -570,16 +570,16 @@ const FisheryDetail: React.FC = () => {
       <div className="space-y-6">
         {lakes.map((lake) => (
           <div key={lake.id} className="bg-white rounded-xl shadow-md overflow-hidden">
-            <div className="flex flex-col md:flex-row">
-              {/* Lake image */}
-              <div className="w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 m-4 rounded-xl md:ml-6 md:mr-6 overflow-hidden"> 
+            <div className="flex">
+              {/* Lake image on the left, styled like accommodation */}
+              <div className="w-56 h-44 flex-shrink-0 bg-gray-100 m-4 rounded-xl ml-6 overflow-hidden">
                 <img
                   src={lake.image}
                   alt={lake.name}
                   className="w-full h-full object-cover rounded-xl"
                 />
               </div>
-              {/* Lake details */}
+              {/* Lake details on the right */}
               <div className="flex-1 p-6">
                 <h3 className="text-xl font-semibold mb-2">{lake.name}</h3>
                 <p className="text-gray-700 mb-4">{lake.description}</p>
@@ -608,8 +608,7 @@ const FisheryDetail: React.FC = () => {
   </motion.div>
 )}
 
-
-
+ 
         {activeTab === 'accommodation' && fishery.hasaccommodation && (
   <motion.div
     initial={{ opacity: 0 }}

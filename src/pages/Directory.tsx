@@ -55,7 +55,7 @@ const Directory: React.FC = () => {
             isFeatured: !!f.isfeatured,
             hasAccommodation: !!f.hasaccommodation,
             nightFishingAllowed: !!f.night_fishing_allowed,
-            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type.map(type => type.toLowerCase()) : (f.fishing_type ? f.fishing_type.toLowerCase().split(',') : []),
+            fishingType: f.fishing_type ? f.fishing_type.toLowerCase() : '',
             matchFishingFriendly: !!f.match_fishing_friendly,
             disabledAccess: !!f.disabled_access,
             facilities: Array.isArray(f.facilities) ? f.facilities : (f.facilities ? f.facilities.split(',') : []),
@@ -76,7 +76,7 @@ const Directory: React.FC = () => {
       setLoading(false);
     };
     fetchFisheries();
-  }, []); 
+  }, []);
 
   useEffect(() => {
     let results = [...fisheries];
@@ -112,8 +112,8 @@ const Directory: React.FC = () => {
     }
     if (fishingType) {
       results = results.filter(fishery =>
-        Array.isArray(fishery.fishingType) && fishery.fishingType.includes(selectedfishingType)
-      );
+        fishery.fishingType === fishingType
+      ); 
     }
     if (matchFishingFriendly) {
       results = results.filter(fishery => fishery.matchFishingFriendly);
@@ -122,12 +122,12 @@ const Directory: React.FC = () => {
       results = results.filter(fishery => fishery.disabledAccess);
     }
     if (facilities) {
-      results = results.filter(fishery => 
+      results = results.filter(fishery =>
         Array.isArray(fishery.facilities) &&
         fishery.facilities.some((facility: string) =>
           facility.toLowerCase().includes(facilities.toLowerCase())
         )
-      );
+      ); 
     }
     if (dogFriendly) {
       results = results.filter(fishery => fishery.dogFriendly);

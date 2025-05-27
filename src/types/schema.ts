@@ -37,7 +37,9 @@ export interface Fishery {
   fisheryvideo?: string;
   bait_boats?: boolean;
   magic_twig?: boolean;
-  private_hire? boolean;
+  private_hire? boolean;,
+  tackle_hire? boolean;,
+  coaching? boolean;
 }
 
 export interface Lake {

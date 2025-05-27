@@ -26,7 +26,6 @@ const Directory: React.FC = () => {
   const [campingAllowed, setCampingAllowed] = useState(false);
   const [catchPhotos, setCatchPhotos] = useState(false);
   const [wifiSignal, setWifiSignal] = useState('');
-  const [baitBoats, setBaitBoats] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -182,7 +181,6 @@ const Directory: React.FC = () => {
     campingAllowed,
     catchPhotos,
     wifiSignal,
-    baitBoats
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);
@@ -455,24 +453,6 @@ const Directory: React.FC = () => {
                   id="catch-photos"
                 />
                 <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={baitBoats}
-                  onChange={() => setBaitBoats(!baitBoats)}
-                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                  id="bait-boats"
-                />
-                <label htmlFor="bait-boats" className="text-xs text-gray-700 font-medium">Bait Boats Allowed</label>
-              </div>
-                <input
-                  type="checkbox"
-                  checked={baitBoats}
-                  onChange={() => setBaitBoats(!baitBoats)}
-                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                  id="bait-boats"
-                />
               </div>
             </div>
           </div>

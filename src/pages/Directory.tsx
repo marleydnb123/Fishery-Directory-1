@@ -526,6 +526,26 @@ const Directory: React.FC = () => {
                 />
                 <label htmlFor="private-hire" className="text-xs text-gray-700 font-medium">Private Hire</label>
               </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={tackleHire}
+                  onChange={() => settackleHire(!tackleHire)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="tacklehire"
+                />
+                <label htmlFor="tackle-hire" className="text-xs text-gray-700 font-medium">Tackle Hire</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={coaching}
+                  onChange={() => setcoaching(!coaching}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="coaching"
+                />
+                <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
+              </div>
             </div>
           </div>
         </div>

@@ -714,9 +714,9 @@ rel="noopener noreferrer"
       </p>
 
       <div className="prose max-w-none text-gray-700">
-        {fishery.rules.split(/\r?\n/).map((line, i) => (
-          <p key={i}>{line.trim() === '' ? '\u00A0' : line}</p>
-        ))}
+        {fishery.rules.split(/\r?\n/).map((line, i) =>
+          line.trim() === '' ? <div key={i} style={{ height: '1.5em' }} /> : <p key={i}>{line}</p>
+        )}
       </div>
       
       <div className="mt-8 p-4 bg-primary-100 rounded-lg">

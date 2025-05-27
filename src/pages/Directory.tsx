@@ -43,9 +43,8 @@ const Directory: React.FC = () => {
       setLoading(true);
       setError(null);
       const { data, error } = await supabase
-        .from('fisheries')
+        .from('fisheries') 
         .select('*');
-        .eq('', true)
       if (error) {
         setError(error.message);
         setFisheries([]);

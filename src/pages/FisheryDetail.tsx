@@ -264,14 +264,19 @@ const FisheryDetail: React.FC = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-        <h2
-          className="w-full text-3xl font-bebas font-bold mb-4 ml-0 mr-0 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+        <div
+          className="-mx-6 rounded-t-xl bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700"
           style={{
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}
         >
-          About {fishery.name} 
-        </h2>
+          <h2
+            className="w-full text-3xl font-bebas font-bold text-white py-4 px-6 rounded-t-xl"
+            style={{ margin: 0 }}
+          >
+            About {fishery.name}
+          </h2>
+        </div>
         {fishery.description.split(/\r?\n/).map((line, i) => (
           <p key={i} className="text-gray-700 mb-6">{line}</p>
         ))}
@@ -300,23 +305,28 @@ const FisheryDetail: React.FC = () => {
               ) : (
                 <p className="text-gray-500 italic">No facilities information available</p>
               )}
-                </div>
+          </div>
                 
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold mb-3">Available Species</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {(fishery.species || []).map((species, index) => (
-                      <span 
-                        key={index}
-                        className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                      >
-                        <Fish className="h-4 w-4 mr-1" />
-                        {species}
-                      </span>
-                    ))}
-                  </div> 
-                </div>
-              </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
+            <div className="flex flex-wrap gap-2">
+              {(fishery.species || []).map((species, index) => (
+                <span 
+                  key={index}
+                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
+                >
+                  <Fish className="h-4 w-4 mr-1" />
+                  {species}
+                </span>
+              ))}
+            </div> 
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )}
+</div>
+
 
 
               {/* --- Water Features Section --- */}

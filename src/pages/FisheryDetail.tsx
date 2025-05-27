@@ -636,7 +636,14 @@ const FisheryDetail: React.FC = () => {
     animate={{ opacity: 1 }} 
     transition={{ duration: 0.3 }}
   >
-    <h2 className="text-2xl font-semibold mb-6">Accommodation at {fishery.name}</h2>
+    <h2
+      className="w-full text-2xl sm:text-3xl md:text-4xl font-semibold font-bebas mb-6 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+      style={{
+        background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+      }}
+    >
+      Accommodation at {fishery.name}
+    </h2>
     
     {accommodation.length > 0 ? (
       <div className="space-y-6">
@@ -644,6 +651,7 @@ const FisheryDetail: React.FC = () => {
           <div key={acc.id} className="bg-white rounded-xl shadow-md overflow-hidden">
             <div className="flex flex-col md:flex-row">
               {/* Responsive image: wider on mobile, fixed width on desktop, with all margins */}
+
               <div className="w-80 max-w-md md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 mb-6 rounded-xl overflow-hidden flex items-center justify-center">
                 <img
                   src={acc.image}

@@ -181,6 +181,12 @@ const Directory: React.FC = () => {
     if (privateHire) {
       results = results.filter(fishery => fishery.privateHire);
     }
+    if (tackleHire) {
+      results = results.filter(fishery => fishery.tackleHire);
+    }
+    if (coaching) {
+      results = results.fishery => fishery.coaching);
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -204,7 +210,9 @@ const Directory: React.FC = () => {
     baitBoats,
     magicTwig,
     tackleShop,
-    privateHire
+    privateHire,
+    tackleHire,
+    coaching
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);

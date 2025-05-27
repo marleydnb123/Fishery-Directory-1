@@ -567,7 +567,12 @@ const FisheryDetail: React.FC = () => {
     animate={{ opacity: 1 }}
     transition={{ duration: 0.3 }}
   >
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6">
+    <h2
+      className="w-full text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+      style={{
+        background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+      }}
+    >
       Lakes at {fishery.name}
     </h2>
 
@@ -620,6 +625,7 @@ const FisheryDetail: React.FC = () => {
     )}
   </motion.div>
 )}
+
 
  
 

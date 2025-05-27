@@ -28,7 +28,7 @@ const Directory: React.FC = () => {
   const [wifiSignal, setWifiSignal] = useState('');
   const [baitBoats, setBaitBoats] = useState(false);
   const [magicTwig, setMagicTwig] = useState(false);
-  const [tackleShop, setTackleShop] = useState(false);
+  const [tackleShop, settackleShop] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

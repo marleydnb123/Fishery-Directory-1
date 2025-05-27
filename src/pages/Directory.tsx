@@ -79,7 +79,9 @@ const Directory: React.FC = () => {
             baitBoats: !!f.bait_boats,
             magicTwig: !!f.magic_twig,
             tackleShop: !!f.tackle_shop,
-            privateHire: !!f.private_hire
+            privateHire: !!f.private_hire,
+            tackleHire: !!f.tackle_hire,
+            coaching: !!f.coaching
           }))
         );
       }

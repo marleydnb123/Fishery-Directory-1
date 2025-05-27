@@ -70,6 +70,7 @@ const Directory: React.FC = () => {
             district: f.district,
             species: Array.isArray(f.species) ? f.species : (f.species ? f.species.split(',') : []),
             features: Array.isArray(f.features) ? f.features : [],
+            baitBoats: !!f.bait_boats,
           }))
         );
       }
@@ -157,6 +158,9 @@ const Directory: React.FC = () => {
         fishery.wifiSignal && fishery.wifiSignal.toLowerCase().includes(wifiSignal.toLowerCase())
       );
     }
+    if (baitBoats) {
+      results = results.filter(fishery => fishery.baitBoats);
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -176,7 +180,8 @@ const Directory: React.FC = () => {
     parkingClose,
     campingAllowed,
     catchPhotos,
-    wifiSignal
+    wifiSignal,
+    baitBoats
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);
@@ -450,6 +455,15 @@ const Directory: React.FC = () => {
                 />
                 <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
               </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={baitBoats}
+                  onChange={() => setBaitBoats(!baitBoats)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="bait-boats"
+                />
             </div>
           </div>
         </div>

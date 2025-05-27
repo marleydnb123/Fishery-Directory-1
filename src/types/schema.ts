@@ -35,6 +35,7 @@ export interface Fishery {
   fisheryimages2?: string;
   fisheryimages3?: string;
   fisheryvideo?: string;
+  bait_boats?: boolean;
 }
 
 export interface Lake {

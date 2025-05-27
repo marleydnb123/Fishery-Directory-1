@@ -28,7 +28,7 @@ type Fishery = {
   fisheryimages1: string | null;
   fisheryimages2: string | null; 
   fisheryimages3: string | null; 
-  fisheryvideo: string | null; 
+  fisheryvideo: string | null;  
 };
 
 type Lake = {

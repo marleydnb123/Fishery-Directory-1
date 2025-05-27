@@ -504,7 +504,6 @@ const Directory: React.FC = () => {
                 />
                 <label htmlFor="tackle-shop" className="text-xs text-gray-700 font-medium">Tackle Shop On-site</label>
               </div>
-               </div>
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"

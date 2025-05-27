@@ -382,9 +382,11 @@ const Directory: React.FC = () => {
                 />
               </div>
             </div>
-            {/* Column 3: Checkboxes */}
-            <div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-5"> 
-              <div className="flex items-center gap-2"> 
+           {/* Column 3: Checkboxes */}
+<div>
+  <h3 className="text-lg font-semibold mb-2">Preferences</h3>
+  <div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-5"> 
+    <div className="flex items-center gap-2">
                 <input 
                   type="checkbox"
                   checked={accommodationOnly}

@@ -654,7 +654,7 @@ const FisheryDetail: React.FC = () => {
                 <p className="text-gray-700 mb-4">{acc.notes}</p>
                 <a
                   href={`mailto:${fishery.contact_email || ''}`}
-                  className="inline bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors"
+                  className="inline-flex bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors"
                 >
                   <Book className="h-4 w-4 mr-2 inline" />
                   Book Now

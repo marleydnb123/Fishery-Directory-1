@@ -572,7 +572,7 @@ const FisheryDetail: React.FC = () => {
           <div key={lake.id} className="bg-white rounded-xl shadow-md overflow-hidden">
             <div className="flex flex-col md:flex-row">
               {/* Lake image */}
-              <div className="w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 m-4 rounded-xl md:ml-6 overflow-hidden">
+              <div className="w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 m-4 rounded-xl md:ml-6 md:mr-6 overflow-hidden">
                 <img
                   src={lake.image}
                   alt={lake.name}

@@ -193,7 +193,7 @@ const Directory: React.FC = () => {
     wifiSignal,
     baitBoats,
     magicTwig,
-    tackleShop,
+    tackleShop
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);

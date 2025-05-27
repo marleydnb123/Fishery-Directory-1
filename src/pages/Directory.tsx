@@ -383,17 +383,15 @@ const Directory: React.FC = () => {
               </div>
             </div>
             {/* Column 3: Checkboxes */}
-            <div>
-  <h3 className="text-lg font-semibold mb-2">Preferences</h3>
-  <div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-5"> 
-    <div className="flex items-center gap-2"> 
-      <input 
-        type="checkbox"
-        checked={accommodationOnly}
-        onChange={() => setAccommodationOnly(!accommodationOnly)}
-        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-        id="accommodation"
-      />
+            <div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-5"> 
+              <div className="flex items-center gap-2"> 
+                <input 
+                  type="checkbox"
+                  checked={accommodationOnly}
+                  onChange={() => setAccommodationOnly(!accommodationOnly)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
+                  id="accommodation"
+                />
                 <label htmlFor="accommodation" className="text-xs text-gray-700 font-medium">On-site Accommodation</label>
               </div>
               <div className="flex items-center gap-2">

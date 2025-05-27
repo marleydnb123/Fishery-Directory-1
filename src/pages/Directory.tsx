@@ -513,7 +513,7 @@ const Directory: React.FC = () => {
                   id="privatehire"
                 />
                 <label htmlFor="private-hire" className="text-xs text-gray-700 font-medium">Private Hire</label>
-              </div> 
+              </div>
             </div>
           </div>
         </div>

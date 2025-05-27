@@ -28,7 +28,8 @@ type Fishery = {
   fisheryimages1: string | null;
   fisheryimages2: string | null; 
   fisheryimages3: string | null; 
-  fisheryvideo: string | null;  
+  fisheryvideo: string | null;
+  facilities: string | null;
 };
 
 type Lake = {
@@ -254,7 +255,7 @@ const FisheryDetail: React.FC = () => {
         </div>
       </div>
 
-      {/* Content */} 
+      {/* Content */}  
 <div className="container mx-auto px-4 py-8"> 
   {activeTab === 'overview' && (
     <motion.div

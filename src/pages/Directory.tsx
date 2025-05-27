@@ -45,6 +45,7 @@ const Directory: React.FC = () => {
       const { data, error } = await supabase
         .from('fisheries')
         .select('*');
+        .eq('live_status', true)
       if (error) {
         setError(error.message);
         setFisheries([]);

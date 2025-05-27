@@ -55,7 +55,7 @@ const Directory: React.FC = () => {
             isFeatured: !!f.isfeatured,
             hasAccommodation: !!f.hasaccommodation,
             nightFishingAllowed: !!f.night_fishing_allowed,
-            fishingType: f.fishing_type ? f.fishing_type.toLowerCase() : '',
+            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type.map(type => type.toLowerCase()) : (f.fishing_type ? f.fishing_type.toLowerCase().split(',') : []),
             matchFishingFriendly: !!f.match_fishing_friendly,
             disabledAccess: !!f.disabled_access,
             facilities: Array.isArray(f.facilities) ? f.facilities : (f.facilities ? f.facilities.split(',') : []),
@@ -110,11 +110,14 @@ const Directory: React.FC = () => {
     if (nightFishingAllowed) {
       results = results.filter(fishery => fishery.nightFishingAllowed);
     }
-    if (fishingType) {
-      results = results.filter(fishery =>
-        fishery.fishingType === fishingType
-      ); 
+    if (selectedFishingType) {
+    results = results.filter(fishery =>
+    Array.isArray(fishery.fishingType) &&
+    fishery.fishingType.includes(selectedFishingType.toLowerCase()
+        )
+      );
     }
+
     if (matchFishingFriendly) {
       results = results.filter(fishery => fishery.matchFishingFriendly);
     }

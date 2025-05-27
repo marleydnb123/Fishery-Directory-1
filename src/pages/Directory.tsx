@@ -530,7 +530,7 @@ const Directory: React.FC = () => {
                 <input
                   type="checkbox"
                   checked={tackleHire}
-                  onChange={() => settackleHire(!tackleHireHire)}
+                  onChange={() => settackleHire(!tackleHire)}
                   className="w-4 h-4 accent-blue-600 rounded border-gray-300"
                   id="tacklehire"
                 />

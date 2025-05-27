@@ -584,7 +584,7 @@ const FisheryDetail: React.FC = () => {
                 On desktop:
                   - md:w-56 for fixed width
                   - md:mr-6 for right margin
-                  - md:ml-0 md:mt-4
+                  - md:ml-4 md:mt-4
               */}
               <div className="max-w-[20rem] w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-4 ml-4 mr-4 md:ml-0 md:mr-6 rounded-xl overflow-hidden flex items-center justify-center">
                 <img

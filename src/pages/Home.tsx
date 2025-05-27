@@ -110,7 +110,7 @@ const Home: React.FC = () => {
   />
   {/* Frosted glass wrapper for ALL hero content */}
   <div className="relative z-10 flex justify-center w-full">
-    <div className="backdrop-blur-md bg-black/10 rounded-xl px-8 py-8 w-full max-w-6xl mx-4 text-center">
+
       <motion.h1 
         className="text-6xl md:text-8xl font-bebas font-bold text-white mb-4"
         initial={{ opacity: 0, y: -10 }}

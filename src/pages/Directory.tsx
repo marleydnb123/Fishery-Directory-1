@@ -303,7 +303,7 @@ const Directory: React.FC = () => {
                   <option value="pleasure">Pleasure</option>
                   <option value="match">Match</option>
                   <option value="specimen">Specimen</option>
-                  <option value="specimen">Carp</option>
+                  <option value="carp">Carp</option>
                 </select>
               </div>
               <div>

@@ -715,7 +715,7 @@ rel="noopener noreferrer"
 
       <div className="prose max-w-none text-gray-700">
         {fishery.rules.split(/\r?\n/).map((line, i) => (
-          <p key={i}>{line}</p>
+          <p key={i}>{line.trim() === '' ? '\u00A0' : line}</p>
         ))}
       </div>
       

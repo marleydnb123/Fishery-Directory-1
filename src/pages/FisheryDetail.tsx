@@ -272,8 +272,12 @@ const FisheryDetail: React.FC = () => {
         >
           About {fishery.name} 
         </h2>
-        <p className="text-gray-700 mb-6">{fishery.description}</p>
-        <p className="text-gray-700 mb-6">{fishery.descriptionpage}</p> 
+        {fishery.description.split(/\r?\n/).map((line, i) => (
+          <p key={i} className="text-gray-700 mb-6">{line}</p>
+        ))}
+        {fishery.descriptionpage.split(/\r?\n/).map((line, i) => (
+          <p key={i} className="text-gray-700 mb-6">{line}</p>
+        ))}
         
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-1">
@@ -313,6 +317,7 @@ const FisheryDetail: React.FC = () => {
                   </div> 
                 </div>
               </div>
+
 
               {/* --- Water Features Section --- */}
             {fishery.features && fishery.features.length > 0 && (

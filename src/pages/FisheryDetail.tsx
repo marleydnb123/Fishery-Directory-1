@@ -577,10 +577,14 @@ const FisheryDetail: React.FC = () => {
           >
             <div className="flex flex-col md:flex-row">
               {/* 
-                Always margin 6 on top/left/right, all screen sizes.
-                w-full on mobile, md:w-56 on desktop for image sizing.
+                Margins on all sides: mt-6 ml-6 mr-6
+                Mobile: max width calc(100% - 3rem) to allow left+right margin
+                Desktop: fixed width md:w-56
               */}
-              <div className="w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 rounded-xl overflow-hidden flex items-center justify-center">
+              <div
+                className="h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 rounded-xl overflow-hidden flex items-center justify-center"
+                style={{ maxWidth: 'calc(100% - 3rem)' }}
+              >
                 <img
                   src={lake.image}
                   alt={lake.name}
@@ -617,6 +621,7 @@ const FisheryDetail: React.FC = () => {
     )}
   </motion.div>
 )}
+
 
 
  

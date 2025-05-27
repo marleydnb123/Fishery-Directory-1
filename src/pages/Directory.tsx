@@ -110,9 +110,9 @@ const Directory: React.FC = () => {
     if (nightFishingAllowed) {
       results = results.filter(fishery => fishery.nightFishingAllowed);
     }
-    if (fishingType && fishingType.length > 0) {
+    if (selectedFishingType) {
   results = results.filter(fishery =>
-    Array.isArray(fishery.fishingType) && fishingType.some(type => fishery.fishingType.includes(type))
+    Array.isArray(fishery.fishingType) && fishery.fishingType.includes(selectedFishingType)
   );
 }
 

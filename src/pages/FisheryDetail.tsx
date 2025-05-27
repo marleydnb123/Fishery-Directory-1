@@ -594,7 +594,7 @@ const FisheryDetail: React.FC = () => {
                 </h3>
                 <p className="text-gray-700 mb-4">{lake.description}</p>
                 <div className="mb-2 font-medium">Available Species:</div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {(lake.species || []).map((species, index) => (
                     <span
                       key={index}
@@ -605,6 +605,21 @@ const FisheryDetail: React.FC = () => {
                     </span>
                   ))}
                 </div>
+                {lake.features && lake.features.length > 0 && (
+                  <>
+                    <div className="mb-2 font-medium">Features:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {lake.features.map((feature, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center text-sm bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -617,6 +632,7 @@ const FisheryDetail: React.FC = () => {
     )}
   </motion.div>
 )}
+
 
 
 

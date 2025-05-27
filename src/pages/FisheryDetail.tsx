@@ -265,11 +265,10 @@ const FisheryDetail: React.FC = () => {
     >
       <div className="bg-white rounded-xl shadow-md p-6 mb-8">
         <h2
-          className="w-full text-3xl font-bebas font-bold bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white py-4 -mx-6 rounded-t-xl"
+          className="w-full text-3xl font-bebas font-bold mb-4 ml-0 mr-0 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
           style={{
-            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)",
-            marginBottom: 0
-          }}
+            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+          }} 
         >
           About {fishery.name} 
         </h2>
@@ -301,24 +300,24 @@ const FisheryDetail: React.FC = () => {
               ) : (
                 <p className="text-gray-500 italic">No facilities information available</p>
               )}
-          </div>
+                </div>
                 
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
-            <div className="flex flex-wrap gap-2">
-              {(fishery.species || []).map((species, index) => (
-                <span 
-                  key={index}
-                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                >
-                  <Fish className="h-4 w-4 mr-1" />
-                  {species}
-                </span>
-              ))}
-            </div> 
-          </div>
-        </div>
-
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold mb-3">Available Species</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {(fishery.species || []).map((species, index) => (
+                      <span 
+                        key={index}
+                        className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
+                      >
+                        <Fish className="h-4 w-4 mr-1" />
+                        {species}
+                      </span>
+                    ))}
+                  </div> 
+                </div>
+              </div>
+ 
 
               {/* --- Water Features Section --- */}
             {fishery.features && fishery.features.length > 0 && (

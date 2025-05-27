@@ -383,10 +383,9 @@ const Directory: React.FC = () => {
               </div>
             </div>
             {/* Column 3: Checkboxes */}
-            <label className="block text-xs font-semibold text-gray-600 mb-1">Water Features</label>
             <div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-5"> 
               <div className="flex items-center gap-2"> 
-                <input
+                <input 
                   type="checkbox"
                   checked={accommodationOnly}
                   onChange={() => setAccommodationOnly(!accommodationOnly)}

@@ -558,7 +558,7 @@ const FisheryDetail: React.FC = () => {
           </motion.div>
         )} 
 
-        {activeTab === 'lakes' && (
+       {activeTab === 'lakes' && (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -577,10 +577,11 @@ const FisheryDetail: React.FC = () => {
           >
             <div className="flex flex-col md:flex-row">
               {/* 
-                Always margin 6 on top/left/right, all screen sizes.
-                w-full on mobile, md:w-56 on desktop for image sizing.
+                Mobile: max-w-xs, pr-6, w-full
+                Desktop: md:w-56, md:pr-0
+                Margins unchanged
               */}
-              <div className="w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 rounded-xl overflow-hidden flex items-center justify-center">
+              <div className="w-full max-w-xs pr-6 md:w-56 md:max-w-none md:pr-0 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 rounded-xl overflow-hidden flex items-center justify-center">
                 <img
                   src={lake.image}
                   alt={lake.name}
@@ -616,7 +617,8 @@ const FisheryDetail: React.FC = () => {
       </div>
     )}
   </motion.div>
-)} 
+)}
+
 
 
  

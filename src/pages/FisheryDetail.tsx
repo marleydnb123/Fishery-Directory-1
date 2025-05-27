@@ -577,7 +577,7 @@ const FisheryDetail: React.FC = () => {
           >
             <div className="flex flex-col md:flex-row">
               {/* 
-                Mobile: max-w-xs, pr-6, w-full
+                Mobile: max-w-s, pr-6, w-full
                 Desktop: md:w-56, md:pr-0
                 Margins unchanged
               */}

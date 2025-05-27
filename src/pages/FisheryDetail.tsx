@@ -695,32 +695,42 @@ rel="noopener noreferrer"
 
 
         {activeTab === 'rules' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4">Fishery Rules</h2>
-              <p className="text-gray-700 mb-6">
-                Please ensure you are familiar with and adhere to the following rules while fishing at {fishery.name}:
-              </p>
-              
-              <div className="prose max-w-none text-gray-700">
-                <p>{fishery.rules}</p>
-              </div>
-              
-              <div className="mt-8 p-4 bg-primary-100 rounded-lg">
-                <div className="flex items-start">
-                  <Info className="h-5 w-5 text-primary-900 mr-2 mt-0.5" />
-                  <p className="text-primary-900">
-                    Failure to comply with these rules may result in being asked to leave the fishery without refund.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )} 
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
+  >
+    <div className="bg-white rounded-xl shadow-md p-6">
+      <h2
+        className="w-full text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+        style={{
+          background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+        }}
+      >
+        Fishery Rules
+      </h2>
+      <p className="text-gray-700 mb-6">
+        Please ensure you are familiar with and adhere to the following rules while fishing at {fishery.name}:
+      </p>
+
+      <div className="prose max-w-none text-gray-700">
+        {fishery.rules.split(/\r?\n/).map((line, i) => (
+          <p key={i}>{line}</p>
+        ))}
+      </div>
+      
+      <div className="mt-8 p-4 bg-primary-100 rounded-lg">
+        <div className="flex items-start">
+          <Info className="h-5 w-5 text-primary-900 mr-2 mt-0.5" />
+          <p className="text-primary-900">
+            Failure to comply with these rules may result in being asked to leave the fishery without refund.
+          </p>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+)}
+
  
 {/* --- Featured Fisheries Section --- */}
 <section className="py-12 px-4 bg-gray-50">

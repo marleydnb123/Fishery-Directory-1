@@ -162,6 +162,9 @@ const Directory: React.FC = () => {
     if (baitBoats) {
       results = results.filter(fishery => fishery.baitBoats);
     }
+    if (magicTwig) {
+      results = results.filter(fishery => fishery.magicTwig);
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -182,7 +185,8 @@ const Directory: React.FC = () => {
     campingAllowed,
     catchPhotos,
     wifiSignal,
-    baitBoats
+    baitBoats,
+    magicTwig
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);
@@ -465,6 +469,16 @@ const Directory: React.FC = () => {
                   id="bait-boats"
                 />
                 <label htmlFor="bait-boats" className="text-xs text-gray-700 font-medium">Bait Boats Allowed</label>
+              </div>
+                <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={baitBoats}
+                  onChange={() => setMagicTwig(!magicTwig)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="Magic Twig"
+                />
+                <label htmlFor="bait-boats" className="text-xs text-gray-700 font-medium">Magic Twig Allowed</label>
               </div>
             </div>
           </div>

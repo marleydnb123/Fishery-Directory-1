@@ -635,7 +635,7 @@ const FisheryDetail: React.FC = () => {
           <div key={acc.id} className="bg-white rounded-xl shadow-md overflow-hidden">
             <div className="flex flex-col md:flex-row">
               {/* Responsive image: slightly wider on mobile, fixed width on desktop, consistent margins */}
-              <div className="w-80 max-w-md md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 rounded-xl overflow-hidden flex items-center justify-center">
+              <div className="w-80 max-w-md md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 mb-6 rounded-xl overflow-hidden flex items-center justify-center">
                 <img
                   src={acc.image}
                   alt={acc.type}

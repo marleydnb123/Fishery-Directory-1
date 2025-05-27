@@ -73,7 +73,8 @@ const Directory: React.FC = () => {
             species: Array.isArray(f.species) ? f.species : (f.species ? f.species.split(',') : []),
             features: Array.isArray(f.features) ? f.features : [],
             baitBoats: !!f.bait_boats,
-            magicTwig: !!f.magic_twig
+            magicTwig: !!f.magic_twig,
+            tackleShop: !!f.tackle_shop 
           }))
         );
       }

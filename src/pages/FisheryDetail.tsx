@@ -577,11 +577,16 @@ const FisheryDetail: React.FC = () => {
           >
             <div className="flex flex-col md:flex-row">
               {/* 
-                On mobile: margin top, left, right (mt-4 ml-4 mr-4)
-                On desktop: remove ml-4, mr-4, mt-4, add mr-6 (md:mr-6)
+                On mobile: 
+                  - max-w-[20rem] (same as w-80, 320px) keeps image from being full width
+                  - mr-4 adds right margin
+                  - ml-4 mt-4 for left/top margin
+                On desktop:
+                  - md:w-56 for fixed width
+                  - md:mr-6 for right margin
+                  - md:ml-0 md:mt-4
               */}
-              <div className="w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-4 ml-4 mr-4 rounded-xl overflow-hidden flex items-center justify-center
-                md:mt-4 md:ml-0 md:mr-6">
+              <div className="max-w-[20rem] w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-4 ml-4 mr-4 md:ml-0 md:mr-6 rounded-xl overflow-hidden flex items-center justify-center">
                 <img
                   src={lake.image}
                   alt={lake.name}

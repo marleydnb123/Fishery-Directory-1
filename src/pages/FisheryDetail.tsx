@@ -713,22 +713,77 @@ rel="noopener noreferrer"
         Please ensure you are familiar with and adhere to the following rules while fishing at {fishery.name}:
       </p>
 
-               
-              <div className="prose max-w-none text-gray-700">
-                <p>{fishery.rules}</p>
-              </div>
-              
-              <div className="mt-8 p-4 bg-primary-100 rounded-lg">
-                <div className="flex items-start">
-                  <Info className="h-5 w-5 text-primary-900 mr-2 mt-0.5" />
-                  <p className="text-primary-900">
-                    Failure to comply with these rules may result in being asked to leave the fishery without refund.
+      <div className="prose max-w-none text-gray-700">
+        {(() => {
+          const lines = fishery.rules.split(/\r?\n/);
+          const elements = [];
+          let listItems = [];
+          let lastWasHeader = false;
+
+          lines.forEach((line, i) => {
+            const trimmed = line.trim();
+
+            if (trimmed.startsWith('-')) {
+              listItems.push(trimmed.slice(1).trim());
+              lastWasHeader = false;
+            } else {
+              // Flush any bullets before a new header/paragraph/blank
+              if (listItems.length > 0) {
+                elements.push(
+                  <ul key={`ul-${i}`} className="list-disc ml-6">
+                    {listItems.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                );
+                listItems = [];
+              }
+              if (trimmed === '') {
+                elements.push(<div key={i} style={{ height: '1.25em' }} />);
+                lastWasHeader = false;
+              } else {
+                // Treat as header if previous line was blank or it's the first line
+                const isHeader = i === 0 || (lines[i - 1] && lines[i - 1].trim() === '');
+                elements.push(
+                  <p
+                    key={i}
+                    className={isHeader ? 'font-semibold text-lg mt-4 mb-2' : ''}
+                  >
+                    {line}
                   </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )} 
+                );
+                lastWasHeader = isHeader;
+              }
+            }
+          });
+
+          // Flush any remaining bullets
+          if (listItems.length > 0) {
+            elements.push(
+              <ul key={`ul-end`} className="list-disc ml-6">
+                {listItems.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            );
+          }
+
+          return elements;
+        })()}
+      </div>
+      
+      <div className="mt-8 p-4 bg-primary-100 rounded-lg">
+        <div className="flex items-start">
+          <Info className="h-5 w-5 text-primary-900 mr-2 mt-0.5" />
+          <p className="text-primary-900">
+            Failure to comply with these rules may result in being asked to leave the fishery without refund.
+          </p>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+)}
+
  
 {/* --- Featured Fisheries Section --- */}
 <section className="py-12 px-4 bg-gray-50">

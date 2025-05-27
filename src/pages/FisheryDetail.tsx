@@ -609,14 +609,13 @@ const FisheryDetail: React.FC = () => {
                   <>
                     <div className="mb-2 font-medium">Features:</div>
                     <div className="flex flex-wrap gap-2">
-                      {(lake.features || []).map((feature, idx) => (
-                        <span
-                          key={idx}
-                          className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                        >
-                          {/* Use a different icon if you want, e.g., <FeatureIcon /> */}
-                          <Fish className="h-4 w-4 mr-1" />
-                          {feature}
+                       {fishery.features.map((feature, idx) => ( 
+            <span
+            key={idx}
+            className="inline-flex items-center text-sm bg-blue-100 text-blue-900 px-3 py-1 rounded-full"
+            >
+            <Waves className="h-4 w-4 mr-1" />
+            {feature}
                         </span>
                       ))}
                     </div>

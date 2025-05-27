@@ -14,7 +14,7 @@ const Directory: React.FC = () => {
   const [featureSearchTerm, setFeatureSearchTerm] = useState('');
   const [accommodationOnly, setAccommodationOnly] = useState(false);
   const [nightFishingAllowed, setNightFishingAllowed] = useState(false);
-  const [fishingType, setFishingType] = useState('');
+  const [selectedFishingType, setSelectedFishingType] = useState('');
   const [matchFishingFriendly, setMatchFishingFriendly] = useState(false);
   const [disabledAccess, setDisabledAccess] = useState(false);
   const [facilities, setFacilities] = useState('');
@@ -55,7 +55,7 @@ const Directory: React.FC = () => {
             isFeatured: !!f.isfeatured,
             hasAccommodation: !!f.hasaccommodation,
             nightFishingAllowed: !!f.night_fishing_allowed,
-            fishingType: f.fishing_type ? f.fishing_type.toLowerCase() : '',
+            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type : [],
             matchFishingFriendly: !!f.match_fishing_friendly,
             disabledAccess: !!f.disabled_access,
             facilities: Array.isArray(f.facilities) ? f.facilities : (f.facilities ? f.facilities.split(',') : []),
@@ -107,12 +107,10 @@ const Directory: React.FC = () => {
         )
       );
     }
-    if (nightFishingAllowed) {
-      results = results.filter(fishery => fishery.nightFishingAllowed);
-    }
-    if (fishingType) {
+    if (selectedFishingType) {
       results = results.filter(fishery =>
-        fishery.fishingType === fishingType
+        Array.isArray(fishery.fishingType) && 
+        fishery.fishingType.includes(selectedFishingType)
       ); 
     }
     if (matchFishingFriendly) {
@@ -167,8 +165,7 @@ const Directory: React.FC = () => {
     selectedSpecies,
     accommodationOnly,
     featureSearchTerm,
-    nightFishingAllowed,
-    fishingType,
+    selectedFishingType,
     matchFishingFriendly,
     disabledAccess,
     facilities,
@@ -295,14 +292,14 @@ const Directory: React.FC = () => {
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">Fishing Type</label>
                 <select
-                  value={fishingType}
-                  onChange={e => setFishingType(e.target.value)}
+                  value={selectedFishingType}
+                  onChange={e => setSelectedFishingType(e.target.value)}
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
                 >
                   <option value="">All Types</option>
-                  <option value="pleasure">Pleasure</option>
-                  <option value="match">Match</option>
-                  <option value="specimen">Specimen Carp</option> 
+                  {Array.from(new Set(fisheries.flatMap(f => f.fishingType))).sort().map(type => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -563,4 +560,4 @@ const Directory: React.FC = () => {
   );
 };
 
-export default Directory; 
+export default Directory;

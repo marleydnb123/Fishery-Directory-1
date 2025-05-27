@@ -714,9 +714,49 @@ rel="noopener noreferrer"
       </p>
 
       <div className="prose max-w-none text-gray-700">
-        {fishery.rules.split(/\r?\n/).map((line, i) =>
-          line.trim() === '' ? <div key={i} style={{ height: '1.5em' }} /> : <p key={i}>{line}</p>
-        )}
+        {(() => {
+          const lines = fishery.rules.split(/\r?\n/);
+          const elements = [];
+          let listItems = [];
+
+          lines.forEach((line, i) => {
+            const trimmed = line.trim();
+
+            if (trimmed.startsWith('-')) {
+              listItems.push(trimmed.slice(1).trim());
+            } else {
+              if (listItems.length > 0) {
+                elements.push(
+                  <ul key={`ul-${i}`} className="list-disc ml-6">
+                    {listItems.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                );
+                listItems = [];
+              }
+              if (trimmed !== '') {
+                elements.push(
+                  <p key={i} className="font-semibold text-lg mt-4 mb-2">{line}</p>
+                );
+              } else {
+                elements.push(<div key={i} style={{ height: '1em' }} />);
+              }
+            }
+          });
+
+          if (listItems.length > 0) {
+            elements.push(
+              <ul key={`ul-end`} className="list-disc ml-6">
+                {listItems.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            );
+          }
+
+          return elements;
+        })()}
       </div>
       
       <div className="mt-8 p-4 bg-primary-100 rounded-lg">

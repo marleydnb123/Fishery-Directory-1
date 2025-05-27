@@ -265,11 +265,12 @@ const FisheryDetail: React.FC = () => {
     >
       <div className="bg-white rounded-xl shadow-md p-6 mb-8">
         <h2
-          className="w-full text-3xl font-bebas font-bold mb-4 ml-0 mr-0 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+          className="w-full text-3xl font-bebas font-bold mb-4 ml-0 mr-0 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg -mt-6 -mx-6 rounded-t-xl"
           style={{
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}  
-        > 
+        >
+
           About {fishery.name} 
         </h2>
         {fishery.description.split(/\r?\n/).map((line, i) => (

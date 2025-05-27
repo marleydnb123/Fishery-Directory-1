@@ -30,6 +30,8 @@ const Directory: React.FC = () => {
   const [magicTwig, setMagicTwig] = useState(false);
   const [tackleShop, settackleShop] = useState(false);
   const [privateHire, setprivateHire] = useState(false);
+  const [tackleHire, settackleHire] = useState(false);
+  const [coaching, setcoaching] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

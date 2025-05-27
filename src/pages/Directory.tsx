@@ -55,7 +55,11 @@ const Directory: React.FC = () => {
             isFeatured: !!f.isfeatured,
             hasAccommodation: !!f.hasaccommodation,
             nightFishingAllowed: !!f.night_fishing_allowed,
-            fishingType: f.fishing_type ? f.fishing_type.toLowerCase() : '',
+            fishingType: Array.isArray(f.fishing_type)
+              ? f.fishing_type.map((type: string) => type.trim())
+              : (f.fishing_type
+                  ? f.fishing_type.split(',').map((type: string) => type.trim())
+                  : []),
             matchFishingFriendly: !!f.match_fishing_friendly,
             disabledAccess: !!f.disabled_access,
             facilities: Array.isArray(f.facilities) ? f.facilities : (f.facilities ? f.facilities.split(',') : []),
@@ -112,7 +116,7 @@ const Directory: React.FC = () => {
     }
     if (fishingType) {
       results = results.filter(fishery =>
-        fishery.fishingType === fishingType
+        Array.isArray(fishery.fishingType) && fishery.fishingType.includes(fishingType)
       ); 
     }
     if (matchFishingFriendly) {
@@ -223,8 +227,6 @@ const Directory: React.FC = () => {
         </div>
       </div>
       {/* --- Image Banner End --- */}
-            
-
       <div className="container mx-auto px-4 pb-8" style={{ marginTop: '3rem' }}>
         <motion.div
           className="text-center mb-8"
@@ -239,7 +241,6 @@ const Directory: React.FC = () => {
             Discover the perfect fishing spot from our collection of premium fisheries across the UK.
           </p>
         </motion.div>
-
         {/* --- Modern Search Bar & Filters --- */}
         <div className="bg-customBlue/50 rounded-xl shadow-md p-6 mb-16">
           <form
@@ -262,7 +263,6 @@ const Directory: React.FC = () => {
               Search
             </button>
           </form>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Column 1: Dropdowns */}
             <div className="flex flex-col gap-3">
@@ -300,9 +300,9 @@ const Directory: React.FC = () => {
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
                 >
                   <option value="">All Types</option>
-                  <option value="pleasure">Pleasure</option>
-                  <option value="match">Match</option>
-                  <option value="specimen">Specimen Carp</option> 
+                  <option value="Pleasure">Pleasure</option>
+                  <option value="Match">Match</option>
+                  <option value="Specimen">Specimen Carp</option> 
                 </select>
               </div>
               <div>
@@ -563,4 +563,4 @@ const Directory: React.FC = () => {
   );
 };
 
-export default Directory;
+export default Directory; 

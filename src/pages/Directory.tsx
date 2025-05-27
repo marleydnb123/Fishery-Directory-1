@@ -377,7 +377,7 @@ const Directory: React.FC = () => {
               </div>
             </div>
             {/* Column 3: Checkboxes */}
-            <div className="grid grid-cols-2 grid-rows-5 gap-2 h-full"> 
+            <div className="grid grid-cols-2 grid-rows-10 gap-2 h-full"> 
               <div className="flex items-center gap-2"> 
                 <input
                   type="checkbox"

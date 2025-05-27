@@ -6,9 +6,10 @@ import { Fishery } from '../../types/schema';
 
 interface FisheryCardProps {
   fishery: Fishery;
+  showFacilities?: boolean;
 }
 
-const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
+const FisheryCard: React.FC<FisheryCardProps> = ({ fishery, showFacilities }) => {
   const handleScrollTop = () => {
     window.scrollTo(0, 0);
   };
@@ -46,9 +47,20 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
             <h3 className="text-4xl font-bebas font-semibold text-gray-900 mb-2">{fishery.name}</h3>
           </div>
           
-          <div className="flex items-center text-gray-600 mb-3">
-            <MapPin className="h-4 w-4 mr-1 text-primary-600" />
-            <span className="text-sm">{fishery.district}</span>
+          <div className="flex items-center text-gray-600 mb-3 space-x-4">
+            <div className="flex items-center">
+              <MapPin className="h-4 w-4 mr-1 text-primary-600" />
+              <span className="text-sm">{fishery.district}</span>
+            </div>
+            {showFacilities && fishery.facilities && fishery.facilities.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {fishery.facilities.map((facility, idx) => (
+                  <span key={idx} className="text-xs bg-gray-200 text-gray-800 px-2 py-1 rounded-full">
+                    {facility}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
           
           {/* Fixed-height, 2-line clamped description */}
@@ -79,7 +91,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
                   {feature}
                 </span>
               ))}
-            </div> 
+            </div>
           )}
         </div>
       </Link>

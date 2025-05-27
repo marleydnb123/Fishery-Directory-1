@@ -122,7 +122,7 @@ const Directory: React.FC = () => {
       results = results.filter(fishery => fishery.disabledAccess);
     }
     if (facilities) {
-      results = results.filter(fishery =>
+      results = results.filter(fishery => 
         Array.isArray(fishery.facilities) &&
         fishery.facilities.some((facility: string) =>
           facility.toLowerCase().includes(facilities.toLowerCase())

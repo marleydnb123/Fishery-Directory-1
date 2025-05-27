@@ -579,8 +579,8 @@ const FisheryDetail: React.FC = () => {
               {/* 
                 On mobile: 
                   - max-w-[20rem] (same as w-80, 320px) keeps image from being full width
-                  - mr-4 adds right margin
-                  - ml-4 mt-4 for left/top margin
+                  - mr-6 adds right margin
+                  - ml-6 mt-6 for left/top margin
                 On desktop:
                   - md:w-56 for fixed width
                   - md:mr-6 for right margin

@@ -176,7 +176,7 @@ const Directory: React.FC = () => {
     }
     if (privateHire) {
       results = results.filter(fishery => fishery.privateHire);
-    }]
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,

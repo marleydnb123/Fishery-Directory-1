@@ -168,6 +168,9 @@ const Directory: React.FC = () => {
     if (magicTwig) {
       results = results.filter(fishery => fishery.magicTwig);
     }
+    if (tackleShop) {
+      results = results.filter(fishery => fishery.tackleShop);
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -189,7 +192,8 @@ const Directory: React.FC = () => {
     catchPhotos,
     wifiSignal,
     baitBoats,
-    magicTwig
+    magicTwig,
+    tackleShop
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);

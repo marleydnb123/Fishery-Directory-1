@@ -278,27 +278,24 @@ const FisheryDetail: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-1">
             <h3 className="text-lg font-semibold mb-3">Facilities</h3>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                <span>Parking available</span>
-              </li>
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                <span>Toilets on site</span>
-              </li>
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                <span>Tackle shop</span>
-              </li>
-
-                    {fishery.hasaccommodation && (
-                      <li className="flex items-center">
-                        <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                        <span>Accommodation available</span>
-                      </li>
-                    )}
-                  </ul>
+              {fishery.facilities && fishery.facilities.length > 0 ? (
+                <ul className="space-y-2 text-gray-700">
+                  {fishery.facilities.map((facility, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>{facility}</span>
+                    </li>
+                  ))}
+                  {fishery.hasAccommodation && (
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>Accommodation available</span>
+                    </li>
+                  )}
+                </ul>
+              ) : (
+                <p className="text-gray-500 italic">No facilities information available</p>
+              )}
                 </div>
                 
                 <div className="flex-1">

@@ -568,7 +568,7 @@ const FisheryDetail: React.FC = () => {
     transition={{ duration: 0.3 }}
   >
     <h2
-      className="w-full text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+      className="w-full text-2xl sm:text-3xl md:text-4xl font-bebas font-semibold mb-6 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
       style={{
         background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
       }}

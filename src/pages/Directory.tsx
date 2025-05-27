@@ -30,8 +30,6 @@ const Directory: React.FC = () => {
   const [magicTwig, setMagicTwig] = useState(false);
   const [tackleShop, settackleShop] = useState(false);
   const [privateHire, setprivateHire] = useState(false);
-  const [tackleHire, settackleHire] = useState(false);
-  const [coaching, setcoaching] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -50,7 +48,7 @@ const Directory: React.FC = () => {
       setError(null);
       const { data, error } = await supabase
         .from('fisheries') 
-        .select('*');
+        .select('*'); 
       if (error) {
         setError(error.message);
         setFisheries([]);
@@ -79,9 +77,7 @@ const Directory: React.FC = () => {
             baitBoats: !!f.bait_boats,
             magicTwig: !!f.magic_twig,
             tackleShop: !!f.tackle_shop,
-            privateHire: !!f.private_hire,
-            tackleHire: !!f.tackle_hire,
-            coaching: !!f.coaching
+            privateHire: !!f.private_hire
           }))
         );
       }
@@ -181,12 +177,6 @@ const Directory: React.FC = () => {
     if (privateHire) {
       results = results.filter(fishery => fishery.privateHire);
     }
-    if (tackleHire) {
-      results = results.filter(fishery => fishery.tackleHire);
-    }
-    if (coaching) {
-      results = results.filter(fishery => fishery.coaching);
-    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -210,9 +200,7 @@ const Directory: React.FC = () => {
     baitBoats,
     magicTwig,
     tackleShop,
-    privateHire,
-    tackleHire,
-    coaching
+    privateHire
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);
@@ -526,26 +514,6 @@ const Directory: React.FC = () => {
                 />
                 <label htmlFor="private-hire" className="text-xs text-gray-700 font-medium">Private Hire</label>
               </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={tackleHire}
-                  onChange={() => settackleHire(!tackleHire)}
-                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                  id="tacklehire"
-                />
-                <label htmlFor="tackle-hire" className="text-xs text-gray-700 font-medium">Tackle Hire</label>
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={coaching}
-                  onChange={() => setcoaching(!coaching)}
-                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                  id="coaching"
-                />
-                <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
-              </div>
             </div>
           </div>
         </div>
@@ -563,11 +531,10 @@ const Directory: React.FC = () => {
             animate="visible"
           >
             {filteredFisheries.map((fishery) => (
-  <motion.div key={fishery.id} variants={itemVariants}>
-    <FisheryCard fishery={fishery} showFacilities={!!searchTerm} />
-  </motion.div>
-))}
-
+              <motion.div key={fishery.id} variants={itemVariants}>
+                <FisheryCard fishery={fishery} />
+              </motion.div>
+            ))}
           </motion.div>
         ) : (
           <div className="text-center py-16">

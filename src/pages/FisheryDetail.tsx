@@ -576,8 +576,8 @@ const FisheryDetail: React.FC = () => {
             className="bg-white rounded-xl shadow-md overflow-hidden"
           >
             <div className="flex flex-col md:flex-row">
-              {/* Lake image, responsive and centered on mobile */}
-              <div className="w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 mx-6 my-4 rounded-xl overflow-hidden flex items-center justify-center">
+              {/* Lake image with right margin on all screen sizes */}
+              <div className="w-full md:w-56 h-44 flex-shrink-0 bg-gray-100 mx-6 mb-4 md:mb-0 md:mr-6 rounded-xl overflow-hidden flex items-center justify-center">
                 <img
                   src={lake.image}
                   alt={lake.name}

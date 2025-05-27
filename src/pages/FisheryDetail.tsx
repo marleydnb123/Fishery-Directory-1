@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player';
 
 // Define your types if you don't already have them
 type Fishery = {
-  id: string;
+  id: string; 
   name: string;
   slug: string;
   description: string;

@@ -76,7 +76,7 @@ const Directory: React.FC = () => {
       setLoading(false);
     };
     fetchFisheries();
-  }, []);
+  }, []); 
 
   useEffect(() => {
     let results = [...fisheries];

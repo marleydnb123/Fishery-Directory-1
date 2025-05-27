@@ -160,9 +160,6 @@ const Directory: React.FC = () => {
       );
     }
     if (baitBoats) {
-      results = results.filter(fishery => fishery.bait_boats);
-    }
-    if (baitBoats) {
       results = results.filter(fishery => fishery.baitBoats);
     }
     setFilteredFisheries(results);
@@ -185,7 +182,6 @@ const Directory: React.FC = () => {
     campingAllowed,
     catchPhotos,
     wifiSignal,
-    baitBoats
     baitBoats
   ]);
 

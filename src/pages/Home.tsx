@@ -84,7 +84,7 @@ const Home: React.FC = () => {
 
   return ( 
     <div className="min-h-screen">
-     {/* Hero Section */}
+      {/* Hero Section */}
 <section className="h-screen relative flex items-center justify-center bg-black overflow-hidden">
   {/* Previous image fades out */}
   <motion.div
@@ -110,20 +110,7 @@ const Home: React.FC = () => {
   />
   {/* Frosted glass wrapper for ALL hero content */}
   <div className="relative z-10 flex justify-center w-full">
-    <div
-      className="
-        relative px-8 py-8 w-full max-w-6xl mx-4 text-center
-        backdrop-blur-lg
-        bg-black/20
-        before:content-['']
-        before:absolute before:inset-0
-        before:bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.25)_60%,_rgba(0,0,0,0)_100%)]
-        before:pointer-events-none
-        rounded-xl
-        overflow-hidden
-      "
-      style={{ boxShadow: 'none', border: 'none' }}
-    >
+    <div className="backdrop-blur-sm bg-black/10 rounded-xl px-8 py-8 w-full max-w-6xl mx-4 text-center">
       <motion.h1 
         className="text-6xl md:text-8xl font-bebas font-bold text-white mb-4"
         initial={{ opacity: 0, y: -10 }}
@@ -154,8 +141,9 @@ const Home: React.FC = () => {
         </Button> 
       </motion.div>
     </div>
-  </div>
+  </div> 
 </section>
+
 
 
       {/* Featured Fisheries Section */}

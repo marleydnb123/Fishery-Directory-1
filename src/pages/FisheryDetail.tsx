@@ -278,6 +278,7 @@ const FisheryDetail: React.FC = () => {
         {fishery.descriptionpage.split(/\r?\n/).map((line, i) => (
           <p key={i} className="text-gray-700 mb-6">{line}</p>
         ))}
+
         
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-1">

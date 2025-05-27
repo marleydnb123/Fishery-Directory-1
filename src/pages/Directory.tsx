@@ -540,7 +540,7 @@ const Directory: React.FC = () => {
                 <input
                   type="checkbox"
                   checked={coaching}
-                  onChange={() => setcoaching(!coaching}
+                  onChange={() => setcoaching(!coaching)}
                   className="w-4 h-4 accent-blue-600 rounded border-gray-300"
                   id="coaching"
                 />

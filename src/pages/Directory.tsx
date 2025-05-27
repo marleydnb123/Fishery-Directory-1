@@ -27,6 +27,7 @@ const Directory: React.FC = () => {
   const [catchPhotos, setCatchPhotos] = useState(false);
   const [wifiSignal, setWifiSignal] = useState('');
   const [baitBoats, setBaitBoats] = useState(false);
+  const [magicTwig, setMagicTwig] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -471,15 +472,15 @@ const Directory: React.FC = () => {
                 />
                 <label htmlFor="bait-boats" className="text-xs text-gray-700 font-medium">Bait Boats Allowed</label>
               </div>
-                <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  checked={baitBoats}
+                  checked={magicTwig}
                   onChange={() => setMagicTwig(!magicTwig)}
                   className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                  id="Magic Twig"
+                  id="magic-twig"
                 />
-                <label htmlFor="bait-boats" className="text-xs text-gray-700 font-medium">Magic Twig Allowed</label>
+                <label htmlFor="magic-twig" className="text-xs text-gray-700 font-medium">Magic Twig Allowed</label>
               </div>
             </div>
           </div>

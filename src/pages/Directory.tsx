@@ -563,10 +563,11 @@ const Directory: React.FC = () => {
             animate="visible"
           >
             {filteredFisheries.map((fishery) => (
-              <motion.div key={fishery.id} variants={itemVariants}>
-                <FisheryCard fishery={fishery} />
-              </motion.div>
-            ))}
+  <motion.div key={fishery.id} variants={itemVariants}>
+    <FisheryCard fishery={fishery} showFacilities={!!searchTerm} />
+  </motion.div>
+))}
+
           </motion.div>
         ) : (
           <div className="text-center py-16">

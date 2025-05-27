@@ -653,7 +653,10 @@ const FisheryDetail: React.FC = () => {
                 </div>
                 <p className="text-gray-700 mb-4">{acc.notes}</p>
                 <a
-                  href={`mailto:${fishery.contact_email || ''}`}
+                  href={fishery.website}
+target="_blank"
+rel="noopener noreferrer"
+
                   className="bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors self-start"
                 >
                   <Book className="h-4 w-4 mr-2 inline" />

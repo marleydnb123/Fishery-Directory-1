@@ -185,7 +185,7 @@ const Directory: React.FC = () => {
       results = results.filter(fishery => fishery.tackleHire);
     }
     if (coaching) {
-      results = results.fishery => fishery.coaching);
+      results = results.fishery( => fishery.coaching);
     }
     setFilteredFisheries(results);
   }, [

@@ -487,6 +487,16 @@ const Directory: React.FC = () => {
                 />
                 <label htmlFor="magic-twig" className="text-xs text-gray-700 font-medium">Magic Twig Allowed</label>
               </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={tackleShop}
+                  onChange={() => settackleShop(!tackleShop)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="tackleshop"
+                />
+                <label htmlFor="tackle-shop" className="text-xs text-gray-700 font-medium">Tackle Shop On-site</label>
+              </div>
             </div>
           </div>
         </div>

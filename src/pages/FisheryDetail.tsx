@@ -79,6 +79,7 @@ const FisheryDetail: React.FC = () => {
             ...f,
             species: Array.isArray(f.species) ? f.species : [],
             features: Array.isArray(f.features) ? f.features : [],
+            facilities: Array.isArray(f.facilities) ? f.facilities : [],
           }))
         );
       }
@@ -112,6 +113,7 @@ const FisheryDetail: React.FC = () => {
         ...fisheryData,
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
+        facilities: Array.isArray(fisheryData.facilities) ? fisheryData.facilities : [],
       }); 
 
       // Fetch lakes for this fishery
@@ -255,8 +257,8 @@ const FisheryDetail: React.FC = () => {
         </div>
       </div>
 
-      {/* Content */}  
-<div className="container mx-auto px-4 py-8"> 
+      {/* Content */} 
+<div className="container mx-auto px-4 py-8">
   {activeTab === 'overview' && (
     <motion.div
       initial={{ opacity: 0 }}
@@ -273,49 +275,47 @@ const FisheryDetail: React.FC = () => {
           About {fishery.name}
         </h2>
         <p className="text-gray-700 mb-6">{fishery.description}</p>
-        <p className="text-gray-700 mb-6">{fishery.descriptionpage}</p> 
-        
+        <p className="text-gray-700 mb-6">{fishery.descriptionpage}</p>
+
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-1">
             <h3 className="text-lg font-semibold mb-3">Facilities</h3>
             <ul className="space-y-2 text-gray-700">
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                <span>Parking available</span>
-              </li>
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                <span>Toilets on site</span>
-              </li>
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                <span>Tackle shop</span>
-              </li>
+              {(fishery.facilities || []).map((facility, idx) => (
+                <li key={idx} className="flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                  <span>{facility}</span>
+                </li>
+              ))}
+              {fishery.hasaccommodation && (
+                <li className="flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                  <span>Accommodation available</span>
+                </li>
+              )}
+            </ul>
+          </div>
 
-                    {fishery.hasaccommodation && (
-                      <li className="flex items-center">
-                        <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                        <span>Accommodation available</span>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-                
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold mb-3">Available Species</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {(fishery.species || []).map((species, index) => (
-                      <span 
-                        key={index}
-                        className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                      >
-                        <Fish className="h-4 w-4 mr-1" />
-                        {species}
-                      </span>
-                    ))}
-                  </div> 
-                </div>
-              </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
+            <div className="flex flex-wrap gap-2">
+              {(fishery.species || []).map((species, index) => (
+                <span 
+                  key={index}
+                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
+                >
+                  <Fish className="h-4 w-4 mr-1" />
+                  {species}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )}
+</div>
+
 
               {/* --- Water Features Section --- */}
             {fishery.features && fishery.features.length > 0 && (

@@ -29,6 +29,7 @@ const Directory: React.FC = () => {
   const [baitBoats, setBaitBoats] = useState(false);
   const [magicTwig, setMagicTwig] = useState(false);
   const [tackleShop, settackleShop] = useState(false);
+  const [privateHire, setprivateHire] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -75,7 +76,8 @@ const Directory: React.FC = () => {
             features: Array.isArray(f.features) ? f.features : [],
             baitBoats: !!f.bait_boats,
             magicTwig: !!f.magic_twig,
-            tackleShop: !!f.tackle_shop 
+            tackleShop: !!f.tackle_shop,
+            privateHire: !!f.private_hire
           }))
         );
       }
@@ -172,6 +174,9 @@ const Directory: React.FC = () => {
     if (tackleShop) {
       results = results.filter(fishery => fishery.tackleShop);
     }
+    if (privateHire) {
+      results = results.filter(fishery => fishery.privateHire);
+    }]
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -194,7 +199,8 @@ const Directory: React.FC = () => {
     wifiSignal,
     baitBoats,
     magicTwig,
-    tackleShop
+    tackleShop,
+    privateHire
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);
@@ -497,6 +503,17 @@ const Directory: React.FC = () => {
                   id="tackleshop"
                 />
                 <label htmlFor="tackle-shop" className="text-xs text-gray-700 font-medium">Tackle Shop On-site</label>
+              </div>
+               </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={privateHire}
+                  onChange={() => setprivateHire(!privateHire)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="privatehire"
+                />
+                <label htmlFor="tackle-shop" className="text-xs text-gray-700 font-medium">Private Hire</label>
               </div>
             </div>
           </div>

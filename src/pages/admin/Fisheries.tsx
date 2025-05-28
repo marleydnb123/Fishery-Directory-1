@@ -863,102 +863,257 @@ const AdminFisheries: React.FC = () => {
       )}
 
       {/* Edit Modal */}
-{isEditModalOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-xl p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-      <h3 className="text-xl font-semibold mb-4">Edit Fishery</h3>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-        {/* --- Basic Info --- */}
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="Fishery name" value={formFishery.name} onChange={e => setFormFishery(f => ({ ...f, name: e.target.value }))} />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="District" value={formFishery.district} onChange={e => setFormFishery(f => ({ ...f, district: e.target.value }))} />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="Main image URL" value={formFishery.image} onChange={e => setFormFishery(f => ({ ...f, image: e.target.value }))} />
-          </div>
-        </div>
-
-        {/* --- Descriptions --- */}
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Species</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="Species (comma separated)" value={ensureArray(formFishery.species).join(',')} onChange={e => setFormFishery(f => ({ ...f, species: e.target.value.split(',').map(s => s.trim()) }))} />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Features</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="Features (comma separated)" value={ensureArray(formFishery.features).join(',')} onChange={e => setFormFishery(f => ({ ...f, features: e.target.value.split(',').map(s => s.trim()) }))} />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Facilities</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="Facilities (comma separated)" value={ensureArray(formFishery.facilities).join(',')} onChange={e => setFormFishery(f => ({ ...f, facilities: e.target.value.split(',').map(s => s.trim()) }))} />
-          </div>
-        </div>
-
-        {/* --- Booking & Pricing --- */}
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Fishing Type</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="e.g., Match, Pleasure, Specimen" value={ensureArray(formFishery.fishing_type).join(',')} onChange={e => setFormFishery(f => ({ ...f, fishing_type: e.target.value.split(',').map(s => s.trim()) }))} />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="e.g., £10-25" value={formFishery.price_range || ''} onChange={e => setFormFishery(f => ({ ...f, price_range: e.target.value }))} />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Booking Type</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="e.g., Day Ticket, Members Only" value={formFishery.booking_type || ''} onChange={e => setFormFishery(f => ({ ...f, booking_type: e.target.value }))} />
-          </div>
-        </div>
-
-        {/* --- Connectivity --- */}
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Wi-Fi Signal</label>
-            <input className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400" placeholder="e.g., Strong, Weak, None" value={formFishery.wifi_signal || ''} onChange={e => setFormFishery(f => ({ ...f, wifi_signal: e.target.value }))} />
-          </div>
-        </div>
-
-        {/* --- Checkboxes --- */}
-        <div className="space-y-2">
-          {[
-            { key: 'night_fishing_allowed', label: 'Night Fishing Allowed' },
-            { key: 'match_fishing_friendly', label: 'Match Fishing Friendly' },
-            { key: 'disabled_access', label: 'Disabled Access' },
-            { key: 'dog_friendly', label: 'Dog Friendly' },
-            { key: 'fire_pits_allowed', label: 'Fire Pits Allowed' },
-            { key: 'parking_close', label: 'Close Parking' },
-            { key: 'camping_allowed', label: 'Camping Allowed' },
-            { key: 'catch_photos', label: 'Catch Photos Available' },
-            { key: 'bait_boats', label: 'Bait Boats' },
-            { key: 'magic_twig', label: 'Magic Twig' },
-            { key: 'tackle_shop', label: 'Tackle Shop On Site' },
-          ].map(item => (
-            <div className="flex items-center" key={item.key}>
-              <input
-                type="checkbox"
-                checked={formFishery[item.key] || false}
-                onChange={e => setFormFishery(f => ({ ...f, [item.key]: e.target.checked }))}
-                className="mr-2"
-                id={`${item.key}Edit`}
-              />
-              <label htmlFor={`${item.key}Edit`} className="text-sm">{item.label}</label>
+      {isEditModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-xl font-semibold mb-4">Edit Fishery</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Basic Information */}
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="Fishery name"
+                    value={formFishery.name}
+                    onChange={e => setFormFishery(f => ({ ...f, name: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="District"
+                    value={formFishery.district}
+                    onChange={e => setFormFishery(f => ({ ...f, district: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="Main image URL"
+                    value={formFishery.image}
+                    onChange={e => setFormFishery(f => ({ ...f, image: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Species</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="Species (comma separated)"
+                    value={ensureArray(formFishery.species).join(',')}
+                    onChange={e => setFormFishery(f => ({ ...f, species: e.target.value.split(',').map(s => s.trim()) }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Features</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="Features (comma separated)"
+                    value={ensureArray(formFishery.features).join(',')}
+                    onChange={e => setFormFishery(f => ({ ...f, features: e.target.value.split(',').map(s => s.trim()) }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Facilities</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="Facilities (comma separated)"
+                    value={ensureArray(formFishery.facilities).join(',')}
+                    onChange={e => setFormFishery(f => ({ ...f, facilities: e.target.value.split(',').map(s => s.trim()) }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Fishing Type</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="e.g., Match, Pleasure, Specimen (comma separated)"
+                    value={ensureArray(formFishery.fishing_type).join(',')}
+                    onChange={e => setFormFishery(f => ({ ...f, fishing_type: e.target.value.split(',').map(s => s.trim()) }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="e.g., £10-25"
+                    value={formFishery.price_range || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, price_range: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Booking Type</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="e.g., Day Ticket, Members Only"
+                    value={formFishery.booking_type || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, booking_type: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Wi-Fi Signal</label>
+                  <input
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
+                    placeholder="e.g., Strong, Weak, None"
+                    value={formFishery.wifi_signal || ''}
+                    onChange={e => setFormFishery(f => ({ ...f, wifi_signal: e.target.value }))}
+                  />
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.night_fishing_allowed || false}
+                      onChange={e => setFormFishery(f => ({ ...f, night_fishing_allowed: e.target.checked }))}
+                      className="mr-2"
+                      id="nightFishingEdit"
+                    />
+                    <label htmlFor="nightFishingEdit" className="text-sm">Night Fishing Allowed</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.match_fishing_friendly || false}
+                      onChange={e => setFormFishery(f => ({ ...f, match_fishing_friendly: e.target.checked }))}
+                      className="mr-2"
+                      id="matchFishingEdit"
+                    />
+                    <label htmlFor="matchFishingEdit" className="text-sm">Match Fishing Friendly</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.disabled_access || false}
+                      onChange={e => setFormFishery(f => ({ ...f, disabled_access: e.target.checked }))}
+                      className="mr-2"
+                      id="disabledAccessEdit"
+                    />
+                    <label htmlFor="disabledAccessEdit" className="text-sm">Disabled Access</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.dog_friendly || false}
+                      onChange={e => setFormFishery(f => ({ ...f, dog_friendly: e.target.checked }))}
+                      className="mr-2"
+                      id="dogFriendlyEdit"
+                    />
+                    <label htmlFor="dogFriendlyEdit" className="text-sm">Dog Friendly</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.fire_pits_allowed || false}
+                      onChange={e => setFormFishery(f => ({ ...f, fire_pits_allowed: e.target.checked }))}
+                      className="mr-2"
+                      id="firePitsEdit"
+                    />
+                    <label htmlFor="firePitsEdit" className="text-sm">Fire Pits Allowed</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.parking_close || false}
+                      onChange={e => setFormFishery(f => ({ ...f, parking_close: e.target.checked }))}
+                      className="mr-2"
+                      id="parkingCloseEdit"
+                    />
+                    <label htmlFor="parkingCloseEdit" className="text-sm">Close Parking</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.camping_allowed || false}
+                      onChange={e => setFormFishery(f => ({ ...f, camping_allowed: e.target.checked }))}
+                      className="mr-2"
+                      id="campingAllowedEdit"
+                    />
+                    <label htmlFor="campingAllowedEdit" className="text-sm">Camping Allowed</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.catch_photos || false}
+                      onChange={e => setFormFishery(f => ({ ...f, catch_photos: e.target.checked }))}
+                      className="mr-2"
+                      id="catchPhotosEdit"
+                    />
+                    <label htmlFor="catchPhotosEdit" className="text-sm">Catch Photos Available</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.bait_boats || false}
+                      onChange={e => setFormFishery(f => ({ ...f, bait_boats: e.target.checked }))}
+                      className="mr-2"
+                      id="baitBoatsEdit"
+                    />
+                    <label htmlFor="baitBoatsEdit" className="text-sm">Bait Boats</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.magic_twig || false}
+                      onChange={e => setFormFishery(f => ({ ...f, magic_twig: e.target.checked }))}
+                      className="mr-2"
+                      id="magicTwigEdit"
+                    />
+                    <label htmlFor="magicTwigEdit" className="text-sm">Magic Twig</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.tackle_shop || false}
+                      onChange={e => setFormFishery(f => ({ ...f, tackle_shop: e.target.checked }))}
+                      className="mr-2"
+                      id="tackleShopEdit"
+                    />
+                    <label htmlFor="tackleShopEdit" className="text-sm">Tackle Shop</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.private_hire || false}
+                      onChange={e => setFormFishery(f => ({ ...f, private_hire: e.target.checked }))}
+                      className="mr-2"
+                      id="privateHireEdit"
+                    />
+                    <label htmlFor="privateHireEdit" className="text-sm">Private Hire</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.tackle_hire || false}
+                      onChange={e => setFormFishery(f => ({ ...f, tackle_hire: e.target.checked }))}
+                      className="mr-2"
+                      id="tackleHireEdit"
+                    />
+                    <label htmlFor="tackleHireEdit" className="text-sm">Tackle Hire</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.coaching || false}
+                      onChange={e => setFormFishery(f => ({ ...f, coaching: e.target.checked }))}
+                      className="mr-2"
+                      id="coachingEdit"
+                    />
+                    <label htmlFor="coachingEdit" className="text-sm">Coaching</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.keepnets_allowed || false}
+                      onChange={e => setFormFishery(f => ({ ...f, keepnets_allowed: e.target.checked }))}
+                      className="mr-2"
+                      id="keepnetsAllowedEdit"
+                    />
+                    <label htmlFor="keepnetsAllowedEdit" className="text-sm">Keepnets Allowed</label>
+                  </div>
+                </div> 
+              </div>
             </div>
-          ))}
-        </div>
-
-      </div>
-    </div>
-  </div>
-)}
-
             {/* Full Width Fields */}
             <div className="mt-4 space-y-4">
               <div>

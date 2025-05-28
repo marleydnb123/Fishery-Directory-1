@@ -32,6 +32,7 @@ const Directory: React.FC = () => {
   const [privateHire, setprivateHire] = useState(false);
   const [tackleHire, settackleHire] = useState(false);
   const [coaching, setcoaching] = useState(false);
+  const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -81,7 +82,8 @@ const Directory: React.FC = () => {
             tackleShop: !!f.tackle_shop,
             privateHire: !!f.private_hire,
             tackleHire: !!f.tackle_hire,
-            coaching: !!f.coaching
+            coaching: !!f.coaching,
+            keepnetsAllowed: !!f.keepnetsAllowed,
           }))
         );
       }
@@ -187,6 +189,9 @@ const Directory: React.FC = () => {
     if (coaching) {
       results = results.filter(fishery => fishery.coaching);
     }
+    if (keepnetsAllowed) {
+      results = results.filter(fishery => fishery.keepnetsAllowed);
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -212,7 +217,8 @@ const Directory: React.FC = () => {
     tackleShop,
     privateHire,
     tackleHire,
-    coaching
+    coaching,
+    keepnetsAllowed
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);
@@ -545,6 +551,16 @@ const Directory: React.FC = () => {
                   id="coaching"
                 />
                 <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={keepnetsAllowed}
+                  onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="keepnetsAllowed"
+                />
+                <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
               </div>
             </div>
           </div>

@@ -142,12 +142,12 @@ return (
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="h-84 overflow-hidden">
+                <div className="h-48 overflow-hidden">
                   <img
-  src={shop.image || 'https://images.pexels.com/photos/2846815/pexels-photo-2846815.jpeg'}
-  alt={shop.name}
-  className="w-full h-full object-contain bg-gray-100"
-/>
+                    src={shop.image || 'https://images.pexels.com/photos/2846815/pexels-photo-2846815.jpeg'}
+                    alt={shop.name}
+                    className="w-full h-full object-cover"
+                  /> 
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{shop.name}</h3>

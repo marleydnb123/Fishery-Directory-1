@@ -91,6 +91,31 @@ const FisheryDetail: React.FC = () => {
     fetchFeatured();
   }, []);
 
+   useEffect(() => {
+    async function fetchNearbyFisheries() {
+      setLoading(true);
+      setError("");
+      const { data, error } = await supabase
+        .from("fisheries")
+        .select("*")
+        .eq("district", currentFishery.district)
+        .neq("id", currentFishery.id)
+        .limit(4);
+
+      if (error) {
+        setError("Failed to load nearby fisheries.");
+        setNearbyFisheries([]);
+      } else {
+        setNearbyFisheries(data);
+      }
+      setLoading(false);
+    }
+
+    if (currentFishery?.district) {
+      fetchNearbyFisheries();
+    }
+  }, [currentFishery]);
+  
   useEffect(() => {
     if (!slug) return;
 

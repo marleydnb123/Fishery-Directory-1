@@ -454,6 +454,17 @@ const Directory: React.FC = () => {
     />
     <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
   </div>
+   </div>
+  <div className="flex items-center gap-2">
+    <input
+      type="checkbox"
+      checked={firePitsAllowed}
+      onChange={() => setFirePitsAllowed(!firePitsAllowed)}
+      className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+      id="fire-pits"
+    />
+    <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
+  </div>
 
   {/* --- MATCH --- */}
   {/* Match filters */}
@@ -499,17 +510,6 @@ const Directory: React.FC = () => {
       id="dog-friendly"
     />
     <label htmlFor="dog-friendly" className="text-xs text-gray-700 font-medium">Dog Friendly</label>
-  </div>
-  <div className="flex items-center gap-2">
-    <input
-      type="checkbox"
-      checked={firePitsAllowed}
-      onChange={() => setFirePitsAllowed(!firePitsAllowed)}
-      className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-      id="fire-pits"
-    />
-    <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
-  </div>
   <div className="flex items-center gap-2">
     <input
       type="checkbox"
@@ -571,6 +571,7 @@ const Directory: React.FC = () => {
     <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
   </div>
 </div>
+
           </div>
         </div> 
 

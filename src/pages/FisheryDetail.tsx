@@ -842,11 +842,11 @@ rel="noopener noreferrer"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white rounded-xl transition-transform duration-200 hover:scale-[1.02] shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
               >
                 <Link to={`/directory/${f.slug}`}>
                   <img
-                    src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"}
+                    src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"} 
                     alt={f.name}
                     className="w-full h-40 object-cover transition-transform duration-200 hover:scale-[1.02]"
                   />

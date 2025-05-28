@@ -692,10 +692,9 @@ const FisheryDetail: React.FC = () => {
                   <h3 className="text-3xl font-bebas font-semibold text-white tracking-wide">Location</h3>
                 </div>
                 <div className="mb-5 mt-6 text-gray-700 leading-relaxed">
-                  <div> 
-                    <span className="font-semibold ml-6 md:ml-6">{fishery.name}</span> is located in <span className="font-semibold">{fishery.district}</span>, UK.
-
-                  </div>
+                  <div className="ml-6">
+  <span className="font-semibold">{fishery.name}</span> is located in <span className="font-semibold">{fishery.district}</span>, UK.
+</div>
                   <div className="mt-2 text-primary-700 flex flex-wrap gap-4 text-sm">
                     <span className="inline-flex items-center">
                       <svg className="h-4 w-4 mr-1 ml-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>

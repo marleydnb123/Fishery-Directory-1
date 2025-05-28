@@ -471,7 +471,7 @@ const Directory: React.FC = () => {
     <input
       type="checkbox"
       checked={keepnetsAllowed}
-      onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
+      onChange={() => setkeepnetsAllowed(!keepnets_allowed)}
       className="w-4 h-4 accent-blue-600 rounded border-gray-300"
       id="keepnetsallowed"
     />

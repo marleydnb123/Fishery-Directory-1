@@ -558,7 +558,7 @@ const FisheryDetail: React.FC = () => {
                     Detailed directions will be provided upon booking.
                   </div>
                 </div>
-                <div className="h-40 bg-gray-200 ml-6 mr-6 rounded-lg flex items-center justify-center shadow-inner">
+                <div className="h-40 bg-gray-200 ml-6 mr-6 mb-6 rounded-lg flex items-center justify-center shadow-inner">
                   <span className="text-gray-500">Map location preview</span>
                 </div>
               </div>

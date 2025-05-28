@@ -320,12 +320,6 @@ const FisheryDetail: React.FC = () => {
         </div>
 
 
-
-
-
-
-
-
  
 
               {/* --- Water Features Section --- */}

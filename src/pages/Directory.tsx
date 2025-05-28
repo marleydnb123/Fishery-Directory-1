@@ -83,7 +83,7 @@ const Directory: React.FC = () => {
             privateHire: !!f.private_hire,
             tackleHire: !!f.tackle_hire,
             coaching: !!f.coaching,
-            keepnetsAllowed: !!f.keepnetsAllowed,
+            keepnetsAllowed: !!f.keepnets_allowed,
           }))
         );
       }

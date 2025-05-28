@@ -571,7 +571,6 @@ const Directory: React.FC = () => {
     <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
   </div>
 </div>
-
           </div>
         </div> 
 

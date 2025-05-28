@@ -405,7 +405,7 @@ const Directory: React.FC = () => {
             {/* Column 3: Checkboxes */}
 {/* --- CARP --- */}
 {/* Carp filters */}
-<div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-5">  
+<div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-10">  
   <div className="flex items-center gap-2"> 
     <input 
       type="checkbox"

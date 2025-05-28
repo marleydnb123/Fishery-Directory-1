@@ -218,7 +218,7 @@ const Directory: React.FC = () => {
     privateHire,
     tackleHire,
     coaching,
-    keepnetsAllowed
+    keepnetsAllowed,
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);

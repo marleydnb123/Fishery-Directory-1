@@ -37,6 +37,12 @@ const emptyFishery: Omit<Fishery, 'id'> = {
   fisheryimages2: '',
   fisheryimages3: '',
   fisheryvideo: '',
+  bait_boats: false,
+  magic_twig: false,
+  tackle_shop: false,
+  private_hire: false,
+  tackle_hire: false,
+  coaching: false,
 };
 
 const AdminFisheries: React.FC = () => {
@@ -122,8 +128,8 @@ const AdminFisheries: React.FC = () => {
         slug,
         district: formFishery.district,
         image: formFishery.image,
-        species: formFishery.species,
-        features: formFishery.features,
+        species: Array.isArray(formFishery.species) ? formFishery.species : formFishery.species.split(',').map(s => s.trim()),
+        features: Array.isArray(formFishery.features) ? formFishery.features : formFishery.features.split(',').map(s => s.trim()),
         description: formFishery.description,
         isfeatured: formFishery.isFeatured,
         hasaccommodation: formFishery.hasAccommodation,
@@ -137,7 +143,7 @@ const AdminFisheries: React.FC = () => {
         fishing_type: formFishery.fishing_type,
         match_fishing_friendly: formFishery.match_fishing_friendly,
         disabled_access: formFishery.disabled_access,
-        facilities: formFishery.facilities,
+        facilities: Array.isArray(formFishery.facilities) ? formFishery.facilities : formFishery.facilities.split(',').map(s => s.trim()),
         dog_friendly: formFishery.dog_friendly,
         price_range: formFishery.price_range,
         fire_pits_allowed: formFishery.fire_pits_allowed,
@@ -150,6 +156,12 @@ const AdminFisheries: React.FC = () => {
         fisheryimages2: formFishery.fisheryimages2,
         fisheryimages3: formFishery.fisheryimages3,
         fisheryvideo: formFishery.fisheryvideo,
+        bait_boats: formFishery.bait_boats,
+        magic_twig: formFishery.magic_twig,
+        tackle_shop: formFishery.tackle_shop,
+        private_hire: formFishery.private_hire,
+        tackle_hire: formFishery.tackle_hire,
+        coaching: formFishery.coaching,
       }])
       .select()
       .single();
@@ -177,8 +189,8 @@ const AdminFisheries: React.FC = () => {
         slug: formFishery.slug,
         district: formFishery.district,
         image: formFishery.image,
-        species: formFishery.species,
-        features: formFishery.features,
+        species: Array.isArray(formFishery.species) ? formFishery.species : formFishery.species.split(',').map(s => s.trim()),
+        features: Array.isArray(formFishery.features) ? formFishery.features : formFishery.features.split(',').map(s => s.trim()),
         description: formFishery.description,
         isfeatured: formFishery.isFeatured,
         hasaccommodation: formFishery.hasAccommodation,
@@ -192,7 +204,7 @@ const AdminFisheries: React.FC = () => {
         fishing_type: formFishery.fishing_type,
         match_fishing_friendly: formFishery.match_fishing_friendly,
         disabled_access: formFishery.disabled_access,
-        facilities: formFishery.facilities,
+        facilities: Array.isArray(formFishery.facilities) ? formFishery.facilities : formFishery.facilities.split(',').map(s => s.trim()),
         dog_friendly: formFishery.dog_friendly,
         price_range: formFishery.price_range,
         fire_pits_allowed: formFishery.fire_pits_allowed,
@@ -205,6 +217,12 @@ const AdminFisheries: React.FC = () => {
         fisheryimages2: formFishery.fisheryimages2,
         fisheryimages3: formFishery.fisheryimages3,
         fisheryvideo: formFishery.fisheryvideo,
+        bait_boats: formFishery.bait_boats,
+        magic_twig: formFishery.magic_twig,
+        tackle_shop: formFishery.tackle_shop,
+        private_hire: formFishery.private_hire,
+        tackle_hire: formFishery.tackle_hire,
+        coaching: formFishery.coaching,
       })
       .eq('id', currentFishery.id)
       .select()
@@ -740,6 +758,72 @@ const AdminFisheries: React.FC = () => {
                 >
                   Save
                 </button>
+                
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formFishery.bait_boats || false}
+                    onChange={e => setFormFishery(f => ({ ...f, bait_boats: e.target.checked }))}
+                    className="mr-2"
+                    id="baitBoats"
+                  />
+                  <label htmlFor="baitBoats" className="text-sm">Bait Boats Allowed</label>
+                </div>
+
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formFishery.magic_twig || false}
+                    onChange={e => setFormFishery(f => ({ ...f, magic_twig: e.target.checked }))}
+                    className="mr-2"
+                    id="magicTwig"
+                  />
+                  <label htmlFor="magicTwig" className="text-sm">Magic Twig Allowed</label>
+                </div>
+
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formFishery.tackle_shop || false}
+                    onChange={e => setFormFishery(f => ({ ...f, tackle_shop: e.target.checked }))}
+                    className="mr-2"
+                    id="tackleShop"
+                  />
+                  <label htmlFor="tackleShop" className="text-sm">Tackle Shop On-site</label>
+                </div>
+
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formFishery.private_hire || false}
+                    onChange={e => setFormFishery(f => ({ ...f, private_hire: e.target.checked }))}
+                    className="mr-2"
+                    id="privateHire"
+                  />
+                  <label htmlFor="privateHire" className="text-sm">Private Hire Available</label>
+                </div>
+
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formFishery.tackle_hire || false}
+                    onChange={e => setFormFishery(f => ({ ...f, tackle_hire: e.target.checked }))}
+                    className="mr-2"
+                    id="tackleHire"
+                  />
+                  <label htmlFor="tackleHire" className="text-sm">Tackle Hire Available</label>
+                </div>
+
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formFishery.coaching || false}
+                    onChange={e => setFormFishery(f => ({ ...f, coaching: e.target.checked }))}
+                    className="mr-2"
+                    id="coaching"
+                  />
+                  <label htmlFor="coaching" className="text-sm">Coaching Available</label>
+                </div>
               </div>
             </div>
           </div>

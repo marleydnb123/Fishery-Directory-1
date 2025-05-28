@@ -312,8 +312,8 @@ const Directory: React.FC = () => {
                   onChange={e => setSelectedSpecies(e.target.value as FishSpecies | '')}
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
                 >
-                  <option value="">All Species</option 
-                  {species.map((specie) => (
+                  <option value="">All Species</option>
+                  {species.map((specie) => ( 
                     <option key={specie} value={specie}>{specie}</option>
                   ))}
                 </select>

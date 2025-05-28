@@ -263,43 +263,46 @@ const FisheryDetail: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-        <h2
-          className="w-full text-3xl font-bebas font-bold mb-4 ml-0 mr-0 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+      <div className="bg-white rounded-xl shadow-md mb-8 overflow-hidden">
+        <div
+          className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700"
           style={{
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}  
         >  
-          About {fishery.name} 
-        </h2>
-        {fishery.description.split(/\r?\n/).map((line, i) => (
-          <p key={i} className="text-gray-700 mb-6">{line}</p>
-        ))}
-        {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
-          <p key={i} className="text-gray-700 mb-6">{line}</p>
-        ))}
-        
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-3">Facilities</h3>
-              {fishery.facilities && fishery.facilities.length > 0 ? (
-                <ul className="space-y-2 text-gray-700">
-                  {fishery.facilities.map((facility, index) => (
-                    <li key={index} className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                      <span>{facility}</span>
-                    </li>
-                  ))}
-                  {fishery.hasAccommodation && (
-                    <li className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                      <span>Accommodation available</span>
-                    </li>
-                  )}
-                </ul>
-              ) : (
-                <p className="text-gray-500 italic">No facilities information available</p>
-              )}
+          <h2 className="w-full text-3xl font-bebas font-bold text-white px-6 py-4 m-0">
+            About {fishery.name} 
+          </h2>
+        </div>
+        <div className="p-6">
+          {fishery.description.split(/\r?\n/).map((line, i) => (
+            <p key={i} className="text-gray-700 mb-6">{line}</p>
+          ))}
+          {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
+            <p key={i} className="text-gray-700 mb-6">{line}</p>
+          ))}
+          
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold mb-3">Facilities</h3>
+                {fishery.facilities && fishery.facilities.length > 0 ? (
+                  <ul className="space-y-2 text-gray-700">
+                    {fishery.facilities.map((facility, index) => (
+                      <li key={index} className="flex items-center">
+                        <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                        <span>{facility}</span>
+                      </li>
+                    ))}
+                    {fishery.hasAccommodation && (
+                      <li className="flex items-center">
+                        <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                        <span>Accommodation available</span>
+                      </li>
+                    )}
+                  </ul>
+                ) : (
+                  <p className="text-gray-500 italic">No facilities information available</p>
+                )}
                 </div>
                 
                 <div className="flex-1">
@@ -311,12 +314,13 @@ const FisheryDetail: React.FC = () => {
                         className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
                       >
                         <Fish className="h-4 w-4 mr-1" />
-                        {species}Z
+                        {species}
                       </span>
                     ))}
                   </div> 
                 </div>
               </div>
+
  
 
               {/* --- Water Features Section --- */}

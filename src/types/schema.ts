@@ -39,7 +39,8 @@ export interface Fishery {
   magic_twig?: boolean;
   private_hire? boolean;,
   tackle_hire? boolean;,
-  coaching? boolean;
+  coaching? boolean;,
+  keepnets_allowed? boolean;
 }
 
 export interface Lake {

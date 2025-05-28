@@ -265,7 +265,7 @@ const FisheryDetail: React.FC = () => {
     >
       <div className="bg-white rounded-xl shadow-md mb-8 overflow-hidden">
         <div
-          className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700"
+          className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 rounded-t-xl"
           style={{
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}  
@@ -320,6 +320,7 @@ const FisheryDetail: React.FC = () => {
                   </div> 
                 </div>
               </div>
+
 
  
 

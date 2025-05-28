@@ -53,7 +53,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
           gestureHandling="cooperative"
           mapId="fishery-map"
         >
-          <Marker position={{ lat: latitude, lng: longitude }} title={name} />
+          <Marker position={{ lat: latitude, lng: longitude }} title={name} /> 
         </Map>
       </div>
     </APIProvider>

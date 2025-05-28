@@ -842,7 +842,7 @@ rel="noopener noreferrer"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow transition-transform duration-200 hover:scale-[1.02]"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow transition-transform duration-200 hover:scale-[1.04]"
               >
                 <Link to={`/directory/${f.slug}`}>
                   <img

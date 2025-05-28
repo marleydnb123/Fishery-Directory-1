@@ -192,7 +192,7 @@ const FisheryDetail: React.FC = () => {
               {(fishery.species || []).map((species, index) => (
                 <span 
                   key={index}
-                  className="flex items-center text-sm bg-primary-600 bg-opacity-80 px-3 py-1 rounded-full"
+                  className="flex items-center text-sm bg-primary-600 bg-opacity-80 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.02]"
                 >
                   <Fish className="h-4 w-4 mr-1" />
                   {species}

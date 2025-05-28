@@ -494,16 +494,15 @@ const FisheryDetail: React.FC = () => {
   {/* Tactics Content */}
   <div className="p-6">
     {fishery.tactics ? (
-      <ul className="mb-5 text-gray-700 space-y-4 leading-relaxed">
+      <div className="mb-5 text-gray-700 space-y-4 leading-relaxed">
         {fishery.tactics.split('\n').map((tactic, index) => (
           tactic.trim() && (
-            <li key={index} className="flex items-start">
-              <span className="text-primary-600 mr-2">•</span>
+            <div key={index} className="flex items-start">
               <span>{tactic.trim()}</span>
-            </li>
+            </div>
           )
         ))}
-      </ul>
+      </div>
     ) : (
       <div className="text-gray-500 italic">No tactics available for this fishery yet.</div>
     )}
@@ -513,6 +512,7 @@ const FisheryDetail: React.FC = () => {
   </div>
 </div>
 {/* --- End Tactics & Methods Section --- */}
+
 
 
 

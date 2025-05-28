@@ -41,7 +41,7 @@ export interface Fishery {
   tackle_hire?: boolean;   // Fixed syntax
   coaching?: boolean;      // Fixed syntax
   keepnets_allowed?: boolean;  // Fixed syntax
-  tactics: string[];
+  tactics?: string; 
 }
 
 export interface Lake {

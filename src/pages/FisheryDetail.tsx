@@ -30,7 +30,7 @@ type Fishery = {
   fisheryimages3: string | null; 
   fisheryvideo: string | null;
   facilities: string | null;
-  tactics: string[];
+  tactics: string;
 };
 
 type Lake = {
@@ -56,6 +56,7 @@ const FisheryDetail: React.FC = () => {
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
+  const [tactics, setTactics] = useState([]);
 
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
@@ -104,7 +105,6 @@ const FisheryDetail: React.FC = () => {
       if (fisheryError || !fisheryData) {
         setFishery(null);
         setLakes([]);
-        setTactics([]);
         setAccommodation([]);
         setLoading(false);
         return;
@@ -114,7 +114,6 @@ const FisheryDetail: React.FC = () => {
         ...fisheryData,
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
-        tactics: Array.isArray(fisheryData.tactics) ? fisheryData.tactics : [],
       }); 
 
       // Fetch lakes for this fishery
@@ -497,14 +496,20 @@ const FisheryDetail: React.FC = () => {
   <div className="p-6">
     {loading ? (
       <div className="text-gray-500 italic">Loading tactics...</div>
-    ) : !fishery.tactics || fishery.tactics.length === 0 ? (
+    ) : tactics.length === 0 ? (
       <div className="text-gray-500 italic">No tactics available for this fishery yet.</div>
     ) : (
       <ul className="mb-5 text-gray-700 space-y-4 leading-relaxed">
-        {fishery.tactics.map((tactic, index) => (
-          <li key={index} className="flex items-start">
-            <div className="w-2 h-2 rounded-full bg-primary-600 mr-2 mt-2"></div>
-            <span>{tactic}</span>
+        {tactics.map((tactic) => (
+          <li key={tactic.id}>
+            <span className="font-semibold text-primary-700">{tactic.title}:</span>
+            {tactic.description
+              .split(/\r?\n/)
+              .map((line, i) =>
+                line.trim() ? (
+                  <span key={i} className="ml-1 block">{line}</span>
+                ) : null
+              )}
           </li>
         ))}
       </ul>

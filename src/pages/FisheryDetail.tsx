@@ -795,7 +795,7 @@ rel="noopener noreferrer"
  
 {/* --- Featured Fisheries Section --- */}
 <section className="py-12 px-4 bg-gray-50">
-  <div className="container mx-auto shadow-lg overflow-hidden transition-transform duration-200 hover:scale-[1.02]">
+  <div className="container mx-auto shadow-lg overflow-hidden">
     {/* Header Bar */}
     <div
       className="p-6"
@@ -842,7 +842,7 @@ rel="noopener noreferrer"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow transition-transform duration-200 hover:scale-[1.02]"
               >
                 <Link to={`/directory/${f.slug}`}>
                   <img

@@ -405,15 +405,9 @@ const Directory: React.FC = () => {
 
   {/* Coarse Fishing Collapsible */}
   <div className="col-span-2">
-    <button
-      type="button"
-      className="w-full text-left font-bold text-base mb-1"
-      onClick={() => setShowCoarse(!showCoarse)}
-    >
-      Coarse Fishing {showCoarse ? "▲" : "▼"}
-    </button>
-    {showCoarse && (
-      <div className="grid grid-cols-2 gap-2">
+    <details>
+      <summary className="font-bold text-base mb-2 cursor-pointer">Coarse Fishing</summary>
+      <div className="grid grid-cols-2 gap-2 mt-2">
         <div className="flex items-center gap-2">
           <input type="checkbox" checked={disabledAccess} onChange={() => setDisabledAccess(!disabledAccess)} className="w-4 h-4 accent-blue-600 rounded border-gray-300" id="disabled-access-coarse"/>
           <label htmlFor="disabled-access-coarse" className="text-xs text-gray-700 font-medium">Disabled Access</label>
@@ -451,20 +445,14 @@ const Directory: React.FC = () => {
           <label htmlFor="privatehire-coarse" className="text-xs text-gray-700 font-medium">Private Hire</label>
         </div>
       </div>
-    )}
+    </details>
   </div>
 
   {/* Carp Fishing Collapsible */}
   <div className="col-span-2">
-    <button
-      type="button"
-      className="w-full text-left font-bold text-base mb-1"
-      onClick={() => setShowCarp(!showCarp)}
-    >
-      Carp Fishing {showCarp ? "▲" : "▼"}
-    </button>
-    {showCarp && (
-      <div className="grid grid-cols-2 gap-2">
+    <details>
+      <summary className="font-bold text-base mb-2 cursor-pointer">Carp Fishing</summary>
+      <div className="grid grid-cols-2 gap-2 mt-2">
         <div className="flex items-center gap-2">
           <input type="checkbox" checked={accommodationOnly} onChange={() => setAccommodationOnly(!accommodationOnly)} className="w-4 h-4 accent-blue-600 rounded border-gray-300" id="accommodation-carp"/>
           <label htmlFor="accommodation-carp" className="text-xs text-gray-700 font-medium">On-site Accommodation</label>
@@ -506,20 +494,14 @@ const Directory: React.FC = () => {
           <label htmlFor="privatehire-carp" className="text-xs text-gray-700 font-medium">Private Hire</label>
         </div>
       </div>
-    )}
+    </details>
   </div>
 
   {/* Match Fishing Collapsible */}
   <div className="col-span-2">
-    <button
-      type="button"
-      className="w-full text-left font-bold text-base mb-1"
-      onClick={() => setShowMatch(!showMatch)}
-    >
-      Match Fishing {showMatch ? "▲" : "▼"}
-    </button>
-    {showMatch && (
-      <div className="grid grid-cols-2 gap-2">
+    <details>
+      <summary className="font-bold text-base mb-2 cursor-pointer">Match Fishing</summary>
+      <div className="grid grid-cols-2 gap-2 mt-2">
         <div className="flex items-center gap-2">
           <input type="checkbox" checked={matchFishingFriendly} onChange={() => setMatchFishingFriendly(!matchFishingFriendly)} className="w-4 h-4 accent-blue-600 rounded border-gray-300" id="match-friendly-match"/>
           <label htmlFor="match-friendly-match" className="text-xs text-gray-700 font-medium">Match Fishing Friendly</label>
@@ -549,7 +531,7 @@ const Directory: React.FC = () => {
           <label htmlFor="privatehire-match" className="text-xs text-gray-700 font-medium">Private Hire</label>
         </div>
       </div>
-    )}
+    </details>
   </div>
 
 </div>

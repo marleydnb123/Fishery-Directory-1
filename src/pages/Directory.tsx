@@ -303,61 +303,60 @@ const Directory: React.FC = () => {
           </form>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Column 1: Dropdowns */}{/* Column 1: Dropdowns */}
-<div className="flex flex-col gap-3" style={{ maxWidth: 500 }}>
-  <div>
-    <label className="block text-xs font-semibold text-gray-600 mb-1">Fish Species</label>
-    <select
-      value={selectedSpecies}
-      onChange={e => setSelectedSpecies(e.target.value as FishSpecies | '')}
-      className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-    >
-      <option value="">All Species</option>
-      {species.map((specie) => ( 
-        <option key={specie} value={specie}>{specie}</option>
-      ))}
-    </select>
-  </div>
-  <div>
-    <label className="block text-xs font-semibold text-gray-600 mb-1">Region / County</label>
-    <select
-      value={selectedDistrict}
-      onChange={e => setSelectedDistrict(e.target.value as UKDistrict | '')}
-      className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-    >
-      <option value="">All Regions</option>
-      {districts.map((district) => (
-        <option key={district} value={district}>{district}</option>
-      ))}
-    </select>
-  </div>
-  <div>
-    <label className="block text-xs font-semibold text-gray-600 mb-1">Fishing Type</label>
-    <select
-      value={selectedFishingType}
-      onChange={e => setSelectedFishingType(e.target.value)}
-      className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-    >
-      <option value="">All Types</option>
-      {Array.from(new Set(fisheries.flatMap(f => f.fishingType))).sort().map(type => (
-        <option key={type} value={type}>{type}</option>
-      ))}
-    </select>
-  </div>
-  <div>
-    <label className="block text-xs font-semibold text-gray-600 mb-1">Booking</label>
-    <select
-      value={bookingType}
-      onChange={e => setBookingType(e.target.value)}
-      className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-    >
-      <option value="">All</option>
-      <option value="booking required">Booking Required</option>
-      <option value="day tickets">Day Tickets</option>
-    </select>
-  </div>
-</div>
-
+            {/* Column 1: Dropdowns */}
+            <div className="flex flex-col gap-3">
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Fish Species</label>
+                <select 
+                  value={selectedSpecies}
+                  onChange={e => setSelectedSpecies(e.target.value as FishSpecies | '')}
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                >
+                  <option value="">All Species</option>
+                  {species.map((specie) => ( 
+                    <option key={specie} value={specie}>{specie}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Region / County</label>
+                <select
+                  value={selectedDistrict}
+                  onChange={e => setSelectedDistrict(e.target.value as UKDistrict | '')}
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                >
+                  <option value="">All Regions</option>
+                  {districts.map((district) => (
+                    <option key={district} value={district}>{district}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Fishing Type</label>
+                <select
+                  value={selectedFishingType}
+                  onChange={e => setSelectedFishingType(e.target.value)}
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                >
+                  <option value="">All Types</option>
+                  {Array.from(new Set(fisheries.flatMap(f => f.fishingType))).sort().map(type => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Booking</label>
+                <select
+                  value={bookingType}
+                  onChange={e => setBookingType(e.target.value)}
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                >
+                  <option value="">All</option>
+                  <option value="booking required">Booking Required</option>
+                  <option value="day tickets">Day Tickets</option>
+                </select>
+              </div>
+            </div>
             {/* Column 2: Text Inputs */}
             <div className="flex flex-col gap-3">
               <div>

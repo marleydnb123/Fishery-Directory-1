@@ -142,7 +142,7 @@ return (
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="h-48 overflow-hidden">
+                <div className="h-64 overflow-hidden">
                   <img
   src={shop.image || 'https://images.pexels.com/photos/2846815/pexels-photo-2846815.jpeg'}
   alt={shop.name}

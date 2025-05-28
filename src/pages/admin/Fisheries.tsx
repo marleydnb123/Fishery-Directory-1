@@ -37,6 +37,7 @@ const emptyFishery: Omit<Fishery, 'id'> = {
   fisheryimages2: '',
   fisheryimages3: '',
   fisheryvideo: '',
+  bait_boats: false,
 };
 
 const AdminFisheries: React.FC = () => {
@@ -150,6 +151,7 @@ const AdminFisheries: React.FC = () => {
         fisheryimages2: formFishery.fisheryimages2,
         fisheryimages3: formFishery.fisheryimages3,
         fisheryvideo: formFishery.fisheryvideo,
+        bait_boats: formFishery.bait_boats,
       }])
       .select()
       .single();
@@ -205,6 +207,7 @@ const AdminFisheries: React.FC = () => {
         fisheryimages2: formFishery.fisheryimages2,
         fisheryimages3: formFishery.fisheryimages3,
         fisheryvideo: formFishery.fisheryvideo,
+        bait_boats: formFishery.bait_boats,
       })
       .eq('id', currentFishery.id)
       .select()
@@ -420,6 +423,7 @@ const AdminFisheries: React.FC = () => {
                           fisheryimages2: fishery.fisheryimages2,
                           fisheryimages3: fishery.fisheryimages3,
                           fisheryvideo: fishery.fisheryvideo,
+                          bait_boats: fishery.bait_boats
                         });
                         setIsEditModalOpen(true);
                       }}
@@ -645,6 +649,16 @@ const AdminFisheries: React.FC = () => {
                       id="catchPhotos"
                     />
                     <label htmlFor="catchPhotos" className="text-sm">Catch Photos Available</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formFishery.bait_boats || false}
+                      onChange={e => setFormFishery(f => ({ ...f, bait_boats: e.target.checked }))}
+                      className="mr-2"
+                      id="baitboats"
+                    />
+                    <label htmlFor="baitboats" className="text-sm">Bait Boats</label>
                   </div>
                 </div>
               </div>
@@ -924,6 +938,16 @@ const AdminFisheries: React.FC = () => {
                 id="catchPhotosEdit"
               />
               <label htmlFor="catchPhotosEdit" className="text-sm">Catch Photos Available</label>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                checked={formFishery.bait_boats || false}
+                onChange={e => setFormFishery(f => ({ ...f, bait_boats: e.target.checked }))}
+                className="mr-2"
+                id="baitboatsEdit"
+              />
+              <label htmlFor="baitboatsEdit" className="text-sm">Catch Photos Available</label>
             </div>
           </div>
         </div>

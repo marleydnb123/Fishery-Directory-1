@@ -1012,33 +1012,35 @@ rel="noopener noreferrer"
 </section>
 {/* --- End Featured Fisheries Section --- */}
 
-          
-{/* Nearby Fisheries Section */}
-<div className="mt-8">
+          {/* Nearby Fisheries Section */}
+<div className="mt-10">
   <h2 className="font-bold text-lg mb-4">Nearby Fisheries</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     {fisheries
-      .filter(fishery => fishery.district === selectedDistrict)
+      .filter(f => f.district === currentFishery.district && f.id !== currentFishery.id)
       .slice(0, 4)
-      .map(fishery => (
+      .map(f => (
         <div
-          key={fishery.id}
-          className="border rounded-lg p-4 bg-white shadow hover:shadow-lg transition"
+          key={f.id}
+          className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
         >
-          <div className="font-semibold text-base mb-1">{f.name}</div>
-          <div className="text-xs text-gray-500 mb-2">{f.address}</div>
-          {/* Add more fishery details as needed */}
-          <div className="text-xs text-gray-600">{f.description?.slice(0, 80)}...</div> 
-          <a
-            href={`/fisheries/${fishery.id}`}
-            className="inline-block mt-2 text-blue-600 text-xs font-semibold hover:underline"
-          >
-            View Details
-          </a>
+          <Link to={`/directory/${f.slug}`}>
+            <img
+              src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"}
+              alt={f.name}
+              className="w-full h-40 object-cover transition-transform duration-200 hover:scale-[1.02]"
+            />
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-gray-900">{f.name}</h3>
+              <div className="text-sm text-primary-700">{f.district}</div>
+              <div className="text-gray-600 text-xs mt-2 line-clamp-2">{f.description}</div>
+            </div>
+          </Link>
         </div>
       ))}
   </div>
 </div>
+
 
         
                {/* Contact Bar */}

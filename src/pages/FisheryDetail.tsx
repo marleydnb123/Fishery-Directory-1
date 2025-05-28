@@ -18,7 +18,7 @@ type Fishery = {
   isfeatured: boolean;
   hasaccommodation: boolean;
   website?: string 
-  contact_phone?: string;
+  contact_phone?: string; 
   contact_email?: string;
   address?: string;
   postcode?: string;

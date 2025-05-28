@@ -49,40 +49,11 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
       <div className="h-[300px] rounded-lg overflow-hidden"> 
         <Map
           zoom={14}
-          center={{ lat: latitude, lng: longitude }}  
-          options={{
-            zoomControl: true,
-            mapTypeControl: true,
-            scaleControl: true,
-            streetViewControl: true,
-            rotateControl: true,
-            fullscreenControl: true,
-            gestureHandling: 'cooperative',
-            scrollwheel: true, 
-            draggable: true,
-            keyboardShortcuts: true,
-            disableDoubleClickZoom: false,
-            mapTypeId: 'roadmap',
-            clickableIcons: true,
-            styles: [
-              {
-                featureType: 'poi',
-                elementType: 'labels',
-                stylers: [{ visibility: 'on' }]
-              }
-            ]
-          }}
+          center={{ lat: latitude, lng: longitude }}
+          gestureHandling="cooperative"
           mapId="fishery-map"
         >
-          <Marker 
-            position={{ lat: latitude, lng: longitude }} 
-            title={name}
-            options={{
-              draggable: false,
-              clickable: true,
-              visible: true
-            }}
-          /> 
+          <Marker position={{ lat: latitude, lng: longitude }} title={name} /> 
         </Map>
       </div>
     </APIProvider>

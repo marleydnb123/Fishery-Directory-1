@@ -541,65 +541,82 @@ const FisheryDetail: React.FC = () => {
   </div>
   {/* Reviews Content */}
   <div className="p-6">
-    <div className="grid gap-6 md:grid-cols-2">
-      {/* Review 1 */}
-      <div className="bg-primary-50 rounded-xl p-6 shadow-inner flex flex-col md:flex-row items-start gap-4">
-        <div className="flex-shrink-0 w-14 h-14 rounded-full bg-primary-700 flex items-center justify-center text-white text-2xl font-bold shadow-md">
-          JD
-        </div>
-        <div>
-          <div className="flex items-center gap-3 mb-1">
-            <span className="font-semibold text-primary-800 text-lg">Jane D.</span>
-            <span className="flex text-yellow-400 text-xl">
-              ★★★★★
-            </span>
+    {/* Featured Review */}
+    <div className="relative mb-8">
+      <div className="bg-gradient-to-br from-primary-700 via-primary-200 to-white rounded-2xl shadow-xl p-8 border-4 border-primary-300">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-16 h-16 rounded-full bg-primary-700 flex items-center justify-center text-white text-3xl font-bold shadow-lg ring-4 ring-primary-300">
+            JD
           </div>
-          <p className="text-gray-700 mb-1">
-            Fantastic fishery! Landed my PB carp and the staff were super friendly. Will definitely be back.
-          </p>
-          <div className="text-xs text-gray-400">May 2025</div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-primary-900 text-xl">Jane D.</span>
+              <span className="flex text-yellow-400 text-2xl">★★★★★</span>
+            </div>
+            <div className="text-xs text-primary-500">May 2025</div>
+          </div>
         </div>
+        <p className="text-primary-900 text-lg italic leading-relaxed">
+          "Absolutely stunning fishery! Landed my PB carp and the atmosphere was so peaceful. Staff were super friendly and helpful. Can't wait to return!"
+        </p>
       </div>
+      <span className="absolute top-2 right-6 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Featured</span>
+    </div>
+
+    {/* Scrollable Review River */}
+    <div className="flex gap-6 overflow-x-auto pb-2 hide-scrollbar">
       {/* Review 2 */}
-      <div className="bg-primary-50 rounded-xl p-6 shadow-inner flex flex-col md:flex-row items-start gap-4">
-        <div className="flex-shrink-0 w-14 h-14 rounded-full bg-primary-700 flex items-center justify-center text-white text-2xl font-bold shadow-md">
-          TS
-        </div>
-        <div>
-          <div className="flex items-center gap-3 mb-1">
-            <span className="font-semibold text-primary-800 text-lg">Tom S.</span>
-            <span className="flex text-yellow-400 text-xl">
-              ★★★★☆
-            </span>
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            TS
           </div>
-          <p className="text-gray-700 mb-1">
-            Beautiful location and well-stocked lakes. Only downside was a bit of mud on the pegs after rain.
-          </p>
-          <div className="text-xs text-gray-400">April 2025</div>
+          <span className="font-semibold text-primary-800 text-lg">Tom S.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★☆</span>
         </div>
+        <p className="text-gray-700 mb-2">
+          "Beautiful location, well-stocked lakes. Only downside was a bit of mud on the pegs after rain."
+        </p>
+        <div className="text-xs text-gray-400">April 2025</div>
       </div>
       {/* Review 3 */}
-      <div className="bg-primary-50 rounded-xl p-6 shadow-inner flex flex-col md:flex-row items-start gap-4">
-        <div className="flex-shrink-0 w-14 h-14 rounded-full bg-primary-700 flex items-center justify-center text-white text-2xl font-bold shadow-md">
-          SL
-        </div>
-        <div>
-          <div className="flex items-center gap-3 mb-1">
-            <span className="font-semibold text-primary-800 text-lg">Sophie L.</span>
-            <span className="flex text-yellow-400 text-xl">
-              ★★★★★
-            </span>
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            SL
           </div>
-          <p className="text-gray-700 mb-1">
-            Great for families and beginners. My kids caught their first fish here and loved every minute.
-          </p>
-          <div className="text-xs text-gray-400">March 2025</div>
+          <span className="font-semibold text-primary-800 text-lg">Sophie L.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★★</span>
         </div>
+        <p className="text-gray-700 mb-2">
+          "Great for families and beginners. My kids caught their first fish here and loved every minute."
+        </p>
+        <div className="text-xs text-gray-400">March 2025</div>
       </div>
+      {/* Review 4 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            AG
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Alex G.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★★</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Top-notch facilities and a great variety of fish. Highly recommend for a relaxing weekend."
+        </p>
+        <div className="text-xs text-gray-400">February 2025</div>
+      </div>
+      {/* Add more reviews as needed */}
     </div>
+    <style>{`
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    `}</style>
   </div>
 </div>
 {/* --- End Reviews Section --- */}
+
 
 
 

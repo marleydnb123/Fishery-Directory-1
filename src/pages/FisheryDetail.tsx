@@ -514,6 +514,54 @@ const FisheryDetail: React.FC = () => {
 {/* --- End Tactics & Methods Section --- */}
 
 
+{/* --- Reviews Section --- */}
+<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+  {/* Gradient Header Bar */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <svg
+      className="h-7 w-7 text-white mr-3 animate-bounce"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 17.75l-6.172 3.245 1.179-6.873-5-4.873 6.9-1.002L12 2.5l3.093 6.747 6.9 1.002-5 4.873 1.179 6.873z"
+      />
+    </svg>
+    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Reviews</h3>
+  </div>
+  {/* Reviews Content */}
+  <div className="p-6">
+    {fishery.reviews && fishery.reviews.length > 0 ? (
+      <div className="space-y-6">
+        {fishery.reviews.map((review, idx) => (
+          <div key={idx} className="bg-primary-50 rounded-lg p-4 shadow-inner">
+            <div className="flex items-center mb-2">
+              <span className="font-semibold text-primary-800">{review.author}</span>
+              <span className="ml-3 text-yellow-500">
+                {"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}
+              </span>
+            </div>
+            <p className="text-gray-700 italic">"{review.comment}"</p>
+            <div className="text-xs text-gray-400 mt-1">{review.date}</div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="text-gray-500 italic">No reviews yet. Be the first to leave a review!</div>
+    )}
+  </div>
+</div>
+{/* --- End Reviews Section --- */}
 
 
 

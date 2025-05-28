@@ -304,7 +304,7 @@ const Directory: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Column 1: Dropdowns */}
-<div className="flex flex-col gap-3 max-w-[500px]">
+<div className="flex flex-col gap-3 max-w-[200px]">
   <div>
     <label className="block text-xs font-semibold text-gray-600 mb-1">Fish Species</label>
     <select 

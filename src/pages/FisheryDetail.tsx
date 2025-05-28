@@ -92,6 +92,21 @@ const FisheryDetail: React.FC = () => {
   useEffect(() => {
     if (!slug) return;
 
+    useEffect(() => {
+  if (!fisheryId) return; // Don't run if fisheryId is missing
+
+  const fetchTactics = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("tactics")
+      .select("*")
+      .eq("fishery_id", fisheryId);
+    setTactics(error ? [] : data || []);
+    setLoading(false);
+  };
+  fetchTactics();
+}, [fisheryId]);
+
     const fetchData = async () => {
       setLoading(true);
 

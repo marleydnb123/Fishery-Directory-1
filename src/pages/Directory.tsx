@@ -280,7 +280,7 @@ const Directory: React.FC = () => {
         </motion.div>
 
         {/* --- Modern Search Bar & Filters --- */}
-        <div className="bg-customBlue/50 rounded-xl shadow-md p-6 mb-16">
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-16">
           <form
             className="flex gap-2 mb-4"
             onSubmit={e => e.preventDefault()}
@@ -291,26 +291,26 @@ const Directory: React.FC = () => {
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               placeholder="Search by fishery name, region, or county"
-              className="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 shadow-sm text-sm"
+              className="w-full md:w-2/3 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 shadow-sm text-sm"
               aria-label="Search fisheries"
             />
             <button
               type="submit"
-              className="px-5 py-2 bg-customBlue hover:bg-blue-700 text-white font-medium rounded-lg shadow text-sm"
+              className="px-6 py-3 bg-customBlue hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm text-sm"
             >
               Search
             </button>
           </form>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Column 1: Dropdowns */}
-            <div className="flex flex-col gap-3">
+            <div className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">Fish Species</label>
                 <select 
                   value={selectedSpecies}
                   onChange={e => setSelectedSpecies(e.target.value as FishSpecies | '')}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full md:w-64 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm bg-white"
                 >
                   <option value="">All Species</option>
                   {species.map((specie) => ( 
@@ -323,7 +323,7 @@ const Directory: React.FC = () => {
                 <select
                   value={selectedDistrict}
                   onChange={e => setSelectedDistrict(e.target.value as UKDistrict | '')}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full md:w-64 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm bg-white"
                 >
                   <option value="">All Regions</option>
                   {districts.map((district) => (
@@ -336,7 +336,7 @@ const Directory: React.FC = () => {
                 <select
                   value={selectedFishingType}
                   onChange={e => setSelectedFishingType(e.target.value)}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full md:w-64 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm bg-white"
                 >
                   <option value="">All Types</option>
                   {Array.from(new Set(fisheries.flatMap(f => f.fishingType))).sort().map(type => (
@@ -349,7 +349,7 @@ const Directory: React.FC = () => {
                 <select
                   value={bookingType}
                   onChange={e => setBookingType(e.target.value)}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full md:w-64 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm bg-white"
                 >
                   <option value="">All</option>
                   <option value="booking required">Booking Required</option>
@@ -674,7 +674,168 @@ const Directory: React.FC = () => {
                   </div>
                 )}
               </motion.div>
-            )}
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-700">Advanced Filters</h3>
+                <div className="h-px flex-1 bg-gray-200 ml-4"></div>
+              </div>
+              
+              {/* Carp Fishing Section */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="font-medium text-gray-700 mb-3">Carp Fishing</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={baitBoats}
+                      onChange={() => setBaitBoats(!baitBoats)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Bait Boats Allowed</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={nightFishingAllowed}
+                      onChange={() => setNightFishingAllowed(!nightFishingAllowed)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Night Fishing</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={magicTwig}
+                      onChange={() => setMagicTwig(!magicTwig)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Magic Twig Allowed</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={catchPhotos}
+                      onChange={() => setCatchPhotos(!catchPhotos)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Catch Photos</span>
+                  </label>
+                </div>
+              </div>
+              
+              {/* Match Fishing Section */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="font-medium text-gray-700 mb-3">Match Fishing</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={matchFishingFriendly}
+                      onChange={() => setMatchFishingFriendly(!matchFishingFriendly)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Match Friendly</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={keepnetsAllowed}
+                      onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Keepnets Allowed</span>
+                  </label>
+                </div>
+              </div>
+              
+              {/* Coarse Fishing Section */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="font-medium text-gray-700 mb-3">Coarse Fishing</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={disabledAccess}
+                      onChange={() => setDisabledAccess(!disabledAccess)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Disabled Access</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={dogFriendly}
+                      onChange={() => setDogFriendly(!dogFriendly)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Dog Friendly</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={firePitsAllowed}
+                      onChange={() => setFirePitsAllowed(!firePitsAllowed)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Fire Pits</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={parkingClose}
+                      onChange={() => setParkingClose(!parkingClose)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Close Parking</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={campingAllowed}
+                      onChange={() => setCampingAllowed(!campingAllowed)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Camping</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={tackleShop}
+                      onChange={() => settackleShop(!tackleShop)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Tackle Shop</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={privateHire}
+                      onChange={() => setprivateHire(!privateHire)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Private Hire</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={tackleHire}
+                      onChange={() => settackleHire(!tackleHire)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Tackle Hire</span>
+                  </label>
+                  <label className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={coaching}
+                      onChange={() => setcoaching(!coaching)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Coaching</span>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

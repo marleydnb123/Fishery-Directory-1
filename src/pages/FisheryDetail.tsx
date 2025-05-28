@@ -55,7 +55,8 @@ const FisheryDetail: React.FC = () => {
   const [lakes, setLakes] = useState<Lake[]>([]);
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+  const [tactics, setTactics] = useState([]);
 
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
@@ -108,17 +109,11 @@ const FisheryDetail: React.FC = () => {
         setLoading(false);
         return;
       }
-      
-      // Parse tactics string into array if it exists
-      const parsedTactics = fisheryData.tactics ? 
-        fisheryData.tactics.split('\n').filter(line => line.trim()) : 
-        [];
 
       setFishery({
         ...fisheryData,
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
-        tactics: parsedTactics
       }); 
 
       // Fetch lakes for this fishery
@@ -502,17 +497,26 @@ const FisheryDetail: React.FC = () => {
     {loading ? (
       <div className="text-gray-500 italic">Loading tactics...</div>
     ) : tactics.length === 0 ? (
-      <div className="text-gray-500 italic">No tactics information available for this fishery yet.</div>
+      <div className="text-gray-500 italic">No tactics available for this fishery yet.</div>
     ) : (
       <ul className="mb-5 text-gray-700 space-y-4 leading-relaxed">
-        {fishery.tactics.map((tactic, index) => (
-          <li key={index} className="flex items-start">
-            <div className="w-2 h-2 rounded-full bg-primary-600 mr-2 mt-2"></div>
-            <span>{tactic}</span>
+        {tactics.map((tactic) => (
+          <li key={tactic.id}>
+            <span className="font-semibold text-primary-700">{tactic.title}:</span>
+            {tactic.description
+              .split(/\r?\n/)
+              .map((line, i) =>
+                line.trim() ? (
+                  <span key={i} className="ml-1 block">{line}</span>
+                ) : null
+              )}
           </li>
         ))}
       </ul>
     )}
+    <div className="text-primary-600 italic text-sm">
+      More tactics coming soon! Check back for updated methods and tips tailored to this fishery.
+    </div>
   </div>
 </div>
 {/* --- End Tactics & Methods Section --- */}
@@ -609,6 +613,9 @@ const FisheryDetail: React.FC = () => {
                   <div className="mt-2 text-gray-600  ml-6 text-sm">
                     Detailed directions will be provided upon booking.
                   </div>
+                </div>
+                <div className="h-40 bg-gray-200 ml-6 mr-6 mb-6 rounded-lg flex items-center justify-center shadow-inner">
+                  <span className="text-gray-500">Map location preview</span>
                 </div>
               </div>
             </div>
@@ -718,4 +725,254 @@ const FisheryDetail: React.FC = () => {
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-xl font-semibold">{acc.type}</h3>
                   <div className="text-primary-600 font-bold">
-                    
+                    £{acc.price}
+                    <span className="text-gray-500 text-sm font-normal">/night</span>
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4">{acc.notes}</p>
+                <a
+                  href={fishery.website}
+target="_blank"
+rel="noopener noreferrer"
+
+                  className="bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors self-start"
+                >
+                  <Book className="h-4 w-4 mr-2 inline" />
+                  Book Now
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="bg-white rounded-xl shadow-md p-6 text-center">
+        <p className="text-gray-700">No accommodation information available.</p>
+      </div>
+    )}
+  </motion.div>
+)}
+
+
+
+        {activeTab === 'rules' && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
+  >
+    <div className="bg-white rounded-xl shadow-md p-6">
+      <h2
+        className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-2xl sm:text-3xl md:text-4xl font-semibold font-bebas rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
+        style={{
+          background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+        }}
+      >
+        Fishery Rules
+      </h2>
+      <p className="text-gray-700 mb-6">
+        Please ensure you are familiar with and adhere to the following rules while fishing at {fishery.name}:
+      </p>
+
+      <div className="prose max-w-none text-gray-700">
+        {(() => {
+          const lines = fishery.rules.split(/\r?\n/);
+          const elements = [];
+          let listItems = [];
+          let lastWasHeader = false;
+
+          lines.forEach((line, i) => {
+            const trimmed = line.trim();
+
+            if (trimmed.startsWith('-')) {
+              listItems.push(trimmed.slice(1).trim());
+              lastWasHeader = false;
+            } else {
+              // Flush any bullets before a new header/paragraph/blank
+              if (listItems.length > 0) {
+                elements.push(
+                  <ul key={`ul-${i}`} className="list-disc ml-6">
+                    {listItems.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                );
+                listItems = [];
+              }
+              if (trimmed === '') {
+                elements.push(<div key={i} style={{ height: '1.25em' }} />);
+                lastWasHeader = false;
+              } else {
+                // Treat as header if previous line was blank or it's the first line
+                const isHeader = i === 0 || (lines[i - 1] && lines[i - 1].trim() === '');
+                elements.push(
+                  <p
+                    key={i}
+                    className={isHeader ? 'font-semibold text-lg mt-4 mb-2' : ''}
+                  >
+                    {line}
+                  </p>
+                );
+                lastWasHeader = isHeader;
+              }
+            }
+          });
+
+          // Flush any remaining bullets
+          if (listItems.length > 0) {
+            elements.push(
+              <ul key={`ul-end`} className="list-disc ml-6">
+                {listItems.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            );
+          }
+
+          return elements;
+        })()}
+      </div>
+      
+      <div className="mt-8 p-4 bg-primary-100 rounded-lg">
+        <div className="flex items-start">
+          <Info className="h-5 w-5 text-primary-900 mr-2 mt-0.5" />
+          <p className="text-primary-900">
+            Failure to comply with these rules may result in being asked to leave the fishery without refund.
+          </p>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+)}
+
+ 
+{/* --- Featured Fisheries Section --- */}
+<section className="py-12 px-4 bg-gray-50">
+  <div className="container mx-auto shadow-lg overflow-hidden">
+    {/* Header Bar */}
+    <div
+      className="p-6"
+      style={{
+        background:
+          "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+      }}
+    >
+      <motion.h2
+        className="text-4xl font-bebas font-bold text-white mb-1 text-center" 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        Featured Fisheries
+      </motion.h2>
+      <motion.p
+        className="text-primary-200 text-center max-w-2xl mx-auto"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+      >
+        Explore our handpicked selection of the finest fishing spots across the UK
+      </motion.p>
+    </div>
+    {/* Cards Grid */}
+    <div className="p-6 bg-gray-50">
+      {featuredLoading ? (
+        <div className="text-center py-8 text-gray-600">Loading featured fisheries...</div>
+      ) : featuredError ? (
+        <div className="text-center py-8 text-red-600">{featuredError}</div>
+      ) : (
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {featuredFisheries.length > 0 ? (
+            featuredFisheries.map((f) => (
+              <motion.div
+                key={f.id}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+              >
+                <Link to={`/directory/${f.slug}`}>
+                  <img
+                    src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"} 
+                    alt={f.name}
+                    className="w-full h-40 object-cover transition-transform duration-200 hover:scale-[1.02]"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-gray-900">{f.name}</h3>
+                    <div className="text-sm text-primary-700">{f.district}</div>
+                    <div className="text-gray-600 text-xs mt-2 line-clamp-2">{f.description}</div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))
+          ) : (
+            <div className="col-span-4 text-center text-gray-500">
+              No featured fisheries found.
+            </div>
+          )}
+        </motion.div>
+      )}
+    </div>
+  </div>
+</section>
+{/* --- End Featured Fisheries Section --- */}
+
+          
+
+        
+               {/* Contact Bar */}
+        <div className="mt-8 rounded-xl shadow-lg p-0 overflow-hidden">
+          <div
+            className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex flex-col md:flex-row items-center justify-between gap-6"
+            style={{
+              background:
+                "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+            }}
+          >
+            <div className="mb-4 md:mb-0 flex items-center gap-4">
+              <span className="text-2xl font-bold tracking-wide text-white">
+                {fishery.name}
+              </span>
+              <span className="hidden md:inline-block text-primary-200 text-sm">
+                {fishery.district}
+              </span>
+            </div>
+            <div className="flex items-center gap-4">
+              {fishery.website && (
+                <a 
+                  href={fishery.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-white text-primary-900 px-6 py-2 rounded-lg font-semibold shadow hover:bg-primary-100 hover:text-primary-700 transition"
+                >
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.95 7.07l-.71-.71M4.05 4.93l-.71-.71" />
+                  </svg>
+                  Visit Website
+                </a>
+              )}
+              {/* Example: Add social icons if you want */}
+              {/* 
+              <a href="#" className="text-primary-200 hover:text-white transition">
+                <TwitterIcon className="h-5 w-5" />
+              </a>
+              */} 
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  );
+};
+
+
+export default FisheryDetail;
+  
+
+export default FisheryDetail

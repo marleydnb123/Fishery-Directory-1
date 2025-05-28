@@ -507,7 +507,7 @@ const FisheryDetail: React.FC = () => {
       <div className="text-gray-500 italic">No tactics available for this fishery yet.</div>
     )}
     <div className="text-primary-600 italic text-sm">
-      More tactics coming soon! Check back for updated methods and tips tailored to this fishery.
+      
     </div>
   </div>
 </div>

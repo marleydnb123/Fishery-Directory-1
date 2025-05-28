@@ -19,7 +19,7 @@ const emptyFishery: Omit<Fishery, 'id'> = {
   website: '',
   day_ticket_price: 0,
   descriptionpage: '',
-  rules: '',
+  rules: '', 
   night_fishing_allowed: false,
   fishing_type: '',
   match_fishing_friendly: false,

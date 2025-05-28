@@ -409,7 +409,7 @@ const AdminFisheries: React.FC = () => {
                           night_fishing_allowed: fishery.night_fishing_allowed,
                           fishing_type: fishery.fishing_type,
                           match_fishing_friendly: fishery.match_fishing_friendly,
-                          disabled_access: fishery.disabled_access,
+                          disabled_access: fishery.disabled_access, 
                           facilities: fishery.facilities,
                           dog_friendly: fishery.dog_friendly,
                           price_range: fishery.price_range,

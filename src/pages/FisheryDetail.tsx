@@ -56,10 +56,8 @@ const FisheryDetail: React.FC = () => {
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
-  const [nearbyLoading, setNearbyLoading] = useState(true);
-  const [nearbyError, setNearbyError] = useState('');
-  const [nearbyFisheries, setNearbyFisheries] = useState([]);
-
+  
+ 
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
   const [featuredLoading, setFeaturedLoading] = useState(true);
@@ -91,31 +89,6 @@ const FisheryDetail: React.FC = () => {
     fetchFeatured();
   }, []);
 
-   useEffect(() => {
-    async function fetchNearbyFisheries() {
-      setLoading(true);
-      setError("");
-      const { data, error } = await supabase
-        .from("fisheries")
-        .select("*")
-        .eq("district", currentFishery.district)
-        .neq("id", currentFishery.id)
-        .limit(4);
-
-      if (error) {
-        setError("Failed to load nearby fisheries.");
-        setNearbyFisheries([]);
-      } else {
-        setNearbyFisheries(data);
-      }
-      setLoading(false);
-    }
-
-    if (currentFishery?.district) {
-      fetchNearbyFisheries();
-    }
-  }, [currentFishery]);
-  
   useEffect(() => {
     if (!slug) return;
 
@@ -1085,7 +1058,7 @@ rel="noopener noreferrer"
         <div className="col-span-4 text-center text-gray-500">
           No nearby fisheries found in this district.
         </div>
-      )} 
+      )}
     </motion.div>
   )}
 </div>

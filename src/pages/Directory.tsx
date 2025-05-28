@@ -531,9 +531,7 @@ const Directory: React.FC = () => {
           <label htmlFor="privatehire-match" className="text-xs text-gray-700 font-medium">Private Hire</label>
         </div>
       </div>
-    </details>
   </div>
-
 </div>
 
 

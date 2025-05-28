@@ -269,7 +269,7 @@ const FisheryDetail: React.FC = () => {
           style={{
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}
-
+ 
         >
           About {fishery.name} 
         </h2>

@@ -973,6 +973,3 @@ rel="noopener noreferrer"
 
 
 export default FisheryDetail;
-  
-
-export default FisheryDetail

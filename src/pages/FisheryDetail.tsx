@@ -255,20 +255,19 @@ const FisheryDetail: React.FC = () => {
         </div>
       </div>
 
-     {/* Content */} 
+    {/* Content */} 
 <div className="container mx-auto px-4 py-8"> 
   {activeTab === 'overview' && (
     <motion.div 
       initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
       <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-        <h2
-          className="w-full text-3xl font-bebas font-bold bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white py-4 rounded-t-xl"
+        <div
+          className="-mx-6 rounded-t-xl bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700"
           style={{
-            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)",
-            marginBottom: 0
+            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}
 
         >

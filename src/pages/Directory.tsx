@@ -404,9 +404,7 @@ const Directory: React.FC = () => {
 {/* --- CARP --- */}
 {/* Carp filters */}
 <div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-5">  
-  {/* Advanced Filters */}
-<div className="font-bold text-lg">Advanced Filters</div>
-  <div className="flex items-center gap-2">   
+  <div className="flex items-center gap-2"> 
     <input 
       type="checkbox"
       checked={accommodationOnly}

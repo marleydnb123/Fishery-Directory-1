@@ -260,14 +260,15 @@ const FisheryDetail: React.FC = () => {
   {activeTab === 'overview' && (
     <motion.div 
       initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }}
+      animate={{ opacity: 1 }} 
       transition={{ duration: 0.3 }}
     >
-      <div className="bg-white rounded-xl shadow-md p-0 mb-8 overflow-hidden">
-        <div
-          className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 rounded-t-xl px-6 py-4"
+      <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+        <h2
+          className="w-full text-3xl font-bebas font-bold bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white py-4 rounded-t-xl"
           style={{
-            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)",
+            marginBottom: 0
           }}
 
         >

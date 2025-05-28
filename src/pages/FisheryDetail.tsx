@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Fish, Info, Book, Phone, Waves } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
-import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
+ 
 
 // Define your types if you don't already have them
 type Fishery = {
@@ -92,21 +92,6 @@ const FisheryDetail: React.FC = () => {
   useEffect(() => {
     if (!slug) return;
 
-    const CustomMap = ({ lat, lng }) => (
-  <APIProvider apiKey="AIzaSyAdwvQifhxwcMuNBdUDXtgj6e0IXzRVt4c">
-    <div style={{ height: "160px", width: "100%", borderRadius: "12px", overflow: "hidden" }}>
-      <Map
-        defaultCenter={{ lat, lng }}
-        defaultZoom={14}
-        style={{ width: "100%", height: "100%" }}
-        disableDefaultUI
-      >
-        <Marker position={{ lat, lng }} />
-      </Map>
-    </div>
-  </APIProvider>
-);
-    
     const fetchData = async () => {
       setLoading(true);
 
@@ -720,8 +705,7 @@ const FisheryDetail: React.FC = () => {
                   </div>
                 </div>
                 <div className="h-40 bg-gray-200 ml-6 mr-6 mb-6 rounded-lg flex items-center justify-center shadow-inner">
-  <CustomMap lat={fishery.latitude} lng={fishery.longitude} />
-</div>
+                  <span className="text-gray-500">Map location preview</span>
                 </div>
               </div>
             </div>

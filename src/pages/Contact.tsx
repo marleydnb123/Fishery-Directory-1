@@ -125,7 +125,7 @@ const Contact: React.FC = () => {
           <h1 className="text-5xl md:text-6xl font-bebas font-bold text-gray-900 mb-4">
             Contact Us
           </h1> 
-          <p className="text-gray-600 text-md max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Have questions about our fisheries or need help with a booking? 
             We're here to help!
           </p>

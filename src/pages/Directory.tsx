@@ -302,21 +302,20 @@ const Directory: React.FC = () => {
             </button>
           </form>
 
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-  {/* Column 1: Dropdowns */}
-  <div className="flex flex-col gap-3" style={{ maxWidth: 500 }}>
-    <div className="font-bold text-lg mb-2">Advanced Filters</div>
-    <div>
-      <label className="block text-xs font-semibold text-gray-600 mb-1">Fish Species</label>
-      <select 
-        value={selectedSpecies}
-        onChange={e => setSelectedSpecies(e.target.value as FishSpecies | '')}
-        className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-      >
-        <option value="">All Species</option>
-        {species.map((specie) => ( 
-          <option key={specie} value={specie}>{specie}</option>
-        ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Column 1: Dropdowns */}
+            <div className="flex flex-col gap-3">
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Fish Species</label>
+                <select 
+                  value={selectedSpecies}
+                  onChange={e => setSelectedSpecies(e.target.value as FishSpecies | '')}
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                >
+                  <option value="">All Species</option>
+                  {species.map((specie) => ( 
+                    <option key={specie} value={specie}>{specie}</option>
+                  ))}
                 </select>
               </div>
               <div>

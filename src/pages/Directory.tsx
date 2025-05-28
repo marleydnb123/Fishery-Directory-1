@@ -400,8 +400,8 @@ const Directory: React.FC = () => {
                 />
               </div>
             </div>
-
-            <div className="font-bold text-lg mb-1">Advanced Filters</div> 
+ 
+             
             {/* Column 3: Checkboxes */}
 {/* --- CARP --- */}
 {/* Carp filters */}

@@ -331,8 +331,8 @@ const FisheryDetail: React.FC = () => {
             {fishery.features && fishery.features.length > 0 && (
             <div className="mt-8">
             <h3 className="text-lg font-semibold mb-3 flex items-center">
-            <Waves className="h-5 w-5 text-blue-600 mr-2 transition-transform duration-200 hover:scale-[1.02]" />
-            Water Features
+            <Waves className="h-5 w-5 text-blue-600 mr-2" />
+            Water Features 
             </h3>
             <div className="flex flex-wrap gap-2">
             {fishery.features.map((feature, idx) => ( 

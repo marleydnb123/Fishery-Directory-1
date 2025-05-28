@@ -255,7 +255,7 @@ const FisheryDetail: React.FC = () => {
         </div>
       </div>
 
-     {/* Content */} 
+      {/* Content */} 
 <div className="container mx-auto px-4 py-8"> 
   {activeTab === 'overview' && (
     <motion.div 
@@ -265,7 +265,7 @@ const FisheryDetail: React.FC = () => {
     >
       <div className="bg-white rounded-xl shadow-md p-6 mb-8">
         <h2
-          className="w-full text-3xl font-bebas font-bold bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 -mt-6 -mx-6 rounded-t-xl"
+          className="w-full text-3xl font-bebas font-bold mb-4 ml-0 mr-0 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
           style={{
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}  
@@ -309,7 +309,7 @@ const FisheryDetail: React.FC = () => {
                       <span 
                         key={index}
                         className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                      >
+                      > 
                         <Fish className="h-4 w-4 mr-1" />
                         {species}
                       </span>
@@ -317,7 +317,7 @@ const FisheryDetail: React.FC = () => {
                   </div> 
                 </div>
               </div>
-
+ 
 
               {/* --- Water Features Section --- */}
             {fishery.features && fishery.features.length > 0 && (

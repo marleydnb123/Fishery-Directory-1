@@ -65,7 +65,7 @@ const hoverCards = [
     subtitle: "Feel the breeze",
   },
   {
-    image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+    image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/e2/a6/e5/holme-lacy-house-hotel.jpg?w=1400&h=-1&s=1",
     title: "Hotels",
     subtitle: "Rolling hills",
   },

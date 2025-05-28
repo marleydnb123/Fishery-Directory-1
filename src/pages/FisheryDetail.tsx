@@ -693,7 +693,7 @@ const FisheryDetail: React.FC = () => {
                 </div>
                 <div className="mb-5 mt-6 text-gray-700 leading-relaxed">
                   <div> 
-                    <span className="font-semibold ml-2 md:ml-6">{fishery.name}</span> is located in <span className="font-semibold">{fishery.district}</span>, UK.
+                    <span className="font-semibold ml-6 md:ml-6">{fishery.name}</span> is located in <span className="font-semibold">{fishery.district}</span>, UK.
 
                   </div>
                   <div className="mt-2 text-primary-700 flex flex-wrap gap-4 text-sm">

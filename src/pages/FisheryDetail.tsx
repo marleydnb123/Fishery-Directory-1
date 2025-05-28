@@ -30,6 +30,7 @@ type Fishery = {
   fisheryimages3: string | null; 
   fisheryvideo: string | null;
   facilities: string | null;
+  tactics: string;
 };
 
 type Lake = {
@@ -55,6 +56,7 @@ const FisheryDetail: React.FC = () => {
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
+  const [tactics, setTactics] = useState([]);
 
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
@@ -89,6 +91,20 @@ const FisheryDetail: React.FC = () => {
 
   useEffect(() => {
     if (!slug) return;
+
+   useEffect(() => {
+    const fetchTactics = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("tactics")
+        .select("*")
+        .eq("fishery_id", fisheryId);
+      setTactics(error ? [] : data || []);
+      setLoading(false);
+    };
+    fetchTactics();
+  }, [fisheryId]);
+  
 
     const fetchData = async () => {
       setLoading(true);

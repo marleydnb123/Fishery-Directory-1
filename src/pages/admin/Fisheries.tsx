@@ -56,6 +56,16 @@ const AdminFisheries: React.FC = () => {
   const [formFishery, setFormFishery] = useState<Omit<Fishery, 'id'>>(emptyFishery);
   const [loading, setLoading] = useState(true);
 
+  // Helper function to ensure array fields are properly formatted
+  const ensureArray = (value: any): string[] => {
+    if (Array.isArray(value)) return value;
+    if (typeof value === 'string') {
+      // If it's a single string, wrap it in an array
+      return value.trim() ? [value] : [];
+    }
+    return [];
+  };
+
   // Fetch fisheries from Supabase
   useEffect(() => {
     const fetchFisheries = async () => {
@@ -65,6 +75,7 @@ const AdminFisheries: React.FC = () => {
         .select('*')
         .order('created_at', { ascending: false });
       if (error) {
+        console.error('Error fetching fisheries:', error);
         setFisheries([]);
       } else {
         setFisheries(
@@ -72,8 +83,10 @@ const AdminFisheries: React.FC = () => {
             ...f,
             isFeatured: f.isfeatured,
             hasAccommodation: f.hasaccommodation,
-            species: Array.isArray(f.species) ? f.species : [],
-            features: Array.isArray(f.features) ? f.features : [],
+            species: ensureArray(f.species),
+            features: ensureArray(f.features),
+            fishing_type: ensureArray(f.fishing_type),
+            facilities: ensureArray(f.facilities),
             description: f.description || '',
           }))
         );
@@ -129,8 +142,8 @@ const AdminFisheries: React.FC = () => {
         slug,
         district: formFishery.district,
         image: formFishery.image,
-        species: formFishery.species,
-        features: formFishery.features,
+        species: ensureArray(formFishery.species),
+        features: ensureArray(formFishery.features),
         description: formFishery.description,
         isfeatured: formFishery.isFeatured,
         hasaccommodation: formFishery.hasAccommodation,
@@ -141,10 +154,10 @@ const AdminFisheries: React.FC = () => {
         descriptionpage: formFishery.descriptionpage,
         rules: formFishery.rules,
         night_fishing_allowed: formFishery.night_fishing_allowed,
-        fishing_type: formFishery.fishing_type,
+        fishing_type: ensureArray(formFishery.fishing_type),
         match_fishing_friendly: formFishery.match_fishing_friendly,
         disabled_access: formFishery.disabled_access,
-        facilities: formFishery.facilities,
+        facilities: ensureArray(formFishery.facilities),
         dog_friendly: formFishery.dog_friendly,
         price_range: formFishery.price_range,
         fire_pits_allowed: formFishery.fire_pits_allowed,
@@ -172,8 +185,10 @@ const AdminFisheries: React.FC = () => {
         ...data,
         isFeatured: data.isfeatured,
         hasAccommodation: data.hasaccommodation,
-        species: Array.isArray(data.species) ? data.species : [],
-        features: Array.isArray(data.features) ? data.features : [],
+        species: ensureArray(data.species),
+        features: ensureArray(data.features),
+        fishing_type: ensureArray(data.fishing_type),
+        facilities: ensureArray(data.facilities),
         description: data.description || '',
       }, ...fisheries]);
     }
@@ -191,8 +206,8 @@ const AdminFisheries: React.FC = () => {
         slug: formFishery.slug,
         district: formFishery.district,
         image: formFishery.image,
-        species: formFishery.species,
-        features: formFishery.features,
+        species: ensureArray(formFishery.species),
+        features: ensureArray(formFishery.features),
         description: formFishery.description,
         isfeatured: formFishery.isFeatured,
         hasaccommodation: formFishery.hasAccommodation,
@@ -203,10 +218,10 @@ const AdminFisheries: React.FC = () => {
         descriptionpage: formFishery.descriptionpage,
         rules: formFishery.rules,
         night_fishing_allowed: formFishery.night_fishing_allowed,
-        fishing_type: formFishery.fishing_type,
+        fishing_type: ensureArray(formFishery.fishing_type),
         match_fishing_friendly: formFishery.match_fishing_friendly,
         disabled_access: formFishery.disabled_access,
-        facilities: formFishery.facilities,
+        facilities: ensureArray(formFishery.facilities),
         dog_friendly: formFishery.dog_friendly,
         price_range: formFishery.price_range,
         fire_pits_allowed: formFishery.fire_pits_allowed,
@@ -237,8 +252,10 @@ const AdminFisheries: React.FC = () => {
               ...data,
               isFeatured: data.isfeatured,
               hasAccommodation: data.hasaccommodation,
-              species: Array.isArray(data.species) ? data.species : [],
-              features: Array.isArray(data.features) ? data.features : [],
+              species: ensureArray(data.species),
+              features: ensureArray(data.features),
+              fishing_type: ensureArray(data.fishing_type),
+              facilities: ensureArray(data.facilities),
               description: data.description || '',
             }
           : f
@@ -360,7 +377,7 @@ const AdminFisheries: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex flex-wrap gap-1">
-                      {fishery.species.slice(0, 2).map((species, i) => (
+                      {ensureArray(fishery.species).slice(0, 2).map((species, i) => (
                         <span 
                           key={i}
                           className="px-2 py-1 text-xs rounded-full bg-primary-100 text-primary-900"
@@ -368,9 +385,9 @@ const AdminFisheries: React.FC = () => {
                           {species}
                         </span>
                       ))}
-                      {fishery.species.length > 2 && (
+                      {ensureArray(fishery.species).length > 2 && (
                         <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800">
-                          +{fishery.species.length - 2}
+                          +{ensureArray(fishery.species).length - 2}
                         </span>
                       )}
                     </div>
@@ -413,8 +430,8 @@ const AdminFisheries: React.FC = () => {
                           slug: fishery.slug,
                           district: fishery.district,
                           image: fishery.image,
-                          species: fishery.species,
-                          features: fishery.features,
+                          species: ensureArray(fishery.species),
+                          features: ensureArray(fishery.features),
                           isFeatured: fishery.isFeatured,
                           hasAccommodation: fishery.hasAccommodation,
                           description: fishery.description,
@@ -425,10 +442,10 @@ const AdminFisheries: React.FC = () => {
                           descriptionpage: fishery.descriptionpage,
                           rules: fishery.rules,
                           night_fishing_allowed: fishery.night_fishing_allowed,
-                          fishing_type: fishery.fishing_type,
+                          fishing_type: ensureArray(fishery.fishing_type),
                           match_fishing_friendly: fishery.match_fishing_friendly,
                           disabled_access: fishery.disabled_access, 
-                          facilities: fishery.facilities,
+                          facilities: ensureArray(fishery.facilities),
                           dog_friendly: fishery.dog_friendly,
                           price_range: fishery.price_range,
                           fire_pits_allowed: fishery.fire_pits_allowed,
@@ -521,7 +538,7 @@ const AdminFisheries: React.FC = () => {
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
                     placeholder="Species (comma separated)"
-                    value={formFishery.species.join(',')}
+                    value={ensureArray(formFishery.species).join(',')}
                     onChange={e => setFormFishery(f => ({ ...f, species: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
@@ -531,7 +548,7 @@ const AdminFisheries: React.FC = () => {
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
                     placeholder="Features (comma separated)"
-                    value={formFishery.features.join(',')}
+                    value={ensureArray(formFishery.features).join(',')}
                     onChange={e => setFormFishery(f => ({ ...f, features: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
@@ -541,7 +558,7 @@ const AdminFisheries: React.FC = () => {
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
                     placeholder="Facilities (comma separated)"
-                    value={formFishery.facilities?.join(',') || ''}
+                    value={ensureArray(formFishery.facilities).join(',')}
                     onChange={e => setFormFishery(f => ({ ...f, facilities: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
@@ -550,9 +567,9 @@ const AdminFisheries: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Fishing Type</label>
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
-                    placeholder="e.g., Match, Pleasure, Specimen"
-                    value={formFishery.fishing_type || ''}
-                    onChange={e => setFormFishery(f => ({ ...f, fishing_type: e.target.value }))}
+                    placeholder="e.g., Match, Pleasure, Specimen (comma separated)"
+                    value={ensureArray(formFishery.fishing_type).join(',')}
+                    onChange={e => setFormFishery(f => ({ ...f, fishing_type: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
 
@@ -885,7 +902,7 @@ const AdminFisheries: React.FC = () => {
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
                     placeholder="Species (comma separated)"
-                    value={formFishery.species.join(',')}
+                    value={ensureArray(formFishery.species).join(',')}
                     onChange={e => setFormFishery(f => ({ ...f, species: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
@@ -894,7 +911,7 @@ const AdminFisheries: React.FC = () => {
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
                     placeholder="Features (comma separated)"
-                    value={formFishery.features.join(',')}
+                    value={ensureArray(formFishery.features).join(',')}
                     onChange={e => setFormFishery(f => ({ ...f, features: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
@@ -903,7 +920,7 @@ const AdminFisheries: React.FC = () => {
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
                     placeholder="Facilities (comma separated)"
-                    value={formFishery.facilities?.join(',') || ''}
+                    value={ensureArray(formFishery.facilities).join(',')}
                     onChange={e => setFormFishery(f => ({ ...f, facilities: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
@@ -911,9 +928,9 @@ const AdminFisheries: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Fishing Type</label>
                   <input
                     className="w-full border p-2 rounded focus:ring-2 focus:ring-primary-400"
-                    placeholder="e.g., Match, Pleasure, Specimen"
-                    value={formFishery.fishing_type || ''}
-                    onChange={e => setFormFishery(f => ({ ...f, fishing_type: e.target.value }))}
+                    placeholder="e.g., Match, Pleasure, Specimen (comma separated)"
+                    value={ensureArray(formFishery.fishing_type).join(',')}
+                    onChange={e => setFormFishery(f => ({ ...f, fishing_type: e.target.value.split(',').map(s => s.trim()) }))}
                   />
                 </div>
                 <div>

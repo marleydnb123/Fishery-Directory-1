@@ -1012,7 +1012,35 @@ rel="noopener noreferrer"
 </section>
 {/* --- End Featured Fisheries Section --- */}
  
-          
+          {/* Nearby Fisheries Section */}
+<div className="mt-10">
+  <h2 className="font-bold text-lg mb-4">Nearby Fisheries</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {fisheries
+      .filter(f => f.district === currentFishery.district && f.id !== currentFishery.id) // same district, not current
+      .slice(0, 4)
+      .map(f => (
+        <div
+          key={f.id}
+          className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+        >
+          <Link to={`/directory/${f.slug}`}>
+            <img
+              src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"}
+              alt={f.name}
+              className="w-full h-40 object-cover transition-transform duration-200 hover:scale-[1.02]"
+            />
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-gray-900">{f.name}</h3>
+              <div className="text-sm text-primary-700">{f.district}</div>
+              <div className="text-gray-600 text-xs mt-2 line-clamp-2">{f.description}</div>
+            </div>
+          </Link>
+        </div>
+      ))}
+  </div>
+</div>
+
 
         
                {/* Contact Bar */}

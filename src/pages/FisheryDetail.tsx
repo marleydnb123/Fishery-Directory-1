@@ -1013,6 +1013,32 @@ rel="noopener noreferrer"
 {/* --- End Featured Fisheries Section --- */}
 
           
+{/* Nearby Fisheries Section */}
+<div className="mt-8">
+  <h2 className="font-bold text-lg mb-4">Nearby Fisheries</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    {fisheries
+      .filter(fishery => fishery.district === selectedDistrict)
+      .slice(0, 4)
+      .map(fishery => (
+        <div
+          key={fishery.id}
+          className="border rounded-lg p-4 bg-white shadow hover:shadow-lg transition"
+        >
+          <div className="font-semibold text-base mb-1">{fishery.name}</div>
+          <div className="text-xs text-gray-500 mb-2">{fishery.address}</div>
+          {/* Add more fishery details as needed */}
+          <div className="text-xs text-gray-600">{fishery.description?.slice(0, 80)}...</div>
+          <a
+            href={`/fisheries/${fishery.id}`}
+            className="inline-block mt-2 text-blue-600 text-xs font-semibold hover:underline"
+          >
+            View Details
+          </a>
+        </div>
+      ))}
+  </div>
+</div>
 
         
                {/* Contact Bar */}

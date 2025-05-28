@@ -40,35 +40,35 @@ function HoverBannerCard({ image, title, subtitle }) {
 // --- CardGrid component ---
 const hoverCards = [
   {
-    image: "https://www.yorklakesidelodges.co.uk/wp-content/uploads/2018/06/holly-lodge-york-lakeside-lodges.jpg",
-    title: "Lodges",
-    subtitle: "Peaceful waters",
-  },
-  {
-    image: "https://lakeviewholidays.co.uk/wp-content/uploads/2019/05/Willow-800-x-600.jpg",
-    title: "Holiday homes",
-    subtitle: "Explore the woods",
-  },
-  {
-    image: "https://tacklebox.co.uk/wp-content/uploads/2023/08/carp-fishing.webp",
-    title: "Camping",
-    subtitle: "Sandy adventures",
-  },
-  {
-    image: "https://assets.parkholidays.com/assets/8a1e89800f1291cff561ee405e484b5b.jpg",
-    title: "Caravan Parks",
-    subtitle: "Urban exploration",
-  },
-  {
-    image: "https://www.fisheries.co.uk/wp-content/uploads/2022/03/outpost1-600x563.jpg",
-    title: "Cabins & Pods",
-    subtitle: "Feel the breeze",
-  },
-  {
-    image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/e2/a6/e5/holme-lacy-house-hotel.jpg?w=1400&h=-1&s=1",
-    title: "Hotels",
-    subtitle: "Rolling hills",
-  },
+  image: "https://www.yorklakesidelodges.co.uk/wp-content/uploads/2018/06/holly-lodge-york-lakeside-lodges.jpg",
+  title: "Lodges",
+  subtitle: "Lakeside tranquillity",
+},
+{
+  image: "https://lakeviewholidays.co.uk/wp-content/uploads/2019/05/Willow-800-x-600.jpg",
+  title: "Holiday Homes",
+  subtitle: "Woodland retreats",
+},
+{
+  image: "https://tacklebox.co.uk/wp-content/uploads/2023/08/carp-fishing.webp",
+  title: "Camping",
+  subtitle: "Back to nature stays",
+},
+{
+  image: "https://assets.parkholidays.com/assets/8a1e89800f1291cff561ee405e484b5b.jpg",
+  title: "Caravan Parks",
+  subtitle: "Cozy countryside escapes",
+},
+{
+  image: "https://www.fisheries.co.uk/wp-content/uploads/2022/03/outpost1-600x563.jpg",
+  title: "Cabins & Pods",
+  subtitle: "Compact comfort by the lake",
+},
+{
+  image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/e2/a6/e5/holme-lacy-house-hotel.jpg?w=1400&h=-1&s=1",
+  title: "Hotels",
+  subtitle: "Elegant rural breaks",
+},
 ];
 
 function CardGrid() {

@@ -532,7 +532,6 @@ const Directory: React.FC = () => {
         </div>
       </div>
     </details>
-  </div>
               </div>
             </div>
           </div>

@@ -1025,10 +1025,10 @@ rel="noopener noreferrer"
           key={fishery.id}
           className="border rounded-lg p-4 bg-white shadow hover:shadow-lg transition"
         >
-          <div className="font-semibold text-base mb-1">{fishery.name}</div>
-          <div className="text-xs text-gray-500 mb-2">{fishery.address}</div>
+          <div className="font-semibold text-base mb-1">{f.name}</div>
+          <div className="text-xs text-gray-500 mb-2">{f.address}</div>
           {/* Add more fishery details as needed */}
-          <div className="text-xs text-gray-600">{fishery.description?.slice(0, 80)}...</div>
+          <div className="text-xs text-gray-600">{f.description?.slice(0, 80)}...</div> 
           <a
             href={`/fisheries/${fishery.id}`}
             className="inline-block mt-2 text-blue-600 text-xs font-semibold hover:underline"

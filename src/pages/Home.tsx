@@ -112,7 +112,7 @@ const Home: React.FC = () => {
   <div className="relative z-10 flex justify-center w-full">
     <div className="backdrop-blur-sm bg-black/10 rounded-xl px-8 py-8 w-full max-w-6xl mx-4 text-center">
       <motion.h1 
-        className="text-4xl md:text-6xl lg:text-8xl font-bebas font-bold text-white mb-4"
+        className="text-5xl md:text-6xl lg:text-8xl font-bebas font-bold text-white mb-4"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}

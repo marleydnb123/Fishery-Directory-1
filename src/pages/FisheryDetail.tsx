@@ -710,7 +710,7 @@ rel="noopener noreferrer"
   >
     <div className="bg-white rounded-xl shadow-md p-6">
       <h2
-        className="w-full text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+        className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-2xl sm:text-3xl md:text-4xl font-semibold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
         style={{
           background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
         }}

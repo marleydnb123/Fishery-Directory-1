@@ -125,7 +125,7 @@ const Home: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
-        Discover and book the best fishing locations across the UK
+        Explore verified UK fishing lakes with detailed info on facilities, species, tactics & more - perfect for every angler from beginner to pro.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

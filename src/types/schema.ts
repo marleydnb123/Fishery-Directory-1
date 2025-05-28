@@ -40,7 +40,7 @@ export interface Fishery {
   private_hire? boolean;,
   tackle_hire? boolean;,
   coaching? boolean;,
-  keepnets_allowed? boolean;
+  keepnets_allowed? boolean;,
 }
 
 export interface Lake {

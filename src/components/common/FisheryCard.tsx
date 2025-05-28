@@ -80,7 +80,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
             </span>
             ))}
             </div>
-)}
+            )}
 
         </div>
       </Link>

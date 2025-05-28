@@ -56,8 +56,7 @@ const FisheryDetail: React.FC = () => {
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
-  
- 
+
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
   const [featuredLoading, setFeaturedLoading] = useState(true);
@@ -1012,57 +1011,8 @@ rel="noopener noreferrer"
   </div>
 </section>
 {/* --- End Featured Fisheries Section --- */}
- 
+  
            
-{/* --- Nearby Fisheries Section --- */}
-<div className="p-6 bg-gray-50 mt-10">
-  <h2 className="font-bold text-lg mb-4">Nearby Fisheries</h2>
-  {nearbyLoading ? (
-    <div className="text-center py-8 text-gray-600">Loading nearby fisheries...</div>
-  ) : nearbyError ? (
-    <div className="text-center py-8 text-red-600">{nearbyError}</div>
-  ) : (
-    <motion.div
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
-      {fisheries
-        .filter(f => f.district === currentFishery.district && f.id !== currentFishery.id)
-        .slice(0, 4)
-        .map(f => (
-          <motion.div
-            key={f.id}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-          >
-            <Link to={`/directory/${f.slug}`}>
-              <img
-                src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"}
-                alt={f.name}
-                className="w-full h-40 object-cover transition-transform duration-200 hover:scale-[1.02]"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900">{f.name}</h3>
-                <div className="text-sm text-primary-700">{f.district}</div>
-                <div className="text-gray-600 text-xs mt-2 line-clamp-2">{f.description}</div>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
-      {/* If no nearby fisheries found */}
-      {fisheries.filter(f => f.district === currentFishery.district && f.id !== currentFishery.id).length === 0 && (
-        <div className="col-span-4 text-center text-gray-500">
-          No nearby fisheries found in this district.
-        </div>
-      )}
-    </motion.div>
-  )}
-</div>
-{/* --- End Nearby Fisheries Section --- */}
 
         
                {/* Contact Bar */}

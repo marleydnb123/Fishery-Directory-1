@@ -56,7 +56,6 @@ const FisheryDetail: React.FC = () => {
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
-  const [tactics, setTactics] = useState([]);
 
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
@@ -494,25 +493,19 @@ const FisheryDetail: React.FC = () => {
   </div>
   {/* Tactics Content */}
   <div className="p-6">
-    {loading ? (
-      <div className="text-gray-500 italic">Loading tactics...</div>
-    ) : tactics.length === 0 ? (
-      <div className="text-gray-500 italic">No tactics available for this fishery yet.</div>
-    ) : (
+    {fishery.tactics ? (
       <ul className="mb-5 text-gray-700 space-y-4 leading-relaxed">
-        {tactics.map((tactic) => (
-          <li key={tactic.id}>
-            <span className="font-semibold text-primary-700">{tactic.title}:</span>
-            {tactic.description
-              .split(/\r?\n/)
-              .map((line, i) =>
-                line.trim() ? (
-                  <span key={i} className="ml-1 block">{line}</span>
-                ) : null
-              )}
-          </li>
+        {fishery.tactics.split('\n').map((tactic, index) => (
+          tactic.trim() && (
+            <li key={index} className="flex items-start">
+              <span className="text-primary-600 mr-2">•</span>
+              <span>{tactic.trim()}</span>
+            </li>
+          )
         ))}
       </ul>
+    ) : (
+      <div className="text-gray-500 italic">No tactics available for this fishery yet.</div>
     )}
     <div className="text-primary-600 italic text-sm">
       More tactics coming soon! Check back for updated methods and tips tailored to this fishery.

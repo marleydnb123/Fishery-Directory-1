@@ -34,8 +34,7 @@ const Directory: React.FC = () => {
   const [coaching, setcoaching] = useState(false);
   const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null); 
 
   // Available districts and species
   const districts: UKDistrict[] = [
@@ -402,204 +401,170 @@ const Directory: React.FC = () => {
               </div>
             </div>
             {/* Column 3: Checkboxes */}
-            <div className="h-full mt-5">
-              {/* Advanced Filters Section */}
-              <div>
-                <button 
-                  onClick={() => setAdvancedOpen(!advancedOpen)}
-                  className="flex items-center justify-between w-full text-sm font-semibold text-gray-800 hover:text-blue-600 mb-2"
-                >
-                  Advanced Filters
-                  <span className={`transform transition-transform ${advancedOpen ? 'rotate-180' : ''}`}>▼</span>
-                </button>
-                {advancedOpen && (
-                  <div>
-                    {/* Coarse Fishing */}
-                    <div className="mb-2">
-                      <h5 className="text-xs font-medium text-gray-600 mb-1">Coarse Fishing</h5>
-                      <div className="grid grid-cols-2 gap-1">
-                        <div className="flex items-center gap-2">  
-                          <input 
-                            type="checkbox"
-                            checked={accommodationOnly}
-                            onChange={() => setAccommodationOnly(!accommodationOnly)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
-                            id="accommodation"
-                          />
-                          <label htmlFor="accommodation" className="text-xs text-gray-700 font-medium">On-site Accommodation</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={nightFishingAllowed}
-                            onChange={() => setNightFishingAllowed(!nightFishingAllowed)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="night-fishing"
-                          />
-                          <label htmlFor="night-fishing" className="text-xs text-gray-700 font-medium">Night Fishing Allowed</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={disabledAccess}
-                            onChange={() => setDisabledAccess(!disabledAccess)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="disabled-access"
-                          />
-                          <label htmlFor="disabled-access" className="text-xs text-gray-700 font-medium">Disabled Access</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={dogFriendly}
-                            onChange={() => setDogFriendly(!dogFriendly)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="dog-friendly"
-                          />
-                          <label htmlFor="dog-friendly" className="text-xs text-gray-700 font-medium">Dog Friendly</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={firePitsAllowed}
-                            onChange={() => setFirePitsAllowed(!firePitsAllowed)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="fire-pits"
-                          />
-                          <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={parkingClose}
-                            onChange={() => setParkingClose(!parkingClose)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="parking-close"
-                          />
-                          <label htmlFor="parking-close" className="text-xs text-gray-700 font-medium">Parking Close</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={campingAllowed}
-                            onChange={() => setCampingAllowed(!campingAllowed)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="camping-allowed"
-                          />
-                          <label htmlFor="camping-allowed" className="text-xs text-gray-700 font-medium">Camping Allowed</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={tackleShop}
-                            onChange={() => settackleShop(!tackleShop)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="tackleshop"
-                          />
-                          <label htmlFor="tackle-shop" className="text-xs text-gray-700 font-medium">Tackle Shop On-site</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={privateHire}
-                            onChange={() => setprivateHire(!privateHire)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="privatehire"
-                          />
-                          <label htmlFor="private-hire" className="text-xs text-gray-700 font-medium">Private Hire</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={tackleHire}
-                            onChange={() => settackleHire(!tackleHire)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="tacklehire"
-                          />
-                          <label htmlFor="tackle-hire" className="text-xs text-gray-700 font-medium">Tackle Hire</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={coaching}
-                            onChange={() => setcoaching(!coaching)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="coaching"
-                          />
-                          <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Carp Fishing */}
-                    <div className="mb-2">
-                      <h5 className="text-xs font-medium text-gray-600 mb-1">Carp Fishing</h5>
-                      <div className="grid grid-cols-2 gap-1">
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={catchPhotos}
-                            onChange={() => setCatchPhotos(!catchPhotos)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="catch-photos"
-                          />
-                          <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={baitBoats}
-                            onChange={() => setBaitBoats(!baitBoats)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="bait-boats"
-                          />
-                          <label htmlFor="bait-boats" className="text-xs text-gray-700 font-medium">Bait Boats Allowed</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={magicTwig}
-                            onChange={() => setMagicTwig(!magicTwig)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="magic-twig"
-                          />
-                          <label htmlFor="magic-twig" className="text-xs text-gray-700 font-medium">Magic Twig Allowed</label>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Match Fishing */}
-                    <div className="mb-2">
-                      <h5 className="text-xs font-medium text-gray-600 mb-1">Match Fishing</h5>
-                      <div className="grid grid-cols-2 gap-1">
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={matchFishingFriendly}
-                            onChange={() => setMatchFishingFriendly(!matchFishingFriendly)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="match-friendly"
-                          />
-                          <label htmlFor="match-friendly" className="text-xs text-gray-700 font-medium">Match Fishing Friendly</label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={keepnetsAllowed}
-                            onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
-                            className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                            id="keepnetsallowed"
-                          />
-                          <label htmlFor="keepnetsallowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+            <div className="grid grid-cols-2 grid-rows-10 gap-2 h-full mt-5">  
+              <div className="flex items-center gap-2">  
+                <input 
+                  type="checkbox"
+                  checked={accommodationOnly}
+                  onChange={() => setAccommodationOnly(!accommodationOnly)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
+                  id="accommodation"
+                />
+                <label htmlFor="accommodation" className="text-xs text-gray-700 font-medium">On-site Accommodation</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={nightFishingAllowed}
+                  onChange={() => setNightFishingAllowed(!nightFishingAllowed)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
+                  id="night-fishing"
+                />
+                <label htmlFor="night-fishing" className="text-xs text-gray-700 font-medium">Night Fishing Allowed</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={matchFishingFriendly}
+                  onChange={() => setMatchFishingFriendly(!matchFishingFriendly)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="match-friendly"
+                />
+                <label htmlFor="match-friendly" className="text-xs text-gray-700 font-medium">Match Fishing Friendly</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={disabledAccess}
+                  onChange={() => setDisabledAccess(!disabledAccess)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="disabled-access"
+                />
+                <label htmlFor="disabled-access" className="text-xs text-gray-700 font-medium">Disabled Access</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={dogFriendly}
+                  onChange={() => setDogFriendly(!dogFriendly)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="dog-friendly"
+                />
+                <label htmlFor="dog-friendly" className="text-xs text-gray-700 font-medium">Dog Friendly</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={firePitsAllowed}
+                  onChange={() => setFirePitsAllowed(!firePitsAllowed)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="fire-pits"
+                />
+                <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={parkingClose}
+                  onChange={() => setParkingClose(!parkingClose)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="parking-close"
+                />
+                <label htmlFor="parking-close" className="text-xs text-gray-700 font-medium">Parking Close</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={campingAllowed}
+                  onChange={() => setCampingAllowed(!campingAllowed)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="camping-allowed"
+                />
+                <label htmlFor="camping-allowed" className="text-xs text-gray-700 font-medium">Camping Allowed</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={catchPhotos}
+                  onChange={() => setCatchPhotos(!catchPhotos)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="catch-photos"
+                />
+                <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={baitBoats}
+                  onChange={() => setBaitBoats(!baitBoats)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="bait-boats"
+                />
+                <label htmlFor="bait-boats" className="text-xs text-gray-700 font-medium">Bait Boats Allowed</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={magicTwig}
+                  onChange={() => setMagicTwig(!magicTwig)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="magic-twig"
+                />
+                <label htmlFor="magic-twig" className="text-xs text-gray-700 font-medium">Magic Twig Allowed</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={tackleShop}
+                  onChange={() => settackleShop(!tackleShop)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="tackleshop"
+                />
+                <label htmlFor="tackle-shop" className="text-xs text-gray-700 font-medium">Tackle Shop On-site</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={privateHire}
+                  onChange={() => setprivateHire(!privateHire)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="privatehire"
+                />
+                <label htmlFor="private-hire" className="text-xs text-gray-700 font-medium">Private Hire</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={tackleHire}
+                  onChange={() => settackleHire(!tackleHire)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="tacklehire"
+                />
+                <label htmlFor="tackle-hire" className="text-xs text-gray-700 font-medium">Tackle Hire</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={coaching}
+                  onChange={() => setcoaching(!coaching)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="coaching"
+                />
+                <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={keepnetsAllowed}
+                  onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                  id="keepnetsallowed"
+                />
+                <label htmlFor="keepnetsallowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
               </div>
             </div>
           </div>
-        </div>
+        </div> 
 
         {/* --- Fisheries Grid --- */}
         {loading ? (

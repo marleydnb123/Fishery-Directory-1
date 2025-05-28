@@ -55,31 +55,31 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
           <p className="text-gray-600 mb-4 line-clamp-2 min-h-[2.5rem]">{fishery.description}</p>
           
           {/* Species badges (hidden on mobile, flex on md+) */}
-<div className="hidden md:flex flex-wrap gap-2 mt-2">
-  {fishery.species.map((species, index) => (
-    <span 
-      key={index}
-      className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
-    >
-      <Fish className="h-3 w-3 mr-1" />
-      {species}
-    </span>
-  ))}
-</div> 
+          <div className="hidden md:flex flex-wrap gap-2 mt-2">
+          {fishery.species.map((species, index) => (
+          <span 
+          key={index}
+          className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
+          >
+          <Fish className="h-3 w-3 mr-1" />
+          {species}
+          </span>
+            ))}
+          </div> 
 
-{/* Features badges (hidden on mobile, flex on md+) */}
-{fishery.features && fishery.features.length > 0 && (
-  <div className="hidden md:flex flex-wrap gap-2 mt-3">
-    {fishery.features.map((feature: string, idx: number) => (
-      <span
-        key={idx}
-        className="flex items-center text-xs bg-blue-100 text-blue-900 px-2 py-1 rounded-full"
-      >
-        <Waves className="h-3 w-3 mr-1" />
-        {feature}
-      </span>
-    ))}
-  </div>
+          {/* Features badges (hidden on mobile, flex on md+) */}
+            {fishery.features && fishery.features.length > 0 && (
+            <div className="hidden md:flex flex-wrap gap-2 mt-3">
+            {fishery.features.map((feature: string, idx: number) => (
+            <span
+            key={idx}
+            className="flex items-center text-xs bg-blue-100 text-blue-900 px-2 py-1 rounded-full"
+            >
+            <Waves className="h-3 w-3 mr-1" />
+            {feature}
+            </span>
+            ))}
+            </div>
 )}
 
         </div>

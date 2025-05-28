@@ -56,7 +56,7 @@ const FisheryDetail: React.FC = () => {
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
-  const [tactics, setTactics] = useState([]);
+  const [tactics, setTactics] = useState<Tactic[]>([]);
 
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
@@ -105,9 +105,21 @@ const FisheryDetail: React.FC = () => {
       if (fisheryError || !fisheryData) {
         setFishery(null);
         setLakes([]);
+        setTactics([]);
         setAccommodation([]);
         setLoading(false);
         return;
+      }
+
+      // Fetch tactics for this fishery
+      const { data: tacticsData, error: tacticsError } = await supabase
+        .from('tactics')
+        .select('*')
+        .eq('fishery_id', fisheryData.id)
+        .order('created_at', { ascending: true });
+
+      if (!tacticsError) {
+        setTactics(tacticsData || []);
       }
 
       setFishery({

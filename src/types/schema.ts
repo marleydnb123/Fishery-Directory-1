@@ -44,6 +44,14 @@ export interface Fishery {
   tactics?: string; 
 }
 
+export interface Tactic {
+  id: string;
+  fishery_id: string;
+  title: string;
+  description: string;
+  created_at: string;
+}
+
 export interface Lake {
   id: string;
   fishery_id: string;

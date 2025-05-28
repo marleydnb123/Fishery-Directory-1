@@ -423,7 +423,7 @@ const AdminFisheries: React.FC = () => {
                           fisheryimages2: fishery.fisheryimages2,
                           fisheryimages3: fishery.fisheryimages3,
                           fisheryvideo: fishery.fisheryvideo,
-                          bait_boats: fishery.bait_boats
+                          bait_boats: fishery.bait_boats,
                         });
                         setIsEditModalOpen(true);
                       }}

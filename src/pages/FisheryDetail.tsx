@@ -465,7 +465,7 @@ const FisheryDetail: React.FC = () => {
 {/* --- End Video Section --- */}
 
 
-{/* --- Tactics & Methods Section --- */}
+{/* --- Tactics & Methods Section --- */} 
 <div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
@@ -475,50 +475,33 @@ const FisheryDetail: React.FC = () => {
         "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
     }}
   >
-    <svg
-      className="h-7 w-7 text-white mr-3 animate-bounce"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M16 7c0-1.657-2.686-3-6-3S4 5.343 4 7m12 0v10a4 4 0 01-8 0V7m12 0c0-1.657-2.686-3-6-3S4 5.343 4 7m12 0v10a4 4 0 01-8 0V7"
-      />
+    <svg className="h-7 w-7 text-white mr-3 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16 7c0-1.657-2.686-3-6-3S4 5.343 4 7m12 0v10a4 4 0 01-8 0V7m12 0c0-1.657-2.686-3-6-3S4 5.343 4 7m12 0v10a4 4 0 01-8 0V7" />
     </svg>
     <h3 className="text-3xl font-bebas font-bold text-white mb-0">Tactics & Methods</h3>
   </div>
   {/* Tactics Content */}
   <div className="p-6">
-    {loading ? (
-      <div className="text-gray-500 italic">Loading tactics...</div>
-    ) : tactics.length === 0 ? (
-      <div className="text-gray-500 italic">No tactics available for this fishery yet.</div>
-    ) : (
-      <ul className="mb-5 text-gray-700 space-y-4 leading-relaxed">
-        {tactics.map((tactic) => (
-          <li key={tactic.id}>
-            <span className="font-semibold text-primary-700">{tactic.title}:</span>
-            {tactic.description
-              .split(/\r?\n/)
-              .map((line, i) =>
-                line.trim() ? (
-                  <span key={i} className="ml-1 block">{line}</span>
-                ) : null
-              )}
-          </li>
-        ))}
-      </ul>
-    )}
+    <ul className="mb-5 text-gray-700 space-y-4 leading-relaxed">
+      <li>
+        <span className="font-semibold text-primary-700">Feeder Fishing:</span> 
+        <span className="ml-1">Ideal for targeting bream, carp, and tench at distance. Use a cage or method feeder packed with groundbait and maggots or corn. Cast near features or open water and wait for positive bites.</span>
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Float Fishing:</span>  
+        <span className="ml-1">Perfect for margin and mid-water fishing. Try a waggler or pole float with maggots, casters, or sweetcorn. Keep loose feeding little and often to draw fish into your swim.</span>
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Pole Fishing:</span> 
+        <span className="ml-1">Excellent for precision and speed, especially when targeting silverfish or carp close in. Use soft pellets, worms, or expanders on the hook and adjust your depth to find feeding fish.</span>
+      </li>
+    </ul>
     <div className="text-primary-600 italic text-sm">
       More tactics coming soon! Check back for updated methods and tips tailored to this fishery.
     </div>
   </div>
 </div>
 {/* --- End Tactics & Methods Section --- */}
-
 
 
 

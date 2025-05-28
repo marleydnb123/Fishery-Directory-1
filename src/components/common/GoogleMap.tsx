@@ -18,7 +18,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
 
   return (
     <APIProvider apiKey="AIzaSyAdwvQifhxwcMuNBdUDXtgj6e0IXzRVt4c">
-      <div className="h-[300px] rounded-lg overflow-hidden">
+      <div className="h-[300px] rounded-lg overflow-hidden"> 
         <Map
           zoom={14}
           center={{ lat: latitude, lng: longitude }}

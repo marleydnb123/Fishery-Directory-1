@@ -309,9 +309,9 @@ const FisheryDetail: React.FC = () => {
                       <span 
                         key={index}
                         className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                      > 
+                      >
                         <Fish className="h-4 w-4 mr-1" />
-                        {species}
+                        {species}Z
                       </span>
                     ))}
                   </div> 

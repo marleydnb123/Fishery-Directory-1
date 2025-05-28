@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Fish, Info, Book, Phone, Waves } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
+import GoogleMap from '../components/common/GoogleMap';
  
 
 // Define your types if you don't already have them
@@ -31,7 +32,9 @@ type Fishery = {
   fisheryimages3: string | null; 
   fisheryvideo: string | null;
   facilities: string | null;
-  tactics: string;
+  tactics: string,
+  Latitude: number | null;
+  Longitude: number | null;
 };
 
 type Lake = {
@@ -703,9 +706,13 @@ const FisheryDetail: React.FC = () => {
                   <div className="mt-2 text-gray-600  ml-6 text-sm">
                     Detailed directions will be provided upon booking.
                   </div>
-                </div>
-                <div className="h-40 bg-gray-200 ml-6 mr-6 mb-6 rounded-lg flex items-center justify-center shadow-inner">
-                  <span className="text-gray-500">Map location preview</span>
+                  <div className="mt-6">
+                    <GoogleMap 
+                      latitude={fishery.Latitude || 0}
+                      longitude={fishery.Longitude || 0}
+                      name={fishery.name}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

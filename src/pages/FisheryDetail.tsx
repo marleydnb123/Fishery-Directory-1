@@ -338,7 +338,7 @@ const FisheryDetail: React.FC = () => {
             {fishery.features.map((feature, idx) => ( 
             <span
             key={idx}
-            className="inline-flex items-center text-sm bg-blue-100 text-blue-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.02]"
+            className="inline-flex items-center text-sm bg-blue-100 text-blue-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
             >
             <Waves className="h-4 w-4 mr-1" />
             {feature}

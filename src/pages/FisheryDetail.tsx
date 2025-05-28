@@ -640,7 +640,7 @@ const FisheryDetail: React.FC = () => {
   <div className="p-6">
     <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
       <li>
-        <span className="font-semibold text-primary-700">Day tickets:</span> Available on request.
+        <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
       </li>
       <li>
         <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.

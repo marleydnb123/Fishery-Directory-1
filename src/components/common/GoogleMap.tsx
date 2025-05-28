@@ -50,7 +50,19 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
         <Map
           zoom={14}
           center={{ lat: latitude, lng: longitude }}
-          gestureHandling="cooperative"
+          gestureHandling={'greedy'}
+          disableDefaultUI={false}
+          options={{
+            zoomControl: true,
+            mapTypeControl: true,
+            scaleControl: true,
+            streetViewControl: true,
+            rotateControl: true,
+            fullscreenControl: true,
+            gestureHandling: 'greedy',
+            scrollwheel: true,
+            draggable: true
+          }}
           mapId="fishery-map"
         >
           <Marker position={{ lat: latitude, lng: longitude }} title={name} /> 

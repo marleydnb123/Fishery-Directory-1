@@ -656,9 +656,9 @@ const AdminFisheries: React.FC = () => {
                       checked={formFishery.bait_boats || false}
                       onChange={e => setFormFishery(f => ({ ...f, bait_boats: e.target.checked }))}
                       className="mr-2"
-                      id="baitboats"
+                      id="baitBoats"
                     />
-                    <label htmlFor="baitboats" className="text-sm">Bait Boats</label>
+                    <label htmlFor="baitBoats" className="text-sm">Bait Boats</label>
                   </div>
                 </div>
               </div>

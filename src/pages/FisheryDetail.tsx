@@ -264,7 +264,6 @@ const FisheryDetail: React.FC = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="bg-white rounded-xl shadow-md mb-8 overflow-hidden">
-        {/* Full-width header with no padding */}
         <div
           className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 rounded-t-xl"
           style={{
@@ -275,7 +274,6 @@ const FisheryDetail: React.FC = () => {
             About {fishery.name} 
           </h2>
         </div>
-        {/* Padded card body */}
         <div className="p-6">
           {fishery.description.split(/\r?\n/).map((line, i) => (
             <p key={i} className="text-gray-700 mb-6">{line}</p>
@@ -322,6 +320,7 @@ const FisheryDetail: React.FC = () => {
                   </div> 
                 </div>
               </div>
+
 
 
 

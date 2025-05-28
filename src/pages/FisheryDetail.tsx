@@ -795,7 +795,7 @@ rel="noopener noreferrer"
  
 {/* --- Featured Fisheries Section --- */}
 <section className="py-12 px-4 bg-gray-50">
-  <div className="container mx-auto shadow-lg overflow-hidden">
+  <div className="container mx-auto shadow-lg overflow-hidden transition-transform duration-200 hover:scale-[1.02]">
     {/* Header Bar */}
     <div
       className="p-6"

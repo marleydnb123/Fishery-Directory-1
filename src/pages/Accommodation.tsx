@@ -241,7 +241,7 @@ const AccommodationPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl md:text-4xl font-bebas font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-6xl font-bebas font-bold text-gray-900 mb-4">
             Explore Fisheries with Accommodation
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">

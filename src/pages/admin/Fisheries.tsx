@@ -1138,5 +1138,3 @@ const AdminFisheries: React.FC = () => {
 };
 
 export default AdminFisheries;
-
-export default AdminFisheries

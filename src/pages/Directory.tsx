@@ -558,9 +558,9 @@ const Directory: React.FC = () => {
                   checked={keepnetsAllowed}
                   onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
                   className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                  id="keepnetsAllowed"
+                  id="keepnetsallowed"
                 />
-                <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
+                <label htmlFor="keepnetsallowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
               </div>
             </div>
           </div>

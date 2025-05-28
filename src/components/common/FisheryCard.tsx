@@ -54,18 +54,18 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
           {/* Fixed-height, 2-line clamped description */}
           <p className="text-gray-600 mb-4 line-clamp-2 min-h-[2.5rem]">{fishery.description}</p>
           
-          {/* Species badges (hidden on mobile, flex on md+) */}
-          <div className="hidden md:flex flex-wrap gap-2 mt-2">
-          {fishery.species.map((species, index) => (
-          <span 
-          key={index}
-          className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
-          >
-          <Fish className="h-3 w-3 mr-1" />
-          {species}
-          </span>
-            ))}
-          </div> 
+          <div className="hidden md:flex flex-nowrap overflow-hidden gap-2 mt-2">
+  {fishery.species.map((species, index) => (
+    <span 
+      key={index}
+      className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
+    >
+      <Fish className="h-3 w-3 mr-1" />
+      {species}
+    </span>
+  ))}
+</div>
+
 
           {/* Features badges (hidden on mobile, flex on md+) */}
             {fishery.features && fishery.features.length > 0 && (

@@ -711,7 +711,7 @@ const FisheryDetail: React.FC = () => {
           </motion.div>
         )} 
 
-       {activeTab === 'lakes' && (
+       {activeTab === 'lakes' && ( 
     <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -727,12 +727,12 @@ const FisheryDetail: React.FC = () => {
         </h2>
 
           {lakes.length > 0 ? (
-          <div className="space-y-6">
-          {lakes.map((lake) => (
+      <div className="space-y-6">
+        {lakes.map((lake) => (
           <div
             key={lake.id}
             className="bg-white rounded-xl shadow-md overflow-hidden" 
-              >
+          >
             <div className="flex flex-col md:flex-row">
               {/* 
                 Mobile: slightly wider image (w-80 or max-w-md), keeps mt-6 ml-6 mr-6.
@@ -1011,8 +1011,8 @@ rel="noopener noreferrer"
   </div>
 </section>
 {/* --- End Featured Fisheries Section --- */}
-  
-           
+
+          
 
         
                {/* Contact Bar */}

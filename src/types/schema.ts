@@ -18,7 +18,7 @@ export interface Fishery {
   day_ticket_price?: number;
   features: string[];
   night_fishing_allowed?: boolean;
-  fishing_type?: string;
+  fishing_type?: string[];  // Changed from string to string[]
   match_fishing_friendly?: boolean;
   disabled_access?: boolean;
   facilities?: string[];
@@ -37,10 +37,10 @@ export interface Fishery {
   fisheryvideo?: string;
   bait_boats?: boolean;
   magic_twig?: boolean;
-  private_hire? boolean;,
-  tackle_hire? boolean;,
-  coaching? boolean;,
-  keepnets_allowed? boolean;,
+  private_hire?: boolean;  // Fixed syntax
+  tackle_hire?: boolean;   // Fixed syntax
+  coaching?: boolean;      // Fixed syntax
+  keepnets_allowed?: boolean;  // Fixed syntax
 }
 
 export interface Lake {
@@ -104,7 +104,7 @@ export type FishSpecies =
   | 'Trout'
   | 'Catfish'
   | 'Eel'
-  | 'Barbel';
+  | 'Barbel'
   | 'Gudgeon';
 
 export type UKDistrict =

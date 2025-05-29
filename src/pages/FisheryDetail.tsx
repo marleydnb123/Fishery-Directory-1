@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Fish, Book, Waves } from 'lucide-react';
+import { MapPin, Fish, Info, Book, Phone, Waves } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
-import BookingInfo from '../components/common/BookingInfo';
-import LocationInfo from '../components/common/LocationInfo';
+import GoogleMap from '../components/common/GoogleMap';
  
 
 // Define your types if you don't already have them
@@ -622,19 +621,100 @@ const FisheryDetail: React.FC = () => {
 
 
                     <div className="flex flex-col md:flex-row gap-6">
+             {/* Booking Information Card */}
+<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
+  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
+    <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
+  </div>
+  {/* Card Content */}
+  <div className="p-6">
+    <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
+      <li>
+        <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Phone:</span>
+        <a
+          href={`tel:${fishery.contact_phone || ''}`}
+          className="ml-1 text-primary-600 underline hover:text-primary-800"
+        >
+          {fishery.contact_phone || "Not listed"}
+        </a>
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Email:</span>
+        <a
+          href={`mailto:${fishery.contact_email || ''}`}
+          className="ml-1 text-primary-600 underline hover:text-primary-800"
+        >
+          {fishery.contact_email || "Not listed"}
+        </a>
+      </li>
+    </ul>
+    <a
+      href={`mailto:${fishery.contact_email || ''}`}
+      className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+    >
+      Contact for Booking
+    </a>
+    <div className="mt-4 text-xs text-primary-500 italic">
+      Fast replies, friendly staff. We do not handle bookings directly.
+    </div>
+  </div>
+</div>
 
-              <BookingInfo
-                name={fishery.name}
-                contact_phone={fishery.contact_phone}
-                contact_email={fishery.contact_email}
-                website={fishery.website}
-              />
-              <LocationInfo
-                name={fishery.name}
-                district={fishery.district}
-                latitude={fishery.Latitude}
-                longitude={fishery.Longitude}
-              />
+
+              
+              {/* Location Card */}
+<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
+  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+                  <MapPin className="h-7 w-7 text-white mr-3 animate-bounce" />
+                  <h3 className="text-3xl font-bebas font-semibold text-white tracking-wide">Location</h3>
+                </div>
+                <div className="mb-5 mt-6 text-gray-700 leading-relaxed">
+                  <div className="ml-6">
+  <span className="font-semibold">{fishery.name}</span> is located in <span className="font-semibold">{fishery.district}</span>, UK.
+</div>
+                  <div className="mt-2 text-primary-700 flex flex-wrap gap-4 text-sm">
+                    <span className="inline-flex items-center">
+                      <svg className="h-4 w-4 mr-1 ml-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
+                      Parking available
+                    </span>
+                    <span className="inline-flex items-center">
+                      <svg className="h-4 w-4 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
+                      
+                    </span>
+                  </div>
+                  <div className="mt-2 text-gray-600  ml-6 text-sm">
+                    Detailed directions will be provided upon booking.
+                  </div>
+                  <div className="mt-6">
+                    <GoogleMap 
+                      latitude={fishery.Latitude || 0}
+                      longitude={fishery.Longitude || 0}
+                      name={fishery.name}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         )} 
@@ -963,51 +1043,17 @@ rel="noopener noreferrer"
             <div className="flex items-center gap-4">
               {fishery.website && (
                 <a 
-                  href={`${fishery.website}`}
+                  href={fishery.website}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-white text-primary-900 px-6 py-2 rounded-lg font-semibold shadow hover:bg-primary-100 hover:text-primary-700 transition"
                 >
-                  <Globe className="h-5 w-5" />
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.95 7.07l-.71-.71M4.05 4.93l-.71-.71" />
                   </svg>
                   Visit Website
                 </a>
               )}
-              <div className="flex gap-3">
-                <a 
-                  href="https://facebook.com/broomfisheries" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary-200 hover:text-white transition"
-                >
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                  </svg>
-                </a>
-                <a 
-                  href="https://twitter.com/broomfisheries" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary-200 hover:text-white transition"
-                >
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                  </svg>
-                </a>
-                <a 
-                  href="https://instagram.com/broomfisheries" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary-200 hover:text-white transition"
-                >
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" />
-                  </svg>
-                </a>
-              </div>
               {/* Example: Add social icons if you want */}
               {/* 
               <a href="#" className="text-primary-200 hover:text-white transition">
@@ -1024,3 +1070,4 @@ rel="noopener noreferrer"
 
 
 export default FisheryDetail;
+

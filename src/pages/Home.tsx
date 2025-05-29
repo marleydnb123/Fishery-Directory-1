@@ -19,6 +19,10 @@ const Home: React.FC = () => {
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [fishery_of_the_week, setFisheryOfTheWeek] = useState(null);
+  const [loading_fotw, setLoadingFOTW] = useState(false);
+  const [error_fotw, setErrorFOTW] = useState(null);
+
 
   // Hero slideshow state
   const [currentHero, setCurrentHero] = useState(0);
@@ -59,6 +63,26 @@ const Home: React.FC = () => {
     };
     fetchFeatured();
   }, []);
+
+   useEffect(() => {
+  const fetch_fishery_of_the_week = async () => {
+    setLoadingFOTW(true);
+    setErrorFOTW(null);
+    const { data, error } = await supabase
+      .from('fisheries')
+      .select('*')
+      .eq('fishery_of_the_week', true)
+      .single();
+    if (error) {
+      setErrorFOTW('Failed to load fishery of the week.');
+      setFisheryOfTheWeek(null);
+    } else {
+      setFisheryOfTheWeek(data);
+    }
+    setLoadingFOTW(false);
+  };
+  fetch_fishery_of_the_week();
+}, []);
 
   // Animation variants
   const containerVariants = {
@@ -217,19 +241,23 @@ const Home: React.FC = () => {
     {/* Two-column layout */}
     <div className="flex flex-col md:flex-row items-stretch gap-12">
       
-      {/* === Fishery of the Week Card === */}
-      <div className="flex-1 flex flex-col">
-        <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-2 text-center">
-          Fishery of the Week
-        </h3>
-        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-between">
-          {featuredFisheries.length > 0 ? ( 
-            <FisheryCard fishery={featuredFisheries[0]} />
-          ) : (
-            <div className="text-gray-500 py-12">No featured fishery available.</div>
-          )}
-        </div>
-      </div>
+      <div className="flex-1 max-w-md flex flex-col">
+  <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-2 text-center">
+    Fishery of the Week
+  </h3>
+  <div className="bg-blue-50 rounded-2xl shadow-lg p-6 flex flex-col justify-between">
+    {loading_fotw ? (
+      <div className="text-gray-500 py-12 text-center">Loading...</div>
+    ) : error_fotw ? (
+      <div className="text-red-500 py-12 text-center">{error_fotw}</div>
+    ) : fishery_of_the_week ? (
+      <FisheryCard fishery={fishery_of_the_week} />
+    ) : (
+      <div className="text-gray-500 py-12 text-center">No fishery of the week available.</div>
+    )}
+  </div>
+</div>
+
       
       {/* === Vertical Blue Divider === */}
       <div className="hidden md:flex items-center px-0">

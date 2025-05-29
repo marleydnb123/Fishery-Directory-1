@@ -351,7 +351,7 @@ const FisheryDetail: React.FC = () => {
             <h3 className="text-lg font-semibold mb-3">Pricing</h3>
             {fishery.pricing && fishery.pricing.length > 0 ? (
               <ul className="list-disc ml-6 space-y-2 text-gray-700">
-                {fishery.pricing.map((item, idx) => (
+                {fishery.pricing.map((pricing, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
@@ -362,7 +362,7 @@ const FisheryDetail: React.FC = () => {
             <h3 className="text-lg font-semibold mt-6 mb-3">Opening Times</h3>
             {fishery.opening_times && fishery.opening_times.length > 0 ? (
               <ul className="list-disc ml-6 space-y-2 text-gray-700">
-                {fishery.opening_times.map((item, idx) => (
+                {fishery.opening_times.map((opeing_times, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>

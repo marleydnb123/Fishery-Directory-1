@@ -660,7 +660,7 @@ const FisheryDetail: React.FC = () => {
           </li>
         </ul>
         {/* Contact Info Section */}
-        <h4 className="text-md font-bold font-bebas text-primary-700 mb-2">Contact Info</h4>
+        <h4 className="text-lg font-bold font-bebas text-primary-700 mb-2">Contact Info</h4>
         <ul className="mb-4 text-gray-700 space-y-2 leading-relaxed">
           <li>
             <span className="font-semibold text-primary-700">Phone:</span>

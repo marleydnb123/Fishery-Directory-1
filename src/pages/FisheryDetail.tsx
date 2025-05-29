@@ -620,89 +620,59 @@ const FisheryDetail: React.FC = () => {
 
 
 
-             <div className="flex flex-col md:flex-row gap-6">
-  {/* Booking Information Card */}
-  <div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
-    {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
-    <div
-      className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
-      style={{
-        background:
-          "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-      }}
+                    <div className="flex flex-col md:flex-row gap-6">
+             {/* Booking Information Card */}
+<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
+  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
+    <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
+  </div>
+  {/* Card Content */}
+  <div className="p-6"> 
+    <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
+      <li>
+        <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Phone:</span>
+        <a
+          href={`tel:${fishery.contact_phone || ''}`}
+          className="ml-1 text-primary-600 underline hover:text-primary-800"
+        >
+          {fishery.contact_phone || "Not listed"}
+        </a>
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Email:</span>
+        <a
+          href={`mailto:${fishery.contact_email || ''}`}
+          className="ml-1 text-primary-600 underline hover:text-primary-800"
+        >
+          {fishery.contact_email || "Not listed"}
+        </a>
+      </li>
+    </ul>
+    <a
+      href={`mailto:${fishery.contact_email || ''}`}
+      className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
     >
-      <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
-      <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
-    </div>
-    {/* Card Content */}
-    <div className="p-6">
-      <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
-        <li>
-          <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Pricing:</span>
-          <span className="ml-1">{fishery.pricing || "Not listed"}</span>
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Phone:</span>
-          <a
-            href={`tel:${fishery.contact_phone || ''}`}
-            className="ml-1 text-primary-600 underline hover:text-primary-800"
-          >
-            {fishery.contact_phone || "Not listed"}
-          </a>
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Email:</span>
-          <a
-            href={`mailto:${fishery.contact_email || ''}`}
-            className="ml-1 text-primary-600 underline hover:text-primary-800"
-          >
-            {fishery.contact_email || "Not listed"}
-          </a>
-        </li>
-      </ul>
-      {/* Social Icons */}
-      <div className="flex gap-4 mb-5">
-        {fishery.facebook && (
-          <a href={fishery.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <svg className="w-6 h-6 text-blue-600 hover:text-blue-800" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.877v-6.987h-2.54v-2.89h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.261c-1.243 0-1.631.771-1.631 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12"/>
-            </svg>
-          </a>
-        )}
-        {fishery.instagram && (
-          <a href={fishery.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg className="w-6 h-6 text-pink-500 hover:text-pink-700" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.977.24 2.43.415a4.92 4.92 0 011.675 1.043 4.92 4.92 0 011.043 1.675c.175.453.359 1.224.415 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.24 1.977-.415 2.43a4.92 4.92 0 01-1.043 1.675 4.92 4.92 0 01-1.675 1.043c-.453.175-1.224.359-2.43.415-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-1.977-.24-2.43-.415a4.902 4.902 0 01-2.718-2.718c-.175-.453-.359-1.224-.415-2.43C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.056-1.206.24-1.977.415-2.43A4.902 4.902 0 015.366 2.578c.453-.175 1.224-.359 2.43-.415C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.775.13 4.902.308 4.062.543a7.075 7.075 0 00-2.52 1.07A7.075 7.075 0 00.543 4.062C.308 4.902.13 5.775.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.058 1.277.236 2.15.471 2.99a7.075 7.075 0 001.07 2.52 7.075 7.075 0 002.52 1.07c.84.235 1.713.413 2.99.471C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.277-.058 2.15-.236 2.99-.471a7.075 7.075 0 002.52-1.07 7.075 7.075 0 001.07-2.52c.235-.84.413-1.713.471-2.99.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.058-1.277-.236-2.15-.471-2.99a7.075 7.075 0 00-1.07-2.52A7.075 7.075 0 0019.938.543c-.84-.235-1.713-.413-2.99-.471C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
-            </svg>
-          </a>
-        )}
-        {fishery.twitter && (
-          <a href={fishery.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
-            <svg className="w-6 h-6 text-gray-700 hover:text-black" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M22.162 5.656c-.793.352-1.644.59-2.538.697a4.466 4.466 0 001.962-2.462c-.87.516-1.833.892-2.86 1.094A4.448 4.448 0 0015.448 4c-2.462 0-4.46 1.998-4.46 4.46 0 .35.04.692.115 1.02C7.69 9.33 4.066 7.51 1.64 4.905c-.384.66-.603 1.43-.603 2.252 0 1.553.791 2.924 2.001 3.729-.735-.023-1.425-.225-2.03-.563v.057c0 2.17 1.544 3.98 3.594 4.39-.376.102-.772.158-1.18.158-.288 0-.566-.028-.839-.08.567 1.77 2.213 3.057 4.164 3.092A8.933 8.933 0 012 19.54c-.653 0-1.292-.038-1.924-.112A12.617 12.617 0 006.29 21c7.547 0 11.675-6.254 11.675-11.675 0-.178-.004-.355-.012-.53A8.348 8.348 0 0024 4.59a8.19 8.19 0 01-2.338.64z"/>
-            </svg>
-          </a>
-        )}
-      </div>
-      <a
-        href={`mailto:${fishery.contact_email || ''}`}
-        className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-      >
-        Contact for Booking
-      </a>
-      <div className="mt-4 text-xs text-primary-500 italic">
-        Fast replies, friendly staff. We do not handle bookings directly.
-      </div>
+      Contact for Booking
+    </a>
+    <div className="mt-4 text-xs text-primary-500 italic">
+      Fast replies, friendly staff. We do not handle bookings directly.
     </div>
   </div>
 </div>
-
 
 
               

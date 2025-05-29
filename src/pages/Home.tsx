@@ -60,6 +60,26 @@ const Home: React.FC = () => {
     fetchFeatured();
   }, []);
 
+  useEffect(() => {
+  const fetch_fishery_of_the_week = async () => {
+    setLoadingFOTW(true);
+    setErrorFOTW(null);
+    const { data, error } = await supabase
+      .from('fisheries')
+      .select('*')
+      .eq('fishery_of_the_week', true)
+      .single();
+    if (error) {
+      setErrorFOTW('Failed to load fishery of the week.');
+      setFisheryOfTheWeek(null);
+    } else {
+      setFisheryOfTheWeek(data);
+    }
+    setLoadingFOTW(false);
+  };
+  fetch_fishery_of_the_week();
+}, []);
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },

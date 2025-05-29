@@ -658,9 +658,6 @@ const FisheryDetail: React.FC = () => {
           <li>
             <span className="font-semibold text-primary-700">Payment:</span> Cash, Card, Bank Transfer
           </li>
-          <li>
-            <span className="font-semibold text-primary-700">Address:</span> 123 Lakeside Lane, Anglingtown, AB12 3CD
-          </li>
         </ul>
         {/* Contact Info Section */}
         <h4 className="text-xl font-bold text-primary-700 mb-2">Contact Info</h4>
@@ -686,6 +683,9 @@ const FisheryDetail: React.FC = () => {
             ) : (
               <span className="ml-1 text-gray-400">Not listed</span>
             )}
+          </li>
+          <li>
+            <span className="font-semibold text-primary-700">Address:</span> 123 Lakeside Lane, Anglingtown, AB12 3CD
           </li>
         </ul>
         <a

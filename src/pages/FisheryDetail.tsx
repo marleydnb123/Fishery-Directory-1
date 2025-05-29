@@ -423,7 +423,7 @@ const FisheryDetail: React.FC = () => {
 `}
 </style>
 
-<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
@@ -463,7 +463,7 @@ const FisheryDetail: React.FC = () => {
              
 
                       {/* --- Video Section (supports YouTube, Vimeo, MP4, etc.) --- */}
-<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
@@ -499,7 +499,7 @@ const FisheryDetail: React.FC = () => {
 
 
 {/* --- Tactics & Methods Section --- */}
-<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
@@ -547,7 +547,7 @@ const FisheryDetail: React.FC = () => {
 
 
 {/* --- Reviews Section --- */}
-<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"

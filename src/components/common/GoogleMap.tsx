@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, Marker, useMapsLibrary } from '@vis.gl/react-google-maps';
 import { MapPin } from 'lucide-react';
 
 interface GoogleMapProps {
@@ -16,6 +16,7 @@ interface GoogleMapProps {
  */
 const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
   const [mapError, setMapError] = useState<boolean>(false);
+  const coreLibrary = useMapsLibrary('core');
 
   // Early return if coordinates are missing
   if (!latitude || !longitude) {
@@ -69,14 +70,16 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
           }}
           mapId="fishery-map"
         >
-          <Marker 
-            position={{ lat: latitude, lng: longitude }} 
-            title={name}
-            options={{
-              draggable: false,
-              animation: google.maps.Animation.DROP
-            }}
-          /> 
+          {coreLibrary && (
+            <Marker 
+              position={{ lat: latitude, lng: longitude }} 
+              title={name}
+              options={{
+                draggable: false,
+                animation: coreLibrary.Animation.DROP
+              }}
+            />
+          )}
         </Map>
       </div>
     </APIProvider>

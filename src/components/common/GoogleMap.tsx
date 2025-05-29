@@ -9,9 +9,7 @@ interface GoogleMapProps {
 }
 
 const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
-  const [mapError, setMapError] = useState<boolean>(false);
-  const [mapCenter, setMapCenter] = useState({ lat: latitude, lng: longitude });
-
+  const [mapError, setMapError] = useState(false);
   const mapRef = useRef<google.maps.Map | null>(null);
 
   if (typeof latitude !== "number" || typeof longitude !== "number") {
@@ -43,23 +41,10 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
     >
       <div className="h-[400px] md:h-[515px] rounded-lg overflow-hidden">
         <Map
-          center={mapCenter}
-          zoom={14}
+          defaultCenter={{ lat: latitude, lng: longitude }}
+          defaultZoom={14}
           mapId="fishery-map"
-          onLoad={(map) => {
-            mapRef.current = map;
-          }}
-          onIdle={() => {
-            if (mapRef.current) {
-              const newCenter = mapRef.current.getCenter();
-              if (newCenter) {
-                setMapCenter({
-                  lat: newCenter.lat(),
-                  lng: newCenter.lng(),
-                });
-              }
-            }
-          }}
+          onLoad={(map) => (mapRef.current = map)}
           options={{
             gestureHandling: "greedy",
             scrollwheel: true,

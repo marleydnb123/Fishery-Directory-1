@@ -5,6 +5,7 @@ import { MapPin, Fish, Info, Book, Phone, Waves } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
 import GoogleMap from '../components/common/GoogleMap';
+import { SocialIcon } from "react-social-icons";
  
 
 // Define your types if you don't already have them
@@ -620,56 +621,94 @@ const FisheryDetail: React.FC = () => {
 
 
 
-                    <div className="flex flex-col md:flex-row gap-6">
-             {/* Booking Information Card */}
-<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
-  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
-  <div
-    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
-    style={{
-      background:
-        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-    }}
-  >
-    <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
-    <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
-  </div>
-  {/* Card Content */}
-  <div className="p-6"> 
-    <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
-      <li>
-        <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
-      </li>
-      <li>
-        <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
-      </li>
-      <li>
-        <span className="font-semibold text-primary-700">Phone:</span>
-        <a
-          href={`tel:${fishery.contact_phone || ''}`}
-          className="ml-1 text-primary-600 underline hover:text-primary-800"
-        >
-          {fishery.contact_phone || "Not listed"}
-        </a>
-      </li>
-      <li>
-        <span className="font-semibold text-primary-700">Email:</span>
-        <a
-          href={`mailto:${fishery.contact_email || ''}`}
-          className="ml-1 text-primary-600 underline hover:text-primary-800"
-        >
-          {fishery.contact_email || "Not listed"}
-        </a>
-      </li>
-    </ul>
-    <a
-      href={`mailto:${fishery.contact_email || ''}`}
-      className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                   <div className="flex flex-col md:flex-row gap-6">
+  {/* Booking Information Card */}
+  <div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
+    {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
+    <div
+      className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
+      style={{
+        background:
+          "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+      }}
     >
-      Contact for Booking
-    </a>
-    <div className="mt-4 text-xs text-primary-500 italic">
-      Fast replies, friendly staff. We do not handle bookings directly.
+      <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
+      <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
+    </div>
+    {/* Card Content */}
+    <div className="p-6">
+      <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
+        <li>
+          <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
+        </li>
+        <li>
+          <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
+        </li>
+        <li>
+          <span className="font-semibold text-primary-700">Pricing:</span>
+          <span className="ml-1">{fishery.pricing || "Not listed"}</span>
+        </li>
+        <li>
+          <span className="font-semibold text-primary-700">Phone:</span>
+          <a
+            href={`tel:${fishery.contact_phone || ''}`}
+            className="ml-1 text-primary-600 underline hover:text-primary-800"
+          >
+            {fishery.contact_phone || "Not listed"}
+          </a>
+        </li>
+        <li>
+          <span className="font-semibold text-primary-700">Email:</span>
+          <a
+            href={`mailto:${fishery.contact_email || ''}`}
+            className="ml-1 text-primary-600 underline hover:text-primary-800"
+          >
+            {fishery.contact_email || "Not listed"}
+          </a>
+        </li>
+      </ul>
+      {/* Social Icons */}
+      <div className="flex gap-4 mb-5">
+        {fishery.facebook && (
+          <SocialIcon
+            url={fishery.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ height: 24, width: 24 }}
+            fgColor="#3b5998"
+            aria-label="Facebook"
+          />
+        )}
+        {fishery.instagram && (
+          <SocialIcon
+            url={fishery.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ height: 24, width: 24 }}
+            fgColor="#e4405f"
+            aria-label="Instagram"
+          />
+        )}
+        {fishery.twitter && (
+          <SocialIcon
+            url={fishery.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ height: 24, width: 24 }}
+            fgColor="#1da1f2"
+            aria-label="Twitter"
+          />
+        )}
+      </div>
+      <a
+        href={`mailto:${fishery.contact_email || ''}`}
+        className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+      >
+        Contact for Booking
+      </a>
+      <div className="mt-4 text-xs text-primary-500 italic">
+        Fast replies, friendly staff. We do not handle bookings directly.
+      </div>
     </div>
   </div>
 </div>

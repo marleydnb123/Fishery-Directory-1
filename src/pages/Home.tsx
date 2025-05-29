@@ -242,11 +242,11 @@ const Home: React.FC = () => {
     <div className="flex flex-col md:flex-row items-stretch justify-center gap-12"> 
       
       {/* === Fishery of the Week Card === */}
-      <div className="flex-1 max-w-xl flex flex-col items-center">
+      <div className="flex-1 flex flex-col items-center">
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-4 text-center tracking-wide">
           Fishery of the Week
         </h3>
-        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-8 w-full transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 flex flex-col justify-between">
+        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-8 w-full min-w-[350px] max-w-[420px] flex flex-col justify-between transition-transform hover:scale-[1.025] hover:shadow-blue-200/40">
           {loading_fotw ? (
             <div className="text-gray-500 py-16 text-center">Loading...</div>
           ) : error_fotw ? (
@@ -265,15 +265,15 @@ const Home: React.FC = () => {
       </div>
       
       {/* === Catch of the Week Card === */}
-      <div className="flex-1 max-w-xl flex flex-col items-center">
+      <div className="flex-1 flex flex-col items-center">
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-4 text-center tracking-wide">
           Catch of the Week
         </h3>
-        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-8 w-full transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 flex flex-col justify-between">
+        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-8 w-full min-w-[350px] max-w-[420px] flex flex-col justify-between transition-transform hover:scale-[1.025] hover:shadow-blue-200/40">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
             alt="Angler with a 34lb Mirror Carp"
-            className="w-full h-64 object-fit rounded-2xl mb-6 border border-blue-200 shadow"
+            className="w-full h-64 object-cover rounded-2xl mb-6 border border-blue-200 shadow"
           />
           <div>
             <p className="text-xl font-semibold text-blue-900 mb-2 text-center">
@@ -292,6 +292,7 @@ const Home: React.FC = () => {
   </div> 
 </section>
 {/* ================== End Weekly Highlights Section ================== */}
+
 
 
 

@@ -207,9 +207,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-    
-
-{/* ===================== Weekly Highlights Section ===================== */}
+            {/* ===================== Weekly Highlights Section ===================== */}
 <section className="py-20 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
   <div className="container mx-auto max-w-6xl">
     {/* Section Title */}
@@ -224,7 +222,7 @@ const Home: React.FC = () => {
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-4 text-center tracking-wide">
           Fishery of the Week
         </h3>
-        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-8 w-full min-w-[600px] max-w-[600px] min-h-[500px] max-h-[500px] flex flex-col justify-between transition-transform hover:scale-[1.025] hover:shadow-blue-200/40">
+        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-0 w-full min-w-[600px] max-w-[600px] min-h-[500px] max-h-[500px] flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden">
           {loading_fotw ? (
             <div className="text-gray-500 py-16 text-center">Loading...</div>
           ) : error_fotw ? (
@@ -247,23 +245,30 @@ const Home: React.FC = () => {
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-4 text-center tracking-wide">
           Catch of the Week
         </h3>
-        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-8 w-full min-w-[600px] max-w-[600px] min-h-[500px] max-h-[500px] flex flex-col justify-between transition-transform hover:scale-[1.025] hover:shadow-blue-200/40">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
-            alt="Angler with a 34lb Mirror Carp"
-            className="w-full h-64 object-cover rounded-2xl mb-6 border border-blue-200 shadow"
-          />
-          <div>
-            <p className="text-xl font-semibold text-blue-900 mb-2 text-center">
-              34lb Mirror Carp
-            </p>
-            <p className="text-gray-700 mb-3 text-center">
-              Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill.
-            </p>
-            <div className="w-full text-center">
-            <p className="text-blue-800 text-sm bg-blue-100 rounded px-3 py-1 inline-block">
-          <span className="font-semibold">Caught at:</span> Willow Lake Carp Fishery
-            </p>
+        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-0 w-full min-w-[600px] max-w-[600px] min-h-[500px] max-h-[500px] flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden">
+          {/* Card Figure/Image */}
+          <div className="w-full h-64 overflow-hidden">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
+              alt="Angler with a 34lb Mirror Carp"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          {/* Card Body */}
+          <div className="flex-1 flex flex-col justify-between p-8">
+            <div>
+              <h4 className="text-2xl font-bold text-blue-900 mb-2 text-center">
+                34lb Mirror Carp
+              </h4>
+              <p className="text-gray-700 mb-4 text-center">
+                Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill.
+              </p>
+            </div>
+            {/* Card Footer */}
+            <div className="w-full text-center mt-2">
+              <p className="text-blue-800 text-sm bg-blue-100 rounded px-3 py-1 inline-block">
+                <span className="font-semibold">Caught at:</span> Willow Lake Carp Fishery
+              </p>
             </div>
           </div>
         </div>
@@ -272,6 +277,7 @@ const Home: React.FC = () => {
   </div> 
 </section>
 {/* ================== End Weekly Highlights Section ================== */}
+
       
 {/* How It Works Section */}
 <section className="py-20 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">

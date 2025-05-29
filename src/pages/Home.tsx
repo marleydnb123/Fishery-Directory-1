@@ -219,7 +219,7 @@ const Home: React.FC = () => {
       
       {/* ===================== Weekly Highlights Section ===================== */}
 <section className="py-20 px-4 bg-white">
-  <div className="container mx-auto max-w-7xl">
+  <div className="container mx-auto max-w-[90rem]">
     {/* Section Title - Centered */}
     <h2 className="text-6xl font-bebas font-bold text-blue-900 mb-12 text-center">
       Weekly Highlights
@@ -241,12 +241,9 @@ const Home: React.FC = () => {
         </div>
       </div>
       
-      {/* === Vertical Blue Divider (thinner) === */}
-      <div className="hidden md:flex items-center px-0">
-        <div
-          className="h-full bg-blue-700 rounded-full mx-auto"
-          style={{ width: '2px', minHeight: '440px' }}
-        ></div>
+      {/* === Vertical Blue Divider (1px) === */}
+      <div className="hidden md:flex items-stretch px-0">
+        <div className="w-px bg-blue-700 mx-auto my-4 rounded-full" style={{ minHeight: '440px' }}></div>
       </div>
       
       {/* === Catch of the Week Card === */}

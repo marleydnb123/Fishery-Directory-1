@@ -650,8 +650,14 @@ const FisheryDetail: React.FC = () => {
         <h4 className="text-xl font-bold text-primary-700 mb-2 underline">Booking Information</h4>
         <ul className="mb-4 text-gray-700 space-y-2 leading-relaxed">
           <li>
-            <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
-          </li>
+            <span className="font-semibold text-primary-700">Day tickets:</span> <ul className="ml-4 list-disc">
+              {(fishery.pricing && fishery.pricing.length > 0)
+                ? fishery.pricing.map((price, idx) => (
+                    <li key={idx}>{price}</li>
+                  ))
+                : <li>Not listed</li>
+              }
+            </ul>
           <li>
             <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
           </li>

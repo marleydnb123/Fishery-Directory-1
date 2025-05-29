@@ -605,7 +605,7 @@ const Directory: React.FC = () => {
 
       {/* --- Featured Fisheries Section --- */}
       <section className="py-12 px-4 bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200">
-        <div className="container mx-auto shadow-lg overflow-hidden">
+        <div className="container mx-auto rounded-xl shadow-lg overflow-hidden">
           {/* Header Bar */}
           <div
             className="p-6"

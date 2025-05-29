@@ -19,6 +19,10 @@ const Home: React.FC = () => {
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [fishery_of_the_week, setFisheryOfTheWeek] = useState(null);
+  const [loading_fotw, setLoadingFOTW] = useState(false);
+  const [error_fotw, setErrorFOTW] = useState(null);
+
 
   // Hero slideshow state
   const [currentHero, setCurrentHero] = useState(0);

@@ -46,6 +46,7 @@ export interface Fishery {
   opening_times?: string[];
   day_tickets?: string[];
   payments?: string[];
+  fishery_of_the_week?: boolean;
 }
 
 export interface Lake {

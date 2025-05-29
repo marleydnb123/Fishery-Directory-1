@@ -42,6 +42,7 @@ export interface Fishery {
   coaching?: boolean;      // Fixed syntax
   keepnets_allowed?: boolean;  // Fixed syntax
   tactics?: string; 
+  pricing?: string[];
 }
 
 export interface Lake {

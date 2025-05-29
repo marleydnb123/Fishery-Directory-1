@@ -752,7 +752,6 @@ const FisheryDetail: React.FC = () => {
             />
           </a>
         )}
-      </div>
     </div>
   </div>
 </div>

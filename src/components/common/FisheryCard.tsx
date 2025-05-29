@@ -42,7 +42,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
         </div>
         
         <div className="p-6 flex flex-col h-full">
-          <div className="flex items-start centre text-center justify-between">
+          <div className="flex items-start centre text-center justify-center">
             <h3 className="text-4xl font-bebas font-semibold text-gray-900 mb-2">{fishery.name}</h3>
           </div>
           

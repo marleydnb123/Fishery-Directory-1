@@ -278,9 +278,32 @@ const FisheryDetail: React.FC = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+         {/* --- Stats Card --- */}
+        <div className="mb-8">
+          <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
+            {/* Visitors */}
+            <div className="flex-1 flex flex-col items-center">
+              <span className="text-3xl font-bold text-blue-900">{fishery.visitors_monthly ?? '—'}</span>
+              <span className="text-sm text-blue-800 mt-1">Visitors (Monthly)</span>
+            </div>
+            <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+            {/* Record Fish */}
+            <div className="flex-1 flex flex-col items-center">
+              <span className="text-3xl font-bold text-green-900">{fishery.record_biggest_fish ?? '—'}</span>
+              <span className="text-sm text-green-800 mt-1">Record/Biggest Fish</span>
+            </div>
+            <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+            {/* Match Record */}
+            <div className="flex-1 flex flex-col items-center">
+              <span className="text-3xl font-bold text-yellow-900">{fishery.record_match_weight ?? '—'}</span>
+              <span className="text-sm text-yellow-800 mt-1">Record Match Weight</span>
+            </div>
+          </div>
+        </div>
+        {/* --- End Stats Card --- */}
         <h2
           className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
-          style={{
+          style={{ 
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}
         >

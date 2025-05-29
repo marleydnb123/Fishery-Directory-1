@@ -659,9 +659,7 @@ const FisheryDetail: React.FC = () => {
               }
             </ul>
           </li> 
-          <li>
-            <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
-          </li>
+          
           <li>
             <span className="font-semibold text-primary-700">Pricing:</span>
             <ul className="ml-4 list-disc">

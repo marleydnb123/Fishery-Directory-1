@@ -291,49 +291,33 @@ const FisheryDetail: React.FC = () => {
         ))}
         {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
           <p key={i} className="text-gray-700 mb-6">{line}</p>
-        ))}
+        ))} 
         
-        {/* Two-column grid below */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          {/* Left column: Facilities, Features, Species */}
-          <div>
+        <div className="flex flex-col gap-6">
+          <div className="flex-1">
             <h3 className="text-lg font-semibold mb-3">Facilities</h3>
-            {fishery.facilities && fishery.facilities.length > 0 ? (
-              <ul className="space-y-2 text-gray-700">
-                {fishery.facilities.map((facility, index) => (
-                  <li key={index} className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                    <span>{facility}</span>
-                  </li>
-                ))}
-                {fishery.hasAccommodation && (
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                    <span>Accommodation available</span>
-                  </li>
-                )}
-              </ul>
-            ) : (
-              <p className="text-gray-500 italic">No facilities information available</p>
-            )}
-
-            <h3 className="text-lg font-semibold mt-6 mb-3">Features</h3>
-            {fishery.features && fishery.features.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {fishery.features.map((feature, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center text-sm bg-primary-50 text-primary-800 px-3 py-1 rounded-full"
-                  >
-                    {feature}
-                  </span>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 italic">No features listed</p>
-            )}
-
-            <h3 className="text-lg font-semibold mt-6 mb-3">Available Species</h3>
+              {fishery.facilities && fishery.facilities.length > 0 ? (
+                <ul className="space-y-2 text-gray-700">
+                  {fishery.facilities.map((facility, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>{facility}</span>
+                    </li>
+                  ))}
+                  {fishery.hasAccommodation && (
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>Accommodation available</span>
+                    </li>
+                  )}
+                </ul>
+              ) : (
+                <p className="text-gray-500 italic">No facilities information available</p>
+              )}
+          </div>
+                
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
             <div className="flex flex-wrap gap-2">
               {(fishery.species || []).map((species, index) => (
                 <span 
@@ -347,7 +331,6 @@ const FisheryDetail: React.FC = () => {
             </div> 
           </div>
         </div>
-
 
 
  

@@ -407,7 +407,7 @@ const [showCoarse, setShowCoarse] = useState(true);
             </div>
 
               
-            {/* Column 3: Advanced Filters (Collapsible) */}
+           {/* Column 3: Advanced Filters (Collapsible) */}
 <div>
   {/* Advanced Filters Toggle */}
   <button
@@ -618,11 +618,9 @@ const [showCoarse, setShowCoarse] = useState(true);
               id="keepnetsAllowed"
             />
             <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
-          </div>
-        </div>
-      )} 
     </div>
-  )}
+</div> 
+</div>
 </div>
 
 

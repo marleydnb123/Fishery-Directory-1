@@ -39,7 +39,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
       apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "YOUR_GOOGLE_MAPS_API_KEY"}
       onError={() => setMapError(true)}
     >
-      <div className="h-[400px] md:h-[515px] rounded-lg overflow-hidden">
+      <div className="h-[400px] md:h-[400px] rounded-lg overflow-hidden">
         <Map
           defaultCenter={{ lat: latitude, lng: longitude }}
           defaultZoom={14}

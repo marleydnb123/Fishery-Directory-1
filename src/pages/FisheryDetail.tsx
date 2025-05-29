@@ -640,7 +640,7 @@ const FisheryDetail: React.FC = () => {
     {/* Card Content */}
     <div className="flex-1 flex flex-col justify-between p-6">
       <div>
-        <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
+        <ul className="mb-1 text-gray-700 space-y-2 leading-relaxed">
           <li>
             <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
           </li>

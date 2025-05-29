@@ -122,7 +122,7 @@ const FisheryDetail: React.FC = () => {
         ...fisheryData,
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
-        pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [],
+        pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [], 
         opening_times: Array.isArray(fisheryData.opening_times) ? fisheryData.opening_times : [],
         day_tickets: Array.isArray(fisheryData.day_tickets) ? fisheryData.day_tickets : [],
         payments: Array.isArray(fisheryData.payments) ? fisheryData.payments : [],
@@ -269,106 +269,68 @@ const FisheryDetail: React.FC = () => {
         </div>
       </div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Column */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
-                {fishery.facilities && fishery.facilities.length > 0 ? (
-                  <ul className="space-y-2 text-gray-700">
-                    {fishery.facilities.map((facility, index) => (
-                      <li key={index} className="flex items-center">
-                        <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                        <span>{facility}</span>
-                      </li>
-                    ))}
-                    {fishery.hasAccommodation && (
-                      <li className="flex items-center">
-                        <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                        <span>Accommodation available</span>
-                      </li>
-                    )}
-                  </ul>
-                ) : (
-                  <p className="text-gray-500 italic">No facilities information available</p>
-                )}
-            </div>
-                  
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Available Species</h3>
-              <div className="flex flex-wrap gap-2">
-                {(fishery.species || []).map((species, index) => (
-                  <span 
-                    key={index}
-                    className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
-                  >
-                    <Fish className="h-4 w-4 mr-1" />
-                    {species}
-                  </span>
-                ))}
-              </div> 
-            </div>
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Pricing</h3>
-              {fishery.pricing && fishery.pricing.length > 0 ? (
-                <div className="space-y-3">
-                  {fishery.pricing.map((price, index) => (
-                    <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                      <span className="text-gray-700">{price.type}</span>
-                      <span className="font-semibold text-primary-700">£{price.amount}</span>
-                    </div>
+    {/* Content */} 
+<div className="container mx-auto px-4 py-8"> 
+  {activeTab === 'overview' && (
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+        <h2
+          className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
+          style={{
+            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+          }}
+        >
+          About {fishery.name} 
+        </h2>
+        {fishery.description.split(/\r?\n/).map((line, i) => (
+          <p key={i} className="text-gray-700 mb-6">{line}</p>
+        ))}
+        {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
+          <p key={i} className="text-gray-700 mb-6">{line}</p>
+        ))} 
+         
+        <div className="flex flex-col gap-6">
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
+              {fishery.facilities && fishery.facilities.length > 0 ? (
+                <ul className="space-y-2 text-gray-700">
+                  {fishery.facilities.map((facility, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>{facility}</span>
+                    </li>
                   ))}
-                </div>
+                  {fishery.hasAccommodation && (
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>Accommodation available</span>
+                    </li>
+                  )}
+                </ul>
               ) : (
-                <p className="text-gray-500 italic">Contact fishery for pricing information</p>
+                <p className="text-gray-500 italic">No facilities information available</p>
               )}
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Opening Times</h3>
-              {fishery.opening_times ? (
-                <div className="space-y-2">
-                  {Object.entries(fishery.opening_times).map(([day, times]) => (
-                    <div key={day} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
-                      <span className="capitalize text-gray-700 font-medium">{day}</span>
-                      <span className="text-gray-600">{times}</span>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500 italic">Contact fishery for opening times</p>
-              )}
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Contact Information</h3>
-              <div className="space-y-2">
-                {fishery.phone && (
-                  <div className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                    <span>Phone: {fishery.phone}</span>
-                  </div>
-                )}
-                {fishery.email && (
-                  <div className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                    <span>Email: {fishery.email}</span>
-                  </div>
-                )}
-                {fishery.website && (
-                  <div className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                    <span>Website: {fishery.website}</span>
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
-
+                
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
+            <div className="flex flex-wrap gap-2">
+              {(fishery.species || []).map((species, index) => (
+                <span 
+                  key={index}
+                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
+                >
+                  <Fish className="h-4 w-4 mr-1" />
+                  {species}
+                </span> 
+              ))}
+            </div> 
+          </div>
+        </div> 
 
 
  

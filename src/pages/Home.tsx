@@ -261,7 +261,7 @@ const Home: React.FC = () => {
 
       {/* === Vertical Blue Divider === */}
       <div className="hidden md:flex items-center px-0">
-        <div className="w-px mt-55 bg-blue-700/30 rounded-full mx-auto" style={{ minHeight: '500px' }}></div>
+        <div className="w-px mt-5 bg-blue-700/30 rounded-full mx-auto" style={{ minHeight: '500px' }}></div>
       </div>
       
       {/* === Catch of the Week Card === */}

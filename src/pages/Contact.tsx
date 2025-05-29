@@ -177,7 +177,7 @@ const Contact: React.FC = () => {
               </div>
               
               <div className="mt-8 pt-8 border-t border-gray-200">
-                <h3 className="text-4xl font-bebas font-semibold mb-6">Frequently Asked Questions</h3>
+                <h3 className="text-4xl font-bebas font-semibold mb-3">Frequently Asked Questions</h3>
                 
                 <div className="space-y-4">
                   <div>

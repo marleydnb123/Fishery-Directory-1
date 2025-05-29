@@ -243,7 +243,7 @@ const Home: React.FC = () => {
       
       {/* === Fishery of the Week Card === */}
       <div className="flex-1 max-w-xl flex flex-col items-center">
-        <h3 className="text-3xl font-bebas font-bold text-blue-900 mb-4 text-center tracking-wide">
+        <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-4 text-center tracking-wide">
           Fishery of the Week
         </h3>
         <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-8 w-full transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 flex flex-col justify-between">

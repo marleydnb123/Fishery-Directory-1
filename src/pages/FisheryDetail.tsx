@@ -652,7 +652,15 @@ const FisheryDetail: React.FC = () => {
             <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
           </li>
           <li>
-            <span className="font-semibold text-primary-700">Pricing:</span> £20 per day ticket, £15 per junior/concession. Group rates available on request.
+            <span className="font-semibold text-primary-700">Pricing:</span>
+            <ul className="ml-4 list-disc">
+              {(fishery.pricing && fishery.pricing.length > 0)
+                ? fishery.pricing.map((price, idx) => (
+                    <li key={idx}>{price}</li>
+                  ))
+                : <li>Not listed</li>
+              }
+            </ul>
           </li>
           <li>
             <span className="font-semibold text-primary-700">Opening times:</span> 7:00am – 7:00pm (Mon–Sun)
@@ -696,6 +704,7 @@ const FisheryDetail: React.FC = () => {
       </div>
     </div>
   </div>
+
 
 
 

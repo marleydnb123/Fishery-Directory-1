@@ -214,15 +214,15 @@ const Home: React.FC = () => {
     <h2 className="text-6xl font-bebas font-bold text-gray-900 mb-8 text-center">
       Weekly Highlights
     </h2>
-    {/* Two-column layout */}
-    <div className="flex flex-col md:flex-row items-stretch gap-12">
+    {/* Centered Two-column layout */}
+    <div className="flex flex-col md:flex-row justify-center items-center gap-12">
       
       {/* === Fishery of the Week Card === */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 max-w-md flex flex-col">
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-2 text-center">
           Fishery of the Week
         </h3>
-        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-between">
+        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 flex flex-col justify-between">
           {featuredFisheries.length > 0 ? ( 
             <FisheryCard fishery={featuredFisheries[0]} />
           ) : (
@@ -232,16 +232,16 @@ const Home: React.FC = () => {
       </div>
       
       {/* === Vertical Blue Divider === */}
-      <div className="hidden md:flex items-center px-0">
-        <div className="h-300 w-0.5 bg-blue-700/50 rounded-full mx-auto" style={{ minHeight: '400px' }}></div>
+      <div className="hidden md:flex items-center h-full">
+        <div className="w-px bg-blue-700/50 mx-8" style={{ minHeight: '400px' }}></div>
       </div>
       
       {/* === Catch of the Week Card === */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 max-w-md flex flex-col">
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-2 text-center">
           Catch of the Week
         </h3>
-        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-between">
+        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 flex flex-col justify-between">
           <img
             src="https://www.fishermanholidays.com/images-waters/jonchery/catches/_1600x980_crop_center-center_80_line/109390/20231022_1851176545bfb5e07082.50810937.jpeg"
             alt="Angler with a 34lb Mirror Carp"
@@ -264,6 +264,7 @@ const Home: React.FC = () => {
   </div>
 </section>
 {/* ================== End Weekly Highlights Section ================== */}
+
 
 
 

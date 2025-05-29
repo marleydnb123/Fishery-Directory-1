@@ -640,6 +640,8 @@ const FisheryDetail: React.FC = () => {
     {/* Card Content */}
     <div className="flex-1 flex flex-col justify-between p-6">
       <div>
+        {/* Booking Info Section */}
+        <h4 className="text-xl font-bold text-primary-700 mb-2">Booking Info</h4>
         <ul className="mb-4 text-gray-700 space-y-2 leading-relaxed">
           <li>
             <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
@@ -659,6 +661,10 @@ const FisheryDetail: React.FC = () => {
           <li>
             <span className="font-semibold text-primary-700">Address:</span> 123 Lakeside Lane, Anglingtown, AB12 3CD
           </li>
+        </ul>
+        {/* Contact Info Section */}
+        <h4 className="text-xl font-bold text-primary-700 mb-2">Contact Info</h4>
+        <ul className="mb-4 text-gray-700 space-y-2 leading-relaxed">
           <li>
             <span className="font-semibold text-primary-700">Phone:</span>
             <a
@@ -694,8 +700,63 @@ const FisheryDetail: React.FC = () => {
           Fast replies, friendly staff. We do not handle bookings directly.
         </div>
       </div>
+      {/* Social Icons Row */}
+      <div className="flex items-center justify-center gap-6 mt-8 mb-6">
+        <a
+          href="https://facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+            alt="Facebook"
+            className="h-10 w-10 hover:opacity-80 transition-opacity"
+          />
+        </a>
+        <a
+          href="https://instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+            alt="Instagram"
+            className="h-10 w-10 hover:opacity-80 transition-opacity"
+          />
+        </a>
+        <a
+          href="https://x.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X (Twitter)"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png"
+            alt="X"
+            className="h-10 w-10 hover:opacity-80 transition-opacity"
+          />
+        </a>
+        {fishery.contact_whatsapp && (
+          <a
+            href={`https://wa.me/${fishery.contact_whatsapp.replace(/\D/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+              alt="WhatsApp"
+              className="h-10 w-10 hover:opacity-80 transition-opacity"
+            />
+          </a>
+        )}
+      </div>
     </div>
   </div>
+</div>
+
 
 
 

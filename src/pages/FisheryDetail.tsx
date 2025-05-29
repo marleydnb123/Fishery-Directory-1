@@ -279,7 +279,7 @@ const FisheryDetail: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     > 
-      <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+      <div className="bbg-gradient-to-b from-blue-50 via-white to-blue-100 rounded-xl shadow-md p-6 mb-8">
         <h2
           className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
           style={{ 
@@ -291,7 +291,7 @@ const FisheryDetail: React.FC = () => {
         
         
         {/* --- Stats Card --- */}
-        <div className="mb-8">
+        <div className="mb-8"> 
           <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
             {/* Visitors */}
             <div className="flex-1 flex flex-col items-center">

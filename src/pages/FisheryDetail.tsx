@@ -715,10 +715,10 @@ const FisheryDetail: React.FC = () => {
           </motion.div>
         )} 
 
-  <GoogleMap 
-  latitude={fishery.Latitude || 0}
-  longitude={fishery.Longitude || 0}
-  name={fishery.name}
+<GoogleMap 
+  latitude={54.9797}
+  longitude={-3.3058}
+  name="Test Fishery"
 />
 
 

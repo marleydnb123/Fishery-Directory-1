@@ -273,7 +273,7 @@ const Home: React.FC = () => {
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
             alt="Angler with a 34lb Mirror Carp"
-            className="w-full h-64 object-cover rounded-2xl mb-6 border border-blue-200 shadow"
+            className="w-full h-64 object-cover rounded-2xl mb-2 border border-blue-200 shadow"
           />
           <div>
             <p className="text-xl font-semibold text-blue-900 mb-2 text-center">

@@ -269,15 +269,14 @@ const FisheryDetail: React.FC = () => {
         </div>
       </div>
 
-   {/* Content */}
-<div className="container mx-auto px-4 py-8">
+    {/* Content */} 
+<div className="container mx-auto px-4 py-8"> 
   {activeTab === 'overview' && (
     <motion.div 
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      {/* About/Description - Full Width */}
       <div className="bg-white rounded-xl shadow-md p-6 mb-8">
         <h2
           className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
@@ -285,18 +284,18 @@ const FisheryDetail: React.FC = () => {
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}
         >
-          About {fishery.name}
+          About {fishery.name} 
         </h2>
         {fishery.description.split(/\r?\n/).map((line, i) => (
           <p key={i} className="text-gray-700 mb-6">{line}</p>
         ))}
-        {fishery.descriptionpage.split(/\r?\n/).map((line, i) => (
+        {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
           <p key={i} className="text-gray-700 mb-6">{line}</p>
         ))}
-
+        
         {/* Two-column grid below */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          {/* Left: Facilities, Features, Species */}
+          {/* Left column: Facilities, Features, Species */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Facilities</h3>
             {fishery.facilities && fishery.facilities.length > 0 ? (
@@ -337,7 +336,7 @@ const FisheryDetail: React.FC = () => {
             <h3 className="text-lg font-semibold mt-6 mb-3">Available Species</h3>
             <div className="flex flex-wrap gap-2">
               {(fishery.species || []).map((species, index) => (
-                <span
+                <span 
                   key={index}
                   className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
                 >
@@ -345,40 +344,9 @@ const FisheryDetail: React.FC = () => {
                   {species}
                 </span>
               ))}
-            </div>
-          </div>
-
-          {/* Right: Pricing and Opening Times */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">Pricing</h3>
-            {fishery.pricing && fishery.pricing.length > 0 ? (
-              <ul className="list-disc ml-6 space-y-2 text-gray-700">
-                {fishery.pricing.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500 italic">No pricing information available</p>
-            )}
-
-            <h3 className="text-lg font-semibold mt-6 mb-3">Opening Times</h3>
-            {fishery.opening_times && fishery.opening_times.length > 0 ? (
-              <ul className="list-disc ml-6 space-y-2 text-gray-700">
-                {fishery.opening_times.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500 italic">No opening times listed</p>
-            )}
+            </div> 
           </div>
         </div>
-      </div>
-    </motion.div>
-  )}
-</div>
-      </div>
-    
 
 
 
@@ -745,7 +713,7 @@ const FisheryDetail: React.FC = () => {
           </li>
         </ul>
         {/* Contact Info Section */}
-        <h4 className="text-xl font-bold text-primary-700 mb-2 underline">Contact Information</h4>  
+        <h4 className="text-xl font-bold text-primary-700 mb-2 underline">Contact Information</h4> 
         <ul className="mb-4 text-gray-700 space-y-2 leading-relaxed">
           <li>
             <span className="font-semibold text-primary-700">Phone:</span>

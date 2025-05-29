@@ -396,7 +396,7 @@ const Home: React.FC = () => {
 </section>
 
       {/* --- List Your Fishery Section --- */}
-<section className="py-24 px-4 bg-gradient-to-br from-blue-100 via-white to-green-100">
+<section className="py-24 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
   <div className="max-w-7xl mx-auto">
     <h2 className="text-6xl max-w-7xl font-bebas font-bold text-gray-900 mb-2 text-center tracking-tight drop-shadow-lg animate-fade-in">
       List Your Fishery

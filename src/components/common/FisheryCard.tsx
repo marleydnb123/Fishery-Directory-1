@@ -55,14 +55,13 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
           <p className="text-gray-600 mb-4 line-clamp-2 min-h-[2.5rem]">{fishery.description}</p>
           
           <div className="hidden md:flex flex-nowrap overflow-hidden gap-2 mt-2">
-          {fishery.species.map((species, index) => (
-          <span 
-          key={index}
-          className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
-          >
-          <Fish className="h-3 w-3 mr-1" />
-          {species}
-          </span>
+  {fishery.species.slice(0, 5).map((species, index) => (
+    <span 
+      key={index}
+      className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
+    >
+      {species}
+    </span>
             ))}
           </div>
 

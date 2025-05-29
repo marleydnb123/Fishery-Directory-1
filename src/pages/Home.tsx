@@ -206,50 +206,7 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
-<section className="py-16 px-4 bg-white">
-  <div className="container mx-auto max-w-4xl">
-    <h2 className="text-5xl font-bebas font-bold text-blue-900 mb-4 text-center">
-      Fishery of the Week
-    </h2>
-    <p className="text-lg text-gray-700 text-center mb-10 max-w-2xl mx-auto">
-      Each week, we highlight a top UK fishery. Discover this week's featured spot and what makes it special!
-    </p>
-    <div className="flex justify-center">
-      <div className="bg-blue-50 rounded-2xl shadow-lg overflow-hidden w-full max-w-md">
-        <img
-          src="https://www.fishermanholidays.com/images-waters/jonchery/catches/_1600x980_crop_center-center_80_line/109390/20231022_1851176545bfb5e07082.50810937.jpeg"
-          alt="Willow Lake Carp Fishery"
-          className="w-full h-56 object-cover"
-        />
-        <div className="p-6">
-          <h3 className="text-2xl font-bold text-blue-800 mb-2">
-            Willow Lake Carp Fishery
-          </h3>
-          <p className="text-gray-600 mb-2">
-            <span className="font-semibold">Location:</span> Hampshire, UK
-          </p>
-          <p className="text-gray-700 mb-4">
-            A stunning 8-acre lake set in peaceful countryside, renowned for its specimen carp and excellent facilities. Day and night fishing available, plus on-site accommodation.
-          </p>
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className="bg-blue-200 text-blue-900 px-2 py-1 rounded text-xs font-semibold">Carp</span>
-            <span className="bg-blue-200 text-blue-900 px-2 py-1 rounded text-xs font-semibold">Tench</span>
-            <span className="bg-blue-200 text-blue-900 px-2 py-1 rounded text-xs font-semibold">Bream</span>
-          </div>
-          <a
-            href="https://willowlakecarpfishery.co.uk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200"
-          >
-            Visit Website
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+ 
 {/* How It Works Section */}
 <section className="py-20 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
   <div className="container mx-auto">

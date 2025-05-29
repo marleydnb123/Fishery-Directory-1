@@ -16,6 +16,7 @@ interface GoogleMapProps {
  */
 const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
   const [mapError, setMapError] = useState<boolean>(false);
+  const [mapCenter, setMapCenter] = useState({ lat: latitude, lng: longitude });
 
   // Early return if coordinates are missing
   if (typeof latitude !== "number" || typeof longitude !== "number") {
@@ -49,19 +50,25 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
       <div className="h-[400px] md:h-[515px] rounded-lg overflow-hidden">
         <Map
           zoom={14}
-          center={{ lat: latitude, lng: longitude }}
+          center={mapCenter}
+          onIdle={(mapInstance) => {
+            const newCenter = mapInstance.getCenter();
+            if (newCenter) {
+              setMapCenter({ lat: newCenter.lat(), lng: newCenter.lng() });
+            }
+          }}
           mapId="fishery-map"
           options={{
-            gestureHandling: "greedy",    // Enables scroll and drag with one finger/mouse
-            scrollwheel: true,            // Enables zoom with mouse wheel
-            draggable: true,              // Enables pan/drag
+            gestureHandling: "greedy",
+            scrollwheel: true,
+            draggable: true,
             zoomControl: true,
             mapTypeControl: true,
             scaleControl: true,
             streetViewControl: true,
             rotateControl: true,
-            fullscreenControl: true, 
-            disableDefaultUI: false,      // Show all controls
+            fullscreenControl: true,
+            disableDefaultUI: false,
           }}
         >
           <Marker position={{ lat: latitude, lng: longitude }} title={name} />
@@ -72,4 +79,3 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
 };
 
 export default GoogleMap;
- 

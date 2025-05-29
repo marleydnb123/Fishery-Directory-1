@@ -207,6 +207,63 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+{/* ===================== Weekly Highlights Section ===================== */}
+<section className="py-20 px-4 bg-white">
+  <div className="container mx-auto max-w-6xl">
+    {/* Section Title */}
+    <h2 className="text-6xl font-bebas font-bold text-blue-900 mb-12 text-left">
+      Weekly Highlights
+    </h2>
+    {/* Two-column layout */}
+    <div className="flex flex-col md:flex-row items-stretch gap-12">
+      
+      {/* === Fishery of the Week Card === */}
+      <div className="flex-1 flex flex-col">
+        <h3 className="text-3xl font-bebas font-bold text-blue-900 mb-6 text-left">
+          Fishery of the Week
+        </h3>
+        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-between">
+          {featuredFisheries.length > 0 ? (
+            <FisheryCard fishery={featuredFisheries[0]} />
+          ) : (
+            <div className="text-gray-500 py-12">No featured fishery available.</div>
+          )}
+        </div>
+      </div>
+      
+      {/* === Vertical Blue Divider === */}
+      <div className="hidden md:flex items-center px-0">
+        <div className="h-full w-1 bg-blue-700 rounded-full mx-auto" style={{ minHeight: '440px' }}></div>
+      </div>
+      
+      {/* === Catch of the Week Card === */}
+      <div className="flex-1 flex flex-col">
+        <h3 className="text-3xl font-bebas font-bold text-blue-900 mb-6 text-left">
+          Catch of the Week
+        </h3>
+        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-between">
+          <img
+            src="https://www.fishermanholidays.com/images-waters/jonchery/catches/_1600x980_crop_center-center_80_line/109390/20231022_1851176545bfb5e07082.50810937.jpeg"
+            alt="Angler with a 34lb Mirror Carp"
+            className="w-full h-56 object-cover rounded-xl mb-4"
+          />
+          <div>
+            <p className="text-lg font-semibold text-blue-900 mb-2">
+              34lb Mirror Carp
+            </p>
+            <p className="text-gray-700 mb-2">
+              Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill.
+            </p>
+            <p className="text-gray-600 text-sm">
+              <span className="font-semibold">Caught at:</span> Willow Lake Carp Fishery
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/* ================== End Weekly Highlights Section ================== */}
 
 
 

@@ -35,6 +35,11 @@ const Directory: React.FC = () => {
   const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
+  const [showAdvanced, setShowAdvanced] = useState(false);
+const [showCarp, setShowCarp] = useState(true);
+const [showMatch, setShowMatch] = useState(true);
+const [showCoarse, setShowCoarse] = useState(true);
+
 
   // Available districts and species
   const districts: UKDistrict[] = [

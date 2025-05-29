@@ -691,7 +691,7 @@ const FisheryDetail: React.FC = () => {
         Fast replies, friendly staff. We do not handle bookings directly.
       </div>
       {/* Social Icons Row */}
-      <div className="flex items-center gap-4 mt-8 mb-6">
+      <div className="flex items-center gap-4 ">
         <a
           href="https://facebook.com/yourpage"
           target="_blank"

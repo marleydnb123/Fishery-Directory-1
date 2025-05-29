@@ -282,13 +282,14 @@ const Home: React.FC = () => {
           flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden
         ">
           {/* Card Figure/Image */}
-          <div className="w-full h-64 overflow-hidden">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
-              alt="Angler with a 34lb Mirror Carp"
-              className="w-full h-full object-cover"
-            />
-          </div>
+<div className="w-full h-40 md:h-64 overflow-hidden">
+  <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
+    alt="Angler with a 34lb Mirror Carp"
+    className="w-full h-full object-cover"
+  />
+</div>
+
           {/* Card Body */}
           <div className="flex-1 flex flex-col justify-between p-4">
             <div>

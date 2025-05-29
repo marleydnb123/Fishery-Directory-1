@@ -17,7 +17,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
     <motion.div 
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="bg-gradient-to-b from-blue-50 via-white to-blue-100 rounded-xl shadow-md overflow-hidden h-full"
+      className="bg-gradient-to-b from-blue-50 via-white to-blue-100 border-blue-300 rounded-xl shadow-md overflow-hidden h-full"
     >
       <Link to={`/directory/${fishery.slug}`} className="block h-full" onClick={handleScrollTop}>
         <div className="h-48 overflow-hidden relative">

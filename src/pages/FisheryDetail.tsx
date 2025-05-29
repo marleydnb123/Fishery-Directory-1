@@ -702,7 +702,7 @@ const FisheryDetail: React.FC = () => {
                       <svg className="h-4 w-4 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
                     </span>
                   </div>
-                  <div className="mt-6">
+                  <div className="mt-6 mr-6 ml-6">
                     <GoogleMap 
                       latitude={fishery.Latitude || 0}
                       longitude={fishery.Longitude || 0}

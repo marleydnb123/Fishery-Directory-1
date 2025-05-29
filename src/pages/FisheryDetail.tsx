@@ -291,75 +291,46 @@ const FisheryDetail: React.FC = () => {
         ))}
         {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
           <p key={i} className="text-gray-700 mb-6">{line}</p>
-        ))}
+        ))} 
         
-        {/* Two-column grid below */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          {/* Left column: Facilities, Features, Species */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">Facilities</h3>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                Toilets
-              </li>
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                Cafe
-              </li>
-              <li className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                Accommodation available
-              </li>
-            </ul>
-
-            <h3 className="text-lg font-semibold mt-6 mb-3">Features</h3>
+        <div className="flex flex-col gap-6">
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
+              {fishery.facilities && fishery.facilities.length > 0 ? (
+                <ul className="space-y-2 text-gray-700">
+                  {fishery.facilities.map((facility, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>{facility}</span>
+                    </li>
+                  ))}
+                  {fishery.hasAccommodation && (
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>Accommodation available</span>
+                    </li>
+                  )}
+                </ul>
+              ) : (
+                <p className="text-gray-500 italic">No facilities information available</p>
+              )}
+          </div>
+                
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
             <div className="flex flex-wrap gap-2">
-              <span className="inline-flex items-center text-sm bg-primary-50 text-primary-800 px-3 py-1 rounded-full">
-                Day tickets
-              </span>
-              <span className="inline-flex items-center text-sm bg-primary-50 text-primary-800 px-3 py-1 rounded-full">
-                Disabled access
-              </span>
-              <span className="inline-flex items-center text-sm bg-primary-50 text-primary-800 px-3 py-1 rounded-full">
-                Night fishing
-              </span>
-            </div>
-
-            <h3 className="text-lg font-semibold mt-6 mb-3">Available Species</h3>
-            <div className="flex flex-wrap gap-2">
-              <span className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full">
-                <Fish className="h-4 w-4 mr-1" />
-                Carp
-              </span>
-              <span className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full">
-                <Fish className="h-4 w-4 mr-1" />
-                Tench
-              </span>
-              <span className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full">
-                <Fish className="h-4 w-4 mr-1" />
-                Perch
-              </span>
+              {(fishery.species || []).map((species, index) => (
+                <span 
+                  key={index}
+                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
+                >
+                  <Fish className="h-4 w-4 mr-1" />
+                  {species}
+                </span>
+              ))}
             </div> 
           </div>
-          {/* Right column: Pricing, Opening Times */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">Pricing</h3>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Adult day ticket: £10</li>
-              <li>Junior day ticket: £6</li>
-              <li>Night fishing: £20</li>
-            </ul>
-
-            <h3 className="text-lg font-semibold mt-6 mb-3">Opening Times</h3>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Monday - Friday: 7am - 7pm</li>
-              <li>Saturday - Sunday: 6am - 8pm</li>
-              <li>Night fishing: By arrangement</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        </div> 
 
 
  

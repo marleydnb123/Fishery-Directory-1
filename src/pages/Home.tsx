@@ -255,7 +255,7 @@ const Home: React.FC = () => {
             <FisheryCard fishery={fishery_of_the_week} />
           ) : (
             <div className="text-gray-500 py-16 text-center">No fishery of the week available.</div>
-          )}
+          )} 
         </div>
       </div>
 

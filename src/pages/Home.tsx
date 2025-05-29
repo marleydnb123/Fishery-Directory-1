@@ -273,10 +273,10 @@ const Home: React.FC = () => {
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
             alt="Angler with a 34lb Mirror Carp"
-            className="w-full h-64 object-cover rounded-2xl border border-blue-200 shadow"
+            className="w-full h-64 object-cover rounded-2xl mb-6 border border-blue-200 shadow"
           />
           <div>
-            <p className="text-xl font-semibold text-blue-900 mt-0 mb-2 text-center">
+            <p className="text-xl font-semibold text-blue-900 mb-2 text-center">
               34lb Mirror Carp
             </p>
             <p className="text-gray-700 mb-3 text-center">
@@ -377,9 +377,9 @@ const Home: React.FC = () => {
     </motion.div>
   </div>
 </section>
-
+ 
       {/* --- List Your Fishery Section --- */}
-<section className="py-24 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
+<section className="py-24 px-4 bg-gradient-to-br from-blue-100 via-white to-green-100">
   <div className="max-w-7xl mx-auto">
     <h2 className="text-6xl max-w-7xl font-bebas font-bold text-gray-900 mb-2 text-center tracking-tight drop-shadow-lg animate-fade-in">
       List Your Fishery

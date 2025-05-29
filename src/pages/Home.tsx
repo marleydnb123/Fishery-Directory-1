@@ -211,7 +211,7 @@ const Home: React.FC = () => {
 <section className="py-20 px-4 bg-white">
   <div className="container mx-auto max-w-6xl">
     {/* Section Title */}
-    <h2 className="text-6xl font-bebas font-bold text-blue-900 mb-12 text-left">
+    <h2 className="text-6xl font-bebas font-bold text-blue-900 mb-12 text-center">
       Weekly Highlights
     </h2>
     {/* Two-column layout */}

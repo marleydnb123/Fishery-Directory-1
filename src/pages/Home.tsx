@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   const [error_fotw, setErrorFOTW] = useState(null);
 
 
-  // Hero slideshow state
+  // Hero slideshow state 
   const [currentHero, setCurrentHero] = useState(0);
   const [prevHero, setPrevHero] = useState(0);
 

@@ -408,7 +408,7 @@ const Home: React.FC = () => {
         </a>
       </div>
       {/* Featured Listing */}
-      <div className="relative bg-gradient-to-br from-yellow-100 via-white to-yellow-50 rounded-2xl shadow-2xl p-8 flex flex-col items-center border-2 border-yellow-300 hover:scale-110 hover:shadow-yellow-400/40 transition-transform duration-300 ease-out animate-fade-in delay-200">
+      <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 rounded-2xl shadow-2xl p-8 flex flex-col items-center border-2 border-blue-300 hover:scale-110 hover:shadow-blue-400/40 transition-transform duration-300 ease-out animate-fade-in delay-200">
         <span className="absolute top-4 right-4 text-xs bg-yellow-200 text-yellow-900 px-2 py-1 rounded uppercase tracking-wider font-semibold">Featured</span>
         <span className="text-2xl font-bold text-yellow-700 mb-2">Featured</span>
         <div className="text-4xl font-extrabold mb-3 text-yellow-900">£15<span className="text-base font-normal">/mo</span></div>

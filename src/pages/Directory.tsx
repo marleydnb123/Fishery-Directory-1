@@ -620,7 +620,10 @@ const [showCoarse, setShowCoarse] = useState(true);
             <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
           </div>
         </div>
-
+      )} 
+    </div>
+  )}
+</div>
 
 
         {/* --- Fisheries Grid --- */}

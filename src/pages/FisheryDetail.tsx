@@ -543,111 +543,6 @@ const FisheryDetail: React.FC = () => {
     </div>
   </div>
 </div>
-{/* --- End Tactics & Methods Section --- */}
-
-
-{/* --- Reviews Section --- */}
-<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
-  {/* Gradient Header Bar */}
-  <div
-    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
-    style={{
-      background:
-        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-    }}
-  >
-    <svg
-      className="h-7 w-7 text-white mr-3 animate-bounce"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 17.75l-6.172 3.245 1.179-6.873-5-4.873 6.9-1.002L12 2.5l3.093 6.747 6.9 1.002-5 4.873 1.179 6.873z"
-      />
-    </svg>
-    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Reviews</h3>
-  </div>
-  {/* Reviews Content */}
-  <div className="p-6">
-    {/* Featured Review */}
-    <div className="relative mb-8">
-      <div className="bg-gradient-to-br from-primary-700 via-primary-200 to-white rounded-2xl shadow-xl p-8 border-4 border-primary-300">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 rounded-full bg-primary-700 flex items-center justify-center text-white text-3xl font-bold shadow-lg ring-4 ring-primary-300">
-            JD
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-primary-900 text-xl">Jane D.</span>
-              <span className="flex text-yellow-400 text-2xl">★★★★★</span>
-            </div>
-            <div className="text-xs text-primary-500">May 2025</div>
-          </div>
-        </div>
-        <p className="text-primary-900 text-lg italic leading-relaxed">
-          "Absolutely stunning fishery! Landed my PB carp and the atmosphere was so peaceful. Staff were super friendly and helpful. Can't wait to return!"
-        </p>
-      </div>
-      <span className="absolute top-2 right-6 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Featured</span>
-    </div>
-
-    {/* Scrollable Review River */}
-    <div className="flex gap-6 overflow-x-auto pb-2 hide-scrollbar">
-      {/* Review 2 */}
-      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
-            TS
-          </div>
-          <span className="font-semibold text-primary-800 text-lg">Tom S.</span>
-          <span className="flex text-yellow-400 text-lg">★★★★☆</span>
-        </div>
-        <p className="text-gray-700 mb-2">
-          "Beautiful location, well-stocked lakes. Only downside was a bit of mud on the pegs after rain."
-        </p>
-        <div className="text-xs text-gray-400">April 2025</div>
-      </div>
-      {/* Review 3 */}
-      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
-            SL
-          </div>
-          <span className="font-semibold text-primary-800 text-lg">Sophie L.</span>
-          <span className="flex text-yellow-400 text-lg">★★★★★</span>
-        </div>
-        <p className="text-gray-700 mb-2">
-          "Great for families and beginners. My kids caught their first fish here and loved every minute."
-        </p>
-        <div className="text-xs text-gray-400">March 2025</div>
-      </div>
-      {/* Review 4 */}
-      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
-            AG
-          </div>
-          <span className="font-semibold text-primary-800 text-lg">Alex G.</span>
-          <span className="flex text-yellow-400 text-lg">★★★★★</span>
-        </div>
-        <p className="text-gray-700 mb-2">
-          "Top-notch facilities and a great variety of fish. Highly recommend for a relaxing weekend."
-        </p>
-        <div className="text-xs text-gray-400">February 2025</div>
-      </div>
-      {/* Add more reviews as needed */}
-    </div>
-    <style>{`
-      .hide-scrollbar::-webkit-scrollbar { display: none; }
-      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    `}</style>
-  </div>
-</div>
-{/* --- End Reviews Section --- */}
 
 
 
@@ -1106,7 +1001,111 @@ rel="noopener noreferrer"
 </section>
 {/* --- End Featured Fisheries Section --- */}
 
-          
+          {/* --- End Tactics & Methods Section --- */}
+
+
+{/* --- Reviews Section --- */}
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+  {/* Gradient Header Bar */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <svg
+      className="h-7 w-7 text-white mr-3 animate-bounce"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 17.75l-6.172 3.245 1.179-6.873-5-4.873 6.9-1.002L12 2.5l3.093 6.747 6.9 1.002-5 4.873 1.179 6.873z"
+      />
+    </svg>
+    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Reviews</h3>
+  </div>
+  {/* Reviews Content */}
+  <div className="p-6">
+    {/* Featured Review */}
+    <div className="relative mb-8">
+      <div className="bg-gradient-to-br from-primary-700 via-primary-200 to-white rounded-2xl shadow-xl p-8 border-4 border-primary-300">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-16 h-16 rounded-full bg-primary-700 flex items-center justify-center text-white text-3xl font-bold shadow-lg ring-4 ring-primary-300">
+            JD
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-primary-900 text-xl">Jane D.</span>
+              <span className="flex text-yellow-400 text-2xl">★★★★★</span>
+            </div>
+            <div className="text-xs text-primary-500">May 2025</div>
+          </div>
+        </div>
+        <p className="text-primary-900 text-lg italic leading-relaxed">
+          "Absolutely stunning fishery! Landed my PB carp and the atmosphere was so peaceful. Staff were super friendly and helpful. Can't wait to return!"
+        </p>
+      </div>
+      <span className="absolute top-2 right-6 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Featured</span>
+    </div>
+
+    {/* Scrollable Review River */}
+    <div className="flex gap-6 overflow-x-auto pb-2 hide-scrollbar">
+      {/* Review 2 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            TS
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Tom S.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★☆</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Beautiful location, well-stocked lakes. Only downside was a bit of mud on the pegs after rain."
+        </p>
+        <div className="text-xs text-gray-400">April 2025</div>
+      </div>
+      {/* Review 3 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            SL
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Sophie L.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★★</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Great for families and beginners. My kids caught their first fish here and loved every minute."
+        </p>
+        <div className="text-xs text-gray-400">March 2025</div>
+      </div>
+      {/* Review 4 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            AG
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Alex G.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★★</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Top-notch facilities and a great variety of fish. Highly recommend for a relaxing weekend."
+        </p>
+        <div className="text-xs text-gray-400">February 2025</div>
+      </div>
+      {/* Add more reviews as needed */}
+    </div>
+    <style>{`
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    `}</style>
+  </div>
+</div>
+{/* --- End Reviews Section --- */}
 
         
                {/* Contact Bar */}

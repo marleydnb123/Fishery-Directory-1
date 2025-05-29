@@ -275,7 +275,7 @@ const Home: React.FC = () => {
         </h3>
         <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-0 w-full min-w-[600px] max-w-[600px] min-h-[500px] max-h-[500px] flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden">
           {/* Card Figure/Image */}
-          <div className="w-full h-44 overflow-hidden">
+          <div className="w-full h-64 overflow-hidden">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
               alt="Angler with a 34lb Mirror Carp"

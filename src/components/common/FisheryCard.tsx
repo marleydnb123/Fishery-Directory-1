@@ -73,7 +73,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
             {fishery.features.map((feature: string, idx: number) => (
             <span
             key={idx}
-            className="flex items-center text-xs bg-blue-100 text-blue-900 border border-blue-500 px-2 py-1 rounded-xl"
+            className="flex items-center text-xs bg-blue-100 text-blue-900 border border-blue-200 px-2 py-1 rounded-xl"
             >
             <Waves className="h-3 w-3 mr-1" />
             {feature}

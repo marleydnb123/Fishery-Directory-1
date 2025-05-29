@@ -222,6 +222,10 @@ const Directory: React.FC = () => {
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showCarp, setShowCarp] = useState(true);
+  const [showMatch, setShowMatch] = useState(true);
+  const [showCoarse, setShowCoarse] = useState(true);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -469,16 +473,7 @@ const Directory: React.FC = () => {
         />
         <label htmlFor="match-friendly" className="text-xs text-gray-700 font-medium">Match Fishing Friendly</label>
     </div>
-    <div className="flex items-center gap-2">
-        <input
-            type="checkbox"
-            checked={keepnetsAllowed}
-            onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
-        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-        id="keepnetsAllowed"
-        />
-        <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
-    </div>
+    
     
   {/* --- COARSE --- */}
     {/* Coarse filters */}
@@ -571,6 +566,16 @@ const Directory: React.FC = () => {
         id="coaching"
         />
         <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
+    </div>
+  <div className="flex items-center gap-2">
+        <input
+            type="checkbox"
+            checked={keepnetsAllowed}
+            onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
+        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+        id="keepnetsAllowed"
+        />
+        <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
     </div>
 </div> 
 </div>

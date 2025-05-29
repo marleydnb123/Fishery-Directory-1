@@ -231,7 +231,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-            {/* ===================== Weekly Highlights Section ===================== */}
+           {/* ===================== Weekly Highlights Section ===================== */}
 <section className="py-20 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
   <div className="container mx-auto max-w-6xl">
     {/* Section Title */}
@@ -246,7 +246,11 @@ const Home: React.FC = () => {
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-4 text-center tracking-wide">
           Fishery of the Week
         </h3>
-        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 rounded-3xl shadow-2xl p-0 w-full min-w-[600px] max-w-[600px] min-h-[450px] max-h-[450px] flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden">
+        <div className="
+          relative bg-gradient-to-br from-blue-100 via-white to-blue-50 rounded-3xl shadow-2xl p-0
+          w-full max-w-[95vw] md:min-w-[600px] md:max-w-[600px] min-h-[450px] max-h-[450px]
+          flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden
+        ">
           {loading_fotw ? (
             <div className="text-gray-500 py-16 text-center">Loading...</div>
           ) : error_fotw ? (
@@ -260,20 +264,23 @@ const Home: React.FC = () => {
       </div>
 
       {/* === Vertical Blue Divider === */}
-<div className="hidden md:flex items-center px-0">
-  <div
-    className="w-px bg-blue-700/30 rounded-full mx-auto mt-10"
-    style={{ minHeight: '500px' }}
-  ></div>
-</div>
+      <div className="hidden md:flex items-center px-0">
+        <div
+          className="w-px bg-blue-700/30 rounded-full mx-auto mt-10"
+          style={{ minHeight: '500px' }}
+        ></div>
+      </div>
 
-      
       {/* === Catch of the Week Card === */}
       <div className="flex-1 flex flex-col items-center">
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-4 text-center tracking-wide">
           Catch of the Week
         </h3>
-        <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-0 w-full min-w-[600px] max-w-[600px] min-h-[450px] max-h-[450px] flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden">
+        <div className="
+          relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-0
+          w-full max-w-[95vw] md:min-w-[600px] md:max-w-[600px] min-h-[450px] max-h-[450px]
+          flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden
+        ">
           {/* Card Figure/Image */}
           <div className="w-full h-64 overflow-hidden">
             <img
@@ -305,6 +312,7 @@ const Home: React.FC = () => {
   </div> 
 </section>
 {/* ================== End Weekly Highlights Section ================== */}
+
 
       
 {/* How It Works Section */}

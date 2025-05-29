@@ -700,11 +700,7 @@ const FisheryDetail: React.FC = () => {
                     </span>
                     <span className="inline-flex items-center">
                       <svg className="h-4 w-4 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
-                      
                     </span>
-                  </div>
-                  <div className="mt-2 text-gray-600  ml-6 text-sm">
-                    Detailed directions will be provided upon booking.
                   </div>
                   <div className="mt-6">
                     <GoogleMap 

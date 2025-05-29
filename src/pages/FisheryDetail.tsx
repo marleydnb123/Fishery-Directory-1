@@ -37,6 +37,7 @@ type Fishery = {
   Latitude: number | null;
   Longitude: number | null;
   pricing: string[];
+  opening_times: string[];
 };
 
 type Lake = {
@@ -120,6 +121,7 @@ const FisheryDetail: React.FC = () => {
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
         pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [],
+        opening_times: Array.isArray(fisheryData.opening_times) ? fisheryData.opening_times : [],
       }); 
 
       // Fetch lakes for this fishery

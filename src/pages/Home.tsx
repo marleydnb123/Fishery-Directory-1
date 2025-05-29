@@ -260,9 +260,13 @@ const Home: React.FC = () => {
       </div>
 
       {/* === Vertical Blue Divider === */}
-      <div className="hidden md:flex items-center px-0">
-        <div className="w-px mt-50 bg-blue-700/30 rounded-full mx-auto" style={{ minHeight: '500px' }}></div>
-      </div>
+<div className="hidden md:flex items-center px-0">
+  <div
+    className="w-px bg-blue-700/30 rounded-full mx-auto mt-5"
+    style={{ minHeight: '500px' }}
+  ></div>
+</div>
+
       
       {/* === Catch of the Week Card === */}
       <div className="flex-1 flex flex-col items-center">

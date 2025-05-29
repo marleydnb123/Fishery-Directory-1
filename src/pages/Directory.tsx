@@ -456,7 +456,8 @@ const Directory: React.FC = () => {
         />
         <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
     </div>
-    {/* --- MATCH --- */}
+   
+  {/* --- MATCH --- */}
     {/* Match filters */}
     <div className="flex items-center gap-2">
         <input
@@ -478,7 +479,8 @@ const Directory: React.FC = () => {
         />
         <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
     </div>
-    {/* --- COARSE --- */}
+    
+  {/* --- COARSE --- */}
     {/* Coarse filters */}
     <div className="flex items-center gap-2">
         <input

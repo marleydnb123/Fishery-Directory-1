@@ -235,11 +235,11 @@ const Home: React.FC = () => {
 <section className="py-20 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
   <div className="container mx-auto max-w-6xl">
     {/* Section Title */}
-    <h2 className="text-6xl font-bebas font-bold text-gray-900 underline mb-12 text-center">
+    <h2 className="text-6xl font-bebas font-bold text-gray-900 mb-12 text-center">
       Weekly Highlights
     </h2>
     {/* Two-column layout */}
-    <div className="flex flex-col md:flex-row items-stretch justify-center gap-12">
+    <div className="flex flex-col md:flex-row items-stretch justify-center gap-12"> 
       
       {/* === Fishery of the Week Card === */}
       <div className="flex-1 max-w-xl flex flex-col items-center">
@@ -271,7 +271,7 @@ const Home: React.FC = () => {
         </h3>
         <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-3xl shadow-2xl p-8 w-full transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 flex flex-col justify-between">
           <img
-            src="https://www.fishermanholidays.com/images-waters/jonchery/catches/_1600x980_crop_center-center_80_line/109390/20231022_1851176545bfb5e07082.50810937.jpeg"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
             alt="Angler with a 34lb Mirror Carp"
             className="w-full h-64 object-cover rounded-2xl mb-6 border border-blue-200 shadow"
           />

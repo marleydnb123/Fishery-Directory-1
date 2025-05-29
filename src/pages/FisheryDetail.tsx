@@ -622,7 +622,6 @@ const FisheryDetail: React.FC = () => {
 
 
                     <div className="flex flex-col md:flex-row gap-6">
-  {/* Booking & Contact Info Card */}
   <div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
     {/* Gradient Header Bar */}
     <div
@@ -638,7 +637,7 @@ const FisheryDetail: React.FC = () => {
       </h3>
     </div>
     {/* Card Content */}
-    <div className="p-4 flex flex-col gap-3">
+    <div className="p-4 flex flex-col gap-2">
       <ul className="text-gray-700 space-y-1 leading-relaxed text-sm">
         <li>
           <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
@@ -648,6 +647,9 @@ const FisheryDetail: React.FC = () => {
         </li>
         <li>
           <span className="font-semibold text-primary-700">Pricing:</span> £20 per day ticket, £15 per junior/concession. Group rates available on request.
+        </li>
+        <li>
+          <span className="font-semibold text-primary-700">Opening times:</span> 7:00am – 7:00pm (Mon–Sun)
         </li>
         <li>
           <span className="font-semibold text-primary-700">Phone:</span>
@@ -671,10 +673,14 @@ const FisheryDetail: React.FC = () => {
             <span className="ml-1 text-gray-400">Not listed</span>
           )}
         </li>
+        <li>
+          <span className="font-semibold text-primary-700">Payment:</span>
+          <span className="ml-1">Cash, Card, Bank Transfer</span>
+        </li>
       </ul>
 
-      {/* Button + Socials Row */}
-      <div className="flex items-center justify-between mt-2">
+      {/* Contact Button */}
+      <div className="mt-3">
         {fishery.contact_email ? (
           <a
             href={`mailto:${fishery.contact_email}`}
@@ -685,51 +691,69 @@ const FisheryDetail: React.FC = () => {
         ) : (
           <span className="text-xs text-gray-400 italic">No email for direct booking</span>
         )}
-        <div className="flex items-center gap-2">
-          <a
-            href="https://facebook.com/yourpage"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
-              alt="Facebook"
-              className="h-9 w-9 hover:opacity-80 transition-opacity"
-            />
-          </a>
-          <a
-            href="https://instagram.com/yourpage"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-              alt="Instagram"
-              className="h-9 w-9 hover:opacity-80 transition-opacity"
-            />
-          </a>
-          <a
-            href="https://x.com/yourpage"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X (Twitter)"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png"
-              alt="X"
-              className="h-9 w-9 hover:opacity-80 transition-opacity"
-            />
-          </a>
-        </div>
       </div>
 
-      <div className="text-xs text-primary-500 italic mt-2">
+      {/* Social Icons Row */}
+      <div className="flex items-center gap-4 mt-6">
+        <a
+          href="https://facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+            alt="Facebook"
+            className="h-10 w-10 hover:opacity-80 transition-opacity"
+          />
+        </a>
+        <a
+          href="https://instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+            alt="Instagram"
+            className="h-10 w-10 hover:opacity-80 transition-opacity"
+          />
+        </a>
+        <a
+          href="https://x.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X (Twitter)"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png"
+            alt="X"
+            className="h-10 w-10 hover:opacity-80 transition-opacity"
+          />
+        </a>
+        {fishery.contact_whatsapp && (
+          <a
+            href={`https://wa.me/${fishery.contact_whatsapp.replace(/\D/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+              alt="WhatsApp"
+              className="h-10 w-10 hover:opacity-80 transition-opacity"
+            />
+          </a>
+        )}
+      </div>
+
+      <div className="text-xs text-primary-500 italic mt-3">
         Fast replies, friendly staff. We do not handle bookings directly.
       </div>
     </div>
   </div>
+</div>
+
 
 
               

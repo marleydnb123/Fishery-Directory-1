@@ -44,14 +44,16 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
   return (
     <APIProvider 
       apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "AIzaSyDnt92TtJtFGhGCtzarFJ7Nnt_hI3XsVU4"}
-      onError={() => setMapError(true)}
+      onError={(e) => {
+        console.error('Google Maps Error:', e);
+        setMapError(true);
+      }}
     >
       <div className="h-[300px] rounded-lg overflow-hidden"> 
         <Map
           zoom={14}
           center={{ lat: latitude, lng: longitude }}
-          gestureHandling={'greedy'}
-          disableDefaultUI={false}
+          gestureHandling="cooperative"
           options={{
             zoomControl: true,
             mapTypeControl: true,
@@ -59,13 +61,22 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
             streetViewControl: true,
             rotateControl: true,
             fullscreenControl: true,
-            gestureHandling: 'greedy',
-            scrollwheel: true,
-            draggable: true
+            gestureHandling: "cooperative",
+            draggableCursor: "move",
+            draggingCursor: "move",
+            clickableIcons: true,
+            keyboardShortcuts: true
           }}
           mapId="fishery-map"
         >
-          <Marker position={{ lat: latitude, lng: longitude }} title={name} /> 
+          <Marker 
+            position={{ lat: latitude, lng: longitude }} 
+            title={name}
+            options={{
+              draggable: false,
+              animation: google.maps.Animation.DROP
+            }}
+          /> 
         </Map>
       </div>
     </APIProvider>

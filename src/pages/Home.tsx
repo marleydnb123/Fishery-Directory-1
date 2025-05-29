@@ -437,7 +437,7 @@ const Home: React.FC = () => {
         </ul>
         <a
           href="/contact"
-          className="mt-auto bg-blue500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg shadow transition-all duration-200"
+          className="mt-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg shadow transition-all duration-200"
         >
           Get Featured
         </a>

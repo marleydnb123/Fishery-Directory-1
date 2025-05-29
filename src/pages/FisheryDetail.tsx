@@ -651,9 +651,9 @@ const FisheryDetail: React.FC = () => {
         <ul className="mb-4 text-gray-700 space-y-2 leading-relaxed">
           <li>
             <span className="font-semibold text-primary-700">Day tickets:</span> <ul className="ml-4 list-disc">
-              {(fishery.pricing && fishery.pricing.length > 0)
-                ? fishery.pricing.map((price, idx) => (
-                    <li key={idx}>{price}</li>
+              {(fishery.day_tickets && fishery.day_tickets.length > 0)
+                ? fishery.day_tickets.map((day_tickets, idx) => (
+                    <li key={idx}>{day_tickets}</li>
                   ))
                 : <li>Not listed</li>
               }

@@ -650,7 +650,7 @@ const FisheryDetail: React.FC = () => {
       <div>
         {/* Booking Info Section */}
         <h4 className="text-xl font-bold text-primary-700 mb-2 underline">Booking Information</h4>
-        <ul className="mb-4 text-gray-700 space-y-2 leading-relaxed">
+        <ul className="mb-2 text-gray-700 space-y-2 leading-relaxed">
           <li>
             <span className="font-semibold text-primary-700">Day tickets:</span> <ul className="ml-4 list-disc">
               {(fishery.day_tickets && fishery.day_tickets.length > 0)

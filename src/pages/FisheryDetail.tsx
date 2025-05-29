@@ -724,7 +724,7 @@ const FisheryDetail: React.FC = () => {
             <span className="font-semibold text-primary-700">Address:</span> {fishery.address || "Not listed"}
           </li>
         </ul>
-        <div className=" mb-2 text-m text-primary-500 italic">
+        <div className=" mb-2 text-sm text-primary-500 italic">
           Fast replies & friendly staff. We do not handle bookings directly, contact the Fishery directly to book.
         </div> 
       </div>

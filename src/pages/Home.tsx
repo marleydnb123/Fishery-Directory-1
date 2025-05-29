@@ -292,7 +292,7 @@ const Home: React.FC = () => {
           {/* Card Body */}
           <div className="flex-1 flex flex-col justify-between p-4">
             <div>
-              <h4 className="text-2xl font-bold text-blue-900 mb-2 text-center">
+              <h4 className="text-3xl font-bebas font-bold text-gray-900 mb-2 text-center">
                 34lb Mirror Carp
               </h4>
               <p className="text-gray-700 mb-2 text-center">

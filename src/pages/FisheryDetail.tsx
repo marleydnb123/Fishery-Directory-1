@@ -646,7 +646,7 @@ const FisheryDetail: React.FC = () => {
           <li>
             <span className="font-semibold text-primary-700">Address:</span> {fishery.address || "Not listed"}
           </li>
-        </ul>
+      
       </div>
     </div>
   </div>

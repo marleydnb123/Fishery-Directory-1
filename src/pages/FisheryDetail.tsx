@@ -689,7 +689,7 @@ const FisheryDetail: React.FC = () => {
           </li>
         </ul>
         
-        <div className="mt-4 mb-4 text-xs text-primary-500 italic">
+        <div className="mt-4 mb-2 text-xs text-primary-500 italic">
           Fast replies, friendly staff. We do not handle bookings directly.
         </div>
     </div>

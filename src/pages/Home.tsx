@@ -171,7 +171,7 @@ const Home: React.FC = () => {
 
 
       {/* Featured Fisheries Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4 bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200">
         <div className="container mx-auto">
           <motion.h2 
             className="text-6xl font-bebas font-bold text-gray-900 mb-2 text-center"

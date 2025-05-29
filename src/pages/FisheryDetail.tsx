@@ -286,7 +286,9 @@ const FisheryDetail: React.FC = () => {
         >
           About {fishery.name} 
         </h2> 
-         {/* --- Stats Card --- */}
+        
+        
+        {/* --- Stats Card --- */}
         <div className="mb-8">
           <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
             {/* Visitors */}
@@ -309,6 +311,8 @@ const FisheryDetail: React.FC = () => {
           </div>
         </div>
         {/* --- End Stats Card --- */}
+       
+        
         {fishery.description.split(/\r?\n/).map((line, i) => (
           <p key={i} className="text-gray-700 mb-6">{line}</p>
         ))}

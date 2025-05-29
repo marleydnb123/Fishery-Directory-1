@@ -621,7 +621,7 @@ const FisheryDetail: React.FC = () => {
 
 
 
-                    <div className="flex flex-col md:flex-row gap-6">
+<div className="flex flex-col md:flex-row gap-6">
   <div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
     {/* Gradient Header Bar */}
     <div
@@ -752,7 +752,7 @@ const FisheryDetail: React.FC = () => {
       </div>
     </div>
   </div>
-</div>
+
 
 
 

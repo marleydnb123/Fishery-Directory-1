@@ -40,6 +40,7 @@ type Fishery = {
   opening_times: string[];
   day_tickets: string[];
   payments: string[];
+  record_biggest_fish: string,
 };
 
 type Lake = {

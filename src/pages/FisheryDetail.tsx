@@ -347,8 +347,7 @@ const FisheryDetail: React.FC = () => {
     <div className="flex-1 flex flex-col items-center">
       <span className="text-3xl font-bold text-yellow-900">{fishery.record_match_weight ?? '—'}</span>
       <span className="text-sm text-yellow-800 mt-1">Record Match Weight</span>
-    </div>
-  </div>
+
             </div>  
           </div> 
         </div> 

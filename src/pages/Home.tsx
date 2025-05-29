@@ -209,24 +209,51 @@ const Home: React.FC = () => {
 
 
       <section className="py-16 px-4 bg-white">
-  <div className="container mx-auto max-w-4xl">
-    <h2 className="text-5xl font-bebas font-bold text-blue-900 mb-4 text-center">
-      Fishery of the Week
-    </h2>
-    <p className="text-lg text-gray-700 text-center mb-10 max-w-2xl mx-auto">
-      Each week, we highlight a top UK fishery. Discover this week's featured spot and what makes it special!
-    </p>
-    <div className="flex justify-center">
-      {featuredFisheries.length > 0 ? (
-        <FisheryCard fishery={featuredFisheries[0]} />
-      ) : (
-        <div className="text-gray-500 text-center py-12">
-          No featured fishery available.
+  <div className="container mx-auto max-w-6xl">
+    <div className="flex flex-col md:flex-row items-stretch gap-12">
+      {/* Left: Fishery of the Week */}
+      <div className="flex-1">
+        <h2 className="text-5xl font-bebas font-bold text-blue-900 mb-6 text-left">
+          Fishery of the Week
+        </h2>
+        {featuredFisheries.length > 0 ? (
+          <FisheryCard fishery={featuredFisheries[0]} />
+        ) : (
+          <div className="text-gray-500 py-12">No featured fishery available.</div>
+        )}
+      </div>
+      
+      {/* Center: Blue vertical line */}
+      <div className="hidden md:flex items-center px-4">
+        <div className="h-96 w-1 bg-blue-700 rounded-full mx-auto"></div>
+      </div>
+      
+      {/* Right: Catch of the Week */}
+      <div className="flex-1 flex flex-col items-start">
+        <h2 className="text-5xl font-bebas font-bold text-blue-900 mb-6 text-left">
+          Catch of the Week
+        </h2>
+        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 w-full">
+          <img
+            src="https://www.fishermanholidays.com/images-waters/jonchery/catches/_1600x980_crop_center-center_80_line/109390/20231022_1851176545bfb5e07082.50810937.jpeg"
+            alt="Angler with a 34lb Mirror Carp"
+            className="w-full h-56 object-cover rounded-xl mb-4"
+          />
+          <p className="text-lg font-semibold text-blue-900 mb-2">
+            34lb Mirror Carp
+          </p>
+          <p className="text-gray-700 mb-2">
+            Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill.
+          </p>
+          <p className="text-gray-600 text-sm">
+            <span className="font-semibold">Caught at:</span> Willow Lake Carp Fishery
+          </p>
         </div>
-      )}
+      </div>
     </div>
   </div>
 </section>
+
 
 {/* How It Works Section */}
 <section className="py-20 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">

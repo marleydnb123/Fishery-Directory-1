@@ -43,6 +43,7 @@ export interface Fishery {
   keepnets_allowed?: boolean;  // Fixed syntax
   tactics?: string; 
   pricing?: string[];
+  opening_times?: string[];
 }
 
 export interface Lake {

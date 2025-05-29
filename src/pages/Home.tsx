@@ -262,7 +262,7 @@ const Home: React.FC = () => {
       {/* === Vertical Blue Divider === */}
 <div className="hidden md:flex items-center px-0">
   <div
-    className="w-px bg-blue-700/30 rounded-full mx-auto mt-10"
+    className="w-px bg-blue-700/30 rounded-full mx-auto mt-15"
     style={{ minHeight: '500px' }}
   ></div>
 </div>

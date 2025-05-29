@@ -17,7 +17,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
     <motion.div 
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="bg-gradient-to-b from-blue-50 via-white to-blue-100 border-blue-300 rounded-xl shadow-md overflow-hidden h-full"
+      className="bg-gradient-to-b from-blue-50 via-white to-blue-100 border border-blue-300 rounded-xl shadow-md overflow-hidden h-full"
     >
       <Link to={`/directory/${fishery.slug}`} className="block h-full" onClick={handleScrollTop}>
         <div className="h-48 overflow-hidden relative">
@@ -73,7 +73,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
             {fishery.features.map((feature: string, idx: number) => (
             <span
             key={idx}
-            className="flex items-center text-xs bg-blue-100 text-blue-900 px-2 py-1 rounded-full"
+            className="flex items-center text-xs bg-blue-100 text-blue-900 border border-blue-500 px-2 py-1 rounded-full"
             >
             <Waves className="h-3 w-3 mr-1" />
             {feature}

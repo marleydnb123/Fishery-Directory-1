@@ -206,7 +206,28 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
- 
+
+
+      <section className="py-16 px-4 bg-white">
+  <div className="container mx-auto max-w-4xl">
+    <h2 className="text-5xl font-bebas font-bold text-blue-900 mb-4 text-center">
+      Fishery of the Week
+    </h2>
+    <p className="text-lg text-gray-700 text-center mb-10 max-w-2xl mx-auto">
+      Each week, we highlight a top UK fishery. Discover this week's featured spot and what makes it special!
+    </p>
+    <div className="flex justify-center">
+      {featuredFisheries.length > 0 ? (
+        <FisheryCard fishery={featuredFisheries[0]} />
+      ) : (
+        <div className="text-gray-500 text-center py-12">
+          No featured fishery available.
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
 {/* How It Works Section */}
 <section className="py-20 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
   <div className="container mx-auto">

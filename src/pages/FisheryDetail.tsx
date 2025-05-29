@@ -278,7 +278,15 @@ const FisheryDetail: React.FC = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-        {/* Stats Card */}
+        
+        <h2
+          className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
+          style={{
+            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+          }}
+        >
+          About {fishery.name} 
+          {/* Stats Card */}
 <div className="mb-8">
   <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
     {/* Visitors */}
@@ -300,13 +308,6 @@ const FisheryDetail: React.FC = () => {
     </div>
   </div>
 </div>
-        <h2
-          className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
-          style={{
-            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-          }}
-        >
-          About {fishery.name} 
         </h2> 
         {fishery.description.split(/\r?\n/).map((line, i) => (
           <p key={i} className="text-gray-700 mb-6">{line}</p>

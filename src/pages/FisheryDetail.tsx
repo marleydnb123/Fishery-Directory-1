@@ -685,7 +685,14 @@ const FisheryDetail: React.FC = () => {
             </ul>
           </li>
           <li>
-            <span className="font-semibold text-primary-700">Payment:</span> Cash, Card, Bank Transfer
+            <span className="font-semibold text-primary-700">Payment:</span> <ul className="ml-4 list-disc">
+              {(fishery.payment && fishery.payment.length > 0)
+                ? fishery.payment.map((payment, idx) => (
+                    <li key={idx}>{payment}</li>
+                  ))
+                : <li>Not listed</li>
+              }
+            </ul>
           </li>
         </ul>
         {/* Contact Info Section */}

@@ -17,7 +17,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
     <motion.div 
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200 rounded-xl shadow-md overflow-hidden h-full"
+      className="bg-white rounded-xl shadow-md overflow-hidden h-full"
     >
       <Link to={`/directory/${fishery.slug}`} className="block h-full" onClick={handleScrollTop}>
         <div className="h-48 overflow-hidden relative">
@@ -55,13 +55,14 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
           <p className="text-gray-600 mb-4 line-clamp-2 min-h-[2.5rem]">{fishery.description}</p>
           
           <div className="hidden md:flex flex-nowrap overflow-hidden gap-2 mt-2">
-  {fishery.species.slice(0, 5).map((species, index) => (
-    <span 
-      key={index}
-      className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
-    >
-      {species}
-    </span>
+          {fishery.species.slice(0, 7).map((species, index) => (
+          <span 
+          key={index}
+          className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
+          >
+          <Fish className="h-3 w-3 mr-1" />
+          {species}
+          </span>
             ))}
           </div>
 

@@ -139,7 +139,7 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="bg-white rounded-xl shadow-md p-8 h-full">
-              <h2 className="text-2xl font-semibold mb-6">Get in Touch</h2>
+              <h2 className="text-4xl font-bebas font-semibold mb-6">Get in Touch</h2>
               
               <div className="space-y-6">
                 <div className="flex items-start">

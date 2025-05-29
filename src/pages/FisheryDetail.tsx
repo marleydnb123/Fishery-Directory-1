@@ -693,9 +693,6 @@ const FisheryDetail: React.FC = () => {
         </div>
       </div>
     </div>
-  </div>
-</div>
-
 
 
 

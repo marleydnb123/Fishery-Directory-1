@@ -58,7 +58,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
           {fishery.species.slice(0, 6).map((species, index) => (
           <span 
           key={index}
-          className="flex items-center text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
+          className="flex items-center text-xs bg-primary-100 border border-primary-100 text-primary-900 px-2 py-1 rounded-full"
           >
           <Fish className="h-3 w-3 mr-1" />
           {species}

@@ -1043,17 +1043,51 @@ rel="noopener noreferrer"
             <div className="flex items-center gap-4">
               {fishery.website && (
                 <a 
-                  href={fishery.website}
+                  href={`${fishery.website}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-white text-primary-900 px-6 py-2 rounded-lg font-semibold shadow hover:bg-primary-100 hover:text-primary-700 transition"
                 >
+                  <Globe className="h-5 w-5" />
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.95 7.07l-.71-.71M4.05 4.93l-.71-.71" />
                   </svg>
                   Visit Website
                 </a>
               )}
+              <div className="flex gap-3">
+                <a 
+                  href="https://facebook.com/broomfisheries" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary-200 hover:text-white transition"
+                >
+                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://twitter.com/broomfisheries" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary-200 hover:text-white transition"
+                >
+                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://instagram.com/broomfisheries" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary-200 hover:text-white transition"
+                >
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" />
+                  </svg>
+                </a>
+              </div>
               {/* Example: Add social icons if you want */}
               {/* 
               <a href="#" className="text-primary-200 hover:text-white transition">

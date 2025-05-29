@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { APIProvider, Map, Marker, useMapsLibrary } from '@vis.gl/react-google-maps';
 import { MapPin } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface GoogleMapProps {
   latitude: number;
@@ -8,15 +9,10 @@ interface GoogleMapProps {
   name: string;
 }
 
-/**
- * GoogleMap Component
- * 
- * Displays an interactive Google Map with a marker at the specified location.
- * Includes fallback UI for cases where the map cannot be loaded.
- */
 const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
   const [mapError, setMapError] = useState<boolean>(false);
   const coreLibrary = useMapsLibrary('core');
+  const [mapInstance, setMapInstance] = useState(null);
 
   // Early return if coordinates are missing
   if (!latitude || !longitude) {
@@ -53,8 +49,8 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
       <div className="h-[300px] rounded-lg overflow-hidden"> 
         <Map
           zoom={14}
+          gestureHandling={'greedy'}
           center={{ lat: latitude, lng: longitude }}
-          gestureHandling="cooperative"
           options={{
             zoomControl: true,
             mapTypeControl: true,
@@ -62,13 +58,12 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
             streetViewControl: true,
             rotateControl: true,
             fullscreenControl: true,
-            gestureHandling: "cooperative",
-            draggableCursor: "move",
-            draggingCursor: "move",
+            gestureHandling: "greedy",
             clickableIcons: true,
             keyboardShortcuts: true
           }}
           mapId="fishery-map"
+          onLoad={(map) => setMapInstance(map)}
         >
           {coreLibrary && (
             <Marker 

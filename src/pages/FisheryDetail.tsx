@@ -621,130 +621,59 @@ const FisheryDetail: React.FC = () => {
 
 
 
-<div className="flex flex-col md:flex-row gap-6">
-  {/* Booking Information Card */}
-  <div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
-    {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
-    <div
-      className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
-      style={{
-        background:
-          "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-      }}
+                    <div className="flex flex-col md:flex-row gap-6">
+             {/* Booking Information Card */}
+<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
+  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
+    <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
+  </div>
+  {/* Card Content */}
+  <div className="p-6"> 
+    <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
+      <li>
+        <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
+      </li>
+      <li> 
+        <span className="font-semibold text-primary-700">Phone:</span>
+        <a 
+          href={`tel:${fishery.contact_phone || ''}`}
+          className="ml-1 text-primary-600 underline hover:text-primary-800"
+        >
+          {fishery.contact_phone || "Not listed"}
+        </a>
+      </li>
+      <li>
+        <span className="font-semibold text-primary-700">Email:</span>
+        <a
+          href={`mailto:${fishery.contact_email || ''}`}
+          className="ml-1 text-primary-600 underline hover:text-primary-800"
+        >
+          {fishery.contact_email || "Not listed"}
+        </a>
+      </li>
+    </ul>
+    <a
+      href={`mailto:${fishery.contact_email || ''}`}
+      className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
     >
-      <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
-      <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
-    </div>
-    {/* Card Content */}
-    <div className="p-6 flex flex-col h-full justify-between">
-      <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
-        <li>
-          <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Pricing:</span> £20 per day ticket, £15 per junior/concession. Group rates available on request.
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Opening times:</span> 7:00am – 7:00pm (Mon–Sun)
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Payment:</span> Cash, Card, Bank Transfer
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Address:</span> 123 Lakeside Lane, Anglingtown, AB12 3CD
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Phone:</span>
-          <a
-            href={`tel:${fishery.contact_phone || ''}`}
-            className="ml-1 text-primary-600 underline hover:text-primary-800"
-          >
-            {fishery.contact_phone || "Not listed"}
-          </a>
-        </li>
-        <li>
-          <span className="font-semibold text-primary-700">Email:</span>
-          {fishery.contact_email ? (
-            <a
-              href={`mailto:${fishery.contact_email}`}
-              className="ml-1 text-primary-600 underline hover:text-primary-800"
-            >
-              {fishery.contact_email}
-            </a>
-          ) : (
-            <span className="ml-1 text-gray-400">Not listed</span>
-          )}
-        </li>
-      </ul>
-      <a
-        href={fishery.contact_email ? `mailto:${fishery.contact_email}` : undefined}
-        className={`inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${fishery.contact_email ? "" : "pointer-events-none opacity-50"}`}
-        tabIndex={fishery.contact_email ? 0 : -1}
-        aria-disabled={!fishery.contact_email}
-      >
-        Contact for Booking
-      </a>
-      <div className="mt-4 text-xs text-primary-500 italic">
-        Fast replies, friendly staff. We do not handle bookings directly.
-      </div>
-      {/* Social Icons Row */}
-      <div className="flex items-center gap-4 ">
-        <a
-          href="https://facebook.com/yourpage"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook"
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
-            alt="Facebook"
-            className="h-10 w-10 hover:opacity-80 transition-opacity"
-          />
-        </a>
-        <a
-          href="https://instagram.com/yourpage"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-            alt="Instagram"
-            className="h-10 w-10 hover:opacity-80 transition-opacity"
-          />
-        </a>
-        <a
-          href="https://x.com/yourpage"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="X (Twitter)"
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png"
-            alt="X"
-            className="h-10 w-10 hover:opacity-80 transition-opacity"
-          />
-        </a>
-        {fishery.contact_whatsapp && (
-          <a
-            href={`https://wa.me/${fishery.contact_whatsapp.replace(/\D/g, '')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-              alt="WhatsApp"
-              className="h-10 w-10 hover:opacity-80 transition-opacity"
-            />
-          </a>
-        )}
-      </div>
+      Contact for Booking
+    </a>
+    <div className="mt-4 text-xs text-primary-500 italic">
+      Fast replies, friendly staff. We do not handle bookings directly.
     </div>
   </div>
+</div>
 
 
               

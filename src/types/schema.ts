@@ -45,6 +45,7 @@ export interface Fishery {
   pricing?: string[];
   opening_times?: string[];
   day_tickets?: string[];
+  payments?: string[];
 }
 
 export interface Lake {

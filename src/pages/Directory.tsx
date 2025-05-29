@@ -620,7 +620,6 @@ const [showCoarse, setShowCoarse] = useState(true);
     </div>
 </div> 
 </div>
-</div>
 
 
         {/* --- Fisheries Grid --- */}

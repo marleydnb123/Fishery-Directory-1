@@ -792,7 +792,7 @@ const FisheryDetail: React.FC = () => {
                       
                     </span>
                   </div>
-                  <div className="mt-6 mr-6 ml-6">
+                  <div className="mt-6 mr-6 ml-6 mb-6">
                     <GoogleMap 
                       latitude={fishery.Latitude || 0}
                       longitude={fishery.Longitude || 0}

@@ -551,7 +551,7 @@ const FisheryDetail: React.FC = () => {
 
 <div className="flex flex-col md:flex-row gap-6">
   {/* Booking Information Card */}
-  <div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0 flex flex-col">
+  <div className="flex-1 bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0 flex flex-col">
     {/* Gradient Header Bar */}
     <div
       className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
@@ -659,7 +659,7 @@ const FisheryDetail: React.FC = () => {
 
               
               {/* Location Card */}
-<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
+<div className="flex-1 bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
   {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
@@ -925,7 +925,7 @@ rel="noopener noreferrer"
 
  
 {/* --- Featured Fisheries Section --- */}
-<section className="py-12 px-4 bg-gray-50">
+<section className="py-12 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-50">
   <div className="container mx-auto shadow-lg rounded-t-xl overflow-hidden">
     {/* Header Bar */}
     <div

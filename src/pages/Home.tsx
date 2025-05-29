@@ -267,7 +267,7 @@ const Home: React.FC = () => {
       <div className="hidden md:flex items-center px-0">
         <div
           className="w-px bg-blue-700/30 rounded-full mx-auto mt-10"
-          style={{ minHeight: '500px' }}
+          style={{ minHeight: '490px' }}
         ></div>
       </div>
 

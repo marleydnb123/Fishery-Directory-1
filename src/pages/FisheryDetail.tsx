@@ -634,7 +634,7 @@ const FisheryDetail: React.FC = () => {
     >
       <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
       <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">
-        Booking Information
+        Booking & Contact Information
       </h3>
     </div>
     {/* Card Content */}

@@ -51,11 +51,11 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
           zoom={14}
           center={{ lat: latitude, lng: longitude }}
           mapId="fishery-map"
-         options={{
+          options={{
   scrollwheel: true,
   draggable: true,
   zoomControl: true,
-}}
+
 
           }}
         >

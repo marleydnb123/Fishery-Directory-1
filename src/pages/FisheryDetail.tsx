@@ -745,7 +745,7 @@ const FisheryDetail: React.FC = () => {
                       Parking available
                     </span>
                     <span className="inline-flex items-center">
-                      <svg className="h-4 w-4 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
+                      
                     </span>
                   </div>
                   <div className="mt-6 mr-6 ml-6">

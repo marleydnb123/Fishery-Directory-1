@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Fish, Info, Book, Phone, Waves, Globe } from 'lucide-react';
+import { MapPin, Fish, Book, Waves } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
-import GoogleMap from '../components/common/GoogleMap';
+import BookingInfo from '../components/common/BookingInfo';
+import LocationInfo from '../components/common/LocationInfo';
  
 
 // Define your types if you don't already have them
@@ -621,100 +622,19 @@ const FisheryDetail: React.FC = () => {
 
 
                     <div className="flex flex-col md:flex-row gap-6">
-             {/* Booking Information Card */}
-<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
-  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
-  <div
-    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
-    style={{
-      background:
-        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-    }}
-  >
-    <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
-    <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
-  </div>
-  {/* Card Content */}
-  <div className="p-6">
-    <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
-      <li>
-        <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
-      </li>
-      <li>
-        <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
-      </li>
-      <li>
-        <span className="font-semibold text-primary-700">Phone:</span>
-        <a
-          href={`tel:${fishery.contact_phone || ''}`}
-          className="ml-1 text-primary-600 underline hover:text-primary-800"
-        >
-          {fishery.contact_phone || "Not listed"}
-        </a>
-      </li>
-      <li>
-        <span className="font-semibold text-primary-700">Email:</span>
-        <a
-          href={`mailto:${fishery.contact_email || ''}`}
-          className="ml-1 text-primary-600 underline hover:text-primary-800"
-        >
-          {fishery.contact_email || "Not listed"}
-        </a>
-      </li>
-    </ul>
-    <a
-      href={`mailto:${fishery.contact_email || ''}`}
-      className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-    >
-      Contact for Booking
-    </a>
-    <div className="mt-4 text-xs text-primary-500 italic">
-      Fast replies, friendly staff. We do not handle bookings directly.
-    </div>
-  </div>
-</div>
 
-
-              
-              {/* Location Card */}
-<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
-  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
-  <div
-    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
-    style={{
-      background:
-        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-    }}
-  >
-                  <MapPin className="h-7 w-7 text-white mr-3 animate-bounce" />
-                  <h3 className="text-3xl font-bebas font-semibold text-white tracking-wide">Location</h3>
-                </div>
-                <div className="mb-5 mt-6 text-gray-700 leading-relaxed">
-                  <div className="ml-6">
-  <span className="font-semibold">{fishery.name}</span> is located in <span className="font-semibold">{fishery.district}</span>, UK.
-</div>
-                  <div className="mt-2 text-primary-700 flex flex-wrap gap-4 text-sm">
-                    <span className="inline-flex items-center">
-                      <svg className="h-4 w-4 mr-1 ml-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
-                      Parking available
-                    </span>
-                    <span className="inline-flex items-center">
-                      <svg className="h-4 w-4 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
-                      
-                    </span>
-                  </div>
-                  <div className="mt-2 text-gray-600  ml-6 text-sm">
-                    Detailed directions will be provided upon booking.
-                  </div>
-                  <div className="mt-6">
-                    <GoogleMap 
-                      latitude={fishery.Latitude || 0}
-                      longitude={fishery.Longitude || 0}
-                      name={fishery.name}
-                    />
-                  </div>
-                </div>
-              </div>
+              <BookingInfo
+                name={fishery.name}
+                contact_phone={fishery.contact_phone}
+                contact_email={fishery.contact_email}
+                website={fishery.website}
+              />
+              <LocationInfo
+                name={fishery.name}
+                district={fishery.district}
+                latitude={fishery.Latitude}
+                longitude={fishery.Longitude}
+              />
             </div>
           </motion.div>
         )} 

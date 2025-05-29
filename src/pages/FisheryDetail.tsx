@@ -293,11 +293,9 @@ const FisheryDetail: React.FC = () => {
           <p key={i} className="text-gray-700 mb-6">{line}</p>
         ))} 
           
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Column */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
+        <div className="flex flex-col gap-6">
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
               {fishery.facilities && fishery.facilities.length > 0 ? (
                 <ul className="space-y-2 text-gray-700">
                   {fishery.facilities.map((facility, index) => (
@@ -316,87 +314,24 @@ const FisheryDetail: React.FC = () => {
               ) : (
                 <p className="text-gray-500 italic">No facilities information available</p>
               )}
-            </div>
-                  
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Available Species</h3>
-              <div className="flex flex-wrap gap-2">
-                {(fishery.species || []).map((species, index) => (
-                  <span 
-                    key={index}
-                    className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
-                  >
-                    <Fish className="h-4 w-4 mr-1" />
-                    {species}
-                  </span> 
-                ))}
-              </div> 
-            </div>
           </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Pricing</h3>
-              {fishery.pricing && fishery.pricing.length > 0 ? (
-                <div className="space-y-2">
-                  {fishery.pricing.map((pricing, index) => (
-                    <div key={index} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                      <span>{pricing}</span>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500 italic">Contact fishery for pricing information</p>
-              )}
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Opening Times</h3>
-              {fishery.opening_times && fishery.opening_times.length > 0 ? (
-                <div className="space-y-2">
-                  {fishery.opening_times.map((time, index) => (
-                    <div key={index} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                      <span>{time}</span>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500 italic">Contact fishery for opening times</p>
-              )}
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Contact Information</h3>
-              <div className="space-y-2">
-                {fishery.phone && (
-                  <div className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                    <span>Phone: {fishery.phone}</span>
-                  </div>
-                )}
-                {fishery.email && (
-                  <div className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                    <span>Email: {fishery.email}</span>
-                  </div>
-                )}
-                {fishery.website && (
-                  <div className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                    <span>Website: {fishery.website}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  )}
-</div>
+                
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
+            <div className="flex flex-wrap gap-2">
+              {(fishery.species || []).map((species, index) => (
+                <span 
+                  key={index}
+                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
+                >
+                  <Fish className="h-4 w-4 mr-1" />
+                  {species}
+                </span> 
+              ))}
+            </div> 
+          </div> 
+        </div> 
+ 
 
  
 

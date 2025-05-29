@@ -217,16 +217,6 @@ const Home: React.FC = () => {
     {/* Two-column layout */}
     <div className="flex flex-col md:flex-row items-stretch gap-12">
       
-      {/* ===================== Weekly Highlights Section ===================== */}
-<section className="py-20 px-4 bg-white">
-  <div className="container mx-auto max-w-[90rem]">
-    {/* Section Title - Centered */}
-    <h2 className="text-6xl font-bebas font-bold text-blue-900 mb-12 text-center">
-      Weekly Highlights
-    </h2>
-    {/* Two-column layout */}
-    <div className="flex flex-col md:flex-row items-stretch gap-12">
-      
       {/* === Fishery of the Week Card === */}
       <div className="flex-1 flex flex-col">
         <h3 className="text-3xl font-bebas font-bold text-blue-900 mb-6 text-left">
@@ -241,9 +231,9 @@ const Home: React.FC = () => {
         </div>
       </div>
       
-      {/* === Vertical Blue Divider (1px) === */}
-      <div className="hidden md:flex items-stretch px-0">
-        <div className="w-px bg-blue-700 mx-auto my-4 rounded-full" style={{ minHeight: '440px' }}></div>
+      {/* === Vertical Blue Divider === */}
+      <div className="hidden md:flex items-center px-0">
+        <div className="h-full w-1 bg-blue-700 rounded-full mx-auto" style={{ minHeight: '440px' }}></div>
       </div>
       
       {/* === Catch of the Week Card === */}
@@ -274,7 +264,6 @@ const Home: React.FC = () => {
   </div>
 </section>
 {/* ================== End Weekly Highlights Section ================== */}
-
 
 
 

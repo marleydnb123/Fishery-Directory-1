@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
-import { MapPin } from 'lucide-react';
+import React, { useState } from "react";
+import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
+import { MapPin } from "lucide-react";
 
 interface GoogleMapProps {
   latitude: number;
@@ -12,13 +12,13 @@ interface GoogleMapProps {
  * GoogleMap Component
  * 
  * Displays an interactive Google Map with a marker at the specified location.
- * Includes fallback UI for cases where the map cannot be loaded.
+ * Allows zoom and scroll. Includes fallback UI for errors or missing data.
  */
 const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
   const [mapError, setMapError] = useState<boolean>(false);
 
   // Early return if coordinates are missing
-  if (!latitude || !longitude) {
+  if (typeof latitude !== "number" || typeof longitude !== "number") {
     return (
       <div className="h-[300px] bg-gray-100 rounded-lg flex flex-col items-center justify-center text-gray-500 gap-2">
         <MapPin className="w-8 h-8" />
@@ -42,30 +42,29 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ latitude, longitude, name }) => {
   }
 
   return (
-    <APIProvider 
-      apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "AIzaSyDnt92TtJtFGhGCtzarFJ7Nnt_hI3XsVU4"}
+    <APIProvider
+      apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "YOUR_GOOGLE_MAPS_API_KEY"}
       onError={() => setMapError(true)}
     >
-      <div className="h-[300px] rounded-lg overflow-hidden"> 
+      <div className="h-[300px] rounded-lg overflow-hidden">
         <Map
           zoom={14}
           center={{ lat: latitude, lng: longitude }}
-          gestureHandling={'greedy'}
-          disableDefaultUI={false}
+          mapId="fishery-map"
           options={{
+            gestureHandling: "greedy",    // Enables scroll and drag with one finger/mouse
+            scrollwheel: true,            // Enables zoom with mouse wheel
+            draggable: true,              // Enables pan/drag
             zoomControl: true,
             mapTypeControl: true,
             scaleControl: true,
             streetViewControl: true,
             rotateControl: true,
             fullscreenControl: true,
-            gestureHandling: 'greedy',
-            scrollwheel: true,
-            draggable: true
+            disableDefaultUI: false,      // Show all controls
           }}
-          mapId="fishery-map"
         >
-          <Marker position={{ lat: latitude, lng: longitude }} title={name} /> 
+          <Marker position={{ lat: latitude, lng: longitude }} title={name} />
         </Map>
       </div>
     </APIProvider>

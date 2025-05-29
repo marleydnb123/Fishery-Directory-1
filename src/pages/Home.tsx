@@ -238,7 +238,7 @@ const Home: React.FC = () => {
       
       {/* === Catch of the Week Card === */}
       <div className="flex-1 flex flex-col">
-        <h3 className="text-3xl font-bebas font-bold text-blue-900 mb-6 text-left">
+        <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-2 text-center">
           Catch of the Week
         </h3>
         <div className="bg-blue-50 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-between">

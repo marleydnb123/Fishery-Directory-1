@@ -407,7 +407,7 @@ const Directory: React.FC = () => {
 
               
        
-    <div>
+ 
       {/* Advanced Filters Toggle */}
       <button
         type="button"

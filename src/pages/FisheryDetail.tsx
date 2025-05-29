@@ -328,11 +328,7 @@ const FisheryDetail: React.FC = () => {
                   {species}
                 </span> 
               ))}
-            </div>  
-          </div> 
-        </div> 
- 
-{/* Stats Card */}
+              {/* Stats Card */}
 <div className="mb-8">
   <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
     {/* Visitors */}
@@ -353,7 +349,11 @@ const FisheryDetail: React.FC = () => {
       <span className="text-sm text-yellow-800 mt-1">Record Match Weight</span>
     </div>
   </div>
-</div>
+            </div>  
+          </div> 
+        </div> 
+ 
+
 
  
 

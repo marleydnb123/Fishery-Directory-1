@@ -47,6 +47,8 @@ export interface Fishery {
   day_tickets?: string[];
   payments?: string[];
   fishery_of_the_week?: boolean;
+  record_biggest_fish?: string;
+  record_match_weight?: string;
 }
 
 export interface Lake {

@@ -282,7 +282,7 @@ const Home: React.FC = () => {
             <p className="text-gray-700 mb-3 text-center">
               Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill.
             </p>
-            <p className="text-blue-800 text-sm text-center bg-blue-100 rounded px-3 py-1 inline-block">
+            <p className="text-blue-800 text-sm text-center bg-blue-100 rounded px-3 py-1 inline-block centre">
               <span className="font-semibold">Caught at:</span> Willow Lake Carp Fishery
             </p>
           </div>

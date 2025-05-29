@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Fish, Info, Book, Phone, Waves } from 'lucide-react';
+import { MapPin, Fish, Info, Book, Phone, Waves, Mail } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
 import GoogleMap from '../components/common/GoogleMap';
@@ -632,43 +632,60 @@ const FisheryDetail: React.FC = () => {
     }}
   >
     <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
-    <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">Booking Information</h3>
+    <h3 className="text-3xl font-bebas font-bold tracking-wide text-white">Booking Information</h3>
   </div>
   {/* Card Content */}
   <div className="p-6">
-    <ul className="mb-5 text-gray-700 space-y-2 leading-relaxed">
+    <ul className="mb-5 text-gray-700 space-y-4">
       <li>
-        <span className="font-semibold text-primary-700">Day tickets:</span> Available On-Site.
+        <div className="flex items-center">
+          <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+          <span className="font-semibold text-primary-700">Day tickets:</span>
+          <span className="ml-2">£{fishery.day_ticket_price || 'Contact for prices'}</span>
+        </div>
       </li>
       <li>
-        <span className="font-semibold text-primary-700">Group bookings:</span> Please enquire for special rates.
+        <div className="flex items-center">
+          <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+          <span className="font-semibold text-primary-700">Group bookings:</span>
+          <span className="ml-2">Please enquire for special rates</span>
+        </div>
       </li>
       <li>
-        <span className="font-semibold text-primary-700">Phone:</span>
-        <a
-          href={`tel:${fishery.contact_phone || ''}`}
-          className="ml-1 text-primary-600 underline hover:text-primary-800"
-        >
-          {fishery.contact_phone || "Not listed"}
-        </a>
+        <div className="flex items-center">
+          <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+          <span className="font-semibold text-primary-700">Phone:</span>
+          <a
+            href={`tel:${fishery.contact_phone || ''}`}
+            className="ml-2 text-primary-600 hover:text-primary-800 flex items-center"
+          >
+            <Phone className="h-4 w-4 mr-1" />
+            {fishery.contact_phone || "Not listed"}
+          </a>
+        </div>
       </li>
       <li>
-        <span className="font-semibold text-primary-700">Email:</span>
-        <a
-          href={`mailto:${fishery.contact_email || ''}`}
-          className="ml-1 text-primary-600 underline hover:text-primary-800"
-        >
-          {fishery.contact_email || "Not listed"}
-        </a>
+        <div className="flex items-center">
+          <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+          <span className="font-semibold text-primary-700">Email:</span>
+          <a
+            href={`mailto:${fishery.contact_email || ''}`}
+            className="ml-2 text-primary-600 hover:text-primary-800 flex items-center"
+          >
+            <Mail className="h-4 w-4 mr-1" />
+            {fishery.contact_email || "Not listed"}
+          </a>
+        </div>
       </li>
     </ul>
-    <a
-      href={`mailto:${fishery.contact_email || ''}`}
-      className="inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+    <button
+      onClick={() => window.location.href = `mailto:${fishery.contact_email || ''}`}
+      className="w-full bg-primary-600 hover:bg-primary-800 text-white py-3 px-6 rounded-lg font-semibold shadow-lg transition-all duration-200 flex items-center justify-center"
     >
+      <Mail className="h-5 w-5 mr-2" />
       Contact for Booking
-    </a>
-    <div className="mt-4 text-xs text-primary-500 italic">
+    </button>
+    <div className="mt-4 text-sm text-primary-500 italic text-center">
       Fast replies, friendly staff. We do not handle bookings directly.
     </div>
   </div>
@@ -677,396 +694,4 @@ const FisheryDetail: React.FC = () => {
 
               
               {/* Location Card */}
-<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
-  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
-  <div
-    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
-    style={{
-      background:
-        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-    }}
-  >
-                  <MapPin className="h-7 w-7 text-white mr-3 animate-bounce" />
-                  <h3 className="text-3xl font-bebas font-semibold text-white tracking-wide">Location</h3>
-                </div>
-                <div className="mb-5 mt-6 text-gray-700 leading-relaxed">
-                  <div className="ml-6">
-  <span className="font-semibold">{fishery.name}</span> is located in <span className="font-semibold">{fishery.district}</span>, UK.
-</div>
-                  <div className="mt-2 text-primary-700 flex flex-wrap gap-4 text-sm">
-                    <span className="inline-flex items-center">
-                      <svg className="h-4 w-4 mr-1 ml-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
-                      Parking available
-                    </span>
-                    <span className="inline-flex items-center">
-                      <svg className="h-4 w-4 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
-                      
-                    </span>
-                  </div>
-                  <div className="mt-2 text-gray-600  ml-6 text-sm">
-                    Detailed directions will be provided upon booking.
-                  </div>
-                  <div className="mt-6">
-                    <GoogleMap 
-                      latitude={fishery.Latitude || 0}
-                      longitude={fishery.Longitude || 0}
-                      name={fishery.name}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )} 
-
-       {activeTab === 'lakes' && ( 
-    <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.3 }}
-    >
-    <h2
-      className="w-full text-2xl sm:text-3xl md:text-4xl font-bebas font-semibold mb-6 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4         rounded-lg"
-        style={{
-        background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-        }}
-        >
-        Lakes at {fishery.name}
-        </h2>
-
-          {lakes.length > 0 ? (
-      <div className="space-y-6">
-        {lakes.map((lake) => (
-          <div
-            key={lake.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden" 
-          >
-            <div className="flex flex-col md:flex-row">
-              {/* 
-                Mobile: slightly wider image (w-80 or max-w-md), keeps mt-6 ml-6 mr-6.
-                Desktop: md:w-56, same margins.
-              */}
-              <div className="w-80 max-w-md md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 mb-6 rounded-xl overflow-hidden flex items-center justify-center">  
-                <img
-                  src={lake.image}
-                  alt={lake.name}
-                  className="w-full h-full object-cover rounded-xl"
-                /> 
-              </div>
-              {/* Lake details */}
-              <div className="flex-1 p-6 flex flex-col justify-center">
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">
-                  {lake.name}
-                </h3>
-                <p className="text-gray-700 mb-4">{lake.description}</p>
-                <div className="mb-2 font-medium">Available Species:</div>
-                <div className="flex flex-wrap gap-2">
-                  {(lake.species || []).map((species, index) => (
-                    <span
-                      key={index} 
-                      className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                    >
-                      <Fish className="h-4 w-4 mr-1" />
-                      {species}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div> 
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div className="bg-white rounded-xl shadow-md p-6 text-center">
-        <p className="text-gray-700">No lake information available.</p>
-      </div>
-    )}
-  </motion.div>
-)}
-
-
- 
-
- 
-        {activeTab === 'accommodation' && fishery.hasaccommodation && (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }} 
-    transition={{ duration: 0.3 }}
-  >
-    <h2
-      className="w-full text-2xl sm:text-3xl md:text-4xl font-semibold font-bebas mb-6 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
-      style={{
-        background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-      }}
-    >
-      Accommodation at {fishery.name}
-    </h2>
-    
-    {accommodation.length > 0 ? (
-      <div className="space-y-6">
-        {accommodation.map((acc) => (
-          <div key={acc.id} className="bg-white rounded-xl shadow-md overflow-hidden">
-            <div className="flex flex-col md:flex-row">
-              {/* Responsive image: wider on mobile, fixed width on desktop, with all margins */}
-
-              <div className="w-80 max-w-md md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 mb-6 rounded-xl overflow-hidden flex items-center justify-center">
-                <img
-                  src={acc.image}
-                  alt={acc.type}
-                  className="w-full h-full object-cover rounded-xl"
-                />
-              </div>
-              {/* Details on the right */}
-              <div className="flex-1 p-6 flex flex-col justify-center">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-semibold">{acc.type}</h3>
-                  <div className="text-primary-600 font-bold">
-                    £{acc.price}
-                    <span className="text-gray-500 text-sm font-normal">/night</span>
-                  </div>
-                </div>
-                <p className="text-gray-700 mb-4">{acc.notes}</p>
-                <a
-                  href={fishery.website}
-target="_blank"
-rel="noopener noreferrer"
-
-                  className="bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors self-start"
-                >
-                  <Book className="h-4 w-4 mr-2 inline" />
-                  Book Now
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div className="bg-white rounded-xl shadow-md p-6 text-center">
-        <p className="text-gray-700">No accommodation information available.</p>
-      </div>
-    )}
-  </motion.div>
-)}
-
-
-
-        {activeTab === 'rules' && (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.3 }}
-  >
-    <div className="bg-white rounded-xl shadow-md p-6">
-      <h2
-        className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-2xl sm:text-3xl md:text-4xl font-semibold font-bebas rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
-        style={{
-          background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-        }}
-      >
-        Fishery Rules
-      </h2>
-      <p className="text-gray-700 mb-6">
-        Please ensure you are familiar with and adhere to the following rules while fishing at {fishery.name}:
-      </p>
-
-      <div className="prose max-w-none text-gray-700">
-        {(() => {
-          const lines = fishery.rules.split(/\r?\n/);
-          const elements = [];
-          let listItems = [];
-          let lastWasHeader = false;
-
-          lines.forEach((line, i) => {
-            const trimmed = line.trim();
-
-            if (trimmed.startsWith('-')) {
-              listItems.push(trimmed.slice(1).trim());
-              lastWasHeader = false;
-            } else {
-              // Flush any bullets before a new header/paragraph/blank
-              if (listItems.length > 0) {
-                elements.push(
-                  <ul key={`ul-${i}`} className="list-disc ml-6">
-                    {listItems.map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                );
-                listItems = [];
-              }
-              if (trimmed === '') {
-                elements.push(<div key={i} style={{ height: '1.25em' }} />);
-                lastWasHeader = false;
-              } else {
-                // Treat as header if previous line was blank or it's the first line
-                const isHeader = i === 0 || (lines[i - 1] && lines[i - 1].trim() === '');
-                elements.push(
-                  <p
-                    key={i}
-                    className={isHeader ? 'font-semibold text-lg mt-4 mb-2' : ''}
-                  >
-                    {line}
-                  </p>
-                );
-                lastWasHeader = isHeader;
-              }
-            }
-          });
-
-          // Flush any remaining bullets
-          if (listItems.length > 0) {
-            elements.push(
-              <ul key={`ul-end`} className="list-disc ml-6">
-                {listItems.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            );
-          }
-
-          return elements;
-        })()}
-      </div>
-      
-      <div className="mt-8 p-4 bg-primary-100 rounded-lg">
-        <div className="flex items-start">
-          <Info className="h-5 w-5 text-primary-900 mr-2 mt-0.5" />
-          <p className="text-primary-900">
-            Failure to comply with these rules may result in being asked to leave the fishery without refund.
-          </p>
-        </div>
-      </div>
-    </div>
-  </motion.div>
-)}
-
- 
-{/* --- Featured Fisheries Section --- */}
-<section className="py-12 px-4 bg-gray-50">
-  <div className="container mx-auto shadow-lg overflow-hidden">
-    {/* Header Bar */}
-    <div
-      className="p-6"
-      style={{
-        background:
-          "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-      }}
-    >
-      <motion.h2
-        className="text-4xl font-bebas font-bold text-white mb-1 text-center" 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-      >
-        Featured Fisheries
-      </motion.h2>
-      <motion.p
-        className="text-primary-200 text-center max-w-2xl mx-auto"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2 }}
-      >
-        Explore our handpicked selection of the finest fishing spots across the UK
-      </motion.p>
-    </div>
-    {/* Cards Grid */}
-    <div className="p-6 bg-gray-50">
-      {featuredLoading ? (
-        <div className="text-center py-8 text-gray-600">Loading featured fisheries...</div>
-      ) : featuredError ? (
-        <div className="text-center py-8 text-red-600">{featuredError}</div>
-      ) : (
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {featuredFisheries.length > 0 ? (
-            featuredFisheries.map((f) => (
-              <motion.div
-                key={f.id}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-              >
-                <Link to={`/directory/${f.slug}`}>
-                  <img
-                    src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"} 
-                    alt={f.name}
-                    className="w-full h-40 object-cover transition-transform duration-200 hover:scale-[1.02]"
-                  />
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-gray-900">{f.name}</h3>
-                    <div className="text-sm text-primary-700">{f.district}</div>
-                    <div className="text-gray-600 text-xs mt-2 line-clamp-2">{f.description}</div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))
-          ) : (
-            <div className="col-span-4 text-center text-gray-500">
-              No featured fisheries found.
-            </div>
-          )}
-        </motion.div>
-      )}
-    </div>
-  </div>
-</section>
-{/* --- End Featured Fisheries Section --- */}
-
-          
-
-        
-               {/* Contact Bar */}
-        <div className="mt-8 rounded-xl shadow-lg p-0 overflow-hidden">
-          <div
-            className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex flex-col md:flex-row items-center justify-between gap-6"
-            style={{
-              background:
-                "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-            }}
-          >
-            <div className="mb-4 md:mb-0 flex items-center gap-4">
-              <span className="text-2xl font-bold tracking-wide text-white">
-                {fishery.name}
-              </span>
-              <span className="hidden md:inline-block text-primary-200 text-sm">
-                {fishery.district}
-              </span>
-            </div>
-            <div className="flex items-center gap-4">
-              {fishery.website && (
-                <a 
-                  href={fishery.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-white text-primary-900 px-6 py-2 rounded-lg font-semibold shadow hover:bg-primary-100 hover:text-primary-700 transition"
-                >
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.95 7.07l-.71-.71M4.05 4.93l-.71-.71" />
-                  </svg>
-                  Visit Website
-                </a>
-              )}
-              {/* Example: Add social icons if you want */}
-              {/* 
-              <a href="#" className="text-primary-200 hover:text-white transition">
-                <TwitterIcon className="h-5 w-5" />
-              </a>
-              */} 
-            </div>
-          </div>
-        </div> 
-      </div>
-    </div>
-  );
-};
-
-
-export default FisheryDetail;
+<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0

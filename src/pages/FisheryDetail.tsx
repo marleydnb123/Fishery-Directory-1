@@ -39,6 +39,7 @@ type Fishery = {
   pricing: string[];
   opening_times: string[];
   day_tickets: string[];
+  payments: string[];
 };
 
 type Lake = {
@@ -124,6 +125,7 @@ const FisheryDetail: React.FC = () => {
         pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [],
         opening_times: Array.isArray(fisheryData.opening_times) ? fisheryData.opening_times : [],
         day_tickets: Array.isArray(fisheryData.day_tickets) ? fisheryData.day_tickets : [],
+        payments: Array.isArray(fisheryData.payments) ? fisheryData.payments : [],
       }); 
 
       // Fetch lakes for this fishery

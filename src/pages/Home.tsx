@@ -222,8 +222,8 @@ const Home: React.FC = () => {
         <h3 className="text-3xl font-bebas font-bold text-gray-900 mb-2 text-center">
           Fishery of the Week
         </h3>
-        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-center">
-          {featuredFisheries.length > 0 ? (
+        <div className="bg-blue-50 rounded-2xl shadow-lg p-6 h-full flex flex-col justify-between">
+          {featuredFisheries.length > 0 ? ( 
             <FisheryCard fishery={featuredFisheries[0]} />
           ) : (
             <div className="text-gray-500 py-12">No featured fishery available.</div>

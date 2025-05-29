@@ -767,7 +767,7 @@ const FisheryDetail: React.FC = () => {
 
               
               {/* Location Card */}
-<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0 max-h-[800px]">
+<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
   {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0 "

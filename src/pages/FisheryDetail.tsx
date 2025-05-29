@@ -665,7 +665,15 @@ const FisheryDetail: React.FC = () => {
             </ul>
           </li>
           <li>
-            <span className="font-semibold text-primary-700">Opening times:</span> 7:00am – 7:00pm (Mon–Sun)
+            <span className="font-semibold text-primary-700">Opening times:</span>
+            <ul className="ml-4 list-disc">
+              {(fishery.opening_times && fishery.opening_times.length > 0)
+                ? fishery.opening_times.map((time, idx) => (
+                    <li key={idx}>{time}</li>
+                  ))
+                : <li>Not listed</li>
+              }
+            </ul>
           </li>
           <li>
             <span className="font-semibold text-primary-700">Payment:</span> Cash, Card, Bank Transfer
@@ -706,6 +714,7 @@ const FisheryDetail: React.FC = () => {
       </div>
     </div>
   </div>
+
 
 
 

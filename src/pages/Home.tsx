@@ -282,13 +282,13 @@ const Home: React.FC = () => {
           flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden
         ">
           {/* Card Figure/Image */}
-<div className="w-full h-40 md:h-64 overflow-hidden">
-  <img
-    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
-    alt="Angler with a 34lb Mirror Carp"
-    className="w-full h-full object-cover"
-  />
-</div>
+        <div className="w-full h-40 md:h-64 overflow-hidden">
+        <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ934kToXbU3zHZE5ye6a2MH2pN8rMI2se-hA&s"
+        alt="Angler with a 34lb Mirror Carp"
+        className="w-full h-full object-cover"
+        />
+        </div>
 
           {/* Card Body */}
           <div className="flex-1 flex flex-col justify-between p-4">
@@ -297,7 +297,7 @@ const Home: React.FC = () => {
                 34lb Mirror Carp
               </h4>
               <p className="text-gray-700 mb-2 text-center">
-                Taken confidently from the margins on a trimmed wafter, this solid mirror carp ran hard for the far shelf, putting every turn of pressure through the rod before finally slipping into the net after a well-managed, tactical battle.
+                Taken confidently from the margins on a trimmed wafter, this solid mirror carp ran hard for the far shelf, putting every turn of pressure through the rod                     before finally slipping into the net after a well-managed, tactical battle.
               </p>
             </div>
             {/* Card Footer */}

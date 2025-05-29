@@ -715,6 +715,13 @@ const FisheryDetail: React.FC = () => {
           </motion.div>
         )} 
 
+  <GoogleMap 
+  latitude={fishery.Latitude || 0}
+  longitude={fishery.Longitude || 0}
+  name={fishery.name}
+/>
+
+
        {activeTab === 'lakes' && ( 
     <motion.div
     initial={{ opacity: 0 }}

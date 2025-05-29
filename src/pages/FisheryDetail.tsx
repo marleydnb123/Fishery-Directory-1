@@ -40,8 +40,6 @@ type Fishery = {
   opening_times: string[];
   day_tickets: string[];
   payments: string[];
-  record_biggest_fish: string,
-  record_match_weight: string,
 };
 
 type Lake = {
@@ -278,44 +276,19 @@ const FisheryDetail: React.FC = () => {
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-    > 
-      <div className="bg-gradient-to-b from-blue-50 via-white to-blue-100/50 rounded-xl shadow-md p-6 mb-8">
+    >
+      <div className="bg-white rounded-xl shadow-md p-6 mb-8">
         <h2
           className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
-          style={{ 
+          style={{
             background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
           }}
         >
           About {fishery.name} 
         </h2> 
-        
-        
-        {/* --- Stats Card --- */}
-        <div className="mb-8"> 
-          <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
-            {/* Visitors */}
-            <div className="flex-1 flex flex-col items-center">
-              <span className="text-3xl font-bebas font-bold text-white">{fishery.visitors_monthly ?? '—'}</span>
-              <span className="text-sm text-blue-800 mt-1">Visitors (Monthly)</span>
-            </div>
-            <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
-            {/* Record Fish */}
-            <div className="flex-1 flex flex-col items-center">
-              <span className="text-3xl font-bebas font-bold text-white">{fishery.record_biggest_fish ?? '—'}</span>
-              <span className="text-sm text-green-800 mt-1">Record/Biggest Fish</span>
-            </div>
-            <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
-            {/* Match Record */}
-            <div className="flex-1 flex flex-col items-center">
-              <span className="text-3xl font-bold text-yellow-900">{fishery.record_match_weight ?? '—'}</span>
-              <span className="text-sm text-yellow-800 mt-1">Record Match Weight</span>
-            </div>
-          </div>
-        </div>
-        {/* --- End Stats Card --- */}
-       
-        
-        
+        {fishery.description.split(/\r?\n/).map((line, i) => (
+          <p key={i} className="text-gray-700 mb-6">{line}</p>
+        ))}
         {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
           <p key={i} className="text-gray-700 mb-6">{line}</p>
         ))} 
@@ -356,10 +329,31 @@ const FisheryDetail: React.FC = () => {
                 </span> 
               ))}
             </div>  
-          </div>  
+          </div> 
         </div> 
-  
-
+ 
+{/* Stats Card */}
+<div className="mb-8">
+  <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
+    {/* Visitors */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-blue-900">{fishery.visitors_monthly ?? '—'}</span>
+      <span className="text-sm text-blue-800 mt-1">Visitors (Monthly)</span>
+    </div>
+    <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+    {/* Record Fish */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-green-900">{fishery.record_biggest_fish ?? '—'}</span>
+      <span className="text-sm text-green-800 mt-1">Record/Biggest Fish</span>
+    </div> 
+    <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+    {/* Match Record */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-yellow-900">{fishery.record_match_weight ?? '—'}</span>
+      <span className="text-sm text-yellow-800 mt-1">Record Match Weight</span>
+    </div>
+  </div>
+</div>
 
  
 
@@ -426,7 +420,7 @@ const FisheryDetail: React.FC = () => {
 `}
 </style>
 
-<div className="bg-gradient-to-b from-blue-50 via-white to-blue-100/50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
@@ -466,7 +460,7 @@ const FisheryDetail: React.FC = () => {
              
 
                       {/* --- Video Section (supports YouTube, Vimeo, MP4, etc.) --- */}
-<div className="bg-gradient-to-b from-blue-50 via-white to-blue-100/50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
@@ -502,7 +496,7 @@ const FisheryDetail: React.FC = () => {
 
 
 {/* --- Tactics & Methods Section --- */}
-<div className="bg-gradient-to-b from-blue-50 via-white to-blue-100/50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
     className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
@@ -549,12 +543,117 @@ const FisheryDetail: React.FC = () => {
 {/* --- End Tactics & Methods Section --- */}
 
 
-      
+{/* --- Reviews Section --- */}
+<div className="bg-white rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+  {/* Gradient Header Bar */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <svg
+      className="h-7 w-7 text-white mr-3 animate-bounce"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 17.75l-6.172 3.245 1.179-6.873-5-4.873 6.9-1.002L12 2.5l3.093 6.747 6.9 1.002-5 4.873 1.179 6.873z"
+      />
+    </svg>
+    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Reviews</h3>
+  </div>
+  {/* Reviews Content */}
+  <div className="p-6">
+    {/* Featured Review */}
+    <div className="relative mb-8">
+      <div className="bg-gradient-to-br from-primary-700 via-primary-200 to-white rounded-2xl shadow-xl p-8 border-4 border-primary-300">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-16 h-16 rounded-full bg-primary-700 flex items-center justify-center text-white text-3xl font-bold shadow-lg ring-4 ring-primary-300">
+            JD
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-primary-900 text-xl">Jane D.</span>
+              <span className="flex text-yellow-400 text-2xl">★★★★★</span>
+            </div>
+            <div className="text-xs text-primary-500">May 2025</div>
+          </div>
+        </div>
+        <p className="text-primary-900 text-lg italic leading-relaxed">
+          "Absolutely stunning fishery! Landed my PB carp and the atmosphere was so peaceful. Staff were super friendly and helpful. Can't wait to return!"
+        </p>
+      </div>
+      <span className="absolute top-2 right-6 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Featured</span>
+    </div>
+
+    {/* Scrollable Review River */}
+    <div className="flex gap-6 overflow-x-auto pb-2 hide-scrollbar">
+      {/* Review 2 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            TS
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Tom S.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★☆</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Beautiful location, well-stocked lakes. Only downside was a bit of mud on the pegs after rain."
+        </p>
+        <div className="text-xs text-gray-400">April 2025</div>
+      </div>
+      {/* Review 3 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            SL
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Sophie L.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★★</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Great for families and beginners. My kids caught their first fish here and loved every minute."
+        </p>
+        <div className="text-xs text-gray-400">March 2025</div>
+      </div>
+      {/* Review 4 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            AG
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Alex G.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★★</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Top-notch facilities and a great variety of fish. Highly recommend for a relaxing weekend."
+        </p>
+        <div className="text-xs text-gray-400">February 2025</div>
+      </div>
+      {/* Add more reviews as needed */}
+    </div>
+    <style>{`
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    `}</style>
+  </div>
+</div>
+{/* --- End Reviews Section --- */}
+
+
+
+
 
 
 <div className="flex flex-col md:flex-row gap-6">
   {/* Booking Information Card */}
-  <div className="flex-1 bg-gradient-to-b from-blue-50 via-white to-blue-100/50 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0 flex flex-col">
+  <div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0 flex flex-col">
     {/* Gradient Header Bar */}
     <div
       className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
@@ -647,7 +746,10 @@ const FisheryDetail: React.FC = () => {
             <span className="font-semibold text-primary-700">Address:</span> {fishery.address || "Not listed"}
           </li>
         </ul>
-      </div> 
+        <div className=" mb-2 text-sm text-primary-500 italic">
+          Fast replies & friendly staff. We do not handle bookings directly, contact the Fishery directly to book.
+        </div> 
+      </div>
     </div>
   </div>
 
@@ -659,10 +761,10 @@ const FisheryDetail: React.FC = () => {
 
               
               {/* Location Card */}
-<div className="flex-1 bg-gradient-to-b from-blue-50 via-white to-blue-100/50 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
+<div className="flex-1 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
   {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
   <div
-    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0 "
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
     style={{
       background:
         "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
@@ -684,7 +786,7 @@ const FisheryDetail: React.FC = () => {
                       
                     </span>
                   </div>
-                  <div className="mt-6 mr-6 ml-6 mb-6">
+                  <div className="mt-6 mr-6 ml-6">
                     <GoogleMap 
                       latitude={fishery.Latitude || 0}
                       longitude={fishery.Longitude || 0}
@@ -1001,108 +1103,7 @@ rel="noopener noreferrer"
 </section>
 {/* --- End Featured Fisheries Section --- */}
 
-                {/* --- Reviews Section --- */}
-<div className="bg-gradient-to-b from-blue-50 via-white to-blue-100/50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
-  {/* Gradient Header Bar */}
-  <div
-    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
-    style={{
-      background:
-        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-    }}
-  >
-    <svg
-      className="h-7 w-7 text-white mr-3 animate-bounce"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 17.75l-6.172 3.245 1.179-6.873-5-4.873 6.9-1.002L12 2.5l3.093 6.747 6.9 1.002-5 4.873 1.179 6.873z"
-      />
-    </svg>
-    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Reviews</h3>
-  </div>
-  {/* Reviews Content */}
-  <div className="p-6">
-    {/* Featured Review */}
-    <div className="relative mb-8">
-      <div className="bg-gradient-to-br from-primary-700 via-primary-200 to-white rounded-2xl shadow-xl p-8 border-4 border-primary-300">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 rounded-full bg-primary-700 flex items-center justify-center text-white text-3xl font-bold shadow-lg ring-4 ring-primary-300">
-            JD
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-primary-900 text-xl">Jane D.</span>
-              <span className="flex text-yellow-400 text-2xl">★★★★★</span>
-            </div>
-            <div className="text-xs text-primary-500">May 2025</div>
-          </div>
-        </div>
-        <p className="text-primary-900 text-lg italic leading-relaxed">
-          "Absolutely stunning fishery! Landed my PB carp and the atmosphere was so peaceful. Staff were super friendly and helpful. Can't wait to return!"
-        </p>
-      </div>
-      <span className="absolute top-2 right-6 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Featured</span>
-    </div>
-
-    {/* Scrollable Review River */}
-    <div className="flex gap-6 overflow-x-auto pb-2 hide-scrollbar">
-      {/* Review 2 */}
-      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
-            TS
-          </div>
-          <span className="font-semibold text-primary-800 text-lg">Tom S.</span>
-          <span className="flex text-yellow-400 text-lg">★★★★☆</span>
-        </div>
-        <p className="text-gray-700 mb-2">
-          "Beautiful location, well-stocked lakes. Only downside was a bit of mud on the pegs after rain."
-        </p>
-        <div className="text-xs text-gray-400">April 2025</div>
-      </div>
-      {/* Review 3 */}
-      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
-            SL
-          </div>
-          <span className="font-semibold text-primary-800 text-lg">Sophie L.</span>
-          <span className="flex text-yellow-400 text-lg">★★★★★</span>
-        </div>
-        <p className="text-gray-700 mb-2">
-          "Great for families and beginners. My kids caught their first fish here and loved every minute."
-        </p>
-        <div className="text-xs text-gray-400">March 2025</div>
-      </div>
-      {/* Review 4 */}
-      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
-            AG
-          </div>
-          <span className="font-semibold text-primary-800 text-lg">Alex G.</span>
-          <span className="flex text-yellow-400 text-lg">★★★★★</span>
-        </div>
-        <p className="text-gray-700 mb-2">
-          "Top-notch facilities and a great variety of fish. Highly recommend for a relaxing weekend."
-        </p>
-        <div className="text-xs text-gray-400">February 2025</div>
-      </div>
-      {/* Add more reviews as needed */}
-    </div>
-    <style>{`
-      .hide-scrollbar::-webkit-scrollbar { display: none; }
-      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    `}</style>
-  </div>
-</div>
-{/* --- End Reviews Section --- */}          
+          
 
         
                {/* Contact Bar */}

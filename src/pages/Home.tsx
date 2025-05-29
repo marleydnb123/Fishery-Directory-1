@@ -289,7 +289,7 @@ const Home: React.FC = () => {
                 34lb Mirror Carp
               </h4>
               <p className="text-gray-700 mb-2 text-center">
-                Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill. Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill. Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill.
+                Taken confidently from the margins on a trimmed wafter, this solid mirror carp ran hard for the far shelf, putting every turn of pressure through the rod before finally slipping into the net after a well-managed, tactical battle.
               </p>
             </div>
             {/* Card Footer */}

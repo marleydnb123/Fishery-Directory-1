@@ -332,6 +332,28 @@ const FisheryDetail: React.FC = () => {
           </div> 
         </div> 
  
+{/* Stats Card */}
+<div className="mb-8">
+  <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
+    {/* Visitors */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-blue-900">{fishery.visitors_monthly ?? '—'}</span>
+      <span className="text-sm text-blue-800 mt-1">Visitors (Monthly)</span>
+    </div>
+    <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+    {/* Record Fish */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-green-900">{fishery.record_biggest_fish ?? '—'}</span>
+      <span className="text-sm text-green-800 mt-1">Record/Biggest Fish</span>
+    </div>
+    <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+    {/* Match Record */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-yellow-900">{fishery.record_match_weight ?? '—'}</span>
+      <span className="text-sm text-yellow-800 mt-1">Record Match Weight</span>
+    </div>
+  </div>
+</div>
 
  
 

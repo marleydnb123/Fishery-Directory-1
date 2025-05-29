@@ -248,7 +248,7 @@ const Home: React.FC = () => {
         </h3>
         <div className="
           relative bg-gradient-to-br from-blue-100 via-white to-blue-50 rounded-3xl shadow-2xl p-0
-         w-full max-w-[95vw] min-h-[430px] max-h-[430px]
+         w-full max-w-[95vw] min-h-[400px] max-h-[400px]
   md:min-w-[600px] md:max-w-[600px] md:min-h-[450px] md:max-h-[450px]
           flex flex-col transition-transform hover:scale-[1.025] hover:shadow-blue-200/40 overflow-hidden
         ">

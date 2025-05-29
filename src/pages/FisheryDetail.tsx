@@ -688,14 +688,7 @@ const FisheryDetail: React.FC = () => {
             <span className="font-semibold text-primary-700">Address:</span> 123 Lakeside Lane, Anglingtown, AB12 3CD
           </li>
         </ul>
-        <a
-          href={fishery.contact_email ? `mailto:${fishery.contact_email}` : undefined}
-          className={`inline-block bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg font-semibold shadow transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${fishery.contact_email ? "" : "pointer-events-none opacity-50"}`}
-          tabIndex={fishery.contact_email ? 0 : -1}
-          aria-disabled={!fishery.contact_email}
-        >
-          Contact for Booking
-        </a>
+        
         <div className="mt-8 text-xs text-primary-500 italic">
           Fast replies, friendly staff. We do not handle bookings directly.
         </div>

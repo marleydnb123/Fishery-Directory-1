@@ -288,7 +288,7 @@ const Home: React.FC = () => {
               <h4 className="text-2xl font-bold text-blue-900 mb-2 text-center">
                 34lb Mirror Carp
               </h4>
-              <p className="text-gray-700 mb-4 text-center">
+              <p className="text-gray-700 mb-2 text-center">
                 Landed after a thrilling 20-minute battle on the float, this stunning mirror carp is a testament to both patience and skill.
               </p>
             </div>

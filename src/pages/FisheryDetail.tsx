@@ -41,6 +41,7 @@ type Fishery = {
   day_tickets: string[];
   payments: string[];
   record_biggest_fish: string,
+  record_match_weight: string,
 };
 
 type Lake = {

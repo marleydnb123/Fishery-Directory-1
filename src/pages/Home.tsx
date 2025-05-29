@@ -141,7 +141,7 @@ const Home: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       > 
-        Find the Best Coarse, Carp & Match Fishing Lakes in the UK 
+        Find the Best Carp, Coarse & Match Fishing Lakes in the UK 
       </motion.h1>
       <motion.p 
         className="text-xl md:text-4xl font-bebas font-bold text-white mb-4"

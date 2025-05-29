@@ -694,9 +694,6 @@ const FisheryDetail: React.FC = () => {
           Fast replies, friendly staff. We do not handle bookings directly.
         </div>
       </div>
-      </a>
-        )}
-      </div>
     </div>
   </div>
 

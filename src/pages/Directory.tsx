@@ -408,7 +408,6 @@ const [showCoarse, setShowCoarse] = useState(true);
 
               
            {/* Column 3: Advanced Filters (Collapsible) */}
-<div>
   {/* Advanced Filters Toggle */}
   <button
     type="button"

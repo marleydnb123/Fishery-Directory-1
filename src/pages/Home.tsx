@@ -409,10 +409,10 @@ const Home: React.FC = () => {
       </div>
       {/* Featured Listing */}
       <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 rounded-2xl shadow-2xl p-8 flex flex-col items-center border-2 border-blue-300 hover:scale-110 hover:shadow-blue-400/40 transition-transform duration-300 ease-out animate-fade-in delay-200">
-        <span className="absolute top-4 right-4 text-xs bg-yellow-200 text-yellow-900 px-2 py-1 rounded uppercase tracking-wider font-semibold">Featured</span>
-        <span className="text-2xl font-bold text-yellow-700 mb-2">Featured</span>
-        <div className="text-4xl font-extrabold mb-3 text-yellow-900">£15<span className="text-base font-normal">/mo</span></div>
-        <ul className="text-yellow-900 text-base mb-6 space-y-2">
+        <span className="absolute top-4 right-4 text-xs bg-blue-200 text-blue-900 px-2 py-1 rounded uppercase tracking-wider font-semibold">Featured</span>
+        <span className="text-2xl font-bold text-blue700 mb-2">Featured</span>
+        <div className="text-4xl font-extrabold mb-3 text-blue-900">£15<span className="text-base font-normal">/mo</span></div>
+        <ul className="text-blue900 text-base mb-6 space-y-2">
           <li>✔ Priority placement</li>
           <li>✔ Appear on homepage</li>
           <li>✔ Add images, videos & links</li>

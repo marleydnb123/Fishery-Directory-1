@@ -179,12 +179,7 @@ const FisheryDetail: React.FC = () => {
   }, [fishery, visitUpdated]);
  
    
-  // Update visit count when fishery data is loaded
-  useEffect(() => {
-    if (fishery?.id && !visitUpdated) {
-      updateVisitCount(fishery.id);
-    }
-  }, [fishery, visitUpdated]);
+
 
   if (loading) {
     return (

@@ -46,7 +46,7 @@ const ListYourFishery: React.FC = () => {
   }, []);
   
   const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); 
     setLoading(true);
     setError(null);
 

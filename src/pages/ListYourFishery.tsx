@@ -16,6 +16,10 @@ const ListYourFishery: React.FC = () => {
   const [featuredLoading, setFeaturedLoading] = useState(true);
   const [featuredError, setFeaturedError] = useState<string | null>(null);
 
+  const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+
   // Fetch featured fisheries
   useEffect(() => {
     const fetchFeaturedFisheries = async () => {
@@ -635,11 +639,9 @@ const ListYourFishery: React.FC = () => {
   </div>
 </section>
 
-{/* FAQ Item Component */}
-const FAQItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  return (
+      {/* FAQ Item Component */}
+  
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
       <button
         className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"

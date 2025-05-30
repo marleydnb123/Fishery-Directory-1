@@ -690,7 +690,6 @@ const Directory: React.FC = () => {
         </div>
       </section>
       {/* --- End Featured Fisheries Section --- */}
-    </div>
   );
 };
 

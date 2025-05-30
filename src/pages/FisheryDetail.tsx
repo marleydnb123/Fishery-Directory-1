@@ -192,18 +192,33 @@ const FisheryDetail: React.FC = () => {
 
   // Helper function to render the third stat based on fishing type
   const renderThirdStat = () => {
-    if (!fishery || !fishery.fishing_type) return { value: '—', label: 'N/A' };
+    if (!fishery || !fishery.fishing_type || fishery.fishing_type.length === 0) {
+      return { value: '—', label: 'N/A' };
+    }
+
+    // Check for multiple types and prioritize
+    const hasMatch = fishery.fishing_type.includes('Match');
+    const hasSpecimen = fishery.fishing_type.includes('Specimen');
+    const hasCoarse = fishery.fishing_type.includes('Coarse');
 
     let value: string | null = null;
     let label = '';
 
-    if (fishery.fishing_type.includes('Match')) {
+    // Priority order: Match > Specimen > Coarse
+    if (hasMatch) {
       value = fishery.record_match_weight ?? null;
       label = 'Record Match Weight';
-    } else if (fishery.fishing_type.includes('Specimen')) {
+      // If multiple types, add indicator
+      if (hasSpecimen || hasCoarse) {
+        label += ' (Primary)';
+      }
+    } else if (hasSpecimen) {
       value = fishery.stock ?? null;
       label = 'Stock';
-    } else if (fishery.fishing_type.includes('Coarse')) {
+      if (hasCoarse) {
+        label += ' (Primary)';
+      }
+    } else if (hasCoarse) {
       value = fishery.average_weight ?? null;
       label = 'Average Weight';
     } else {
@@ -213,7 +228,8 @@ const FisheryDetail: React.FC = () => {
 
     return {
       value: value || '—',
-      label
+      label,
+      hasMultipleTypes: (hasMatch && (hasSpecimen || hasCoarse)) || (hasSpecimen && hasCoarse)
     };
   };
 
@@ -369,7 +385,12 @@ const FisheryDetail: React.FC = () => {
                   {/* Dynamic Third Stat */}
                   <div className="flex-1 flex flex-col items-center">
                     <span className="text-3xl font-bold text-grey-600">{renderThirdStat().value}</span>
-                    <span className="text-sm text-grey-600 mt-1">{renderThirdStat().label}</span>
+                    <span className="text-sm text-grey-600 mt-1 text-center">{renderThirdStat().label}</span>
+                    {renderThirdStat().hasMultipleTypes && (
+                      <span className="text-xs text-blue-500 mt-1">
+                        Multiple types: {fishery.fishing_type.join(', ')}
+                      </span>
+                    )}
                   </div> 
                 </div>
               </div>

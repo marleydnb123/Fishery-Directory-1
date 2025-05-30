@@ -361,50 +361,6 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
-            {/* Column 2: Text Inputs */}
-            <div className="flex flex-col gap-3">
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Water Features</label>
-                <input
-                  type="text"
-                  value={featureSearchTerm}
-                  onChange={handleFeatureSearch}
-                  placeholder="e.g. weed beds, lily pads"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Facilities</label>
-                <input
-                  type="text"
-                  value={facilities}
-                  onChange={e => setFacilities(e.target.value)}
-                  placeholder="toilets, showers, café..."
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Day Ticket Price Range</label>
-                <input
-                  type="text"
-                  value={priceRange}
-                  onChange={e => setPriceRange(e.target.value)}
-                  placeholder="e.g. £10-£25"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Wi-Fi / Mobile Signal</label>
-                <input
-                  type="text"
-                  value={wifiSignal}
-                  onChange={e => setWifiSignal(e.target.value)}
-                  placeholder="Wifi, Signal, Provider (vodafone, o2 etc)"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                />
-              </div>
-            </div>
-
             {/* --- Modern Search Bar & Filters --- */}
         <div className="bg-customBlue/50 rounded-xl shadow-md p-6 mb-16">
           {/* Search Bar Section */}
@@ -807,14 +763,12 @@ const Directory: React.FC = () => {
                             id="coaching"
                           />
                           <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
-                        </div>
-                      </div>
-                    )}
+                    </div>
                   </div>
-                </div> 
+                )}
               </div>
             </div> 
-          </div>
+          </div> 
         </div>
 
 

@@ -69,7 +69,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
         <p className="text-gray-600 line-clamp-2 mb-2 flex-1"> 
           {accommodation.notes || <span className="opacity-50">No notes</span>}
         </p>
-        <div className=" md:flex flex-nowrap overflow-hidden gap-2 mt-2 mb-4"> 
+        <div className="hidden md:flex flex-nowrap overflow-hidden gap-2 mt-2 mb-4">  
           {fishery.species.slice(0, 6).map((species, index) => ( 
             <span
               key={index}

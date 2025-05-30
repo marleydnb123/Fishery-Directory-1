@@ -279,7 +279,7 @@ const Directory: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* --- Modern Search Bar & Filters --- */}
+{/* --- Modern Search Bar & Filters --- */}
         <div className="bg-customBlue/50 rounded-xl shadow-md p-6 mb-16">
           <form
             className="flex gap-2 mb-4"
@@ -357,6 +357,7 @@ const Directory: React.FC = () => {
                 </select>
               </div>
             </div>
+
             {/* Column 2: Text Inputs */}
             <div className="flex flex-col gap-3">
               <div>
@@ -401,34 +402,12 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
-              
-            {/* Column 3: Checkboxes with Categories */}
-            <div className="flex flex-col gap-4 mt-1">
-              
+            {/* Column 3: Checkboxes with Section Headers */}
+            <div className="flex flex-col gap-4">
               {/* CARP Section */}
               <div>
-                <h3 className="text-sm font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Carp</h3>
+                <h3 className="text-sm font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">CARP</h3>
                 <div className="grid grid-cols-1 gap-2">
-                  <div className="flex items-center gap-2">
-                    <input 
-                      type="checkbox"
-                      checked={accommodationOnly}
-                      onChange={() => setAccommodationOnly(!accommodationOnly)}
-                      className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
-                      id="accommodation"
-                    /> 
-                    <label htmlFor="accommodation" className="text-xs text-gray-700 font-medium">On-site Accommodation</label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={nightFishingAllowed}
-                      onChange={() => setNightFishingAllowed(!nightFishingAllowed)}
-                      className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
-                      id="night-fishing"
-                    />
-                    <label htmlFor="night-fishing" className="text-xs text-gray-700 font-medium">Night Fishing Allowed</label>
-                  </div>
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
@@ -464,7 +443,7 @@ const Directory: React.FC = () => {
 
               {/* MATCH Section */}
               <div>
-                <h3 className="text-sm font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Match</h3>
+                <h3 className="text-sm font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">MATCH</h3>
                 <div className="grid grid-cols-1 gap-2">
                   <div className="flex items-center gap-2">
                     <input
@@ -491,8 +470,28 @@ const Directory: React.FC = () => {
 
               {/* COARSE Section */}
               <div>
-                <h3 className="text-sm font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Coarse</h3>
+                <h3 className="text-sm font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">COARSE</h3>
                 <div className="grid grid-cols-1 gap-2">
+                  <div className="flex items-center gap-2"> 
+                    <input 
+                      type="checkbox"
+                      checked={accommodationOnly}
+                      onChange={() => setAccommodationOnly(!accommodationOnly)}
+                      className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
+                      id="accommodation"
+                    /> 
+                    <label htmlFor="accommodation" className="text-xs text-gray-700 font-medium">On-site Accommodation</label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={nightFishingAllowed}
+                      onChange={() => setNightFishingAllowed(!nightFishingAllowed)}
+                      className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
+                      id="night-fishing"
+                    />
+                    <label htmlFor="night-fishing" className="text-xs text-gray-700 font-medium">Night Fishing Allowed</label>
+                  </div>
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
@@ -585,7 +584,9 @@ const Directory: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> 
+          </div> 
+        </div>
 
 
         {/* --- Fisheries Grid --- */}
@@ -690,6 +691,7 @@ const Directory: React.FC = () => {
         </div>
       </section>
       {/* --- End Featured Fisheries Section --- */}
+    </div>
   );
 };
 

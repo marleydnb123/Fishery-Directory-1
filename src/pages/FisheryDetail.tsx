@@ -204,6 +204,7 @@ const FisheryDetail: React.FC = () => {
       </div>
     );
   }
+  
 
   return (
     <div className="min-h-screen pb-16 bg-gray-50">

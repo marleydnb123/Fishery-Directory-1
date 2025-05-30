@@ -507,7 +507,7 @@ const ListYourFishery: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
             Sponsorship & Business Advertising
           </h2>
-          <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+          <div className="text-center text-xl text-gray-600 mb-8 max-w-8xl mx-auto">
             <p className="mb-4">
               If your business supplies the angling world — tackle, bait, gear, services or destinations — we offer a range of flexible sponsorship and advertising options to suit all budgets.
             </p>

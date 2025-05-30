@@ -122,13 +122,12 @@ const FisheryDetail: React.FC = () => {
       // Fetch fishery by slug
       const { data: fisheryData, error: fisheryError } = await supabase
         .from('fisheries')
-        .select(`
-          *,
+        .select('*')
           fishery_visits!inner (
             visit_count
           )
         .select(`
-          *,
+          *')
           fishery_visits!inner (
             visit_count
           )

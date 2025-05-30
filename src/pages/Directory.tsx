@@ -413,7 +413,7 @@ const Directory: React.FC = () => {
                   value={facilities}
                   onChange={e => setFacilities(e.target.value)}
                   placeholder="toilets, showers, café..."
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm text-blue-500"
                 />
               </div>
               <div>

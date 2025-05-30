@@ -2,13 +2,40 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Check, Star, Users, TrendingUp, Mail, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase'; 
+import { Fishery } from '../types/schema';
+import FisheryCard from '../components/common/FisheryCard';
 
 const ListYourFishery: React.FC = () => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
+  const [loadingFisheries, setLoadingFisheries] = useState(true);
+
+  useEffect(() => {
+    const fetchFeaturedFisheries = async () => {
+      setLoadingFisheries(true);
+      const { data, error } = await supabase
+        .from('fisheries')
+        .select('*')
+        .eq('isfeatured', true)
+        .limit(3);
+
+      if (!error && data) {
+        setFeaturedFisheries(data.map((f: any) => ({
+          ...f,
+          isFeatured: f.isfeatured,
+          hasAccommodation: f.hasaccommodation,
+          species: Array.isArray(f.species) ? f.species : [],
+        })));
+      }
+      setLoadingFisheries(false);
+    };
+
+    fetchFeaturedFisheries();
+  }, []);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -261,35 +288,26 @@ const ListYourFishery: React.FC = () => {
           
           {/* Example Fishery Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {featuredFisheries.slice(0, 3).map((fishery) => (
-              <motion.div
-                key={fishery.id}
-                whileHover={{ scale: 1.02 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden"
-              >
-                <div className="h-48 overflow-hidden">
-                  <img
-                    src={fishery.image}
-                    alt={fishery.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{fishery.name}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{fishery.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {fishery.species.slice(0, 3).map((species, index) => (
-                      <span
-                        key={index}
-                        className="text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
-                      >
-                        {species}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            {loadingFisheries ? (
+              <div className="col-span-3 text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600 mx-auto"></div>
+                <p className="mt-4 text-gray-600">Loading featured fisheries...</p>
+              </div>
+            ) : featuredFisheries.length > 0 ? (
+              featuredFisheries.map((fishery) => (
+                <motion.div
+                  key={fishery.id}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <FisheryCard fishery={fishery} />
+                </motion.div>
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12">
+                <p className="text-gray-600">No featured fisheries available.</p>
+              </div>
+            )}
           </div>
           
           {/* Features Grid */}

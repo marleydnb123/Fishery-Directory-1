@@ -269,7 +269,7 @@ const ListYourFishery: React.FC = () => {
       </section>
 
       {/* Featured Fisheries Section */}
-      <section className="py-12 bg-gradient-to-b from-blue-50 via-white to-blue-50">
+      <section className="py-6 bg-gradient-to-b from-blue-50 via-white to-blue-50">
         <div className="container mx-auto shadow-lg rounded-xl overflow-hidden">
           {/* Header Bar */}
           <div

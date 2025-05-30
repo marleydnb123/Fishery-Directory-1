@@ -313,10 +313,15 @@ const Contact: React.FC = () => {
           </motion.div>
         </div>
       </div>
-
+      
       {/* Newsletter Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
-        <div className="container mx-auto max-w-xl text-center">
+      <motion.div
+        className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-8 mt-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-bebas font-bold mb-4">
             Stay Updated
           </h2>
@@ -324,7 +329,7 @@ const Contact: React.FC = () => {
             Subscribe to our newsletter for the latest updates and fishery management tips
           </p>
           
-          <form onSubmit={handleSubscribe} className="space-y-4">
+          <form onSubmit={handleSubscribe} className="max-w-xl mx-auto space-y-4">
             <div className="relative">
               <Mail className="absolute left-3 top-3 h-6 w-6 text-gray-400" />
               <input
@@ -360,7 +365,7 @@ const Contact: React.FC = () => {
             )}
           </form>
         </div>
-      </section>
+      </motion.div>
     </div>
   );
 }; 

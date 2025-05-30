@@ -824,3 +824,5 @@ const ListYourFishery: React.FC = () => {
 };
 
 export default ListYourFishery;
+
+export default ListYourFishery

@@ -6,9 +6,6 @@ import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
 import GoogleMap from '../components/common/GoogleMap'; 
 
- 
-
-// Define your types if you don't already have them
 type Fishery = {
   id: string; 
   name: string;
@@ -40,6 +37,8 @@ type Fishery = {
   opening_times: string[];
   day_tickets: string[];
   payments: string[];
+  record_biggest_fish?: string;
+  record_match_weight?: string;
 };
 
 type Lake = {
@@ -66,6 +65,7 @@ const FisheryDetail: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
   const [visitUpdated, setVisitUpdated] = useState(false);
+  const [visitCount, setVisitCount] = useState<number>(0);
 
   // Function to update visit count
   const updateVisitCount = async (fisheryId: string) => {
@@ -74,6 +74,18 @@ const FisheryDetail: React.FC = () => {
         await supabase.rpc('increment_fishery_visits', { 
           fishery_id_param: fisheryId 
         });
+
+        // Fetch updated visit count
+        const { data: visitData } = await supabase
+          .from('fishery_visits')
+          .select('visit_count')
+          .eq('fishery_id', fisheryId)
+          .single();
+
+        if (visitData) {
+          setVisitCount(visitData.visit_count);
+        }
+        
         setVisitUpdated(true);
       } catch (error) {
         console.error('Error updating visit count:', error);
@@ -175,9 +187,6 @@ const FisheryDetail: React.FC = () => {
       updateVisitCount(fishery.id);
     }
   }, [fishery, visitUpdated]);
- 
-   
-
 
   if (loading) {
     return (
@@ -241,8 +250,6 @@ const FisheryDetail: React.FC = () => {
           </div>
         </div>
       </div>
-
-    
 
       {/* Tab Navigation */}
       <div className="bg-white border-b">
@@ -318,8 +325,8 @@ const FisheryDetail: React.FC = () => {
   <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
     {/* Visitors */}
     <div className="flex-1 flex flex-col items-center">
-      <span className="text-3xl font-bold text-grey-600">{fishery.visitors_monthly ?? '—'}</span>
-      <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
+      <span className="text-3xl font-bold text-grey-600">{visitCount || '—'}</span>
+      <span className="text-sm text-grey-600 mt-1">Total Visits</span>
     </div>
     <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
     {/* Record Fish */}
@@ -378,10 +385,6 @@ const FisheryDetail: React.FC = () => {
             </div>  
           </div> 
         </div> 
- 
-
-
- 
 
               {/* --- Water Features Section --- */}
             {fishery.features && fishery.features.length > 0 && (
@@ -483,8 +486,6 @@ const FisheryDetail: React.FC = () => {
 </div>
 {/* --- End Images Section --- */}
 
-             
-
                       {/* --- Video Section (supports YouTube, Vimeo, MP4, etc.) --- */}
 <div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
@@ -566,11 +567,6 @@ const FisheryDetail: React.FC = () => {
     </div>
   </div>
 </div>
-
-
-
-
-
 
 <div className="flex flex-col md:flex-row gap-6">
   {/* Booking Information Card */}
@@ -673,13 +669,6 @@ const FisheryDetail: React.FC = () => {
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
               
               {/* Location Card */}
 <div className="flex-1 bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
@@ -710,7 +699,7 @@ const FisheryDetail: React.FC = () => {
                   <div className="mt-6 mr-6 ml-6">
                     <GoogleMap 
                       latitude={fishery.Latitude || 0}
-                      longitude={fishery.Longitude || 0}
+                      longitude={fishery.Longitude ||0}
                       name={fishery.name}
                     />
                   </div>
@@ -719,9 +708,6 @@ const FisheryDetail: React.FC = () => {
             </div>
           </motion.div>
         )} 
-
-
-
 
        {activeTab === 'lakes' && ( 
     <motion.div
@@ -788,10 +774,6 @@ const FisheryDetail: React.FC = () => {
   </motion.div>
 )}
 
-
- 
-
- 
         {activeTab === 'accommodation' && fishery.hasaccommodation && (
   <motion.div
     initial={{ opacity: 0 }}
@@ -853,8 +835,6 @@ rel="noopener noreferrer"
     )}
   </motion.div>
 )}
-
-
 
         {activeTab === 'rules' && (
   <motion.div
@@ -946,7 +926,6 @@ rel="noopener noreferrer"
   </motion.div>
 )}
 
- 
 {/* --- Featured Fisheries Section --- */}
 <section className="py-12 bg-gradient-to-b from-blue-50 via-white to-blue-50 ">
   <div className="container mx-auto shadow-lg rounded-xl overflow-hidden">
@@ -1023,9 +1002,6 @@ rel="noopener noreferrer"
   </div>
 </section>
 {/* --- End Featured Fisheries Section --- */}
-
-          {/* --- End Tactics & Methods Section --- */}
-
 
 {/* --- Reviews Section --- */}
 <div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
@@ -1130,8 +1106,7 @@ rel="noopener noreferrer"
 </div>
 {/* --- End Reviews Section --- */}
 
-        
-               {/* Contact Bar */}
+        {/* Contact Bar */}
         <div className="mt-8 rounded-xl shadow-lg p-0 overflow-hidden">
           <div
             className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex flex-col md:flex-row items-center justify-between gap-6"
@@ -1162,12 +1137,6 @@ rel="noopener noreferrer"
                   Visit Website
                 </a>
               )}
-              {/* Example: Add social icons if you want */}
-              {/* 
-              <a href="#" className="text-primary-200 hover:text-white transition">
-                <TwitterIcon className="h-5 w-5" />
-              </a>
-              */} 
             </div>
           </div>
         </div> 
@@ -1175,6 +1144,5 @@ rel="noopener noreferrer"
     </div>
   );
 };
-
 
 export default FisheryDetail;

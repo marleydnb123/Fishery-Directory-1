@@ -82,7 +82,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
         <Link
           to={`/directory/${fishery.slug}`}
           onClick={handleScrollTop}
-          className="block w-full bg-primary-600 hover:bg-primary-800 text-white py-2 px-4 rounded-lg transition-colors text-center"
+          className="block w-full bg-customBlue hover:bg-primary-800 text-white py-2 px-4 rounded-lg transition-colors text-center"
         >
           View Details
         </Link>

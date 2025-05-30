@@ -23,7 +23,7 @@ const ListYourFishery: React.FC = () => {
       const { data, error } = await supabase
         .from('fisheries')
         .select('*')
-        .eq('isfeatured', true)
+        .eq('isfeatured', true) 
         .limit(4);
       if (error) {
         setFeaturedError('Failed to load featured fisheries.');

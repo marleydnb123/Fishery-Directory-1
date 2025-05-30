@@ -555,7 +555,7 @@ const FisheryDetail: React.FC = () => {
         d="M16 7c0-1.657-2.686-3-6-3S4 5.343 4 7m12 0v10a4 4 0 01-8 0V7m12 0c0-1.657-2.686-3-6-3S4 5.343 4 7m12 0v10a4 4 0 01-8 0V7"
       />
     </svg>
-    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Tactics & Methods</h3>
+    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Tactics, Methods & Bait Advice</h3>
   </div>
   {/* Tactics Content */}
   <div className="p-6">

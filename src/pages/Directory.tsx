@@ -385,7 +385,7 @@ const Directory: React.FC = () => {
                 <select
                   value={bookingType}
                   onChange={e => setBookingType(e.target.value)}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-customBlue/50 "
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-transparent"
                 >
                   <option value="">All</option>
                   <option value="booking required">Booking Required</option>
@@ -403,7 +403,7 @@ const Directory: React.FC = () => {
                   value={featureSearchTerm}
                   onChange={handleFeatureSearch} 
                   placeholder="e.g. weed beds, lily pads"
-                  className="w-full p-2 border border-gray-200   rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-customBlue/50"
+                  className="w-full p-2 border border-gray-200   rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-transparent"
                 />
               </div>
               <div>
@@ -413,7 +413,7 @@ const Directory: React.FC = () => {
                   value={facilities}
                   onChange={e => setFacilities(e.target.value)}
                   placeholder="toilets, showers, café..."
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-customBlue/50"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-transparent"
                 />
               </div>
               <div>
@@ -423,7 +423,7 @@ const Directory: React.FC = () => {
                   value={priceRange}
                   onChange={e => setPriceRange(e.target.value)}
                   placeholder="e.g. £10-£25"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-customBlue/50"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 "
                 />
               </div>
               <div>
@@ -433,7 +433,7 @@ const Directory: React.FC = () => {
                   value={wifiSignal}
                   onChange={e => setWifiSignal(e.target.value)}
                   placeholder="Wifi, Signal, Provider (vodafone, o2 etc)"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-customBlue/50"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-transparent"
                 />
               </div>
             </div>
@@ -449,7 +449,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCarpOpen(!carpOpen)}
-                  className="w-full flex items-center justify-between p-3 rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl transition-colors"
+                  className="w-full flex items-center justify-between p-3 rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl t"
                 >
                   <h3 className="text-sm font-bold text-gray-800">CARP</h3>
                   <svg

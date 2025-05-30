@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Check, Star, Users, TrendingUp, Mail, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { ChevronDown } from 'lucide-react';
 
 const ListYourFishery: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -603,44 +604,73 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            Frequently Asked Questions
-          </h2>
-          
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">How do I update my listing?</h3>
-              <p className="text-gray-700">
-                You can update your listing anytime through your admin dashboard. Changes are usually live within minutes.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">Can I list multiple lakes?</h3>
-              <p className="text-gray-700">
-                Yes! You can add as many lakes as you have, each with their own details, species, and features.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">What photos should I include?</h3>
-              <p className="text-gray-700">
-                We recommend high-quality photos of your lakes, facilities, and surroundings. Our team can help with photo selection.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">How long does setup take?</h3>
-              <p className="text-gray-700">
-                Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup.
-              </p>
-            </div>
-          </div>
+     {/* FAQ Section */}
+<section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
+  <div className="container mx-auto max-w-4xl">
+    <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
+      Frequently Asked Questions
+    </h2>
+    
+    <div className="space-y-4">
+      <FAQItem
+        question="How do I update my listing?"
+        answer="You can update your listing anytime through your admin dashboard. Changes are usually live within minutes."
+      />
+      
+      <FAQItem
+        question="Can I list multiple lakes?"
+        answer="Yes! You can add as many lakes as you have, each with their own details, species, and features."
+      />
+      
+      <FAQItem
+        question="What photos should I include?"
+        answer="We recommend high-quality photos of your lakes, facilities, and surroundings. Our team can help with photo selection."
+      />
+      
+      <FAQItem
+        question="How long does setup take?"
+        answer="Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup."
+      />
+    </div>
+  </div>
+</section>
+
+{/* FAQ Item Component */}
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      <button
+        className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <h3 className="text-xl font-bold text-gray-900">{question}</h3>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="flex-shrink-0 ml-4"
+        >
+          <ChevronDown className="w-6 h-6 text-gray-600" />
+        </motion.div>
+      </button>
+      
+      <motion.div
+        initial={false}
+        animate={{
+          height: isOpen ? "auto" : 0,
+          opacity: isOpen ? 1 : 0
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="overflow-hidden"
+      >
+        <div className="px-6 pb-6">
+          <p className="text-gray-700 leading-relaxed">{answer}</p>
         </div>
-      </section>
+      </motion.div>
+    </div>
+  );
+};
 
        {/* Newsletter Section */}
       <section className="py-16 px-4">

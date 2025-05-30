@@ -102,7 +102,7 @@ const ListYourFishery: React.FC = () => {
       </div>
 
      {/* Advertising Packages Section */}
-<section className="py-16 px-4 bg-white">
+<section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-50">
   <div className="container mx-auto">
     <motion.h2
       className="text-4xl md:text-5xl font-bebas font-bold text-center mb-8"

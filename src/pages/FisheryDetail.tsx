@@ -127,6 +127,11 @@ const FisheryDetail: React.FC = () => {
           fishery_visits!inner (
             visit_count
           )
+        .select(`
+          *,
+          fishery_visits!inner (
+            visit_count
+          )
         `)
         .eq('slug', slug)
         .single();
@@ -141,6 +146,7 @@ const FisheryDetail: React.FC = () => {
 
       setFishery({
         ...fisheryData,
+        visit_count: fisheryData.fishery_visits?.[0]?.visit_count || 0,
         visit_count: fisheryData.fishery_visits?.[0]?.visit_count || 0,
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],

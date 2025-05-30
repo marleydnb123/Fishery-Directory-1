@@ -2,6 +2,7 @@ export interface Fishery {
   id: string;
   name: string;
   slug: string;
+  visit_count?: number;
   description: string;
   rules: string;
   image: string;

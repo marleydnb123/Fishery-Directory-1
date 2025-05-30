@@ -6,7 +6,7 @@ import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
 import GoogleMap from '../components/common/GoogleMap'; 
 
- 
+  
 
 // Define your types if you don't already have them
 type Fishery = {

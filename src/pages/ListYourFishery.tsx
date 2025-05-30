@@ -6,27 +6,30 @@ import { supabase } from '../lib/supabase';
 import { Fishery } from '../types/schema';
 import FisheryCard from '../components/common/FisheryCard'; 
 
- 
-
 const ListYourFishery: React.FC = () => {
+  // Newsletter subscription states
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Featured fisheries states
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
   const [loadingFisheries, setLoadingFisheries] = useState(true);
+  const [fisheriesError, setFisheriesError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchFeatured = async () => {
-      setFeaturedLoading(true);
-      setFeaturedError(null);
+      setLoadingFisheries(true);
+      setFisheriesError(null);
       const { data, error } = await supabase
         .from('fisheries')
         .select('*')
-        .eq('isfeatured', true) 
+        .eq('isfeatured', true)
         .limit(4);
+
       if (error) {
-        setFeaturedError('Failed to load featured fisheries.');
+        setFisheriesError('Failed to load featured fisheries.');
         setFeaturedFisheries([]);
       } else {
         setFeaturedFisheries(
@@ -37,7 +40,7 @@ const ListYourFishery: React.FC = () => {
           }))
         );
       }
-      setFeaturedLoading(false);
+      setLoadingFisheries(false);
     };
     fetchFeatured();
   }, []);

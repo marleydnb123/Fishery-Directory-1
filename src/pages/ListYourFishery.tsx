@@ -670,9 +670,8 @@ const ListYourFishery: React.FC = () => {
           <p className="text-gray-700 leading-relaxed">{answer}</p>
         </div>
       </motion.div>
-    </div>
-  );
-};
+    </div> 
+
 
        {/* Newsletter Section */}
       <section className="py-16 px-4">

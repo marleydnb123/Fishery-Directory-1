@@ -164,7 +164,7 @@ const ListYourFishery: React.FC = () => {
     >
       <div className="lg:w-1/2">
         <img
-          src="https://images.pexels.com/photos/5582871/pexels-photo-5582871.jpeg"
+          src="https://static.wixstatic.com/media/aeb0b8_63212d8d5b244bafb56f301f03811b82~mv2.jpg/v1/fill/w_640,h_336,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/aeb0b8_63212d8d5b244bafb56f301f03811b82~mv2.jpg"
           alt="Business meeting and marketing"
           className="w-full h-96 object-cover rounded-2xl shadow-xl"
         />

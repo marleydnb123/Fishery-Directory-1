@@ -413,7 +413,7 @@ const Directory: React.FC = () => {
                   value={facilities}
                   onChange={e => setFacilities(e.target.value)}
                   placeholder="toilets, showers, café..."
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-customBlue/50"
                 />
               </div>
               <div>
@@ -423,7 +423,7 @@ const Directory: React.FC = () => {
                   value={priceRange}
                   onChange={e => setPriceRange(e.target.value)}
                   placeholder="e.g. £10-£25"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-customBlue/50"
                 />
               </div>
               <div>
@@ -433,7 +433,7 @@ const Directory: React.FC = () => {
                   value={wifiSignal}
                   onChange={e => setWifiSignal(e.target.value)}
                   placeholder="Wifi, Signal, Provider (vodafone, o2 etc)"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-customBlue/50"
                 />
               </div>
             </div>

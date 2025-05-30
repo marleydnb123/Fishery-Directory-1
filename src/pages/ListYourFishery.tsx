@@ -547,7 +547,7 @@ const ListYourFishery: React.FC = () => {
               From banner ads and newsletter placements to featured articles and social content, we can help amplify your message to tens of thousands of active anglers each month.
             </p>
             <p>
-              Our audience includes end customers and trade buyers — and our business listings, content sponsorships, and database access put your brand in front of exactly the right people.
+              Our audience spans both individual anglers and trade buyers, ensuring your brand reaches the right people. With business listings, content sponsorships, and database access, we put your products and services directly in front of those who matter most
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

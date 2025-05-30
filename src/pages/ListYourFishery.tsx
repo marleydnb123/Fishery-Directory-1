@@ -377,7 +377,48 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
 
-      {/* Newsletter Section */}
+     
+
+      {/* FAQ Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
+            Frequently Asked Questions
+          </h2>
+          
+          <div className="space-y-6">
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold mb-2">How do I update my listing?</h3>
+              <p className="text-gray-700">
+                You can update your listing anytime through your admin dashboard. Changes are usually live within minutes.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold mb-2">Can I list multiple lakes?</h3>
+              <p className="text-gray-700">
+                Yes! You can add as many lakes as you have, each with their own details, species, and features.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold mb-2">What photos should I include?</h3>
+              <p className="text-gray-700">
+                We recommend high-quality photos of your lakes, facilities, and surroundings. Our team can help with photo selection.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold mb-2">How long does setup take?</h3>
+              <p className="text-gray-700">
+                Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+       {/* Newsletter Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-xl text-center">
           <h2 className="text-3xl md:text-4xl font-bebas font-bold mb-4">
@@ -424,46 +465,7 @@ const ListYourFishery: React.FC = () => {
           </form>
         </div>
       </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            Frequently Asked Questions
-          </h2>
-          
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">How do I update my listing?</h3>
-              <p className="text-gray-700">
-                You can update your listing anytime through your admin dashboard. Changes are usually live within minutes.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">Can I list multiple lakes?</h3>
-              <p className="text-gray-700">
-                Yes! You can add as many lakes as you have, each with their own details, species, and features.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">What photos should I include?</h3>
-              <p className="text-gray-700">
-                We recommend high-quality photos of your lakes, facilities, and surroundings. Our team can help with photo selection.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">How long does setup take?</h3>
-              <p className="text-gray-700">
-                Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* CTA Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto text-center">

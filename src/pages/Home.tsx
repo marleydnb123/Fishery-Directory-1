@@ -6,6 +6,7 @@ import FisheryCard from '../components/common/FisheryCard';
 import Button from '../components/common/Button';
 import { supabase } from '../lib/supabase'; // Make sure this path is correct!
 import { Fishery } from '../types/schema'; // Adjust import if needed
+import AccommodationCard from '../components/common/AccommodationCard';
 
 const heroImages = [
   "https://www.wokinghamcountryside.co.uk/sites/countryside/files/styles/scale_crop_7_3_large/public/2024-05/sunset%2C%20black.jpg?itok=OMc703vu",
@@ -83,6 +84,36 @@ const Home: React.FC = () => {
   };
   fetch_fishery_of_the_week();
 }, []);
+
+    // Fetch data from Supabase
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const [
+          { data: accommodationData, error: accommodationError },
+          { data: fisheriesData, error: fisheriesError }
+        ] = await Promise.all([
+          supabase.from('accommodation').select('*'),
+          supabase.from('fisheries').select('*')
+        ]);
+
+        if (accommodationError) throw accommodationError;
+        if (fisheriesError) throw fisheriesError;
+
+        setAccommodations(accommodationData || []);
+        setFisheries(fisheriesData || []);
+        setFilteredAccommodations(accommodationData || []);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+  
 
   // Animation variants
   const containerVariants = {
@@ -314,6 +345,27 @@ const Home: React.FC = () => {
   </div> 
 </section>
 {/* ================== End Weekly Highlights Section ================== */}
+
+      <section className="w-full max-w-7xl mx-auto px-4 mb-12">
+  <div className="flex items-center justify-between mb-6">
+    <h2 className="text-2xl font-bold text-gray-900">Accommodation</h2>
+    <Link
+      to="/accommodation"
+      className="text-primary-600 hover:underline text-sm font-medium"
+    >
+      View all
+    </Link>
+  </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {accommodations.map((item, idx) => (
+      <AccommodationCard
+        key={item.accommodation?.id || idx}
+        accommodation={item.accommodation}
+        fishery={item.fishery}
+      />
+    ))}
+  </div>
+</section>
 
 
       

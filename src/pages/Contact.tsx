@@ -306,6 +306,53 @@ const Contact: React.FC = () => {
                   <p className="text-primary-900 text-sm">
                     We typically respond to inquiries within 24 hours during business days.
                   </p>
+                  {/* Newsletter Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bebas font-bold mb-4">
+            Stay Updated
+          </h2>
+          <p className="text-gray-600 mb-8">
+            Subscribe to our newsletter for the latest updates and fishery management tips
+          </p>
+          
+          <form onSubmit={handleSubscribe} className="space-y-4">
+            <div className="relative">
+              <Mail className="absolute left-3 top-3 h-6 w-6 text-gray-400" />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
+                required
+              />
+            </div>
+            
+            {error && (
+              <div className="flex items-center text-red-600 text-sm">
+                <AlertCircle className="h-4 w-4 mr-2" />
+                {error}
+              </div>
+            )}
+            
+            {subscribed ? (
+              <div className="flex items-center justify-center text-green-600">
+                <Check className="h-5 w-5 mr-2" />
+                Thanks for subscribing!
+              </div>
+            ) : (
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-customBlue hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors"
+              >
+                {loading ? 'Subscribing...' : 'Subscribe'}
+              </button>
+            )}
+          </form>
+        </div>
+      </section>
                 </div>
               </div>
             </div>

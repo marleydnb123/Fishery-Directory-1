@@ -22,7 +22,7 @@ const ListYourFishery: React.FC = () => {
         const { data, error } = await supabase
           .from('fisheries')
           .select('*')
-          .eq('featured', true)
+          .eq('isfeatured', true)
           .limit(3);
 
         if (error) throw error;

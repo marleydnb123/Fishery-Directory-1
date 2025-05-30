@@ -122,8 +122,11 @@ const ListYourFishery: React.FC = () => {
       <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
         <div className="container mx-auto">
           <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            Choose Your Perfect Plan
+            Advertising Packages
           </h2>
+          <p className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+            With hundreds of thousands of visits from a highly engaged angling audience each month, and one of the UK's largest directories of fisheries, we help you reach more anglers, generate more enquiries, and grow your business — simply and affordably.
+          </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Free Plan */}
@@ -242,8 +245,19 @@ const ListYourFishery: React.FC = () => {
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            Your Listing Preview
+            Fisheries & Fishing Holiday Venues
           </h2>
+          <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+            <p className="mb-4">
+              If you own a fishery or fishing holiday venue and want to attract more anglers, we're here to help.
+            </p>
+            <p className="mb-4">
+              Our audience includes match anglers, specimen hunters, pleasure fishers, and families looking for fishing breaks — and our platform connects them directly with venues like yours.
+            </p>
+            <p>
+              We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.
+            </p>
+          </div>
           <div className="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
             <img
               src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg"
@@ -278,8 +292,19 @@ const ListYourFishery: React.FC = () => {
       <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
         <div className="container mx-auto">
           <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            What Fishery Owners Say
+            Sponsorship & Business Advertising
           </h2>
+          <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+            <p className="mb-4">
+              If your business supplies the angling world — tackle, bait, gear, services or destinations — we offer a range of flexible sponsorship and advertising options to suit all budgets.
+            </p>
+            <p className="mb-4">
+              From banner ads and newsletter placements to featured articles and social content, we can help amplify your message to tens of thousands of active anglers each month.
+            </p>
+            <p>
+              Our audience includes end customers and trade buyers — and our business listings, content sponsorships, and database access put your brand in front of exactly the right people.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div
               className="bg-white p-6 rounded-xl shadow-lg"
@@ -443,16 +468,18 @@ const ListYourFishery: React.FC = () => {
       <section className="py-16 px-4">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bebas font-bold mb-6">
-            Ready to List Your Fishery?
+            Looking to Sell Your Fishery or Lake?
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Join the UK's fastest-growing fishing community and start attracting more anglers today.
+            If you're thinking of selling a fishery, lake, river stretch, or land with fishing rights — we can help.
+            We're not estate agents, but we work closely with trusted rural property partners. And with one of the UK's largest databases of angling venue owners, holidaymakers, and investors, we can put your property in front of the right eyes.
+            List your water with us and reach thousands of qualified, fishing-focused buyers actively searching for properties with angling potential.
           </p>
           <Link
             to="/contact"
             className="inline-block bg-customBlue hover:bg-blue-700 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-colors"
           >
-            Start My Listing
+            List a Fishery for Sale
           </Link>
         </div>
       </section>

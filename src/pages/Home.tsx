@@ -177,7 +177,7 @@ const Home: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
-        Explore verified UK fisheries with detailed information on facilities, species, tactics & more.
+        Explore verified UK fisheries with detailed information on lakes, facilities, species, tactics & more.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

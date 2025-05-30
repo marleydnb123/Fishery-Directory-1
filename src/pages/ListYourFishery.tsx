@@ -17,28 +17,31 @@ const ListYourFishery: React.FC = () => {
   const [loadingFisheries, setLoadingFisheries] = useState(true);
 
   useEffect(() => {
-    const fetchFeaturedFisheries = async () => {
-      setLoadingFisheries(true);
+    const fetchFeatured = async () => {
+      setFeaturedLoading(true);
+      setFeaturedError(null);
       const { data, error } = await supabase
         .from('fisheries')
         .select('*')
         .eq('isfeatured', true)
-        .limit(3);
-
-      if (!error && data) {
-        setFeaturedFisheries(data.map((f: any) => ({
-          ...f,
-          isFeatured: f.isfeatured,
-          hasAccommodation: f.hasaccommodation,
-          species: Array.isArray(f.species) ? f.species : [],
-        })));
+        .limit(4);
+      if (error) {
+        setFeaturedError('Failed to load featured fisheries.');
+        setFeaturedFisheries([]);
+      } else {
+        setFeaturedFisheries(
+          (data || []).map((f: any) => ({
+            ...f,
+            species: Array.isArray(f.species) ? f.species : [],
+            features: Array.isArray(f.features) ? f.features : [],
+          }))
+        );
       }
-      setLoadingFisheries(false);
+      setFeaturedLoading(false);
     };
- 
-    fetchFeaturedFisheries();
+    fetchFeatured();
   }, []);
-
+  
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);

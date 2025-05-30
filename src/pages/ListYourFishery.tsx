@@ -93,7 +93,7 @@ const ListYourFishery: React.FC = () => {
           >
             <Link
               to="/contact"
-              className="inline-block bg-customBlue hover:bg-blue-700 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-colors"
+              className="inline-block bg-customBlue hover:bg-blue-700 text-white text-lg font-semibold px-8 py-2 rounded-lg transition-colors"
             >
               List My Fishery
             </Link>

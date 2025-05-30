@@ -66,7 +66,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
           <Home className="h-4 w-4 mr-1 text-primary-600" />
           <span className="text-sm truncate">{fishery.name}, {fishery.district}</span>
         </div>
-        <p className="text-gray-600 line-clamp-2 mb-1 flex-1 overflow overflow-hidden"> 
+        <p className="text-gray-600 line-clamp-2 mb-1 flex-1"> 
           {accommodation.notes || <span className="opacity-50">No notes</span>}
         </p>
         <div className="hidden md:flex flex-nowrap overflow-hidden gap-2 mt-2 mb-4"> 

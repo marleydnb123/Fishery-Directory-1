@@ -132,7 +132,7 @@ const Contact: React.FC = () => {
         </motion.div>
         
         <div className="grid grid-cols-1 mb-16 lg:grid-cols-2 gap-8">
-         
+
           {/* Newsletter Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-xl text-center">
@@ -180,7 +180,6 @@ const Contact: React.FC = () => {
           </form>
         </div>
       </section>
-          
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}

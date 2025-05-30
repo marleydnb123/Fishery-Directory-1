@@ -197,21 +197,22 @@ const ListYourFishery: React.FC = () => {
     >
       <div className="lg:w-1/2">
         <img
-          src="https://images.pexels.com/photos/259804/pexels-photo-259804.jpeg"
+          src="https://majestic-carp.co.uk/lakesfrance/wp-content/uploads/sites/4/2017/02/received_1033219727329915_1-1024x768.jpg"
           alt="Property for sale with water"
           className="w-full h-96 object-cover rounded-2xl shadow-xl"
         />
       </div>
       <div className="lg:w-1/2 space-y-6">
-        <h3 className="text-3xl md:text-4xl font-bebas font-bold text-gray-900">
-          Looking to Sell Your Fishing Venue?
-        </h3>
-        <p className="text-lg text-gray-600 leading-relaxed">
-          If you have a commercial fishery, a fishing lake, stretch of river or land with fishing potential that you want to sell then we can help. Equally, if you own a property with water and potential fishing, and you're looking to sell, please get in touch.
-        </p>
-        <p className="text-lg text-gray-600 leading-relaxed">
-          We're not estate agents but we work closely with our partners who are. We'll also advertise your property on our website, putting your venue in front of hundreds of thousands of anglers in the UK.
-        </p>
+        <h3 className="text-2xl font-bold mb-4">
+  List Your Tackle Shop
+</h3>
+<p className="text-lg text-gray-600 leading-relaxed">
+  Do you own a tackle shop or fishing supplies store? Reach more anglers by listing your shop with us. Whether you’re a specialist in carp, coarse, fly, or sea fishing gear, or you run a well-stocked local bait shop, we can help you connect with fishing enthusiasts across the UK.
+</p>
+<p className="text-lg text-gray-600 leading-relaxed">
+  We’re not just another directory—we work closely with our partners to promote tackle shops and fishing retailers. Your shop will be featured on our website, putting your business in front of hundreds of thousands of anglers looking for quality equipment, bait, and expert advice.
+</p>
+
         <Link
           to="/contact"
           className="inline-block bg-customBlue hover:bg-blue-700 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-colors"

@@ -635,7 +635,7 @@ const ListYourFishery: React.FC = () => {
             <div className="bg-white p-6 rounded-xl shadow-lg">
               <h3 className="text-xl font-bold mb-2">How long does setup take?</h3>
               <p className="text-gray-700">
-                Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup.
+                Listings can be live within a few hours.
               </p>
             </div>
           </div>

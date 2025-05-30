@@ -283,60 +283,60 @@ const Directory: React.FC = () => {
         </motion.div>
 
 {/* --- Modern Search Bar & Filters --- */}
-<div className="bg-customBlue/50 rounded-xl shadow-md p-6 mb-16">
-  <form
-    className="flex flex-wrap gap-2 mb-4"
-    onSubmit={e => e.preventDefault()}
-    autoComplete="off"
-  >
-    <input
-      type="text"
-      value={searchTerm}
-      onChange={e => setSearchTerm(e.target.value)}
-      placeholder="Search by fishery name, region, or county"
-      className="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 shadow-sm text-sm"
-      aria-label="Search fisheries"
-    />
-    <button
-      type="submit"
-      className="px-5 py-2 bg-customBlue hover:bg-blue-700 text-white font-medium rounded-lg shadow text-sm"
-    >
-      Search
-    </button>
-    <button
-      type="button"
-      onClick={() => {
-        setSearchTerm('');
-        setSelectedSpecies('');
-        setSelectedDistrict('');
-        setSelectedFishingType('');
-        setBookingType('');
-        setFeatureSearchTerm('');
-        setFacilities('');
-        setPriceRange('');
-        setWifiSignal('');
-        setBaitBoats(false);
-        setMagicTwig(false);
-        setCatchPhotos(false);
-        setMatchFishingFriendly(false);
-        setkeepnetsAllowed(false);
-        setAccommodationOnly(false);
-        setNightFishingAllowed(false);
-        setDisabledAccess(false);
-        setDogFriendly(false);
-        setFirePitsAllowed(false);
-        setParkingClose(false);
-        setCampingAllowed(false);
-        settackleShop(false);
-        setprivateHire(false);
-        settackleHire(false);
-        setcoaching(false);
-      }}
-      className="px-5 py-2 bg-customBlue hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
-    >
-      Reset Filters
-    </button>
-  </form>
+        <div className="bg-customBlue/50 rounded-xl shadow-md p-6 mb-16">
+          <form
+            className="flex gap-2 mb-4"
+            onSubmit={e => e.preventDefault()}
+            autoComplete="off"
+          >
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              placeholder="Search by fishery name, region, or county"
+              className="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 shadow-sm text-sm"
+              aria-label="Search fisheries"
+            />
+            <button
+              type="submit"
+              className="px-5 py-2 bg-customBlue hover:bg-blue-700 text-white font-medium rounded-lg shadow text-sm"
+            >
+              Search
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedSpecies('');
+                setSelectedDistrict('');
+                setSelectedFishingType('');
+                setBookingType('');
+                setFeatureSearchTerm('');
+                setFacilities('');
+                setPriceRange('');
+                setWifiSignal('');
+                setBaitBoats(false);
+                setMagicTwig(false);
+                setCatchPhotos(false);
+                setMatchFishingFriendly(false);
+                setkeepnetsAllowed(false);
+                setAccommodationOnly(false);
+                setNightFishingAllowed(false);
+                setDisabledAccess(false);
+                setDogFriendly(false);
+                setFirePitsAllowed(false);
+                setParkingClose(false);
+                setCampingAllowed(false);
+                settackleShop(false);
+                setprivateHire(false);
+                settackleHire(false);
+                setcoaching(false);
+              }}
+              className="px-5 py-2 bg-customBlue  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
+            >
+              Reset Filters
+            </button>
+          </form>
  
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4"> 
             {/* Column 1: Dropdowns */}

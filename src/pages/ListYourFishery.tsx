@@ -1,66 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check, Star, Users, TrendingUp, Mail, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase'; 
+import { Check, Star, Users, TrendingUp } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 import { Fishery } from '../types/schema';
 import FisheryCard from '../components/common/FisheryCard';
 
- 
-
 const ListYourFishery: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
   const [loadingFisheries, setLoadingFisheries] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchFeatured = async () => {
-      setFeaturedLoading(true);
-      setFeaturedError(null);
+    const fetchFeaturedFisheries = async () => {
+      setLoadingFisheries(true);
+      setFetchError(null);
       const { data, error } = await supabase
         .from('fisheries')
         .select('*')
-        .eq('isfeatured', true) 
-        .limit(4);
+        .eq('isfeatured', true)
+        .limit(3);
+
       if (error) {
-        setFeaturedError('Failed to load featured fisheries.');
+        setFetchError('Failed to load featured fisheries.');
         setFeaturedFisheries([]);
-      } else {
+      } else if (data) {
         setFeaturedFisheries(
-          (data || []).map((f: any) => ({
+          data.map((f: any) => ({
             ...f,
+            isFeatured: f.isfeatured,
+            hasAccommodation: f.hasaccommodation,
             species: Array.isArray(f.species) ? f.species : [],
-            features: Array.isArray(f.features) ? f.features : [],
           }))
         );
       }
-      setFeaturedLoading(false);
+      setLoadingFisheries(false);
     };
-    fetchFeatured();
+
+    fetchFeaturedFisheries();
   }, []);
-  
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    try {
-      const { error: subError } = await supabase
-        .from('newsletter_subscriptions')
-        .insert([{ email }]);
-
-      if (subError) throw subError;
-      setSubscribed(true);
-      setEmail('');
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100">
@@ -120,7 +98,6 @@ const ListYourFishery: React.FC = () => {
               <h3 className="text-4xl font-bold text-gray-900 mb-2">150K+</h3>
               <p className="text-gray-600">Monthly Visitors</p>
             </motion.div>
-            
             <motion.div
               className="bg-white p-8 rounded-xl shadow-lg text-center"
               whileHover={{ scale: 1.02 }}
@@ -133,7 +110,6 @@ const ListYourFishery: React.FC = () => {
               <h3 className="text-4xl font-bold text-gray-900 mb-2">500+</h3>
               <p className="text-gray-600">Active Venues</p>
             </motion.div>
-            
             <motion.div
               className="bg-white p-8 rounded-xl shadow-lg text-center"
               whileHover={{ scale: 1.02 }}
@@ -159,7 +135,6 @@ const ListYourFishery: React.FC = () => {
           <p className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
             With hundreds of thousands of visits from a highly engaged angling audience each month, and one of the UK's largest directories of fisheries, we help you reach more anglers, generate more enquiries, and grow your business — simply and affordably.
           </p>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Free Plan */}
             <motion.div
@@ -192,7 +167,6 @@ const ListYourFishery: React.FC = () => {
                 Get Started
               </Link>
             </motion.div>
-
             {/* Featured Plan */}
             <motion.div
               className="bg-white rounded-2xl shadow-xl p-8 border-2 border-customBlue relative"
@@ -232,7 +206,6 @@ const ListYourFishery: React.FC = () => {
                 Get Featured
               </Link>
             </motion.div>
-
             {/* Premium Plan */}
             <motion.div
               className="bg-white rounded-2xl shadow-xl p-8"
@@ -273,7 +246,7 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
 
-      {/* Sample Listing Preview */}
+      {/* Featured Fisheries Section */}
       <section className="py-24 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
         <div className="container mx-auto">
           <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
@@ -290,13 +263,16 @@ const ListYourFishery: React.FC = () => {
               We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.
             </p>
           </div>
-          
           {/* Example Fishery Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {loadingFisheries ? (
               <div className="col-span-3 text-center py-12">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600 mx-auto"></div>
                 <p className="mt-4 text-gray-600">Loading featured fisheries...</p>
+              </div>
+            ) : fetchError ? (
+              <div className="col-span-3 text-center py-12">
+                <p className="text-red-600">{fetchError}</p>
               </div>
             ) : featuredFisheries.length > 0 ? (
               featuredFisheries.map((fishery) => (
@@ -314,7 +290,6 @@ const ListYourFishery: React.FC = () => {
               </div>
             )}
           </div>
-          
           {/* Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
             <div>
@@ -336,204 +311,6 @@ const ListYourFishery: React.FC = () => {
               </ul>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
-        <div className="container mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            Sponsorship & Business Advertising
-          </h2>
-          <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
-            <p className="mb-4">
-              If your business supplies the angling world — tackle, bait, gear, services or destinations — we offer a range of flexible sponsorship and advertising options to suit all budgets.
-            </p>
-            <p className="mb-4">
-              From banner ads and newsletter placements to featured articles and social content, we can help amplify your message to tens of thousands of active anglers each month.
-            </p>
-            <p>
-              Our audience includes end customers and trade buyers — and our business listings, content sponsorships, and database access put your brand in front of exactly the right people.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg"
-              whileHover={{ scale: 1.02 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-customBlue rounded-full flex items-center justify-center text-white font-bold mr-4">
-                  BM
-                </div>
-                <div>
-                  <h4 className="font-bold">Bill Matthews</h4>
-                  <p className="text-sm text-gray-600">Nine Oaks Fishery</p>
-                </div>
-              </div>
-              <p className="text-gray-700">
-                "Since listing with TackleFlow, we've seen a 40% increase in bookings. The platform is easy to use and the support team is fantastic."
-              </p>
-              <div className="text-yellow-400 mt-4">★★★★★</div>
-            </motion.div>
-
-            <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg"
-              whileHover={{ scale: 1.02 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-customBlue rounded-full flex items-center justify-center text-white font-bold mr-4">
-                  SH
-                </div>
-                <div>
-                  <h4 className="font-bold">Sarah Hughes</h4>
-                  <p className="text-sm text-gray-600">Lakeside Fishery</p>
-                </div>
-              </div>
-              <p className="text-gray-700">
-                "The featured listing has been a game-changer for us. We're reaching more anglers than ever before."
-              </p>
-              <div className="text-yellow-400 mt-4">★★★★★</div>
-            </motion.div>
-
-            <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg"
-              whileHover={{ scale: 1.02 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-customBlue rounded-full flex items-center justify-center text-white font-bold mr-4">
-                  JT
-                </div>
-                <div>
-                  <h4 className="font-bold">John Thompson</h4>
-                  <p className="text-sm text-gray-600">Willow Lakes</p>
-                </div>
-              </div>
-              <p className="text-gray-700">
-                "Professional platform that really understands what fishery owners need. Great value for money."
-              </p>
-              <div className="text-yellow-400 mt-4">★★★★★</div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-     
-
-      {/* FAQ Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            Frequently Asked Questions
-          </h2>
-          
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">How do I update my listing?</h3>
-              <p className="text-gray-700">
-                You can update your listing anytime through your admin dashboard. Changes are usually live within minutes.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">Can I list multiple lakes?</h3>
-              <p className="text-gray-700">
-                Yes! You can add as many lakes as you have, each with their own details, species, and features.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">What photos should I include?</h3>
-              <p className="text-gray-700">
-                We recommend high-quality photos of your lakes, facilities, and surroundings. Our team can help with photo selection.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-2">How long does setup take?</h3>
-              <p className="text-gray-700">
-                Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-       {/* Newsletter Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bebas font-bold mb-4">
-            Stay Updated
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Subscribe to our newsletter for the latest updates and fishery management tips
-          </p>
-          
-          <form onSubmit={handleSubscribe} className="space-y-4">
-            <div className="relative">
-              <Mail className="absolute left-3 top-3 h-6 w-6 text-gray-400" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
-                required
-              />
-            </div>
-            
-            {error && (
-              <div className="flex items-center text-red-600 text-sm">
-                <AlertCircle className="h-4 w-4 mr-2" />
-                {error}
-              </div>
-            )}
-            
-            {subscribed ? (
-              <div className="flex items-center justify-center text-green-600">
-                <Check className="h-5 w-5 mr-2" />
-                Thanks for subscribing!
-              </div>
-            ) : (
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-customBlue hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors"
-              >
-                {loading ? 'Subscribing...' : 'Subscribe'}
-              </button>
-            )}
-          </form>
-        </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bebas font-bold mb-6">
-            Looking to Sell Your Fishery or Lake?
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            If you're thinking of selling a fishery, lake, river stretch, or land with fishing rights — we can help.
-            We're not estate agents, but we work closely with trusted rural property partners. And with one of the UK's largest databases of angling venue owners, holidaymakers, and investors, we can put your property in front of the right eyes.
-            List your water with us and reach thousands of qualified, fishing-focused buyers actively searching for properties with angling potential.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block bg-customBlue hover:bg-blue-700 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-colors"
-          >
-            List a Fishery for Sale
-          </Link>
         </div>
       </section>
     </div>

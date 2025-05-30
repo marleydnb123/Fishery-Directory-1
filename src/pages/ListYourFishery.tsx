@@ -467,52 +467,70 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
 
+      
       {/* Sample Listing Preview */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            Fisheries & Fishing Holiday Venues
-          </h2>
-          <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
-            <p className="mb-4">
-              If you own a fishery or fishing holiday venue and want to attract more anglers, we're here to help.
-            </p>
-            <p className="mb-4">
-              Our audience includes match anglers, specimen hunters, pleasure fishers, and families looking for fishing breaks — and our platform connects them directly with venues like yours.
-            </p>
-            <p>
-              We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.
-            </p>
-          </div>
-          <div className="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
-            <img
-              src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg"
-              alt="Sample listing preview"
-              className="w-full h-64 object-cover rounded-xl mb-6"
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-2xl font-bold mb-4">Overview</h3>
-                <ul className="space-y-2">
-                  <li>✓ Detailed venue description</li>
-                  <li>✓ Photo gallery</li>
-                  <li>✓ Available species</li>
-                  <li>✓ Facilities list</li>
-                </ul>
+<section className="py-16 px-4">
+  <div className="container mx-auto">
+    <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
+      Fisheries & Fishing Holiday Venues
+    </h2>
+    <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+      <p className="mb-4">
+        If you own a fishery or fishing holiday venue and want to attract more anglers, we're here to help.
+      </p>
+      <p className="mb-4">
+        Our audience includes match anglers, specimen hunters, pleasure fishers, and families looking for fishing breaks — and our platform connects them directly with venues like yours.
+      </p>
+      <p>
+        We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.
+      </p>
+    </div>
+
+    {/* Featured Fisheries Cards */}
+    <div className="max-w-4xl mx-auto">
+      {featuredLoading ? (
+        <div className="text-center py-8 text-gray-600">Loading featured fisheries...</div>
+      ) : featuredError ? (
+        <div className="text-center py-8 text-red-600">{featuredError}</div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredFisheries.length > 0 ? (
+            featuredFisheries.slice(0, 3).map((fishery) => (
+              <div
+                key={fishery.id}
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <Link to={`/directory/${fishery.slug}`}>
+                  <div className="relative">
+                    <img
+                      src={fishery.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"}
+                      alt={fishery.name}
+                      className="w-full h-48 object-cover transition-transform duration-200 hover:scale-[1.02]"
+                    />
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                        ⭐ Featured
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{fishery.name}</h3>
+                    <p className="text-blue-600 font-medium mb-3">{fishery.district}</p>
+                    <p className="text-gray-600 text-sm line-clamp-3">{fishery.description}</p>
+                  </div>
+                </Link>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-4">Features</h3>
-                <ul className="space-y-2">
-                  <li>✓ Interactive map</li>
-                  <li>✓ Booking information</li>
-                  <li>✓ Rules & regulations</li>
-                  <li>✓ Contact details</li>
-                </ul>
-              </div>
+            ))
+          ) : (
+            <div className="col-span-3 text-center text-gray-500">
+              No featured fisheries found.
             </div>
-          </div>
+          )}
         </div>
-      </section>
+      )}
+    </div>
+  </div>
+</section>
 
       {/* Testimonials */}
       <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">

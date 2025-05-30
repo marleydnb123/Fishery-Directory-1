@@ -297,6 +297,7 @@ const Home: React.FC = () => {
                     <AccommodationCard 
                       accommodation={accommodation}
                       fishery={accommodation.fishery}
+                      hideSpecies={true}
                     />
                   </motion.div>
                 ))

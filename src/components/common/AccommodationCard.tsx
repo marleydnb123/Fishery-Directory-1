@@ -30,9 +30,10 @@ interface AccommodationCardProps {
     species: string[];
     image: string;
   };
+  hideSpecies?: boolean;
 }
 
-const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fishery }) => {
+const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fishery, hideSpecies = false }) => {
   if (!fishery) return null;
 
   const handleScrollTop = () => {
@@ -69,7 +70,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
         <p className="text-gray-600 mb-4 line-clamp-2 flex-1">
           {accommodation.notes || <span className="opacity-50">No notes</span>}
         </p>
-        <div className="flex flex-wrap gap-2 mt-auto mb-4 min-h-[32px]">
+        {!hideSpecies && <div className="flex flex-wrap gap-2 mt-auto mb-4 min-h-[32px]">
           {fishery.species.map((species, index) => (
             <span
               key={index}
@@ -78,7 +79,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
               {species}
             </span>
           ))}
-        </div>
+        </div>}
         <Link
           to={`/directory/${fishery.slug}`}
           onClick={handleScrollTop}

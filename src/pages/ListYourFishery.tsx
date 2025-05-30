@@ -618,21 +618,21 @@ const ListYourFishery: React.FC = () => {
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="bg-white p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-[1.02]">
               <h3 className="text-xl font-bold mb-2">Can I list multiple lakes?</h3>
               <p className="text-gray-700">
                 Yes! You can add as many lakes as you have, each with their own details, species, and features.
               </p>
             </div> 
             
-            <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="bg-white p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-[1.02]">
               <h3 className="text-xl font-bold mb-2">What photos should I include?</h3>
               <p className="text-gray-700">
                 We recommend high-quality photos of your lakes, facilities, and surroundings. Our team can help with photo selection.
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="bg-white p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-[1.02]">
               <h3 className="text-xl font-bold mb-2">How long does setup take?</h3>
               <p className="text-gray-700">
                 Listings can be live within a few hours.

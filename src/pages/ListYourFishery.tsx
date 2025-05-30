@@ -487,7 +487,7 @@ const ListYourFishery: React.FC = () => {
     </div>
 
     {/* Featured Fisheries Cards */}
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-8xl mx-auto">
       {featuredLoading ? (
         <div className="text-center py-8 text-gray-600">Loading featured fisheries...</div>
       ) : featuredError ? (

@@ -327,8 +327,8 @@ const Directory: React.FC = () => {
                   value={selectedDistrict}
                   onChange={e => setSelectedDistrict(e.target.value as UKDistrict | '')}
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                > 
-                  <option value="">All Regions</option>
+                >
+                  <option value="">All Regions</option> 
                   {districts.map((district) => (
                     <option key={district} value={district}>{district}</option>
                   ))}
@@ -364,7 +364,7 @@ const Directory: React.FC = () => {
             {/* Column 2: Text Inputs */}
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-600">Water Features</label>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Water Features</label>
                 <input
                   type="text"
                   value={featureSearchTerm}
@@ -374,7 +374,7 @@ const Directory: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-600">Facilities</label>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Facilities</label>
                 <input
                   type="text"
                   value={facilities}
@@ -384,7 +384,7 @@ const Directory: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-600">Day Ticket Price Range</label>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Day Ticket Price Range</label>
                 <input
                   type="text"
                   value={priceRange}
@@ -394,7 +394,7 @@ const Directory: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-600">Wi-Fi / Mobile Signal</label>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Wi-Fi / Mobile Signal</label>
                 <input
                   type="text"
                   value={wifiSignal}

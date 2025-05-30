@@ -611,7 +611,7 @@ const ListYourFishery: React.FC = () => {
           </h2>
           
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl shadow-lg"> 
+            <div className="bg-white p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-102"> 
               <h3 className="text-xl font-bold mb-2">How do I update my listing?</h3>
               <p className="text-gray-700">
                 You can update your listing anytime through your admin dashboard. Changes are usually live within minutes.

@@ -326,8 +326,8 @@ const Directory: React.FC = () => {
                 <select
                   value={selectedDistrict}
                   onChange={e => setSelectedDistrict(e.target.value as UKDistrict | '')}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-customBlue text-sm"
-                >
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                > 
                   <option value="">All Regions</option>
                   {districts.map((district) => (
                     <option key={district} value={district}>{district}</option>

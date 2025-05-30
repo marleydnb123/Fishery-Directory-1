@@ -65,6 +65,7 @@ const ListYourFishery: React.FC = () => {
   };
 
   return (
+
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100">
       {/* Hero Section */}
       <div className="relative h-[500px] flex items-center justify-center">

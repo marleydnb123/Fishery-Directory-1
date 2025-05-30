@@ -144,7 +144,7 @@ const FisheryDetail: React.FC = () => {
 
       setFishery({
         ...fisheryData,
-        visit_count: fisheryData.fishery_visits?.[0]?.visit_count || 0,
+        visit_count: fisheryData.fishery_visits?.visit_count || 0,
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
         pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [], 

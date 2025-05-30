@@ -46,7 +46,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
       className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full"
       style={{ minHeight: 480, maxHeight: 480 }}
     >
-      <div className="h-48 overflow-hidden flex-shrink-0">
+      <div className="w-full h-full object-cover overflow-hidden flex-shrink-0">
         <img
           src={accommodation.image || getBackupImage(accommodation.type)}
           alt={`${accommodation.type} at ${fishery.name}`}

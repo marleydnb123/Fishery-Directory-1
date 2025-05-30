@@ -6,6 +6,8 @@ import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
 import GoogleMap from '../components/common/GoogleMap'; 
 
+ 
+
 // Define your types if you don't already have them
 type Fishery = {
   id: string; 
@@ -23,7 +25,7 @@ type Fishery = {
   contact_phone?: string; 
   contact_email?: string;
   address?: string;
-  postcode?: string;
+  postcode?: string; 
   day_ticket_price?: string;
   features: string[];
   descriptionpage: string;
@@ -39,12 +41,6 @@ type Fishery = {
   opening_times: string[];
   day_tickets: string[];
   payments: string[];
-  // Add these new fields
-  fishing_type?: string;
-  record_biggest_fish?: string | null;
-  record_match_weight?: string | null;
-  stock?: string | null;
-  average_weight?: string | null;
 };
 
 type Lake = {
@@ -69,6 +65,7 @@ type FisheryVisit = {
   visit_count: number;
   last_visited: string;
 }
+
 
 const FisheryDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -154,7 +151,6 @@ const FisheryDetail: React.FC = () => {
         opening_times: Array.isArray(fisheryData.opening_times) ? fisheryData.opening_times : [],
         day_tickets: Array.isArray(fisheryData.day_tickets) ? fisheryData.day_tickets : [],
         payments: Array.isArray(fisheryData.payments) ? fisheryData.payments : [],
-        fishing_type: Array:isArray(fisheryData.fishing_type) ? fisheryData.fishery_type : [],
       }); 
 
       // Fetch lakes for this fishery
@@ -189,37 +185,9 @@ const FisheryDetail: React.FC = () => {
       updateVisitCount(fishery.id);
     }
   }, [fishery, visitUpdated]);
+ 
+   
 
-  // Helper function to render the third stat based on fishing type
-  const renderThirdStat = () => {
-    if (!fishery) return { value: '—', label: 'N/A' };
-
-    let value: string | null = null;
-    let label = '';
-
-    switch (fishery.fishing_type) {
-      case 'Match':
-        value = fishery.record_match_weight ?? null;
-        label = 'Record Match Weight';
-        break;
-      case 'Specimen':
-        value = fishery.stock ?? null;
-        label = 'Stock';
-        break;
-      case 'Coarse':
-        value = fishery.average_weight ?? null;
-        label = 'Average Weight';
-        break;
-      default:
-        value = null;
-        label = 'N/A';
-    }
-
-    return {
-      value: value || '—',
-      label
-    };
-  };
 
   if (loading) {
     return (
@@ -236,6 +204,7 @@ const FisheryDetail: React.FC = () => {
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen pb-16 bg-gray-50">
@@ -283,6 +252,8 @@ const FisheryDetail: React.FC = () => {
           </div>
         </div>
       </div>
+
+    
 
       {/* Tab Navigation */}
       <div className="bg-white border-b">
@@ -334,49 +305,47 @@ const FisheryDetail: React.FC = () => {
         </div>
       </div>
 
-      {/* Content */} 
-      <div className="container mx-auto px-4 py-8"> 
-        {activeTab === 'overview' && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-6 mb-8">
-              
-              <h2
-                className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
-                style={{
-                  background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-                }}
-              >
-                About {fishery.name} 
-              </h2> 
-
-              {/* Stats Card */}
-              <div className="mb-8">
-                <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
-                  {/* Visitors */}
-                  <div className="flex-1 flex flex-col items-center"> 
-                    <span className="text-3xl font-bold text-grey-600">{fishery.visit_count}</span>
-                    <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
-                  </div>
-                  <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
-                  
-                  {/* Record Fish */}
-                  <div className="flex-1 flex flex-col items-center">
-                    <span className="text-3xl font-bold text-grey-600">{fishery.record_biggest_fish ?? '—'}</span>
-                    <span className="text-sm text-grey-600 mt-1">Record/Biggest Fish</span>
-                  </div> 
-                  <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
-                  
-                  {/* Dynamic Third Stat */}
-                  <div className="flex-1 flex flex-col items-center">
-                    <span className="text-3xl font-bold text-grey-600">{renderThirdStat().value}</span>
-                    <span className="text-sm text-grey-600 mt-1">{renderThirdStat().label}</span>
-                  </div> 
-                </div>
-              </div>
+    {/* Content */} 
+<div className="container mx-auto px-4 py-8"> 
+  {activeTab === 'overview' && (
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-6 mb-8">
+        
+        <h2
+          className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
+          style={{
+            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+          }}
+        >
+          About {fishery.name} 
+          
+        </h2> 
+        {/* Stats Card */}
+<div className="mb-8">
+  <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
+    {/* Visitors */}
+    <div className="flex-1 flex flex-col items-center"> 
+      <span className="text-3xl font-bold text-grey-600">{fishery.visit_count}</span>
+      <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
+    </div>
+    <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+    {/* Record Fish */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-grey-600">{fishery.record_biggest_fish ?? '—'}</span>
+      <span className="text-sm text-grey-600 mt-1">Record/Biggest Fish</span>
+    </div> 
+    <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+    {/* Match Record */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-grey-600">{fishery.record_match_weight ?? '—'}</span>
+      <span className="text-sm text-grey-600 mt-1">Record Match Weight</span>
+    </div> 
+  </div>
+</div>
         
         {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
           <p key={i} className="text-gray-700 mb-6">{line}</p>

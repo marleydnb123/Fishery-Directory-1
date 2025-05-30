@@ -169,7 +169,7 @@ const Home: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       > 
-        Find the Best Coarse, Carp & Match Fishing Lakes in the UK 
+        Find the Best Coarse, Carp & Match Fisheries in the UK 
       </motion.h1>
       <motion.p 
         className="text-xl md:text-4xl font-bebas font-bold text-white mb-4"
@@ -177,7 +177,7 @@ const Home: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
-        Explore verified UK fishing lakes with detailed info on facilities, species, tactics & more.
+        Explore verified UK fisheries with detailed information on facilities, species, tactics & more.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

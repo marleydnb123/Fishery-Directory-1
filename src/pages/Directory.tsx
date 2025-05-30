@@ -283,7 +283,7 @@ const Directory: React.FC = () => {
         </motion.div>
 
 {/* --- Modern Search Bar & Filters --- */}
-        <div className="bg-customBlue/10 rounded-xl shadow-md p-6 mb-16">
+        <div className="bg-customBlue/40 rounded-xl shadow-md p-6 mb-16">
           <form
             className="flex flex-wrap gap-2 mb-4"
             onSubmit={e => e.preventDefault()}

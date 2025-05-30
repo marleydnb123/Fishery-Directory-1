@@ -1,100 +1,79 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { MapPin, Fish, Info, Book, Phone, Waves } from 'lucide-react';
 import { supabase } from '../lib/supabase';
-import { Database } from '../types/supabase';
-import { MapPin, Phone, Mail, Globe, Fish, Calendar, Clock, CreditCard } from 'lucide-react';
+import ReactPlayer from 'react-player';
+import GoogleMap from '../components/common/GoogleMap'; 
 
-// ===================================
-// Types
-// ===================================
-type Fishery = Database['public']['Tables']['fisheries']['Row'];
-type Lake = Database['public']['Tables']['lakes']['Row'];
-type Accommodation = Database['public']['Tables']['accommodation']['Row'];
+ 
 
-// ===================================
-// Component
-// ===================================
-export default function FisheryDetail() {
-  // State Management
+// Define your types if you don't already have them
+type Fishery = {
+  id: string; 
+  name: string;
+  slug: string;
+  description: string;
+  rules: string | null;
+  image: string | null;
+  species: string[];
+  district: string;
+  isfeatured: boolean;
+  hasaccommodation: boolean;
+  website?: string 
+  contact_phone?: string; 
+  contact_email?: string;
+  address?: string;
+  postcode?: string;
+  day_ticket_price?: string;
+  features: string[];
+  descriptionpage: string;
+  fisheryimages1: string | null;
+  fisheryimages2: string | null; 
+  fisheryimages3: string | null; 
+  fisheryvideo: string | null;
+  facilities: string | null;
+  tactics: string,
+  Latitude: number | null;
+  Longitude: number | null;
+  pricing: string[];
+  opening_times: string[];
+  day_tickets: string[];
+  payments: string[];
+};
+
+type Lake = {
+  id: string;
+  name: string;
+  description: string;
+  species: string[];
+  fishery_id: string;
+};
+
+type Accommodation = {
+  id: string;
+  type: string;
+  notes: string;
+  price: number;
+  fishery_id: string;
+};
+
+const FisheryDetail: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
   const [fishery, setFishery] = useState<Fishery | null>(null);
   const [lakes, setLakes] = useState<Lake[]>([]);
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
-  const [visitCount, setVisitCount] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
+  const [loading, setLoading] = useState(true);
   const [visitUpdated, setVisitUpdated] = useState(false);
-  const { slug } = useParams<{ slug: string }>();
 
-  // ===================================
-  // Data Fetching
-  // ===================================
-  useEffect(() => {
-    const fetchFisheryData = async () => {
-      if (!slug) return;
-
-      try {
-        // Fetch fishery details
-        const { data: fisheryData } = await supabase
-          .from('fisheries')
-          .select('*')
-          .eq('slug', slug)
-          .single();
-
-        if (fisheryData) {
-          setFishery(fisheryData);
-          // Fetch associated lakes
-          const { data: lakesData } = await supabase
-            .from('lakes')
-            .select('*')
-            .eq('fishery_id', fisheryData.id);
-
-          setLakes(lakesData || []);
-
-          // Fetch associated accommodation
-          const { data: accommodationData } = await supabase
-            .from('accommodation')
-            .select('*')
-            .eq('fishery_id', fisheryData.id);
-
-          setAccommodation(accommodationData || []);
-
-          // Fetch visit count
-          const { data: visitData } = await supabase
-            .from('fishery_visits')
-            .select('visit_count')
-            .eq('fishery_id', fisheryData.id)
-            .maybeSingle();
-
-          if (visitData) {
-            setVisitCount(visitData.visit_count);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching fishery data:', error);
-      }
-    };
-
-    fetchFisheryData();
-  }, [slug]);
-
-  // ===================================
-  // Visit Count Update
-  // ===================================
+  // Function to update visit count
   const updateVisitCount = async (fisheryId: string) => {
     if (!visitUpdated) {
       try {
         await supabase.rpc('increment_fishery_visits', { 
           fishery_id_param: fisheryId 
         });
-
-        const { data: visitData } = await supabase
-          .from('fishery_visits')
-          .select('visit_count')
-          .eq('fishery_id', fisheryId)
-          .maybeSingle();
-
-        if (visitData) {
-          setVisitCount(visitData.visit_count);
-        }
-        
         setVisitUpdated(true);
       } catch (error) {
         console.error('Error updating visit count:', error);
@@ -102,200 +81,1100 @@ export default function FisheryDetail() {
     }
   };
 
-  // Update visit count on component mount
+  // --- Featured Fisheries State & Fetch ---
+  const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [featuredError, setFeaturedError] = useState<string | null>(null);
+
   useEffect(() => {
-    if (fishery?.id) {
+    const fetchFeatured = async () => {
+      setFeaturedLoading(true);
+      setFeaturedError(null);
+      const { data, error } = await supabase
+        .from('fisheries')
+        .select('*')
+        .eq('isfeatured', true)
+        .limit(4);
+      if (error) {
+        setFeaturedError('Failed to load featured fisheries.');
+        setFeaturedFisheries([]);
+      } else {
+        setFeaturedFisheries(
+          (data || []).map((f: any) => ({
+            ...f,
+            species: Array.isArray(f.species) ? f.species : [],
+            features: Array.isArray(f.features) ? f.features : [],
+          }))
+        );
+      }
+      setFeaturedLoading(false);
+    };
+    fetchFeatured();
+  }, []);
+
+  useEffect(() => {
+    if (!slug) return;
+
+    const fetchData = async () => {
+      setLoading(true);
+
+      // Fetch fishery by slug
+      const { data: fisheryData, error: fisheryError } = await supabase
+        .from('fisheries')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+
+      if (fisheryError || !fisheryData) {
+        setFishery(null);
+        setLakes([]);
+        setAccommodation([]);
+        setLoading(false);
+        return;
+      }
+
+      setFishery({
+        ...fisheryData,
+        species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
+        features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
+        pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [], 
+        opening_times: Array.isArray(fisheryData.opening_times) ? fisheryData.opening_times : [],
+        day_tickets: Array.isArray(fisheryData.day_tickets) ? fisheryData.day_tickets : [],
+        payments: Array.isArray(fisheryData.payments) ? fisheryData.payments : [],
+      }); 
+
+      // Fetch lakes for this fishery
+      const { data: lakesData } = await supabase
+        .from('lakes')
+        .select('*')
+        .eq('fishery_id', fisheryData.id);
+
+      setLakes(lakesData || []);
+
+      // Fetch accommodation for this fishery if available
+      if (fisheryData.hasaccommodation) {
+        const { data: accommodationData } = await supabase
+          .from('accommodation')
+          .select('*')
+          .eq('fishery_id', fisheryData.id);
+ 
+        setAccommodation(accommodationData || []);
+      } else {
+        setAccommodation([]);
+      }
+
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [slug]);
+   
+  // Update visit count when fishery data is loaded
+  useEffect(() => {
+    if (fishery?.id && !visitUpdated) {
       updateVisitCount(fishery.id);
     }
-  }, [fishery?.id]);
+  }, [fishery, visitUpdated]);
+ 
+   
 
-  if (!fishery) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+      </div>
+    );
   }
 
-  // ===================================
-  // Render Component
-  // ===================================
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="relative h-96">
-        <img
-          src={fishery.image || 'https://images.pexels.com/photos/1482193/pexels-photo-1482193.jpeg'}
-          alt={fishery.name}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <h1 className="text-4xl md:text-5xl text-white font-bold text-center">
-            {fishery.name}
-          </h1>
-        </div>
+  if (!fishery) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center">
+        <div className="text-gray-600">Fishery not found.</div>
       </div>
+    );
+  }
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Visit Count */}
-        <div className="text-sm text-gray-600 mb-4">
-          Views: {visitCount}
-        </div>
-
-        {/* Description */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-4">About the Fishery</h2>
-          <p className="text-gray-700 whitespace-pre-wrap">{fishery.description}</p>
-        </div>
-
-        {/* Contact Information */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {fishery.address && (
-              <div className="flex items-center">
-                <MapPin className="w-5 h-5 text-blue-600 mr-2" />
-                <span>{fishery.address}</span>
-              </div>
-            )}
-            {fishery.contact_phone && (
-              <div className="flex items-center">
-                <Phone className="w-5 h-5 text-blue-600 mr-2" />
-                <span>{fishery.contact_phone}</span>
-              </div>
-            )}
-            {fishery.contact_email && (
-              <div className="flex items-center">
-                <Mail className="w-5 h-5 text-blue-600 mr-2" />
-                <span>{fishery.contact_email}</span>
-              </div>
-            )}
-            {fishery.website && (
-              <div className="flex items-center">
-                <Globe className="w-5 h-5 text-blue-600 mr-2" />
-                <a href={fishery.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                  Visit Website
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Key Information */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          {/* Species */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <Fish className="w-6 h-6 text-blue-600 mr-2" />
-              <h2 className="text-2xl font-semibold">Species</h2>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {fishery.species?.map((species, index) => (
-                <span key={index} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+  return (
+    <div className="min-h-screen pb-16 bg-gray-50">
+      {/* Hero Image */}
+      <div  
+        className="h-80 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${fishery.image || 'https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg'})` }}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="container mx-auto h-full flex items-end">
+          <div className="text-white p-6 md:p-8 relative z-10">
+            <motion.h1 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bebas font-bold mb-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {fishery.name} 
+            </motion.h1>
+            <motion.div 
+              className="flex items-center mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <MapPin className="h-5 w-5 mr-1 text-primary-400" />
+              <span>{fishery.district}</span>
+            </motion.div>
+            <motion.div 
+              className="flex flex-wrap gap-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              {(fishery.species || []).map((species, index) => (
+                <span 
+                  key={index}
+                  className="flex items-center text-sm bg-primary-600 bg-opacity-80 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
+                >
+                  <Fish className="h-4 w-4 mr-1" />
                   {species}
                 </span>
               ))}
-            </div>
-          </div>
-
-          {/* Pricing */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <CreditCard className="w-6 h-6 text-blue-600 mr-2" />
-              <h2 className="text-2xl font-semibold">Pricing</h2>
-            </div>
-            <div className="space-y-2">
-              {fishery.pricing?.map((price, index) => (
-                <p key={index} className="text-gray-700">{price}</p>
-              ))}
-            </div>
-          </div>
-
-          {/* Opening Times */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <Clock className="w-6 h-6 text-blue-600 mr-2" />
-              <h2 className="text-2xl font-semibold">Opening Times</h2>
-            </div>
-            <div className="space-y-2">
-              {fishery.opening_times?.map((time, index) => (
-                <p key={index} className="text-gray-700">{time}</p>
-              ))}
-            </div>
-          </div>
-
-          {/* Day Tickets */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <Calendar className="w-6 h-6 text-blue-600 mr-2" />
-              <h2 className="text-2xl font-semibold">Day Tickets</h2>
-            </div>
-            <div className="space-y-2">
-              {fishery.day_tickets?.map((ticket, index) => (
-                <p key={index} className="text-gray-700">{ticket}</p>
-              ))}
-            </div>
+            </motion.div>
           </div>
         </div>
+      </div>
 
-        {/* Lakes Section */}
-        {lakes.length > 0 && (
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Lakes</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {lakes.map((lake) => (
-                <div key={lake.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                  {lake.image && (
-                    <img src={lake.image} alt={lake.name} className="w-full h-48 object-cover" />
+    
+
+      {/* Tab Navigation */}
+      <div className="bg-white border-b">
+        <div className="container mx-auto">
+          <nav className="flex justify-center overflow-x-auto">
+            <button
+              className={`px-4 py-4 text-sm font-medium border-b-2 ${
+                activeTab === 'overview'
+                  ? 'border-primary-600 text-primary-900'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+              onClick={() => setActiveTab('overview')}
+            >
+              Overview
+            </button>
+            <button
+              className={`px-4 py-4 text-sm font-medium border-b-2 ${
+                activeTab === 'lakes'
+                  ? 'border-primary-600 text-primary-900'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+              onClick={() => setActiveTab('lakes')}
+            >
+              Lakes
+            </button>
+            {fishery.hasaccommodation && (
+              <button
+                className={`px-4 py-4 text-sm font-medium border-b-2 ${
+                  activeTab === 'accommodation'
+                    ? 'border-primary-600 text-primary-900'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
+                onClick={() => setActiveTab('accommodation')}
+              >
+                Accommodation
+              </button>
+            )}
+            <button
+              className={`px-4 py-4 text-sm font-medium border-b-2 ${
+                activeTab === 'rules'
+                  ? 'border-primary-600 text-primary-900'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+              onClick={() => setActiveTab('rules')}
+            >
+              Rules
+            </button>
+          </nav>
+        </div>
+      </div>
+
+    {/* Content */} 
+<div className="container mx-auto px-4 py-8"> 
+  {activeTab === 'overview' && (
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-6 mb-8">
+        
+        <h2
+          className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
+          style={{
+            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+          }}
+        >
+          About {fishery.name} 
+          
+        </h2> 
+        {/* Stats Card */}
+<div className="mb-8">
+  <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
+    {/* Visitors */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-grey-600">{fishery.visitors_monthly ?? '—'}</span>
+      <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
+    </div>
+    <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+    {/* Record Fish */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-grey-600">{fishery.record_biggest_fish ?? '—'}</span>
+      <span className="text-sm text-grey-600 mt-1">Record/Biggest Fish</span>
+    </div> 
+    <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+    {/* Match Record */}
+    <div className="flex-1 flex flex-col items-center">
+      <span className="text-3xl font-bold text-grey-600">{fishery.record_match_weight ?? '—'}</span>
+      <span className="text-sm text-grey-600 mt-1">Record Match Weight</span>
+    </div>
+  </div>
+</div>
+        
+        {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
+          <p key={i} className="text-gray-700 mb-6">{line}</p>
+        ))} 
+          
+        <div className="flex flex-col gap-6">
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
+              {fishery.facilities && fishery.facilities.length > 0 ? (
+                <ul className="space-y-2 text-gray-700">
+                  {fishery.facilities.map((facility, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>{facility}</span>
+                    </li>
+                  ))}
+                  {fishery.hasAccommodation && (
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>Accommodation available</span>
+                    </li>
                   )}
-                  <div className="p-4">
-                    <h3 className="text-xl font-semibold mb-2">{lake.name}</h3>
-                    <p className="text-gray-700 mb-4">{lake.description}</p>
-                    <div className="space-y-2">
-                      {lake.species && (
-                        <div className="flex flex-wrap gap-2">
-                          {lake.species.map((species, index) => (
-                            <span key={index} className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">
-                              {species}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      {lake.size_acres && (
-                        <p className="text-sm text-gray-600">Size: {lake.size_acres} acres</p>
-                      )}
-                      {lake.max_depth_ft && (
-                        <p className="text-sm text-gray-600">Max Depth: {lake.max_depth_ft} ft</p>
-                      )}
-                      {lake.pegs && (
-                        <p className="text-sm text-gray-600">Number of Pegs: {lake.pegs}</p>
-                      )}
-                    </div>
+                </ul>
+              ) : (
+                <p className="text-gray-500 italic">No facilities information available</p>
+              )}
+          </div>
+                
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
+            <div className="flex flex-wrap gap-2">
+              {(fishery.species || []).map((species, index) => (
+                <span 
+                  key={index}
+                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
+                >
+                  <Fish className="h-4 w-4 mr-1" />
+                  {species}
+                </span> 
+              ))}
+            </div>  
+          </div> 
+        </div> 
+ 
+
+
+ 
+
+              {/* --- Water Features Section --- */}
+            {fishery.features && fishery.features.length > 0 && (
+            <div className="mt-8">
+            <h3 className="text-lg font-semibold mb-3 flex items-center">
+            <Waves className="h-5 w-5 text-blue-600 mr-2" />
+            Water Features 
+            </h3>
+            <div className="flex flex-wrap gap-2">
+            {fishery.features.map((feature, idx) => ( 
+            <span
+            key={idx}
+            className="inline-flex items-center text-sm bg-blue-100 text-blue-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
+            >
+            <Waves className="h-4 w-4 mr-1" />
+            {feature}
+            </span>
+            ))}
+            </div>
+            </div>
+            )}
+            {/* --- End Water Features Section --- */}
+
+            </div>
+
+           {/* --- Images Section (Animated, Scalable on Hover) --- */}
+<style>
+{`
+.img-hover-zoom {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  position: relative;
+  background: #f3f4f6;
+}
+.img-hover-zoom img {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1), filter 0.3s cubic-bezier(.4,0,.2,1), opacity 0.5s;
+  will-change: transform, filter, opacity;
+  opacity: 0;
+  animation: fadeInImg 0.7s forwards;
+}
+.img-hover-zoom:hover img {
+  transform: scale(1.02);
+  filter: brightness(1.07) saturate(1.05);
+}
+@keyframes fadeInImg {
+  to { opacity: 1; }
+}
+.img-hover-zoom::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: background 0.3s;
+  pointer-events: none;
+} 
+.img-hover-zoom:hover::after {
+  background: rgba(0,0,0,0.03);
+}
+`}
+</style>
+
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+  {/* Gradient Header Bar */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Images</h3>
+  </div>
+  {/* Images Content */}
+  <div className="p-6">
+    <div className="flex flex-col md:flex-row gap-6">
+      <div className="img-hover-zoom flex-1">
+        <img
+          src={fishery.fisheryimages1 || "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"}
+          alt="Fishery image 1"
+        />
+      </div>
+      <div className="img-hover-zoom flex-1">
+        <img
+          src={fishery.fisheryimages2 || "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80"}
+          alt="Fishery image 2"
+        />
+      </div>
+      <div className="img-hover-zoom flex-1">
+        <img
+          src={fishery.fisheryimages3 || "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"}
+          alt="Fishery image 3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+{/* --- End Images Section --- */}
+
+             
+
+                      {/* --- Video Section (supports YouTube, Vimeo, MP4, etc.) --- */}
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+  {/* Gradient Header Bar */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Fishery Video</h3>
+  </div>
+  {/* Video Content */}
+  <div className="p-6">
+    <div
+      className="rounded-lg overflow-hidden shadow-inner bg-gray-100 flex justify-center items-center"
+      style={{ minHeight: "28rem" }}
+    >
+      <ReactPlayer
+        url={fishery.fisheryvideo || "https://www.youtube.com/watch?v=ysz5S6PUM-U"}
+        controls
+        width="100%"
+        height="28rem"
+        style={{ background: "#000", borderRadius: "0.75rem" }}
+        config={{
+          youtube: { 
+            playerVars: { showinfo: 1 }
+          }
+        }}
+      />
+    </div>
+  </div>
+</div>
+{/* --- End Video Section --- */}
+
+
+{/* --- Tactics & Methods Section --- */}
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+  {/* Gradient Header Bar */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <svg
+      className="h-7 w-7 text-white mr-3 animate-bounce"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M16 7c0-1.657-2.686-3-6-3S4 5.343 4 7m12 0v10a4 4 0 01-8 0V7m12 0c0-1.657-2.686-3-6-3S4 5.343 4 7m12 0v10a4 4 0 01-8 0V7"
+      />
+    </svg>
+    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Tactics & Methods</h3>
+  </div>
+  {/* Tactics Content */}
+  <div className="p-6">
+    {fishery.tactics ? (
+      <div className="mb-5 text-gray-700 space-y-4 leading-relaxed">
+        {fishery.tactics.split('\n').map((tactic, index) => (
+          tactic.trim() && (
+            <div key={index} className="flex items-start">
+              <span>{tactic.trim()}</span>
+            </div>
+          )
+        ))}
+      </div>
+    ) : (
+      <div className="text-gray-500 italic">No tactics available for this fishery yet.</div>
+    )}
+    <div className="text-primary-600 italic text-sm">
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div className="flex flex-col md:flex-row gap-6">
+  {/* Booking Information Card */}
+  <div className="flex-1 bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0 flex flex-col">
+    {/* Gradient Header Bar */}
+    <div
+      className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl"
+      style={{
+        background:
+          "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+      }}
+    >
+      <Info className="h-7 w-7 text-white mr-3 animate-bounce" />
+      <h3 className="text-3xl font-bebas font-bold tracking-wide text-white mb-0">
+        Booking & Contact Information
+      </h3>
+    </div>
+    {/* Card Content */}
+    <div className="flex-1 flex flex-col justify-between p-6">
+      <div>
+        {/* Booking Info Section */}
+        <h4 className="text-xl font-bold text-primary-700 mb-2 underline">Booking Information</h4>
+        <ul className="mb-2 text-gray-700 space-y-2 leading-relaxed">
+          <li>
+            <span className="font-semibold text-primary-700">Day tickets:</span> <ul className="ml-4 list-disc">
+              {(fishery.day_tickets && fishery.day_tickets.length > 0)
+                ? fishery.day_tickets.map((day_tickets, idx) => (
+                    <li key={idx}>{day_tickets}</li>
+                  ))
+                : <li>Not listed</li>
+              }
+            </ul>
+          </li> 
+          
+          <li>
+            <span className="font-semibold text-primary-700">Pricing:</span>
+            <ul className="ml-4 list-disc">
+              {(fishery.pricing && fishery.pricing.length > 0)
+                ? fishery.pricing.map((price, idx) => (
+                    <li key={idx}>{price}</li>
+                  ))
+                : <li>Not listed</li>
+              }
+            </ul>
+          </li>
+          <li>
+            <span className="font-semibold text-primary-700">Opening times:</span>
+            <ul className="ml-4 list-disc">
+              {(fishery.opening_times && fishery.opening_times.length > 0)
+                ? fishery.opening_times.map((time, idx) => (
+                    <li key={idx}>{time}</li>
+                  ))
+                : <li>Not listed</li>
+              }
+            </ul>
+          </li>
+          <li>
+            <span className="font-semibold text-primary-700 mb-2">Payment Types:</span> <ul className="ml-4 list-disc">
+              {(fishery.payment && fishery.payment.length > 0)
+                ? fishery.payment.map((payment, idx) => (
+                    <li key={idx}>{payment}</li>
+                  ))
+                : <li>Not listed</li>
+              }
+            </ul>
+          </li>
+        </ul>
+        {/* Contact Info Section */}
+        <h4 className="text-xl font-bold text-primary-700 mb-2 underline">Contact Information</h4> 
+        <ul className="mb-4 text-gray-700 space-y-2 leading-relaxed">
+          <li>
+            <span className="font-semibold text-primary-700">Phone:</span>
+            <a
+              href={`tel:${fishery.contact_phone || ''}`}
+              className="ml-1 text-primary-600 underline hover:text-primary-800"
+            >
+              {fishery.contact_phone || "Not listed"}
+            </a>
+          </li>
+          <li>
+            <span className="font-semibold text-primary-700">Email:</span>
+            {fishery.contact_email ? (
+              <a
+                href={`mailto:${fishery.contact_email}`}
+                className="ml-1 text-primary-600 underline hover:text-primary-800"
+              >
+                {fishery.contact_email}
+              </a>
+            ) : (
+              <span className="ml-1 text-gray-400">Not listed</span>
+            )}
+          </li>
+          <li>
+            <span className="font-semibold text-primary-700">Address:</span> {fishery.address || "Not listed"}
+          </li>
+        </ul>
+        <div className=" mb-2 text-sm text-primary-500 italic">
+          Fast replies & friendly staff. We do not handle bookings directly, contact the Fishery directly to book.
+        </div> 
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+              
+              {/* Location Card */}
+<div className="flex-1 bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-0">
+  {/* Gradient Header Bar - EXACT SAME AS CONTACT BAR */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+                  <MapPin className="h-7 w-7 text-white mr-3 animate-bounce" />
+                  <h3 className="text-3xl font-bebas font-semibold text-white tracking-wide">Location</h3>
+                </div>
+                <div className="mb-5 mt-6 text-gray-700 leading-relaxed">
+                  <div className="ml-6">
+  <span className="font-semibold">{fishery.name}</span> is located in <span className="font-semibold">{fishery.district}</span>, UK.
+</div>
+                  <div className="mt-2 text-primary-700 flex flex-wrap gap-4 text-sm">
+                    <span className="inline-flex items-center">
+                      <svg className="h-4 w-4 mr-1 ml-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/></svg>
+                      Parking available
+                    </span>
+                    <span className="inline-flex items-center">
+                      
+                    </span>
+                  </div>
+                  <div className="mt-6 mr-6 ml-6">
+                    <GoogleMap 
+                      latitude={fishery.Latitude || 0}
+                      longitude={fishery.Longitude || 0}
+                      name={fishery.name}
+                    />
                   </div>
                 </div>
-              ))}
+              </div>
+            </div>
+          </motion.div>
+        )} 
+
+
+
+
+       {activeTab === 'lakes' && ( 
+    <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
+    >
+    <h2
+      className="w-full text-2xl sm:text-3xl md:text-4xl font-bebas font-semibold mb-6 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4         rounded-lg"
+        style={{
+        background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+        }}
+        >
+        Lakes at {fishery.name}
+        </h2>
+
+          {lakes.length > 0 ? (
+      <div className="space-y-6">
+        {lakes.map((lake) => (
+          <div
+            key={lake.id}
+            className="bg-white rounded-xl shadow-md overflow-hidden" 
+          >
+            <div className="flex flex-col md:flex-row">
+              {/* 
+                Mobile: slightly wider image (w-80 or max-w-md), keeps mt-6 ml-6 mr-6.
+                Desktop: md:w-56, same margins.
+              */}
+              <div className="w-80 max-w-md md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 mb-6 rounded-xl overflow-hidden flex items-center justify-center">  
+                <img
+                  src={lake.image}
+                  alt={lake.name}
+                  className="w-full h-full object-cover rounded-xl"
+                /> 
+              </div>
+              {/* Lake details */}
+              <div className="flex-1 p-6 flex flex-col justify-center">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                  {lake.name}
+                </h3>
+                <p className="text-gray-700 mb-4">{lake.description}</p>
+                <div className="mb-2 font-medium">Available Species:</div>
+                <div className="flex flex-wrap gap-2">
+                  {(lake.species || []).map((species, index) => (
+                    <span
+                      key={index} 
+                      className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
+                    >
+                      <Fish className="h-4 w-4 mr-1" />
+                      {species}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div> 
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="bg-white rounded-xl shadow-md p-6 text-center">
+        <p className="text-gray-700">No lake information available.</p>
+      </div>
+    )}
+  </motion.div>
+)}
+
+
+ 
+
+ 
+        {activeTab === 'accommodation' && fishery.hasaccommodation && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }} 
+    transition={{ duration: 0.3 }}
+  >
+    <h2
+      className="w-full text-2xl sm:text-3xl md:text-4xl font-semibold font-bebas mb-6 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4 rounded-lg"
+      style={{
+        background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+      }}
+    >
+      Accommodation at {fishery.name}
+    </h2>
+    
+    {accommodation.length > 0 ? (
+      <div className="space-y-6">
+        {accommodation.map((acc) => (
+          <div key={acc.id} className="bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="flex flex-col md:flex-row">
+              {/* Responsive image: wider on mobile, fixed width on desktop, with all margins */}
+
+              <div className="w-80 max-w-md md:w-56 h-44 flex-shrink-0 bg-gray-100 mt-6 ml-6 mr-6 mb-6 rounded-xl overflow-hidden flex items-center justify-center">
+                <img
+                  src={acc.image}
+                  alt={acc.type}
+                  className="w-full h-full object-cover rounded-xl"
+                />
+              </div>
+              {/* Details on the right */}
+              <div className="flex-1 p-6 flex flex-col justify-center">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-xl font-semibold">{acc.type}</h3>
+                  <div className="text-primary-600 font-bold">
+                    £{acc.price}
+                    <span className="text-gray-500 text-sm font-normal">/night</span>
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4">{acc.notes}</p>
+                <a
+                  href={fishery.website}
+target="_blank"
+rel="noopener noreferrer"
+
+                  className="bg-primary-600 hover:bg-primary-800 text-white py-2 px-6 rounded-lg transition-colors self-start"
+                >
+                  <Book className="h-4 w-4 mr-2 inline" />
+                  Book Now
+                </a>
+              </div>
             </div>
           </div>
-        )}
+        ))}
+      </div>
+    ) : (
+      <div className="bg-white rounded-xl shadow-md p-6 text-center">
+        <p className="text-gray-700">No accommodation information available.</p>
+      </div>
+    )}
+  </motion.div>
+)}
 
-        {/* Accommodation Section */}
-        {accommodation.length > 0 && (
+
+
+        {activeTab === 'rules' && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
+  >
+    <div className="bg-white rounded-xl shadow-md p-6">
+      <h2
+        className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-2xl sm:text-3xl md:text-4xl font-semibold font-bebas rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
+        style={{
+          background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+        }}
+      >
+        Fishery Rules
+      </h2>
+      <p className="text-gray-700 mb-6">
+        Please ensure you are familiar with and adhere to the following rules while fishing at {fishery.name}:
+      </p>
+
+      <div className="prose max-w-none text-gray-700">
+        {(() => {
+          const lines = fishery.rules.split(/\r?\n/);
+          const elements = [];
+          let listItems = [];
+          let lastWasHeader = false;
+
+          lines.forEach((line, i) => {
+            const trimmed = line.trim();
+
+            if (trimmed.startsWith('-')) {
+              listItems.push(trimmed.slice(1).trim());
+              lastWasHeader = false;
+            } else {
+              // Flush any bullets before a new header/paragraph/blank
+              if (listItems.length > 0) {
+                elements.push(
+                  <ul key={`ul-${i}`} className="list-disc ml-6">
+                    {listItems.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                );
+                listItems = [];
+              }
+              if (trimmed === '') {
+                elements.push(<div key={i} style={{ height: '1.25em' }} />);
+                lastWasHeader = false;
+              } else {
+                // Treat as header if previous line was blank or it's the first line
+                const isHeader = i === 0 || (lines[i - 1] && lines[i - 1].trim() === '');
+                elements.push(
+                  <p
+                    key={i}
+                    className={isHeader ? 'font-semibold text-lg mt-4 mb-2' : ''}
+                  >
+                    {line}
+                  </p>
+                );
+                lastWasHeader = isHeader;
+              }
+            }
+          });
+
+          // Flush any remaining bullets
+          if (listItems.length > 0) {
+            elements.push(
+              <ul key={`ul-end`} className="list-disc ml-6">
+                {listItems.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            );
+          }
+
+          return elements;
+        })()}
+      </div>
+      
+      <div className="mt-8 p-4 bg-primary-100 rounded-lg">
+        <div className="flex items-start">
+          <Info className="h-5 w-5 text-primary-900 mr-2 mt-0.5" />
+          <p className="text-primary-900">
+            Failure to comply with these rules may result in being asked to leave the fishery without refund.
+          </p>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+)}
+
+ 
+{/* --- Featured Fisheries Section --- */}
+<section className="py-12 bg-gradient-to-b from-blue-50 via-white to-blue-50 ">
+  <div className="container mx-auto shadow-lg rounded-xl overflow-hidden">
+    {/* Header Bar */}
+    <div
+      className="p-6"
+      style={{
+        background:
+          "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+      }}
+    >
+      <motion.h2
+        className="text-4xl font-bebas font-bold text-white mb-1 text-center" 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        Featured Fisheries
+      </motion.h2>
+      <motion.p
+        className="text-primary-200 text-center max-w-2xl mx-auto"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+      >
+        Explore our handpicked selection of the finest fishing spots across the UK
+      </motion.p>
+    </div>
+    {/* Cards Grid */}
+    <div className="p-6 bg-gray-50">
+      {featuredLoading ? (
+        <div className="text-center py-8 text-gray-600">Loading featured fisheries...</div>
+      ) : featuredError ? (
+        <div className="text-center py-8 text-red-600">{featuredError}</div>
+      ) : (
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {featuredFisheries.length > 0 ? (
+            featuredFisheries.map((f) => (
+              <motion.div
+                key={f.id}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+              >
+                <Link to={`/directory/${f.slug}`}>
+                  <img
+                    src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"} 
+                    alt={f.name}
+                    className="w-full h-40 object-cover transition-transform duration-200 hover:scale-[1.02]"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-gray-900">{f.name}</h3>
+                    <div className="text-sm text-primary-700">{f.district}</div>
+                    <div className="text-gray-600 text-xs mt-2 line-clamp-2">{f.description}</div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))
+          ) : (
+            <div className="col-span-4 text-center text-gray-500">
+              No featured fisheries found.
+            </div>
+          )}
+        </motion.div>
+      )}
+    </div>
+  </div>
+</section>
+{/* --- End Featured Fisheries Section --- */}
+
+          {/* --- End Tactics & Methods Section --- */}
+
+
+{/* --- Reviews Section --- */}
+<div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
+  {/* Gradient Header Bar */}
+  <div
+    className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex items-center rounded-t-xl mb-0"
+    style={{
+      background:
+        "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+    }}
+  >
+    <svg
+      className="h-7 w-7 text-white mr-3 animate-bounce"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 17.75l-6.172 3.245 1.179-6.873-5-4.873 6.9-1.002L12 2.5l3.093 6.747 6.9 1.002-5 4.873 1.179 6.873z"
+      />
+    </svg>
+    <h3 className="text-3xl font-bebas font-bold text-white mb-0">Reviews</h3>
+  </div>
+  {/* Reviews Content */}
+  <div className="p-6">
+    {/* Featured Review */}
+    <div className="relative mb-8">
+      <div className="bg-gradient-to-br from-primary-700 via-primary-200 to-white rounded-2xl shadow-xl p-8 border-4 border-primary-300">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-16 h-16 rounded-full bg-primary-700 flex items-center justify-center text-white text-3xl font-bold shadow-lg ring-4 ring-primary-300">
+            JD
+          </div>
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Accommodation</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {accommodation.map((acc) => (
-                <div key={acc.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                  {acc.image && (
-                    <img src={acc.image} alt={acc.type} className="w-full h-48 object-cover" />
-                  )}
-                  <div className="p-4">
-                    <h3 className="text-xl font-semibold mb-2">{acc.type}</h3>
-                    <p className="text-gray-700 mb-4">{acc.notes}</p>
-                    <p className="text-lg font-semibold text-blue-600">£{acc.price} per night</p>
-                  </div>
-                </div>
-              ))}
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-primary-900 text-xl">Jane D.</span>
+              <span className="flex text-yellow-400 text-2xl">★★★★★</span>
+            </div>
+            <div className="text-xs text-primary-500">May 2025</div>
+          </div>
+        </div>
+        <p className="text-primary-900 text-lg italic leading-relaxed">
+          "Absolutely stunning fishery! Landed my PB carp and the atmosphere was so peaceful. Staff were super friendly and helpful. Can't wait to return!"
+        </p>
+      </div>
+      <span className="absolute top-2 right-6 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Featured</span>
+    </div>
+
+    {/* Scrollable Review River */}
+    <div className="flex gap-6 overflow-x-auto pb-2 hide-scrollbar">
+      {/* Review 2 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            TS
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Tom S.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★☆</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Beautiful location, well-stocked lakes. Only downside was a bit of mud on the pegs after rain."
+        </p>
+        <div className="text-xs text-gray-400">April 2025</div>
+      </div>
+      {/* Review 3 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            SL
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Sophie L.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★★</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Great for families and beginners. My kids caught their first fish here and loved every minute."
+        </p>
+        <div className="text-xs text-gray-400">March 2025</div>
+      </div>
+      {/* Review 4 */}
+      <div className="min-w-[320px] bg-gradient-to-br from-primary-50 via-white to-primary-100 rounded-xl p-6 shadow flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold shadow">
+            AG
+          </div>
+          <span className="font-semibold text-primary-800 text-lg">Alex G.</span>
+          <span className="flex text-yellow-400 text-lg">★★★★★</span>
+        </div>
+        <p className="text-gray-700 mb-2">
+          "Top-notch facilities and a great variety of fish. Highly recommend for a relaxing weekend."
+        </p>
+        <div className="text-xs text-gray-400">February 2025</div>
+      </div>
+      {/* Add more reviews as needed */}
+    </div>
+    <style>{`
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    `}</style>
+  </div>
+</div>
+{/* --- End Reviews Section --- */}
+
+        
+               {/* Contact Bar */}
+        <div className="mt-8 rounded-xl shadow-lg p-0 overflow-hidden">
+          <div
+            className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 p-6 flex flex-col md:flex-row items-center justify-between gap-6"
+            style={{
+              background:
+                "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+            }}
+          >
+            <div className="mb-4 md:mb-0 flex items-center gap-4">
+              <span className="text-2xl font-bold tracking-wide text-white">
+                {fishery.name}
+              </span>
+              <span className="hidden md:inline-block text-primary-200 text-sm">
+                {fishery.district}
+              </span>
+            </div>
+            <div className="flex items-center gap-4">
+              {fishery.website && (
+                <a 
+                  href={fishery.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-white text-primary-900 px-6 py-2 rounded-lg font-semibold shadow hover:bg-primary-100 hover:text-primary-700 transition"
+                >
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.95 7.07l-.71-.71M4.05 4.93l-.71-.71" />
+                  </svg>
+                  Visit Website
+                </a>
+              )}
+              {/* Example: Add social icons if you want */}
+              {/* 
+              <a href="#" className="text-primary-200 hover:text-white transition">
+                <TwitterIcon className="h-5 w-5" />
+              </a>
+              */} 
             </div>
           </div>
-        )}
+        </div> 
       </div>
     </div>
   );
-}
+};
+
+
+export default FisheryDetail;

@@ -49,14 +49,6 @@ export interface Fishery {
   fishery_of_the_week?: boolean;
   record_biggest_fish?: string;
   record_match_weight?: string;
-  visit_count?: number;
-}
-
-export interface FisheryVisit {
-  id: string;
-  fishery_id: string;
-  visit_count: number;
-  last_visited: string;
 }
 
 export interface Lake {

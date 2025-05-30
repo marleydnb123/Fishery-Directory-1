@@ -68,26 +68,6 @@ export interface Database {
           day_ticket_price?: number
         }
       }
-      fishery_visits: {
-        Row: {
-          id: string
-          fishery_id: string
-          visit_count: number
-          last_visited: string
-        }
-        Insert: {
-          id?: string
-          fishery_id: string
-          visit_count?: number
-          last_visited?: string
-        }
-        Update: {
-          id?: string
-          fishery_id?: string
-          visit_count?: number
-          last_visited?: string
-        }
-      }
       lakes: {
         Row: {
           id: string
@@ -224,14 +204,6 @@ export interface Database {
           brands?: string[]
           created_at?: string
         }
-      }
-    }
-    Functions: {
-      increment_fishery_visits: {
-        Args: {
-          fishery_id_param: string
-        }
-        Returns: void
       }
     }
   }

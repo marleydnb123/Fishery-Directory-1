@@ -12,7 +12,7 @@ const heroImages = [
   "https://www.wokinghamcountryside.co.uk/sites/countryside/files/styles/scale_crop_7_3_large/public/2024-05/sunset%2C%20black.jpg?itok=OMc703vu",
   "https://www.fishermanholidays.com/images-waters/jonchery/catches/_1600x980_crop_center-center_80_line/109390/20231022_1851176545bfb5e07082.50810937.jpeg",
   "https://eub5dofeuim.exactdn.com/wp-content/uploads/visvakantie/nederland/carp-lake-rosmalen/carp-lake-rosmalen-sfeerfoto-8.jpg?strip=all&lossy=1&quality=60&webp=65&sharp=1&ssl=1",
-  "https://notch.io/cdn/shop/collections/FISHING_1600x.png?v=1595694362"
+  "https://notch.io/cdn/shop/collections/FISHING_1600x.png?v=1595694362",
   "https://www.carpology.net/uploads/cms/blog/3241/5-image-main.jpg"
   // Add more image URLs as needed
 ];

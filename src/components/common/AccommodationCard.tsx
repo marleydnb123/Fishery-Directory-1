@@ -43,7 +43,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full"
+      className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-500"
       style={{ minHeight: 480, maxHeight: 480 }}
     >
       <div className="h-48 overflow-hidden flex-shrink-0">

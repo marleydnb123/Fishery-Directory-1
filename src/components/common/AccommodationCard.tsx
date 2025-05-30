@@ -74,7 +74,6 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
           {fishery.species.map((species, index) => (
             <span
               key={index}
-              className="text-xs bg-primary-100 text-primary-900 py-1 rounded-full"
             >
               {species}
             </span>

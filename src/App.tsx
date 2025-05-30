@@ -11,6 +11,7 @@ import FisheryDetail from './pages/FisheryDetail';
 import Accommodation from './pages/Accommodation';
 import TackleShops from './pages/TackleShops';
 import Contact from './pages/Contact';
+import ListYourFishery from './pages/ListYourFishery';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminFisheries from './pages/admin/Fisheries';
 import AdminLakes from './pages/admin/Lakes';
@@ -42,6 +43,7 @@ function AppRoutes() {
             <Route path="accommodation" element={<Accommodation />} />
             <Route path="tackle-shops" element={<TackleShops />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="list-your-fishery" element={<ListYourFishery />} />
             <Route path="login" element={<Login />} />
             <Route path="admin" element={<ProtectedRoute />}>
               <Route index element={<AdminDashboard />} />

@@ -137,6 +137,14 @@ const Navbar: React.FC = () => {
                 >
                   Contact
                 </Link>
+                <Link 
+                  to="/list-your-fishery" 
+                  className={`text-primary-100 hover:text-white font-medium transition-colors ${
+                    location.pathname === '/list-your-fishery' ? 'border-b-2 border-primary-400' : ''
+                  }`}
+                >
+                  List Your Fishery
+                </Link>
                 {user ? (
                   <Link 
                     to="/admin" 
@@ -217,6 +225,14 @@ const Navbar: React.FC = () => {
                       }`}
                     >
                       Contact
+                    </Link>
+                    <Link 
+                      to="/list-your-fishery" 
+                      className={`text-primary-100 hover:text-white font-medium py-2 ${
+                        location.pathname === '/list-your-fishery' ? 'border-l-4 border-primary-400 pl-2' : ''
+                      }`}
+                    >
+                      List Your Fishery
                     </Link>
                     {user ? (
                       <Link 

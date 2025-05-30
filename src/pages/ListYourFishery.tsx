@@ -210,7 +210,7 @@ const ListYourFishery: React.FC = () => {
   Do you own a tackle shop or fishing supplies store? Reach more anglers by listing your shop with us. Whether you’re a specialist in carp, coarse, fly, or sea fishing gear, or you run a well-stocked local bait shop, we can help you connect with fishing enthusiasts across the UK.
 </p>
 <p className="text-lg text-gray-600 leading-relaxed">
-  We’re not just another directory - we work closely with our partners to promote tackle shops and fishing retailers. Your shop will be featured on our website, putting your business in front of hundreds of thousands of anglers looking for quality equipment, bait, and expert advice.
+  We’re not just another directory, we work closely with our partners to promote tackle shops and fishing retailers. Your shop will be featured on our website, putting your business in front of hundreds of thousands of anglers looking for quality equipment, bait, and expert advice.
 </p>
 
         <Link

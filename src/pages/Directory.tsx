@@ -397,7 +397,7 @@ const Directory: React.FC = () => {
             {/* Column 2: Text Inputs */}
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-900 mb-1 ">Water Features</label>
+                <label className="block text-xs font-semibold text-gray-600 mb-1 ">Water Features</label> 
                 <input
                   type="text"
                   value={featureSearchTerm}

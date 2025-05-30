@@ -412,7 +412,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCarpOpen(!carpOpen)}
-                  className="w-full flex items-center justify-between p-3 text-left hover:bg-gray-50 transition-colors"
+                  className="w-full flex items-center justify-between p-3 text-left hover:bg-customBlue/50 transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">CARP</h3>
                   <svg

@@ -423,7 +423,7 @@ const Directory: React.FC = () => {
                   value={priceRange}
                   onChange={e => setPriceRange(e.target.value)}
                   placeholder="e.g. £10-£25"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 "
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-900 bg-transparent"
                 />
               </div>
               <div>
@@ -449,7 +449,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCarpOpen(!carpOpen)}
-                  className="w-full flex items-center justify-between p-3 rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl t"
+                  className="w-full flex items-center justify-between p-3 rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">CARP</h3>
                   <svg

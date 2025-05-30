@@ -71,7 +71,7 @@ const ListYourFishery: React.FC = () => {
         <div className="absolute inset-0 bg-black bg-opacity-60" />
         <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-6xl font-bebas font-bold text-white mb-6"
+            className="text-4xl md:text-6xl lg:text-6xl font-bebas font-bold text-white mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -79,7 +79,7 @@ const ListYourFishery: React.FC = () => {
             Get Your Fishery Seen by Thousands of UK Anglers Every Month
           </motion.h1>
           <motion.p
-            className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto"
+            className="text-xl md:text-2xl text-gray-200 mb-4 max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}

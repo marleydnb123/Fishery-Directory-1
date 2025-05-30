@@ -13,22 +13,80 @@ const ListYourFishery: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Featured fisheries states
+// Define your types if you don't already have them
+type Fishery = {
+  id: string; 
+  name: string;
+  slug: string;
+  description: string;
+  rules: string | null;
+  image: string | null;
+  species: string[];
+  district: string;
+  isfeatured: boolean;
+  hasaccommodation: boolean;
+  website?: string 
+  contact_phone?: string; 
+  contact_email?: string;
+  address?: string;
+  postcode?: string;
+  day_ticket_price?: string;
+  features: string[];
+  descriptionpage: string;
+  fisheryimages1: string | null;
+  fisheryimages2: string | null; 
+  fisheryimages3: string | null; 
+  fisheryvideo: string | null;
+  facilities: string | null;
+  tactics: string,
+  Latitude: number | null;
+  Longitude: number | null;
+  pricing: string[];
+  opening_times: string[];
+  day_tickets: string[];
+  payments: string[];
+};
+
+type Lake = {
+  id: string;
+  name: string;
+  description: string;
+  species: string[];
+  fishery_id: string;
+};
+
+type Accommodation = {
+  id: string;
+  type: string;
+  notes: string;
+  price: number;
+  fishery_id: string;
+};
+
+const FisheryDetail: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const [fishery, setFishery] = useState<Fishery | null>(null);
+  const [lakes, setLakes] = useState<Lake[]>([]);
+  const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
+  const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
+  const [loading, setLoading] = useState(true);
+
+  // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
-  const [loadingFisheries, setLoadingFisheries] = useState(true);
-  const [fisheriesError, setFisheriesError] = useState<string | null>(null);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [featuredError, setFeaturedError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchFeatured = async () => {
-      setLoadingFisheries(true);
-      setFisheriesError(null);
+      setFeaturedLoading(true);
+      setFeaturedError(null);
       const { data, error } = await supabase
         .from('fisheries')
         .select('*')
-        .eq('isfeatured', true) 
+        .eq('isfeatured', true)
         .limit(4);
       if (error) {
-        setFisheriesError('Failed to load featured fisheries.');
+        setFeaturedError('Failed to load featured fisheries.');
         setFeaturedFisheries([]);
       } else {
         setFeaturedFisheries(
@@ -39,11 +97,85 @@ const ListYourFishery: React.FC = () => {
           }))
         );
       }
-      setLoadingFisheries(false);
+      setFeaturedLoading(false);
     };
     fetchFeatured();
   }, []);
-  
+
+  useEffect(() => {
+    if (!slug) return;
+
+    const fetchData = async () => {
+      setLoading(true);
+
+      // Fetch fishery by slug
+      const { data: fisheryData, error: fisheryError } = await supabase
+        .from('fisheries')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+
+      if (fisheryError || !fisheryData) {
+        setFishery(null);
+        setLakes([]);
+        setAccommodation([]);
+        setLoading(false);
+        return;
+      }
+
+      setFishery({
+        ...fisheryData,
+        species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
+        features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
+        pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [], 
+        opening_times: Array.isArray(fisheryData.opening_times) ? fisheryData.opening_times : [],
+        day_tickets: Array.isArray(fisheryData.day_tickets) ? fisheryData.day_tickets : [],
+        payments: Array.isArray(fisheryData.payments) ? fisheryData.payments : [],
+      }); 
+
+      // Fetch lakes for this fishery
+      const { data: lakesData } = await supabase
+        .from('lakes')
+        .select('*')
+        .eq('fishery_id', fisheryData.id);
+
+      setLakes(lakesData || []);
+
+      // Fetch accommodation for this fishery if available
+      if (fisheryData.hasaccommodation) {
+        const { data: accommodationData } = await supabase
+          .from('accommodation')
+          .select('*')
+          .eq('fishery_id', fisheryData.id);
+ 
+        setAccommodation(accommodationData || []);
+      } else {
+        setAccommodation([]);
+      }
+
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
+
+  if (!fishery) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center">
+        <div className="text-gray-600">Fishery not found.</div>
+      </div>
+    );
+  }
+
+  return (
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);

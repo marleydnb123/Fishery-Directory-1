@@ -38,6 +38,7 @@ const Directory: React.FC = () => {
   const [carpOpen, setCarpOpen] = useState(false);
   const [matchOpen, setMatchOpen] = useState(false);
   const [coarseOpen, setCoarseOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Available districts and species
   const districts: UKDistrict[] = [
@@ -282,466 +283,383 @@ const Directory: React.FC = () => {
           </p>
         </motion.div>
 
-{/* --- Modern Search Bar & Filters --- */}
-        <div className="bg-customBlue/50 rounded-xl shadow-md p-6 mb-16">
-          <form
-            className="flex gap-2 mb-4"
-            onSubmit={e => e.preventDefault()}
-            autoComplete="off"
-          >
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-              placeholder="Search by fishery name, region, or county"
-              className="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-400 shadow-sm text-sm"
-              aria-label="Search fisheries"
-            />
-            <button
-              type="submit"
-              className="px-5 py-2 bg-customBlue hover:bg-blue-700 text-white font-medium rounded-lg shadow text-sm"
-            >
-              Search
-            </button>
-          </form>
+ {/* Main Search Bar */}
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+              <div className="flex gap-4 mb-6">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    placeholder="Search fisheries by name, region, or species..."
+                    className="w-full pl-12 pr-4 py-4 bg-white rounded-xl border-0 focus:ring-2 focus:ring-blue-400 text-gray-900 placeholder-gray-500 text-lg"
+                  />
+                </div>
+                <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg">
+                  Search
+                </button>
+              </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Column 1: Dropdowns */}
-            <div className="flex flex-col gap-3"> 
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Fish Species</label>
+              {/* Quick Filters */}
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-white font-medium">Quick filters:</span>
                 <select 
                   value={selectedSpecies}
-                  onChange={e => setSelectedSpecies(e.target.value as FishSpecies | '')}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  onChange={e => setSelectedSpecies(e.target.value)}
+                  className="px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:ring-2 focus:ring-blue-400"
                 >
                   <option value="">All Species</option>
-                  {species.map((specie) => ( 
-                    <option key={specie} value={specie}>{specie}</option>
+                  {species.map(specie => (
+                    <option key={specie} value={specie} className="text-gray-900">{specie}</option>
                   ))}
                 </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Region / County</label>
                 <select
                   value={selectedDistrict}
-                  onChange={e => setSelectedDistrict(e.target.value as UKDistrict | '')}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  onChange={e => setSelectedDistrict(e.target.value)}
+                  className="px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:ring-2 focus:ring-blue-400"
                 >
                   <option value="">All Regions</option>
-                  {districts.map((district) => (
-                    <option key={district} value={district}>{district}</option>
+                  {districts.map(district => (
+                    <option key={district} value={district} className="text-gray-900">{district}</option>
                   ))}
                 </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Fishing Type</label>
-                <select
-                  value={selectedFishingType}
-                  onChange={e => setSelectedFishingType(e.target.value)}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                <button
+                  onClick={() => setFiltersOpen(!filtersOpen)}
+                  className="flex items-center gap-2 px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white hover:bg-white/30 transition-colors"
                 >
-                  <option value="">All Types</option>
-                  {Array.from(new Set(fisheries.flatMap(f => f.fishingType))).sort().map(type => (
-                    <option key={type} value={type}>{type}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Booking</label>
-                <select
-                  value={bookingType}
-                  onChange={e => setBookingType(e.target.value)}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                >
-                  <option value="">All</option>
-                  <option value="booking required">Booking Required</option>
-                  <option value="day tickets">Day Tickets</option>
-                </select>
+                  <Filter className="w-4 h-4" />
+                  Advanced Filters
+                  <ChevronDown className={`w-4 h-4 transition-transform ${filtersOpen ? 'rotate-180' : ''}`} />
+                </button>
               </div>
             </div>
-
-            {/* Column 2: Text Inputs */}
-            <div className="flex flex-col gap-3">
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Water Features</label>
-                <input
-                  type="text"
-                  value={featureSearchTerm}
-                  onChange={handleFeatureSearch}
-                  placeholder="e.g. weed beds, lily pads"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Facilities</label>
-                <input
-                  type="text"
-                  value={facilities}
-                  onChange={e => setFacilities(e.target.value)}
-                  placeholder="toilets, showers, café..."
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Day Ticket Price Range</label>
-                <input
-                  type="text"
-                  value={priceRange}
-                  onChange={e => setPriceRange(e.target.value)}
-                  placeholder="e.g. £10-£25"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Wi-Fi / Mobile Signal</label>
-                <input
-                  type="text"
-                  value={wifiSignal}
-                  onChange={e => setWifiSignal(e.target.value)}
-                  placeholder="Wifi, Signal, Provider (vodafone, o2 etc)"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
-                />
-              </div>
-            </div>
-
-            {/* Column 3: Collapsible Checkboxes with Section Headers */}
-            <div className="flex flex-col gap-3">
-              {/* CARP Section */}
-              <div className="border border-gray-200 rounded-lg">
-                <button
-                  type="button"
-                  onClick={() => setCarpOpen(!carpOpen)}
-                  className="w-full flex items-center justify-between p-3  text-left hover:bg-customBlue/50 hover:rounded-xl transition-colors"
-                >
-                  <h3 className="text-sm font-bold text-gray-800">CARP</h3>
-                  <svg
-                    className={`w-4 h-4 transition-transform ${carpOpen ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {carpOpen && (
-                  <div className="px-3 pb-3 space-y-2">
-                    <div className="flex items-center gap-2">
-                      <input 
-                        type="checkbox"
-                        checked={baitBoats}
-                        onChange={() => setBaitBoats(!baitBoats)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="bait-boats"
-                      />
-                      <label htmlFor="bait-boats" className="text-xs text-gray-700 font-medium">Bait Boats Allowed</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={magicTwig}
-                        onChange={() => setMagicTwig(!magicTwig)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="magic-twig"
-                      />
-                      <label htmlFor="magic-twig" className="text-xs text-gray-700 font-medium">Magic Twig Allowed</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={catchPhotos}
-                        onChange={() => setCatchPhotos(!catchPhotos)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="catch-photos"
-                      />
-                      <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* MATCH Section */}
-              <div className="border border-gray-200 rounded-lg">
-                <button
-                  type="button"
-                  onClick={() => setMatchOpen(!matchOpen)}
-                  className="w-full flex items-center justify-between p-3 text-left hover:bg-gray-50 transition-colors"
-                >
-                  <h3 className="text-sm font-bold text-gray-800">MATCH</h3>
-                  <svg
-                    className={`w-4 h-4 transition-transform ${matchOpen ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {matchOpen && (
-                  <div className="px-3 pb-3 space-y-2">
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={matchFishingFriendly}
-                        onChange={() => setMatchFishingFriendly(!matchFishingFriendly)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="match-friendly"
-                      />
-                      <label htmlFor="match-friendly" className="text-xs text-gray-700 font-medium">Match Fishing Friendly</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={keepnetsAllowed}
-                        onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="keepnetsAllowed"
-                      />
-                      <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* COARSE Section */}
-              <div className="border border-gray-200 rounded-lg">
-                <button
-                  type="button"
-                  onClick={() => setCoarseOpen(!coarseOpen)}
-                  className="w-full flex items-center justify-between p-3 text-left hover:bg-gray-50 transition-colors"
-                >
-                  <h3 className="text-sm font-bold text-gray-800">COARSE</h3>
-                  <svg
-                    className={`w-4 h-4 transition-transform ${coarseOpen ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {coarseOpen && (
-                  <div className="px-3 pb-3 space-y-2">
-                    <div className="flex items-center gap-2"> 
-                      <input 
-                        type="checkbox"
-                        checked={accommodationOnly}
-                        onChange={() => setAccommodationOnly(!accommodationOnly)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
-                        id="accommodation"
-                      /> 
-                      <label htmlFor="accommodation" className="text-xs text-gray-700 font-medium">On-site Accommodation</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={nightFishingAllowed}
-                        onChange={() => setNightFishingAllowed(!nightFishingAllowed)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300" 
-                        id="night-fishing"
-                      />
-                      <label htmlFor="night-fishing" className="text-xs text-gray-700 font-medium">Night Fishing Allowed</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={disabledAccess}
-                        onChange={() => setDisabledAccess(!disabledAccess)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="disabled-access"
-                      />
-                      <label htmlFor="disabled-access" className="text-xs text-gray-700 font-medium">Disabled Access</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={dogFriendly}
-                        onChange={() => setDogFriendly(!dogFriendly)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="dog-friendly"
-                      />
-                      <label htmlFor="dog-friendly" className="text-xs text-gray-700 font-medium">Dog Friendly</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input 
-                        type="checkbox"
-                        checked={firePitsAllowed}
-                        onChange={() => setFirePitsAllowed(!firePitsAllowed)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="fire-pits"
-                      />
-                      <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={parkingClose}
-                        onChange={() => setParkingClose(!parkingClose)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="parking-close"
-                      />
-                      <label htmlFor="parking-close" className="text-xs text-gray-700 font-medium">Parking Close</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={campingAllowed}
-                        onChange={() => setCampingAllowed(!campingAllowed)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="camping-allowed"
-                      />
-                      <label htmlFor="camping-allowed" className="text-xs text-gray-700 font-medium">Camping Allowed</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={tackleShop}
-                        onChange={() => settackleShop(!tackleShop)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="tackleshop"
-                      />
-                      <label htmlFor="tackleshop" className="text-xs text-gray-700 font-medium">Tackle Shop On-site</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={privateHire}
-                        onChange={() => setprivateHire(!privateHire)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="privatehire"
-                      />
-                      <label htmlFor="privatehire" className="text-xs text-gray-700 font-medium">Private Hire</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={tackleHire}
-                        onChange={() => settackleHire(!tackleHire)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="tacklehire"
-                      />
-                      <label htmlFor="tacklehire" className="text-xs text-gray-700 font-medium">Tackle Hire</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={coaching}
-                        onChange={() => setcoaching(!coaching)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="coaching"
-                      />
-                      <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div> 
-          </div> 
-        </div>
-
-
-        {/* --- Fisheries Grid --- */}
-        {loading ? (
-          <div className="text-center py-16 text-lg font-semibold text-gray-500">Loading fisheries...</div>
-        ) : error ? (
-          <div className="text-center py-16 text-lg font-semibold text-red-500">{error}</div>
-        ) : filteredFisheries.length > 0 ? (
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible" 
-          >
-            {filteredFisheries.map((fishery) => (
-              <motion.div key={fishery.id} variants={itemVariants}>
-                <FisheryCard fishery={fishery} />
-              </motion.div>
-            ))}
-          </motion.div>
-        ) : (
-          <div className="text-center py-16">
-            <h3 className="text-xl font-semibold mb-2">No fisheries found</h3>
-            <p className="text-gray-600">
-              Try adjusting your filters or check back later for new listings.
-            </p>
           </div>
-        )}
+        </div>
       </div>
 
-      {/* --- Featured Fisheries Section --- */}
-      <section className="py-12 px-4 bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200"> 
-        <div className="container mx-auto rounded-xl shadow-lg overflow-hidden">
-          {/* Header Bar */}
-          <div
-            className="p-6"
-            style={{
-              background:
-                "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-            }}
-          >
-            <motion.h2
-              className="text-4xl font-bebas font-bold text-white mb-1 text-center"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            >
-              Featured Fisheries
-            </motion.h2>
-            <motion.p
-              className="text-primary-200 text-center max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              Explore our handpicked selection of the finest fishing spots across the UK
-            </motion.p>
-          </div>
-          {/* Cards Grid */}
-          <div className="p-6 bg-gray-50">
-            {loading ? (
-              <div className="text-center py-8 text-gray-600">Loading featured fisheries...</div>
-            ) : (
-              <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                {featuredFisheries.length > 0 ? (
-                  featuredFisheries.map((f) => (
-                    <motion.div
-                      key={f.id}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+      <div className="container mx-auto px-6 py-12">
+        {/* Advanced Filters Panel */}
+        {filtersOpen && (
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-12 border border-gray-100">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Advanced Filters</h3>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Column 1: Basic Filters */}
+              <div className="space-y-6">
+                <h4 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2">Basic Options</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Fishing Type</label>
+                    <select
+                      value={selectedFishingType}
+                      onChange={e => setSelectedFishingType(e.target.value)}
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                     >
-                      <Link to={`/directory/${f.slug}`}>
+                      <option value="">All Types</option>
+                      <option value="Carp">Carp Fishing</option>
+                      <option value="Match">Match Fishing</option>
+                      <option value="Coarse">Coarse Fishing</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Booking Type</label>
+                    <select
+                      value={bookingType}
+                      onChange={e => setBookingType(e.target.value)}
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                    >
+                      <option value="">All Booking Types</option>
+                      <option value="booking required">Booking Required</option>
+                      <option value="day tickets">Day Tickets Available</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Price Range</label>
+                    <input
+                      type="text"
+                      value={priceRange}
+                      onChange={e => setPriceRange(e.target.value)}
+                      placeholder="e.g. £10-£25"
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 2: Features & Facilities */}
+              <div className="space-y-6">
+                <h4 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2">Features & Facilities</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Water Features</label>
+                    <input
+                      type="text"
+                      value={featureSearchTerm}
+                      onChange={handleFeatureSearch}
+                      placeholder="e.g. weed beds, lily pads, islands"
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">On-site Facilities</label>
+                    <input
+                      type="text"
+                      value={facilities}
+                      onChange={e => setFacilities(e.target.value)}
+                      placeholder="toilets, showers, café, shop..."
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Connectivity</label>
+                    <input
+                      type="text"
+                      value={wifiSignal}
+                      onChange={e => setWifiSignal(e.target.value)}
+                      placeholder="WiFi, mobile signal, network provider"
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 3: Specialized Options */}
+              <div className="space-y-6">
+                <h4 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2">Specialized Options</h4>
+
+                {/* Carp Fishing Section */}
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
+                  <button
+                    type="button"
+                    onClick={() => setCarpOpen(!carpOpen)}
+                    className="w-full flex items-center justify-between text-left"
+                  >
+                    <h5 className="font-bold text-green-800">🎣 Carp Fishing</h5>
+                    <ChevronDown className={`w-4 h-4 text-green-600 transition-transform ${carpOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {carpOpen && (
+                    <div className="mt-4 space-y-3">
+                      {[
+                        { state: baitBoats, setter: setBaitBoats, label: "Bait Boats Allowed", id: "bait-boats" },
+                        { state: magicTwig, setter: setMagicTwig, label: "Magic Twig Allowed", id: "magic-twig" },
+                        { state: catchPhotos, setter: setCatchPhotos, label: "Catch Photography", id: "catch-photos" }
+                      ].map(({ state, setter, label, id }) => (
+                        <label key={id} className="flex items-center gap-3 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={state}
+                            onChange={() => setter(!state)}
+                            className="w-4 h-4 accent-green-600 rounded"
+                          />
+                          <span className="text-sm text-green-800 font-medium">{label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Match Fishing Section */}
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 border border-blue-200">
+                  <button
+                    type="button"
+                    onClick={() => setMatchOpen(!matchOpen)}
+                    className="w-full flex items-center justify-between text-left"
+                  >
+                    <h5 className="font-bold text-blue-800">🏆 Match Fishing</h5>
+                    <ChevronDown className={`w-4 h-4 text-blue-600 transition-transform ${matchOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {matchOpen && (
+                    <div className="mt-4 space-y-3">
+                      {[
+                        { state: matchFishingFriendly, setter: setMatchFishingFriendly, label: "Match Fishing Friendly", id: "match-friendly" },
+                        { state: keepnetsAllowed, setter: setkeepnetsAllowed, label: "Keepnets Allowed", id: "keepnets" }
+                      ].map(({ state, setter, label, id }) => (
+                        <label key={id} className="flex items-center gap-3 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={state}
+                            onChange={() => setter(!state)}
+                            className="w-4 h-4 accent-blue-600 rounded"
+                          />
+                          <span className="text-sm text-blue-800 font-medium">{label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* General Amenities Section */}
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4 border border-purple-200">
+                  <button
+                    type="button"
+                    onClick={() => setCoarseOpen(!coarseOpen)}
+                    className="w-full flex items-center justify-between text-left"
+                  >
+                    <h5 className="font-bold text-purple-800">🏕️ Amenities</h5>
+                    <ChevronDown className={`w-4 h-4 text-purple-600 transition-transform ${coarseOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {coarseOpen && (
+                    <div className="mt-4 grid grid-cols-1 gap-3 max-h-48 overflow-y-auto">
+                      {[
+                        { state: accommodationOnly, setter: setAccommodationOnly, label: "On-site Accommodation" },
+                        { state: nightFishingAllowed, setter: setNightFishingAllowed, label: "Night Fishing" },
+                        { state: disabledAccess, setter: setDisabledAccess, label: "Disabled Access" },
+                        { state: dogFriendly, setter: setDogFriendly, label: "Dog Friendly" },
+                        { state: firePitsAllowed, setter: setFirePitsAllowed, label: "Fire Pits Allowed" },
+                        { state: parkingClose, setter: setParkingClose, label: "Close Parking" },
+                        { state: campingAllowed, setter: setCampingAllowed, label: "Camping Allowed" },
+                        { state: tackleShop, setter: settackleShop, label: "Tackle Shop" },
+                        { state: privateHire, setter: setprivateHire, label: "Private Hire" },
+                        { state: tackleHire, setter: settackleHire, label: "Tackle Hire" },
+                        { state: coaching, setter: setcoaching, label: "Coaching Available" }
+                      ].map(({ state, setter, label }, idx) => (
+                        <label key={idx} className="flex items-center gap-3 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={state}
+                            onChange={() => setter(!state)}
+                            className="w-4 h-4 accent-purple-600 rounded"
+                          />
+                          <span className="text-sm text-purple-800 font-medium">{label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-4 mt-8">
+              <button
+                onClick={() => setFiltersOpen(false)}
+                className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+              >
+                Cancel
+              </button>
+              <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl transition-all duration-200">
+                Apply Filters
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Results Section */}
+        <div className="mb-16">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Browse Fisheries</h2>
+              <p className="text-gray-600">Showing {filteredFisheries.length} results</p>
+            </div>
+            <select className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400">
+              <option>Sort by Relevance</option>
+              <option>Sort by Price</option>
+              <option>Sort by Rating</option>
+              <option>Sort by Distance</option>
+            </select>
+          </div>
+
+          {loading ? (
+            <div className="text-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading fisheries...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-20 text-red-500">
+              <p className="text-xl font-semibold">{error}</p>
+            </div>
+          ) : filteredFisheries.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredFisheries.map((fishery) => (
+                <FisheryCard key={fishery.id} fishery={fishery} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <div className="text-6xl mb-4">🎣</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">No fisheries found</h3>
+              <p className="text-gray-600 mb-6">
+                Try adjusting your filters or search terms to find the perfect fishing spot.
+              </p>
+              <button 
+                onClick={() => {
+                  setSearchTerm('');
+                  setSelectedSpecies('');
+                  setSelectedDistrict('');
+                  // Reset other filters as needed
+                }}
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
+              >
+                Clear All Filters
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Featured Fisheries Section */}
+        <section className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+          <div className="p-12 text-center">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Featured Premium Fisheries
+            </h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-12">
+              Discover our handpicked selection of the finest fishing destinations across the UK, 
+              chosen for their exceptional quality and angling experiences.
+            </p>
+
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+                <p className="text-slate-300">Loading featured fisheries...</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {featuredFisheries.length > 0 ? (
+                  featuredFisheries.map((fishery) => (
+                    <div
+                      key={fishery.id}
+                      className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 hover:bg-white/20 transition-all duration-300 group"
+                    >
+                      <div className="relative">
                         <img
-                          src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"}
-                          alt={f.name}
-                          className="w-full h-40 object-cover"
+                          src={fishery.image}
+                          alt={fishery.name}
+                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                        <div className="p-4">
-                          <h3 className="text-lg font-semibold text-gray-900">{f.name}</h3>
-                          <div className="text-sm text-primary-700">{f.district}</div>
-                          <div className="text-gray-600 text-xs mt-2 line-clamp-2">{f.description}</div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <h3 className="text-lg font-bold text-white mb-1">{fishery.name}</h3>
+                          <div className="flex items-center gap-2 text-white/80">
+                            <MapPin className="w-4 h-4" />
+                            <span className="text-sm">{fishery.district}</span>
+                          </div>
                         </div>
-                      </Link>
-                    </motion.div>
+                      </div>
+                      <div className="p-6">
+                        <p className="text-slate-300 text-sm mb-4 line-clamp-2">{fishery.description}</p>
+                        <button className="w-full bg-white/20 hover:bg-white/30 border border-white/30 text-white font-semibold py-2 rounded-lg transition-colors">
+                          Explore Fishery
+                        </button>
+                      </div>
+                    </div>
                   ))
                 ) : (
-                  <div className="col-span-4 text-center text-gray-500">
-                    No featured fisheries found.
+                  <div className="col-span-4 text-center text-slate-300">
+                    <p className="text-lg">No featured fisheries available at the moment.</p>
                   </div>
-                )} 
-              </motion.div>
+                )}
+              </div>
             )}
           </div>
-        </div>
-      </section>
-      {/* --- End Featured Fisheries Section --- */}
+        </section>
+      </div>
     </div>
   );
 };

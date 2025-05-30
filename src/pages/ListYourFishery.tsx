@@ -131,7 +131,7 @@ const ListYourFishery: React.FC = () => {
     >
       <div className="lg:w-1/2">
         <img
-          src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg"
+          src="https://www.carpology.net/uploads/cms/blogsection/10440/cottam-234-03-image-untouched.jpg"
           alt="Fishery with anglers"
           className="w-full h-96 object-cover rounded-2xl shadow-xl"
         />

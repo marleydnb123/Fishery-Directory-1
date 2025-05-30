@@ -65,7 +65,7 @@ const ListYourFishery: React.FC = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg')`,
+            backgroundImage: `url('https://www.carpology.net/uploads/cms/blogsection/10440/cottam-234-03-image-untouched.jpg')`,
           }}
         />
         <div className="absolute inset-0 bg-black bg-opacity-60" />

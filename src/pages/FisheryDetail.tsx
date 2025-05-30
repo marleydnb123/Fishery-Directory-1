@@ -65,6 +65,7 @@ const FisheryDetail: React.FC = () => {
   const [accommodation, setAccommodation] = useState<Accommodation[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
+  const [visitUpdated, setVisitUpdated] = useState(false);
 
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
@@ -151,10 +152,25 @@ const FisheryDetail: React.FC = () => {
       setLoading(false);
     };
 
+    // Update visit count when page loads
+    const updateVisitCount = async (fisheryId: string) => {
+      if (!visitUpdated) {
+        await supabase.rpc('increment_fishery_visits', { fishery_id_param: fisheryId });
+        setVisitUpdated(true);
+      }
+    };
+
     fetchData();
   }, [slug]);
  
    
+  // Update visit count when fishery data is loaded
+  useEffect(() => {
+    if (fishery?.id && !visitUpdated) {
+      updateVisitCount(fishery.id);
+    }
+  }, [fishery, visitUpdated]);
+
   if (loading) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center">

@@ -485,6 +485,9 @@ const ListYourFishery: React.FC = () => {
       <p>
         We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.
       </p>
+      <p>
+        Below, you’ll find examples of our Fishery cards and how your venue could be showcased to our highly engaged angling audience
+      </p>
     </div>
 
     {/* Featured Fisheries Cards */}

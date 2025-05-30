@@ -396,7 +396,7 @@ const FisheryDetail: React.FC = () => {
 
               {/* --- Water Features Section --- */}
             {fishery.features && fishery.features.length > 0 && (
-            <div className="">
+            <div className="mt-4">
             <h3 className="text-lg font-semibold mb-3 flex items-center">
           
             Water Features 

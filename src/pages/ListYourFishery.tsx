@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Check, Star, Users, TrendingUp, Mail, AlertCircle } from 'lucide-react';
@@ -9,6 +9,34 @@ const ListYourFishery: React.FC = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
+  // Featured fisheries state
+  const [featuredFisheries, setFeaturedFisheries] = useState<any[]>([]);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [featuredError, setFeaturedError] = useState<string | null>(null);
+
+  // Fetch featured fisheries
+  useEffect(() => {
+    const fetchFeaturedFisheries = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('fisheries')
+          .select('*')
+          .eq('featured', true)
+          .limit(3);
+
+        if (error) throw error;
+        setFeaturedFisheries(data || []);
+      } catch (err: any) {
+        setFeaturedError('Failed to load featured fisheries');
+        console.error('Error fetching featured fisheries:', err);
+      } finally {
+        setFeaturedLoading(false);
+      }
+    };
+
+    fetchFeaturedFisheries();
+  }, []);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,6 +142,82 @@ const ListYourFishery: React.FC = () => {
               <h3 className="text-4xl font-bold text-gray-900 mb-2">10+</h3>
               <p className="text-gray-600">Years Experience</p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Fisheries Section */}
+      <section className="py-12 bg-gradient-to-b from-blue-50 via-white to-blue-50">
+        <div className="container mx-auto shadow-lg rounded-xl overflow-hidden">
+          {/* Header Bar */}
+          <div
+            className="p-6"
+            style={{
+              background:
+                "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+            }}
+          >
+            <motion.h2
+              className="text-4xl font-bebas font-bold text-white mb-1 text-center" 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              Featured Fisheries
+            </motion.h2>
+            <motion.p
+              className="text-gray-200 text-center max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              Explore our handpicked selection of the finest fishing spots across the UK
+            </motion.p>
+          </div>
+          {/* Cards Grid */}
+          <div className="p-6 bg-gray-50">
+            {featuredLoading ? (
+              <div className="text-center py-8 text-gray-600">Loading featured fisheries...</div>
+            ) : featuredError ? (
+              <div className="text-center py-8 text-red-600">{featuredError}</div>
+            ) : (
+              <motion.div
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                {featuredFisheries.length > 0 ? (
+                  featuredFisheries.map((f) => (
+                    <motion.div
+                      key={f.id}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+                    >
+                      <Link to={`/directory/${f.slug}`}>
+                        <img
+                          src={f.image || "https://www.welhamlake.co.uk/wp-content/uploads/2016/12/yorkshire-carp-fishing.jpg"} 
+                          alt={f.name}
+                          className="w-full h-40 object-cover transition-transform duration-200 hover:scale-[1.02]"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold text-gray-900">{f.name}</h3>
+                          <div className="text-sm text-customBlue">{f.district}</div>
+                          <div className="text-gray-600 text-xs mt-2 line-clamp-2">{f.description}</div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))
+                ) : (
+                  <div className="col-span-3 text-center text-gray-500">
+                    No featured fisheries found.
+                  </div>
+                )}
+              </motion.div>
+            )}
           </div>
         </div>
       </section>
@@ -247,7 +351,7 @@ const ListYourFishery: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
             Fisheries & Fishing Holiday Venues
           </h2>
-          <div className="text-center text-xl text-gray-600 mb-12 max-w-7xl mx-auto">
+          <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
             <p className="mb-4">
               If you own a fishery or fishing holiday venue and want to attract more anglers, we're here to help.
             </p>
@@ -376,8 +480,6 @@ const ListYourFishery: React.FC = () => {
           </div>
         </div>
       </section>
-
-     
 
       {/* FAQ Section */}
       <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">

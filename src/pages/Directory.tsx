@@ -338,7 +338,7 @@ const Directory: React.FC = () => {
             </button>
           </form>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-customBlue/50 ">
             {/* Column 1: Dropdowns */}
             <div className="flex flex-col gap-3"> 
               <div>

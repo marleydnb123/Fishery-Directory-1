@@ -101,6 +101,115 @@ const ListYourFishery: React.FC = () => {
         </div>
       </div>
 
+      {/* Advertising Packages Section */}
+<section className="py-16 px-4 bg-gradient-to-b from-white to-blue-50">
+  <div className="container mx-auto">
+    <motion.h2
+      className="text-4xl md:text-5xl font-bebas font-bold text-center mb-8"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Advertising Packages
+    </motion.h2>
+    <motion.p
+      className="text-center text-xl text-gray-600 mb-16 max-w-4xl mx-auto"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.2 }}
+    >
+      With hundreds of thousands of visits from an engaged audience of committed anglers, as well as one of the UK's largest databases of fishing venues, we can promote your venue or business and generate clicks, calls, bookings and revenue so your business grows and becomes more profitable.
+    </motion.p>
+    
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {/* Fisheries and Fishing Holiday Venues */}
+      <motion.div
+        className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+      >
+        <div className="text-center mb-6">
+          <div className="w-16 h-16 bg-customBlue rounded-full flex items-center justify-center mx-auto mb-4">
+            <Users className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold mb-4">Fisheries & Fishing Holiday Venues</h3>
+        </div>
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          With hundreds of thousands of visits from an engaged audience of committed anglers, and one of the largest databases of angling venues in the UK, we'll make sure your venue gets seen. Our packages deliver visibility, clicks, calls, and bookings, which ultimately results in more anglers visiting your venue, adding revenue so your business grows and becomes more profitable.
+        </p>
+        <p className="text-gray-700 font-semibold mb-6">
+          If you own a fishery or fishing holiday venue and would like more day tickets and holiday bookings, then get in touch today.
+        </p>
+        <Link
+          to="/contact"
+          className="block text-center bg-customBlue hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors font-semibold"
+        >
+          Promote Your Venue
+        </Link>
+      </motion.div>
+
+      {/* Sponsorship and Advertising */}
+      <motion.div
+        className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="text-center mb-6">
+          <div className="w-16 h-16 bg-customBlue rounded-full flex items-center justify-center mx-auto mb-4">
+            <TrendingUp className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold mb-4">Sponsorship & Advertising</h3>
+        </div>
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          If you have a business that would benefit from connecting with our audiences, we have a number of flexible sponsorship packages that can help. From low-cost banner advertising to content sponsorship, email marketing and social media.
+        </p>
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          As well as a large angling audience, we also have one of the biggest databases of angling venues and owners in the UK. Whether you are a start up or large corporate, we've got a flexible advertising plan that will work for you.
+        </p>
+        <Link
+          to="/contact"
+          className="block text-center bg-customBlue hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors font-semibold"
+        >
+          Explore Sponsorship
+        </Link>
+      </motion.div>
+
+      {/* Looking to Sell */}
+      <motion.div
+        className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3 }}
+      >
+        <div className="text-center mb-6">
+          <div className="w-16 h-16 bg-customBlue rounded-full flex items-center justify-center mx-auto mb-4">
+            <Star className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold mb-4">Looking to Sell Your Fishing Venue?</h3>
+        </div>
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          If you have a commercial fishery, a fishing lake, stretch of river or land with fishing potential that you want to sell then we can help. Equally, if you own a property with water and potential fishing, and you're looking to sell, please get in touch.
+        </p>
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          We're not estate agents but we work closely with our partners who are. We'll also advertise your property on our website, putting your venue in front of hundreds of thousands of anglers in the UK.
+        </p>
+        <Link
+          to="/contact"
+          className="block text-center bg-customBlue hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors font-semibold"
+        >
+          List Your Property
+        </Link>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
       {/* Stats Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto">

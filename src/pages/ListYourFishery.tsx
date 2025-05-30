@@ -15,8 +15,8 @@ const ListYourFishery: React.FC = () => {
 
   // Featured fisheries states
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
-  const [loadingFisheries, setLoadingFisheries] = useState(true);
-  const [fisheriesError, setFisheriesError] = useState<string | null>(null);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [featuredError, setFeaturedError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchFeatured = async () => {

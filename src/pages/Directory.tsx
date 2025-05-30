@@ -403,7 +403,7 @@ const Directory: React.FC = () => {
                   value={featureSearchTerm}
                   onChange={handleFeatureSearch} 
                   placeholder="e.g. weed beds, lily pads"
-                  className="w-full p-2 border border-gray-200   rounded focus:ring-1 focus:ring-blue-400 text-sm bg-customBlue/50"
+                  className="w-full p-2 border border-gray-200   rounded focus:ring-1 focus:ring-blue-400 text-sm"
                 />
               </div>
               <div>
@@ -413,7 +413,7 @@ const Directory: React.FC = () => {
                   value={facilities}
                   onChange={e => setFacilities(e.target.value)}
                   placeholder="toilets, showers, café..."
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm text-blue-500"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
                 />
               </div>
               <div>

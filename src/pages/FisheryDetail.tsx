@@ -339,19 +339,19 @@ const FisheryDetail: React.FC = () => {
     </div> 
     <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
     {/* Conditional Third Card */}
-    {fishery.fishing_type === 'match' && (
+    {fishery.fishing_type === 'Match' && (
       <div className="flex-1 flex flex-col items-center">
         <span className="text-3xl font-bold text-grey-600">{fishery.record_match_weight ?? '—'}</span>
         <span className="text-sm text-grey-600 mt-1">Record Match Weight</span>
       </div>
     )}
-    {fishery.fishing_type === 'coarse' && (
+    {fishery.fishing_type === 'Coarse' && (
       <div className="flex-1 flex flex-col items-center">
         <span className="text-3xl font-bold text-grey-600">{fishery.average_weight ?? '—'}</span>
         <span className="text-sm text-grey-600 mt-1">Average Weight</span>
       </div>
     )}
-    {fishery.fishing_type === 'carp' && (
+    {fishery.fishing_type === 'Specimen' && (
       <div className="flex-1 flex flex-col items-center">
         <span className="text-3xl font-bold text-grey-600">{fishery.stock ?? '—'}</span>
         <span className="text-sm text-grey-600 mt-1">Stock</span>

@@ -303,6 +303,39 @@ const Directory: React.FC = () => {
             >
               Search
             </button>
+            <button
+              type="button"
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedSpecies('');
+                setSelectedDistrict('');
+                setSelectedFishingType('');
+                setBookingType('');
+                setFeatureSearchTerm('');
+                setFacilities('');
+                setPriceRange('');
+                setWifiSignal('');
+                setBaitBoats(false);
+                setMagicTwig(false);
+                setCatchPhotos(false);
+                setMatchFishingFriendly(false);
+                setkeepnetsAllowed(false);
+                setAccommodationOnly(false);
+                setNightFishingAllowed(false);
+                setDisabledAccess(false);
+                setDogFriendly(false);
+                setFirePitsAllowed(false);
+                setParkingClose(false);
+                setCampingAllowed(false);
+                settackleShop(false);
+                setprivateHire(false);
+                settackleHire(false);
+                setcoaching(false);
+              }}
+              className="px-5 py-2 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
+            >
+              Reset Filters
+            </button>
           </form>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

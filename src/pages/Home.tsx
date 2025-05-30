@@ -10,8 +10,8 @@ import { Fishery, Accommodation } from '../types/schema';
 
 const heroImages = [
   "https://www.wokinghamcountryside.co.uk/sites/countryside/files/styles/scale_crop_7_3_large/public/2024-05/sunset%2C%20black.jpg?itok=OMc703vu",
+  "https://www.fishermanholidays.com/images-waters/jonchery/catches/_1600x980_crop_center-center_80_line/109390/20231022_1851176545bfb5e07082.50810937.jpeg",
   "",
-  "https://dreamcarpholidays.com/wp-content/uploads/2024/01/IMG-20240104-WA0062-722x488.jpg",
   "https://notch.io/cdn/shop/collections/FISHING_1600x.png?v=1595694362"
   // Add more image URLs as needed
 ];

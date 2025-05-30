@@ -67,6 +67,20 @@ const FisheryDetail: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [visitUpdated, setVisitUpdated] = useState(false);
 
+  // Function to update visit count
+  const updateVisitCount = async (fisheryId: string) => {
+    if (!visitUpdated) {
+      try {
+        await supabase.rpc('increment_fishery_visits', { 
+          fishery_id_param: fisheryId 
+        });
+        setVisitUpdated(true);
+      } catch (error) {
+        console.error('Error updating visit count:', error);
+      }
+    }
+  };
+
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
   const [featuredLoading, setFeaturedLoading] = useState(true);
@@ -150,14 +164,6 @@ const FisheryDetail: React.FC = () => {
       }
 
       setLoading(false);
-    };
-
-    // Update visit count when page loads
-    const updateVisitCount = async (fisheryId: string) => {
-      if (!visitUpdated) {
-        await supabase.rpc('increment_fishery_visits', { fishery_id_param: fisheryId });
-        setVisitUpdated(true);
-      }
     };
 
     fetchData();

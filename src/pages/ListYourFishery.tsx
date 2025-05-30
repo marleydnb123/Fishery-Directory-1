@@ -690,25 +690,113 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
       
-      {/* CTA Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bebas font-bold mb-6">
-            Looking to Sell Your Fishery or Lake?
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            If you're thinking of selling a fishery, lake, river stretch, or land with fishing rights — we can help.
-            We're not estate agents, but we work closely with trusted rural property partners. And with one of the UK's largest databases of angling venue owners, holidaymakers, and investors, we can put your property in front of the right eyes.
-            List your water with us and reach thousands of qualified, fishing-focused buyers actively searching for properties with angling potential.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block bg-customBlue hover:bg-blue-700 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-colors"
-          >
-            List a Fishery for Sale
-          </Link>
+      {/* Enhanced CTA Section */}
+<section className="relative py-20 px-4 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 overflow-hidden">
+  {/* Background Elements */}
+  <div className="absolute inset-0 opacity-5">
+    <div className="absolute top-10 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 right-20 w-48 h-48 bg-teal-400 rounded-full blur-3xl"></div>
+    <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-indigo-400 rounded-full blur-2xl"></div>
+  </div>
+  
+  <div className="container mx-auto text-center relative z-10">
+    {/* Badge */}
+    <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-blue-200">
+      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+      </svg>
+      Trusted by UK's Leading Angling Community
+    </div>
+
+    {/* Main Heading */}
+    <h2 className="text-5xl md:text-6xl lg:text-7xl font-bebas font-bold mb-8 bg-gradient-to-r from-slate-800 via-blue-900 to-teal-800 bg-clip-text text-transparent leading-tight">
+      Ready to Sell Your 
+      <span className="block text-blue-600">Fishery or Lake?</span>
+    </h2>
+
+    {/* Enhanced Description */}
+    <div className="max-w-4xl mx-auto mb-12">
+      <p className="text-xl md:text-2xl text-slate-700 mb-6 leading-relaxed font-light">
+        Whether you own a <strong className="text-slate-900">fishery, lake, river stretch</strong>, or land with fishing rights — we connect you with serious buyers.
+      </p>
+      
+      {/* Key Benefits Grid */}
+      <div className="grid md:grid-cols-3 gap-6 mt-10 text-left">
+        <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 className="font-semibold text-lg text-slate-900 mb-2">Massive Reach</h3>
+          <p className="text-slate-600">Access to thousands of qualified buyers actively searching for angling properties</p>
         </div>
-      </section>
+
+        <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+            <svg className="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 className="font-semibold text-lg text-slate-900 mb-2">Expert Network</h3>
+          <p className="text-slate-600">Connected with trusted rural property specialists who understand angling assets</p>
+        </div>
+
+        <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 className="font-semibold text-lg text-slate-900 mb-2">Targeted Marketing</h3>
+          <p className="text-slate-600">Your property reaches fishing-focused investors and venue owners specifically</p>
+        </div>
+      </div>
+    </div>
+
+    {/* CTA Buttons */}
+    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <Link
+        to="/contact"
+        className="group inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg font-semibold px-10 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 transform"
+      >
+        List Your Fishery Now
+        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </Link>
+      
+      <Link
+        to="/how-it-works"
+        className="inline-flex items-center text-slate-700 hover:text-blue-600 text-lg font-medium px-6 py-4 rounded-xl border-2 border-slate-200 hover:border-blue-300 bg-white/50 backdrop-blur-sm transition-all duration-300 hover:shadow-md"
+      >
+        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        How It Works
+      </Link>
+    </div>
+
+    {/* Trust Indicators */}
+    <div className="mt-12 pt-8 border-t border-slate-200">
+      <p className="text-sm text-slate-500 mb-4">Trusted by property owners across the UK</p>
+      <div className="flex justify-center items-center space-x-8 opacity-60">
+        <div className="flex items-center space-x-2">
+          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+          <span className="text-sm text-slate-600">Active Listings</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+          <span className="text-sm text-slate-600">Qualified Buyers</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+          <span className="text-sm text-slate-600">Expert Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </div>
   );
 };

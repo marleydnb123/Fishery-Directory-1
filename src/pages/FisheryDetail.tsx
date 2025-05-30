@@ -328,7 +328,7 @@ const FisheryDetail: React.FC = () => {
   <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
     {/* Visitors */}
     <div className="flex-1 flex flex-col items-center"> 
-      <span className="text-3xl font-bold text-grey-600">{fishery.visit_count || '0'}</span>
+      <span className="text-3xl font-bold text-grey-600">Visits: {fishery.visit_count}</span>
       <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
     </div>
     <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />

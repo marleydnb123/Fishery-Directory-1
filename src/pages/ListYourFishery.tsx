@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Check, Star, Users, TrendingUp, Mail, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase'; 
 import { Fishery } from '../types/schema';
-import FisheryCard from '../components/common/FisheryCard'; 
+
 
 const ListYourFishery: React.FC = () => {
   // Newsletter subscription states
@@ -13,36 +13,8 @@ const ListYourFishery: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Featured fisheries states
-  const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
-  const [loadingFisheries, setLoadingFisheries] = useState(true);
-  const [fisheriesError, setFisheriesError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchFeatured = async () => {
-      setLoadingFisheries(true);
-      setFisheriesError(null);
-      const { data, error } = await supabase
-        .from('fisheries')
-        .select('*')
-        .eq('isfeatured', true)  
-        .limit(4);
-      if (error) {
-        setFisheriesError('Failed to load featured fisheries.');
-        setFeaturedFisheries([]);
-      } else {
-        setFeaturedFisheries(
-          (data || []).map((f: any) => ({
-            ...f,
-            species: Array.isArray(f.species) ? f.species : [],
-            features: Array.isArray(f.features) ? f.features : [],
-          }))
-        );
-      }
-      setLoadingFisheries(false);
-    };
-    fetchFeatured();
-  }, []);
+
   
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -276,71 +248,7 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
 
-      {/* Sample Listing Preview */}
-      <section className="py-24 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
-        <div className="container mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
-            Fisheries & Fishing Holiday Venues
-          </h2>
-          <div className="text-center text-xl text-gray-600 mb-16 max-w-4xl mx-auto">
-            <p className="mb-4">
-              If you own a fishery or fishing holiday venue and want to attract more anglers, we're here to help.
-            </p>
-            <p className="mb-4">
-              Our audience includes match anglers, specimen hunters, pleasure fishers, and families looking for fishing breaks — and our platform connects them directly with venues like yours.
-            </p>
-            <p>
-              We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.
-            </p>
-          </div>
-          
-          {/* Example Fishery Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {loadingFisheries ? (
-              <div className="col-span-3 text-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600 mx-auto"></div>
-                <p className="mt-4 text-gray-600">Loading featured fisheries...</p>
-              </div>
-            ) : featuredFisheries.length > 0 ? (
-              featuredFisheries.map((fishery) => (
-                <motion.div
-                  key={fishery.id}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <FisheryCard fishery={fishery} />
-                </motion.div>
-              ))
-            ) : (
-              <div className="col-span-3 text-center py-12">
-                <p className="text-gray-600">No featured fisheries available.</p>
-              </div>
-            )}
-          </div>
-          
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Overview</h3>
-              <ul className="space-y-2">
-                <li>✓ Detailed venue description</li>
-                <li>✓ Photo gallery</li>
-                <li>✓ Available species</li>
-                <li>✓ Facilities list</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Features</h3>
-              <ul className="space-y-2">
-                <li>✓ Interactive map</li>
-                <li>✓ Booking information</li>
-                <li>✓ Rules & regulations</li>
-                <li>✓ Contact details</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Testimonials */}
       <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">

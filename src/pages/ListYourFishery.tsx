@@ -482,7 +482,7 @@ const ListYourFishery: React.FC = () => {
       <p className="mb-4">
         Our audience includes match anglers, specimen hunters, pleasure fishers, and families looking for fishing breaks, our platform connects them directly with venues like yours.
       </p> 
-      <p>
+      <p className="mb-4">
         We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.
       </p>
       <p>

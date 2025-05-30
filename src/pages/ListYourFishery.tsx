@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Check, Star, Users, TrendingUp, Mail, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase'; 
 import { Fishery } from '../types/schema';
-import FisheryCard from '../components/common/FisheryCard';
+import FisheryCard from '../components/common/FisheryCard'; 
 
  
 

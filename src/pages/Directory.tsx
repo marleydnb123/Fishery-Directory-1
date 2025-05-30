@@ -285,7 +285,7 @@ const Directory: React.FC = () => {
 {/* --- Modern Search Bar & Filters --- */}
         <div className="bg-customBlue/50 rounded-xl shadow-md p-6 mb-16">
           <form
-            className="flex gap-2 mb-4"
+            className="flex flex-wrap gap-2 mb-4"
             onSubmit={e => e.preventDefault()}
             autoComplete="off"
           >

@@ -397,13 +397,13 @@ const Directory: React.FC = () => {
             {/* Column 2: Text Inputs */}
             <div className="flex flex-col gap-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1 bg-customBlue/50 ">Water Features</label>
+                <label className="block text-xs font-semibold text-gray-600 mb-1 ">Water Features</label>
                 <input
                   type="text"
                   value={featureSearchTerm}
                   onChange={handleFeatureSearch} 
                   placeholder="e.g. weed beds, lily pads"
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-customBlue/50 "
                 />
               </div>
               <div>

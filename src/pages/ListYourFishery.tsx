@@ -479,7 +479,7 @@ const ListYourFishery: React.FC = () => {
         If you own a fishery or fishing holiday venue and want to attract more anglers, we're here to help.
       </p>
       <p className="mb-4">
-        Our audience includes match anglers, specimen hunters, pleasure fishers, and families looking for fishing breaks — and our platform connects them directly with venues like yours.
+        Our audience includes match anglers, specimen hunters, pleasure fishers, and families looking for fishing breaks, our platform connects them directly with venues like yours.
       </p>
       <p>
         We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.

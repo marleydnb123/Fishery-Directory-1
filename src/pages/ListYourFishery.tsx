@@ -122,7 +122,7 @@ const ListYourFishery: React.FC = () => {
       With hundreds of thousands of visits from an engaged audience of committed anglers, as well as one of the UK's largest databases of fishing venues, we can promote your venue or business and generate clicks, calls, bookings and revenue so your business grows and becomes more profitable.
     </motion.p>
     
-    {/* Fisheries and Fishing Holiday Venues */}
+    {/* Fisheries and Fishing Holiday Venues */} 
     <motion.div
       className="flex flex-col lg:flex-row items-center gap-12 mb-8"
       initial={{ opacity: 0, x: -50 }}

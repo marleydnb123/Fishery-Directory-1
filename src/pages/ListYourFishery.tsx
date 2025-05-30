@@ -603,170 +603,44 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
 
-      {/* Enhanced FAQ Section */}
-<section className="relative py-20 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100 overflow-hidden">
-  {/* Background Elements */}
-  <div className="absolute inset-0 opacity-5">
-    <div className="absolute top-20 left-1/4 w-40 h-40 bg-blue-400 rounded-full blur-3xl animate-pulse"></div>
-    <div className="absolute bottom-32 right-1/3 w-32 h-32 bg-indigo-400 rounded-full blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
-  </div>
-
-  <div className="container mx-auto max-w-4xl relative z-10">
-    {/* Section Header */}
-    <div className="text-center mb-16">
-      <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-blue-200">
-        <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-        </svg>
-        Got Questions? We've Got Answers
-      </div>
-      
-      <h2 className="text-5xl md:text-6xl font-bebas font-bold mb-6 bg-gradient-to-r from-slate-800 via-blue-900 to-indigo-800 bg-clip-text text-transparent">
-        Frequently Asked Questions
-      </h2>
-      <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-        Everything you need to know about listing your fishery and reaching the right buyers
-      </p>
-    </div>
-
-    {/* FAQ Grid */}
-    <div className="grid md:grid-cols-2 gap-6 mb-12">
-      {/* FAQ Item 1 */}
-      <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-white/50">
-        <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-            </svg>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">
-              How do I update my listing?
-            </h3>
-            <p className="text-slate-600 leading-relaxed">
-              Access your personalized dashboard anytime to make instant updates. Changes go live within minutes, and you'll receive confirmation notifications for all modifications.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ Item 2 */}
-      <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-white/50">
-        <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-teal-600 transition-colors">
-              Can I list multiple properties?
-            </h3>
-            <p className="text-slate-600 leading-relaxed">
-              Absolutely! Manage multiple fisheries, lakes, and river stretches from one account. Each property gets its own detailed profile with unique features and pricing.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ Item 3 */}
-      <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-white/50">
-        <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-purple-600 transition-colors">
-              What photos work best?
-            </h3>
-            <p className="text-slate-600 leading-relaxed">
-              High-resolution images of your waters, facilities, and surrounding areas perform best. Our marketing team provides free photo guidelines and can recommend professional photographers if needed.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ Item 4 */}
-      <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-white/50">
-        <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-emerald-600 transition-colors">
-              How quickly can I go live?
-            </h3>
-            <p className="text-slate-600 leading-relaxed">
-              Basic listings launch within 24 hours. Premium packages with professional optimization and enhanced marketing features typically take 2-3 days for the complete setup process.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Additional FAQ Items - Expandable */}
-    <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-white/50">
-      <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">More Questions?</h3>
-      
-      <div className="grid md:grid-cols-2 gap-6 text-sm">
-        <div className="space-y-4">
-          <div className="flex items-start space-x-3">
-            <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-            <div>
-              <p className="font-semibold text-slate-900">What's included in Premium listings?</p>
-              <p className="text-slate-600">Enhanced photos, priority placement, social media promotion, and dedicated support.</p>
-            </div>
-          </div>
+      {/* FAQ Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
+        <div className="container mx-auto max-w-5xl">
+          <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
+            Frequently Asked Questions
+          </h2>
           
-          <div className="flex items-start space-x-3">
-            <div className="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div>
-            <div>
-              <p className="font-semibold text-slate-900">Do you handle viewings?</p>
-              <p className="text-slate-600">We connect serious buyers with you directly. You maintain full control over all interactions.</p>
+          <div className="space-y-6">
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold mb-2">How do I update my listing?</h3>
+              <p className="text-gray-700">
+                You can update your listing anytime through your admin dashboard. Changes are usually live within minutes.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold mb-2">Can I list multiple lakes?</h3>
+              <p className="text-gray-700">
+                Yes! You can add as many lakes as you have, each with their own details, species, and features.
+              </p>
+            </div> 
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold mb-2">What photos should I include?</h3>
+              <p className="text-gray-700">
+                We recommend high-quality photos of your lakes, facilities, and surroundings. Our team can help with photo selection.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold mb-2">How long does setup take?</h3>
+              <p className="text-gray-700">
+                Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup.
+              </p>
             </div>
           </div>
         </div>
-        
-        <div className="space-y-4">
-          <div className="flex items-start space-x-3">
-            <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-            <div>
-              <p className="font-semibold text-slate-900">What are your success rates?</p>
-              <p className="text-slate-600">85% of our Premium listings receive qualified inquiries within 30 days.</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start space-x-3">
-            <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></div>
-            <div>
-              <p className="font-semibold text-slate-900">Can I pause my listing?</p>
-              <p className="text-slate-600">Yes, temporarily pause or reactivate your listing anytime through your dashboard.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Contact CTA */}
-    <div className="text-center mt-12">
-      <p className="text-lg text-slate-600 mb-6">Still have questions? Our team is here to help.</p>
-      <Link
-        to="/contact"
-        className="inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-      >
-        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-        Get Expert Help
-      </Link>
-    </div>
-  </div>
-</section>
+      </section> 
 
        {/* Newsletter Section */}
       <section className="py-16 px-4">

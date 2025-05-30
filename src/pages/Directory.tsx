@@ -251,7 +251,7 @@ const Directory: React.FC = () => {
       {/* --- Image Banner Start --- */}
       <div className="relative w-full h-56 md:h-[380px] lg:h-[500px] mb-12">
         <img
-          src="https://lh6.googleusercontent.com/proxy/8paZbP_RWtXlzdAxlCjT0GtctaarKhzu-8dDbT03aoDlXOuuTRhWujk7z-owHPF5zPxxtSWgWMklxKDXzBWv2xQi9fQ5PA"
+          src="https://static.wixstatic.com/media/cc739e_696f733ac6a049babd9117b1375fd439~mv2.jpg/v1/fill/w_1189,h_797,al_c,q_85,enc_avif,quality_auto/cc739e_696f733ac6a049babd9117b1375fd439~mv2.jpg"
           alt="Fishing lake banner"
           className="object-cover w-full h-full shadow-md"
         />

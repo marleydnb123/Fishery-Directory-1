@@ -70,7 +70,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
 
           {/* Features badges (hidden on mobile, flex on md+) */}
             {fishery.features && fishery.features.length > 0 && (
-            <div className="hidden md:flex flex-wrap gap-2 mt-3">
+            <div className="hidden md:flex flex-wrap gap-2 mt-3"> 
             {fishery.features.map((feature: string, idx: number) => (
             <span
             key={idx}

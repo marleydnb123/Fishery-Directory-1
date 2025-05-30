@@ -57,9 +57,9 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-xl font-semibold text-gray-900 truncate">{accommodation.type}</h3>
           <div className="flex items-center text-primary-600 font-bold">
-            <PoundSterling className="h-4 w-4 mr-1" />
+            <PoundSterling className="h-5 w-5 mr-1" />
             <span>{accommodation.price}</span>
-            <span className="text-gray-500 text-sm font-normal">/night</span>
+            <span className="text-gray-500 text-md font-normal">/night</span>
           </div>
         </div>
         <div className="flex items-center text-gray-600 mb-2">

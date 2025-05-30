@@ -15,7 +15,7 @@ const backupImages = {
 };
 
 const getBackupImage = (type: string) => {
-  const key = Object.keys(backupImages).find(k => 
+  const key = Object.keys(backupImages).find(k =>  
     type.toLowerCase().includes(k.toLowerCase())
   ) || 'default';
   return `${backupImages[key]}?auto=format&fit=crop&w=800&q=80`;
@@ -30,10 +30,9 @@ interface AccommodationCardProps {
     species: string[];
     image: string;
   };
-  hideSpecies?: boolean;
 }
 
-const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fishery, hideSpecies = false }) => {
+const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fishery }) => {
   if (!fishery) return null;
 
   const handleScrollTop = () => {
@@ -70,15 +69,16 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
         <p className="text-gray-600 mb-4 line-clamp-2 flex-1">
           {accommodation.notes || <span className="opacity-50">No notes</span>}
         </p>
-        {!hideSpecies && <div className="flex flex-wrap gap-2 mt-auto mb-4 min-h-[32px]">
+        <div className="flex flex-wrap gap-2 mt-auto mb-4 min-h-[32px]">
           {fishery.species.map((species, index) => (
             <span
               key={index}
+              className="text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"
             >
               {species}
             </span>
           ))}
-        </div>}
+        </div>
         <Link
           to={`/directory/${fishery.slug}`}
           onClick={handleScrollTop}

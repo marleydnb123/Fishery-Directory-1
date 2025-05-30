@@ -611,13 +611,7 @@ const ListYourFishery: React.FC = () => {
           </h2>
           
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              whileHover={{ scale: 1.02 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
+            <div className="bg-white p-6 rounded-xl shadow-lg"> 
               <h3 className="text-xl font-bold mb-2">How do I update my listing?</h3>
               <p className="text-gray-700">
                 You can update your listing anytime through your admin dashboard. Changes are usually live within minutes.

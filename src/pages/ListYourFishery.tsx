@@ -6,7 +6,7 @@ import { supabase } from '../lib/supabase';
 import { Fishery } from '../types/schema';
 import FisheryCard from '../components/common/FisheryCard';
 
-
+ 
 
 const ListYourFishery: React.FC = () => {
   const [email, setEmail] = useState('');

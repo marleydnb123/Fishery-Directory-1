@@ -541,7 +541,7 @@ const ListYourFishery: React.FC = () => {
           </h2>
           <div className="text-center text-xl text-gray-600 mb-8 max-w-6xl mx-auto">
             <p className="mb-4">
-              If your business supplies the angling world — tackle, bait, gear, services or destinations — we offer a range of flexible sponsorship and advertising options to suit all budgets.
+              If your business serves the angling community, whether you supply tackle, bait, equipment, specialist services, or fishing destinations, we offer a variety of flexible sponsorship and advertising packages designed to fit every budget and help you reach thousands of passionate anglers across the UK
             </p>
             <p className="mb-4">
               From banner ads and newsletter placements to featured articles and social content, we can help amplify your message to tens of thousands of active anglers each month.

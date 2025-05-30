@@ -154,6 +154,26 @@ const FisheryDetail: React.FC = () => {
     fetchData();
   }, [slug]);
 
+  async function incrementFisheryVisit(fisheryId) {
+  // Try to increment if row exists
+  const { data, error } = await supabase
+    .from('fishery_visits')
+    .update({ visit_count: supabase.literal('visit_count + 1') })
+    .eq('fishery_id', fisheryId);
+
+  // If no row was updated, insert a new row
+  if (!data || data.length === 0) {
+    await supabase
+      .from('fishery_visits')
+      .insert({ fishery_id: fisheryId, visit_count: 1 });
+  }
+}
+
+// Call this in useEffect when the fishery page loads:
+useEffect(() => {
+  if (fisheryId) incrementFisheryVisit(fisheryId);
+}, [fisheryId]);
+
   if (loading) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center">

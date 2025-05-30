@@ -242,12 +242,12 @@ const ListYourFishery: React.FC = () => {
       </section>
 
       {/* Sample Listing Preview */}
-      <section className="py-16 px-4">
+      <section className="py-24 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
         <div className="container mx-auto">
           <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
             Fisheries & Fishing Holiday Venues
           </h2>
-          <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+          <div className="text-center text-xl text-gray-600 mb-16 max-w-4xl mx-auto">
             <p className="mb-4">
               If you own a fishery or fishing holiday venue and want to attract more anglers, we're here to help.
             </p>
@@ -258,31 +258,59 @@ const ListYourFishery: React.FC = () => {
               We offer affordable advertising packages that put your venue in front of the right people, helping drive calls, bookings and visits. Whether you're a local day ticket water or a holiday destination with lodges and pods, we'll get you noticed.
             </p>
           </div>
-          <div className="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
-            <img
-              src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg"
-              alt="Sample listing preview"
-              className="w-full h-64 object-cover rounded-xl mb-6"
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-2xl font-bold mb-4">Overview</h3>
-                <ul className="space-y-2">
-                  <li>✓ Detailed venue description</li>
-                  <li>✓ Photo gallery</li>
-                  <li>✓ Available species</li>
-                  <li>✓ Facilities list</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-4">Features</h3>
-                <ul className="space-y-2">
-                  <li>✓ Interactive map</li>
-                  <li>✓ Booking information</li>
-                  <li>✓ Rules & regulations</li>
-                  <li>✓ Contact details</li>
-                </ul>
-              </div>
+          
+          {/* Example Fishery Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {featuredFisheries.slice(0, 3).map((fishery) => (
+              <motion.div
+                key={fishery.id}
+                whileHover={{ scale: 1.02 }}
+                className="bg-white rounded-xl shadow-lg overflow-hidden"
+              >
+                <div className="h-48 overflow-hidden">
+                  <img
+                    src={fishery.image}
+                    alt={fishery.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{fishery.name}</h3>
+                  <p className="text-gray-600 mb-4 line-clamp-2">{fishery.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {fishery.species.slice(0, 3).map((species, index) => (
+                      <span
+                        key={index}
+                        className="text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full"
+                      >
+                        {species}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+            <div>
+              <h3 className="text-2xl font-bold mb-4">Overview</h3>
+              <ul className="space-y-2">
+                <li>✓ Detailed venue description</li>
+                <li>✓ Photo gallery</li>
+                <li>✓ Available species</li>
+                <li>✓ Facilities list</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold mb-4">Features</h3>
+              <ul className="space-y-2">
+                <li>✓ Interactive map</li>
+                <li>✓ Booking information</li>
+                <li>✓ Rules & regulations</li>
+                <li>✓ Contact details</li>
+              </ul>
             </div>
           </div>
         </div>

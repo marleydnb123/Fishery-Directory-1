@@ -80,8 +80,6 @@ const FisheryDetail: React.FC = () => {
       }
     }
   };
-  const [visitUpdated, setVisitUpdated] = useState(false);
-
 
   // --- Featured Fisheries State & Fetch ---
   const [featuredFisheries, setFeaturedFisheries] = useState<Fishery[]>([]);
@@ -1180,4 +1178,3 @@ rel="noopener noreferrer"
 
 
 export default FisheryDetail;
-

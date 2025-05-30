@@ -352,7 +352,7 @@ const ListYourFishery: React.FC = () => {
             Advertising Packages
           </h2>
           <p className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
-            With hundreds of thousands of visits from a highly engaged angling audience each month, and one of the UK's largest directories of fisheries, we help you reach more anglers, generate more enquiries, and grow your business — simply and affordably.
+            With hundreds of thousands of visits from a highly engaged angling audience each month, and one of the UK's largest directories of fisheries, we help you reach more anglers, generate more enquiries, and grow your business - simply and affordably.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-8xl mx-auto">

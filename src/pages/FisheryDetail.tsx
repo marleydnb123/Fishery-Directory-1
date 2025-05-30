@@ -205,6 +205,7 @@ const FisheryDetail: React.FC = () => {
     );
   }
   
+console.log('fishing_type:', fishery.fishing_type);
 
   return (
     <div className="min-h-screen pb-16 bg-gray-50">

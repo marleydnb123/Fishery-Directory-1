@@ -59,6 +59,14 @@ type Accommodation = {
   fishery_id: string;
 };
 
+type FisheryVisit = {
+  id: number;
+  fishery_id: string;
+  visit_count: number;
+  last_visited: string;
+}
+
+
 const FisheryDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [fishery, setFishery] = useState<Fishery | null>(null);

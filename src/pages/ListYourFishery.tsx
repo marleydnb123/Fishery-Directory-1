@@ -18,39 +18,37 @@ const ListYourFishery: React.FC = () => {
   const [featuredLoading, setFeaturedLoading] = useState(true);
   const [featuredError, setFeaturedError] = useState<string | null>(null);
 
-  useEffect(() => {
+   useEffect(() => {
     const fetchFeatured = async () => {
-      setLoadingFisheries(true);
-      setFisheriesError(null);
-      try {
-        const { data, error } = await supabase
-          .from('fisheries')
-          .select('*')
-          .eq('isfeatured', true)  
-          .limit(4);
-        
-        if (error) {
-          setFisheriesError('Failed to load featured fisheries.');
-          setFeaturedFisheries([]);
-        } else {
-          setFeaturedFisheries(
-            (data || []).map((f: any) => ({
-              ...f,
-              species: Array.isArray(f.species) ? f.species : [],
-              features: Array.isArray(f.features) ? f.features : [],
-            }))
-          );
-        }
-      } catch (err) {
-        setFisheriesError('Failed to load featured fisheries.');
+      setFeaturedLoading(true);
+      setFeaturedError(null);
+      const { data, error } = await supabase
+        .from('fisheries')
+        .select('*')
+        .eq('isfeatured', true)
+        .limit(4);
+      if (error) {
+        setFeaturedError('Failed to load featured fisheries.');
         setFeaturedFisheries([]);
-      } finally {
-        setLoadingFisheries(false);
+      } else {
+        setFeaturedFisheries(
+          (data || []).map((f: any) => ({
+            ...f,
+            species: Array.isArray(f.species) ? f.species : [],
+            features: Array.isArray(f.features) ? f.features : [],
+          }))
+        );
       }
+      setFeaturedLoading(false);
     };
-    
     fetchFeatured();
   }, []);
+
+  useEffect(() => {
+    if (!slug) return;
+
+    const fetchData = async () => {
+      setLoading(true);
   
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();

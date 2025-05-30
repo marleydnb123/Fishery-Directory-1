@@ -22,25 +22,33 @@ const ListYourFishery: React.FC = () => {
     const fetchFeatured = async () => {
       setLoadingFisheries(true);
       setFisheriesError(null);
-      const { data, error } = await supabase
-        .from('fisheries')
-        .select('*')
-        .eq('isfeatured', true)  
-        .limit(4);
-      if (error) {
+      try {
+        const { data, error } = await supabase
+          .from('fisheries')
+          .select('*')
+          .eq('isfeatured', true)  
+          .limit(4);
+        
+        if (error) {
+          setFisheriesError('Failed to load featured fisheries.');
+          setFeaturedFisheries([]);
+        } else {
+          setFeaturedFisheries(
+            (data || []).map((f: any) => ({
+              ...f,
+              species: Array.isArray(f.species) ? f.species : [],
+              features: Array.isArray(f.features) ? f.features : [],
+            }))
+          );
+        }
+      } catch (err) {
         setFisheriesError('Failed to load featured fisheries.');
         setFeaturedFisheries([]);
-      } else {
-        setFeaturedFisheries(
-          (data || []).map((f: any) => ({
-            ...f,
-            species: Array.isArray(f.species) ? f.species : [],
-            features: Array.isArray(f.features) ? f.features : [],
-          }))
-        );
+      } finally {
+        setLoadingFisheries(false);
       }
-      setLoadingFisheries(false);
     };
+    
     fetchFeatured();
   }, []);
   
@@ -58,14 +66,13 @@ const ListYourFishery: React.FC = () => {
       setSubscribed(true);
       setEmail('');
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || 'Failed to subscribe');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100">
       {/* Hero Section */}
       <div className="relative h-[500px] flex items-center justify-center">
@@ -298,8 +305,12 @@ const ListYourFishery: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {loadingFisheries ? (
               <div className="col-span-3 text-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600 mx-auto"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mx-auto"></div>
                 <p className="mt-4 text-gray-600">Loading featured fisheries...</p>
+              </div>
+            ) : fisheriesError ? (
+              <div className="col-span-3 text-center py-12">
+                <p className="text-red-600">{fisheriesError}</p>
               </div>
             ) : featuredFisheries.length > 0 ? (
               featuredFisheries.map((fishery) => (
@@ -431,8 +442,6 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
 
-     
-
       {/* FAQ Section */}
       <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
         <div className="container mx-auto max-w-4xl">
@@ -472,7 +481,7 @@ const ListYourFishery: React.FC = () => {
         </div>
       </section>
 
-       {/* Newsletter Section */}
+      {/* Newsletter Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-xl text-center">
           <h2 className="text-3xl md:text-4xl font-bebas font-bold mb-4">
@@ -496,7 +505,7 @@ const ListYourFishery: React.FC = () => {
             </div>
             
             {error && (
-              <div className="flex items-center text-red-600 text-sm">
+              <div className="flex items-center justify-center text-red-600 text-sm">
                 <AlertCircle className="h-4 w-4 mr-2" />
                 {error}
               </div>
@@ -511,7 +520,7 @@ const ListYourFishery: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-customBlue hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors"
+                className="w-full bg-customBlue hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors disabled:opacity-50"
               >
                 {loading ? 'Subscribing...' : 'Subscribe'}
               </button>
@@ -528,7 +537,7 @@ const ListYourFishery: React.FC = () => {
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             If you're thinking of selling a fishery, lake, river stretch, or land with fishing rights — we can help.
-            We're not estate agents, but we work closely with trusted rural property partners. And with one of the UK's largest databases of angling venue owners, holidaymakers, and investors, we can put your property in front of the right eyes.
+            We're not estate agents, but we work closely with trusted rural property partners. And with one of the UK's largest database of angling venue owners, holidaymakers, and investors, we can put your property in front of the right eyes.
             List your water with us and reach thousands of qualified, fishing-focused buyers actively searching for properties with angling potential.
           </p>
           <Link
@@ -543,4 +552,4 @@ const ListYourFishery: React.FC = () => {
   );
 };
 
-export default ListYourFishery; 
+export default ListYourFishery;

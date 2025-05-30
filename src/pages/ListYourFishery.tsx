@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Check, Star, Users, TrendingUp, Mail, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
-
+import { supabase } from '../lib/supabase'; 
 
 const ListYourFishery: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -631,7 +630,7 @@ const ListYourFishery: React.FC = () => {
         question="How long does setup take?"
         answer="Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup."
       />
-    </div> 
+    </div>
   </div>
 </section>
 

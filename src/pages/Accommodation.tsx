@@ -46,7 +46,7 @@ const hoverCards = [
   },
   {
     image: "https://lakeviewholidays.co.uk/wp-content/uploads/2019/05/Willow-800-x-600.jpg",
-    title: "Holiday homes",
+    title: "Holiday Homes",
     subtitle: "Home Comfort by the lake",
   },
   {

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Check, Star, Users, TrendingUp, Mail, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
-import { ChevronDown } from 'lucide-react';
+
 
 const ListYourFishery: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -15,10 +15,6 @@ const ListYourFishery: React.FC = () => {
   const [featuredFisheries, setFeaturedFisheries] = useState<any[]>([]);
   const [featuredLoading, setFeaturedLoading] = useState(true);
   const [featuredError, setFeaturedError] = useState<string | null>(null);
-
-  const FAQItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
 
   // Fetch featured fisheries
   useEffect(() => {
@@ -635,13 +631,15 @@ const ListYourFishery: React.FC = () => {
         question="How long does setup take?"
         answer="Basic listings can be live within 24 hours. Featured and Premium listings typically take 2-3 days for optimal setup."
       />
-    </div>
+    </div> 
   </div>
 </section>
 
+{/* FAQ Item Component */}
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-      {/* FAQ Item Component */}
-  
+  return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
       <button
         className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
@@ -670,8 +668,9 @@ const ListYourFishery: React.FC = () => {
           <p className="text-gray-700 leading-relaxed">{answer}</p>
         </div>
       </motion.div>
-    </div> 
-
+    </div>
+  );
+};
 
        {/* Newsletter Section */}
       <section className="py-16 px-4">

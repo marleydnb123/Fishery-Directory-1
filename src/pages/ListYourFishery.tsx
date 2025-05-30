@@ -25,9 +25,8 @@ const ListYourFishery: React.FC = () => {
       const { data, error } = await supabase
         .from('fisheries')
         .select('*')
-        .eq('isfeatured', true)
+        .eq('isfeatured', true) 
         .limit(4);
-
       if (error) {
         setFisheriesError('Failed to load featured fisheries.');
         setFeaturedFisheries([]);
@@ -46,7 +45,7 @@ const ListYourFishery: React.FC = () => {
   }, []);
   
   const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     setLoading(true);
     setError(null);
 

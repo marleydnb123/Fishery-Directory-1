@@ -44,7 +44,7 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
-      style={{ minHeight: 480, maxHeight: 480 }}
+      style={{ minHeight: 450, maxHeight: 450 }}
     >
       <div className="h-48 overflow-hidden flex-shrink-0">
         <img 

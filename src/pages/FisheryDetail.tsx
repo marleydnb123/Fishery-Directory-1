@@ -154,6 +154,7 @@ const FisheryDetail: React.FC = () => {
         opening_times: Array.isArray(fisheryData.opening_times) ? fisheryData.opening_times : [],
         day_tickets: Array.isArray(fisheryData.day_tickets) ? fisheryData.day_tickets : [],
         payments: Array.isArray(fisheryData.payments) ? fisheryData.payments : [],
+        fishing_type: Array:isArray(fisheryData.fishing_type) ? fisheryData.fishery_type : [],
       }); 
 
       // Fetch lakes for this fishery

@@ -113,7 +113,7 @@ const ListYourFishery: React.FC = () => {
       Advertising Packages
     </motion.h2>
     <motion.p
-      className="text-center text-xl text-gray-600 mb-16 max-w-4xl mx-auto"
+      className="text-center text-xl text-gray-600 mb-16 max-w-5xl mx-auto"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}

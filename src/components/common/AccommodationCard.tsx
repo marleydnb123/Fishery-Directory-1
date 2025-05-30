@@ -69,8 +69,8 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
         <p className="text-gray-600 mb-2 line-clamp-2 flex-1">
           {accommodation.notes || <span className="opacity-50">No notes</span>}
         </p>
-        <div className="flex flex-wrap items-start justify-start gap-2 mb-4">  
-          {fishery.species.map((species, index) => (
+        <div className="flex flex-wrap items-start justify-start gap-2 mb-4 min-h-[32px]"> 
+          {fishery.species.map((species, index) => ( 
             <span
               key={index}
               className="text-xs bg-primary-100 text-primary-900 px-2 py-1 rounded-full"

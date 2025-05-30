@@ -34,7 +34,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           value={searchTerm}
           onChange={handleChange}
           placeholder={placeholder} 
-          className="w-full py-3 pl-12 pr-4 text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent bg-transparent"
+          className="w-full py-3 pl-12 pr-4 text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent bg-transparent" 
         />
         <Search className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
       </div>

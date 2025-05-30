@@ -355,7 +355,7 @@ const ListYourFishery: React.FC = () => {
             With hundreds of thousands of visits from a highly engaged angling audience each month, and one of the UK's largest directories of fisheries, we help you reach more anglers, generate more enquiries, and grow your business — simply and affordably.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-8xl mx-auto">
             {/* Free Plan */}
             <motion.div
               className="bg-white rounded-2xl shadow-xl p-8"

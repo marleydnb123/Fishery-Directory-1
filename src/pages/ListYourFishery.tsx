@@ -247,7 +247,7 @@ const ListYourFishery: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-bebas font-bold text-center mb-12">
             Fisheries & Fishing Holiday Venues
           </h2>
-          <div className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+          <div className="text-lefttext-xl text-gray-600 mb-12 max-w-4xl mx-auto">
             <p className="mb-4">
               If you own a fishery or fishing holiday venue and want to attract more anglers, we're here to help.
             </p>

@@ -13,6 +13,7 @@ type Fishery = {
   id: string; 
   name: string;
   slug: string;
+  visit_count?: number;
   description: string;
   rules: string | null;
   image: string | null;
@@ -121,7 +122,12 @@ const FisheryDetail: React.FC = () => {
       // Fetch fishery by slug
       const { data: fisheryData, error: fisheryError } = await supabase
         .from('fisheries')
-        .select('*')
+        .select(`
+          *,
+          fishery_visits!inner (
+            visit_count
+          )
+        `)
         .eq('slug', slug)
         .single();
 
@@ -135,6 +141,7 @@ const FisheryDetail: React.FC = () => {
 
       setFishery({
         ...fisheryData,
+        visit_count: fisheryData.fishery_visits?.[0]?.visit_count || 0,
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
         pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [], 
@@ -318,7 +325,7 @@ const FisheryDetail: React.FC = () => {
   <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
     {/* Visitors */}
     <div className="flex-1 flex flex-col items-center"> 
-      <span className="text-3xl font-bold text-grey-600">{fishery.visit_count ?? '—'}</span>
+      <span className="text-3xl font-bold text-grey-600">{fishery.visit_count || '0'}</span>
       <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
     </div>
     <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
@@ -1178,5 +1185,3 @@ rel="noopener noreferrer"
 
 
 export default FisheryDetail;
-
-export default FisheryDetail

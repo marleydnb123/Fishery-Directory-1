@@ -306,7 +306,16 @@ const Contact: React.FC = () => {
                   <p className="text-primary-900 text-sm">
                     We typically respond to inquiries within 24 hours during business days.
                   </p>
-                  {/* Newsletter Section */}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+};
+{/* Newsletter Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-xl text-center">
           <h2 className="text-3xl md:text-4xl font-bebas font-bold mb-4">
@@ -353,16 +362,6 @@ const Contact: React.FC = () => {
           </form>
         </div>
       </section>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const Info = ({ className }: { className: string }) => {
   return (
     <svg

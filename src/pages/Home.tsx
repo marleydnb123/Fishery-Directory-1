@@ -6,6 +6,8 @@ import FisheryCard from '../components/common/FisheryCard';
 import Button from '../components/common/Button';
 import { supabase } from '../lib/supabase'; // Make sure this path is correct!
 import { Fishery } from '../types/schema'; // Adjust import if needed
+import { Accommodation } from '../../types/schema';
+import AccommodationCard from '../components/common/AccommodationCard';
 
 const heroImages = [
   "https://www.wokinghamcountryside.co.uk/sites/countryside/files/styles/scale_crop_7_3_large/public/2024-05/sunset%2C%20black.jpg?itok=OMc703vu",
@@ -168,6 +170,15 @@ const Home: React.FC = () => {
   </div> 
 </section>
 
+<section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {accommodations.map((item, idx) => (
+    <AccommodationCard
+      key={item.accommodation?.id || idx}
+      accommodation={item.accommodation}
+      fishery={item.fishery}
+    />
+  ))}
+</section>
 
 
       {/* Featured Fisheries Section */}

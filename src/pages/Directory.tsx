@@ -493,16 +493,6 @@ const Directory: React.FC = () => {
                       />
                       <label htmlFor="match-friendly" className="text-xs text-gray-700 font-medium">Match Fishing Friendly</label>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={keepnetsAllowed}
-                        onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="keepnetsAllowed"
-                      />
-                      <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
-                    </div>
                   </div>
                 )}
               </div>
@@ -635,6 +625,16 @@ const Directory: React.FC = () => {
                         id="coaching"
                       />
                       <label htmlFor="coaching" className="text-xs text-gray-700 font-medium">Coaching</label>
+                    </div>
+                     <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={keepnetsAllowed}
+                        onChange={() => setkeepnetsAllowed(!keepnetsAllowed)}
+                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                        id="keepnetsAllowed"
+                      />
+                      <label htmlFor="keepnetsAllowed" className="text-xs text-gray-700 font-medium">Keepnets Allowed</label>
                     </div>
                   </div>
                 )}

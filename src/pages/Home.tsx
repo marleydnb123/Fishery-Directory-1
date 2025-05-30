@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Map, Calendar, Fish } from 'lucide-react';
 import FisheryCard from '../components/common/FisheryCard';
+import AccommodationCard from '../components/common/AccommodationCard';
 import Button from '../components/common/Button';
 import { supabase } from '../lib/supabase'; // Make sure this path is correct!
-import { Fishery } from '../types/schema'; // Adjust import if needed
+import { Fishery, Accommodation } from '../types/schema';
 
 const heroImages = [
   "https://www.wokinghamcountryside.co.uk/sites/countryside/files/styles/scale_crop_7_3_large/public/2024-05/sunset%2C%20black.jpg?itok=OMc703vu",
@@ -20,6 +21,9 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [fishery_of_the_week, setFisheryOfTheWeek] = useState(null);
+  const [featuredAccommodations, setFeaturedAccommodations] = useState<Accommodation[]>([]);
+  const [loadingAccommodations, setLoadingAccommodations] = useState(true);
+  const [accommodationError, setAccommodationError] = useState<string | null>(null);
   const [loading_fotw, setLoadingFOTW] = useState(false);
   const [error_fotw, setErrorFOTW] = useState(null);
 
@@ -62,6 +66,29 @@ const Home: React.FC = () => {
       setLoading(false);
     };
     fetchFeatured();
+  }, []);
+
+  // Fetch featured accommodations
+  useEffect(() => {
+    const fetchFeaturedAccommodations = async () => {
+      setLoadingAccommodations(true);
+      setAccommodationError(null);
+      try {
+        const { data: accommodations, error: accError } = await supabase
+          .from('accommodation')
+          .select('*, fishery:fisheries(name, district, slug, species, image)')
+          .eq('featured', true)
+          .limit(3);
+
+        if (accError) throw accError;
+        setFeaturedAccommodations(accommodations || []);
+      } catch (err: any) {
+        setAccommodationError(err.message);
+      } finally {
+        setLoadingAccommodations(false);
+      }
+    };
+    fetchFeaturedAccommodations();
   }, []);
 
   useEffect(() => {
@@ -226,6 +253,70 @@ const Home: React.FC = () => {
           >
             <Button to="/directory" variant="outline">
               View All Fisheries
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* Featured Accommodation Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
+        <div className="container mx-auto">
+          <motion.h2 
+            className="text-6xl font-bebas font-bold text-gray-900 mb-2 text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Featured Accommodation
+          </motion.h2>
+          <motion.p 
+            className="text-gray-600 text-center mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Discover premium lakeside stays at our featured fishing destinations
+          </motion.p>
+          
+          {loadingAccommodations ? (
+            <div className="text-center py-12 text-gray-600">Loading featured accommodations...</div>
+          ) : accommodationError ? (
+            <div className="text-center py-12 text-red-600">{accommodationError}</div>
+          ) : (
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {featuredAccommodations.length > 0 ? (
+                featuredAccommodations.map((accommodation) => (
+                  <motion.div key={accommodation.id} variants={itemVariants}>
+                    <AccommodationCard 
+                      accommodation={accommodation}
+                      fishery={accommodation.fishery}
+                    />
+                  </motion.div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center text-gray-500">
+                  No featured accommodations found.
+                </div>
+              )}
+            </motion.div>
+          )}
+
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+          >
+            <Button to="/accommodation" variant="outline">
+              View All Accommodation
             </Button>
           </motion.div>
         </div>

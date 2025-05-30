@@ -61,7 +61,6 @@ export interface Lake {
   max_depth_ft?: number;
   pegs?: number;
   created_at: string;
-  
 }
 
 export interface Accommodation {
@@ -72,6 +71,7 @@ export interface Accommodation {
   notes: string;
   image?: string;
   created_at: string;
+  featured: boolean;
 }
 
 export interface Message {

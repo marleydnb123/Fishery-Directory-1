@@ -403,7 +403,7 @@ const Directory: React.FC = () => {
                   value={featureSearchTerm}
                   onChange={handleFeatureSearch} 
                   placeholder="e.g. weed beds, lily pads"
-                  className="w-full p-2 border border-gray-200   rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-600"
+                  className="w-full p-2 border border-gray-200   rounded focus:ring-1 focus:ring-blue-400 text-sm placeholder-gray-600 bg-customBlue/50"
                 />
               </div>
               <div>

@@ -112,7 +112,7 @@ export interface Database {
           notes: string
           image?: string
           created_at: string
-          featured: boolean
+          featured?: boolean
         }
         Insert: {
           id?: string
@@ -122,7 +122,7 @@ export interface Database {
           notes: string
           image?: string
           created_at?: string
-          featured: boolean
+          featured?: boolean
         }
         Update: {
           id?: string
@@ -132,7 +132,7 @@ export interface Database {
           notes?: string
           image?: string
           created_at?: string
-          featured: boolean
+          featured?: boolean
         }
       }
       messages: {

@@ -482,103 +482,12 @@ const Home: React.FC = () => {
         </div>
         <h3 className="text-2xl font-bold mb-2 text-gray-900">Book</h3>
         <p className="text-gray-600 text-center">
-          Click through to the fishery’s official website to book your session or accommodation directly.
+          Click through to the fishery's official website to book your session or accommodation directly.
         </p>
       </motion.div>
     </motion.div>
   </div>
 </section>
-
-      {/* --- List Your Fishery Section --- */}
-<section className="py-24 px-4 bg-gradient-to-b from-blue-50 via-white to-blue-100">
-  <div className="max-w-7xl mx-auto">
-    <h2 className="text-6xl max-w-7xl font-bebas font-bold text-gray-900 mb-2 text-center tracking-tight drop-shadow-lg animate-fade-in">
-      List Your Fishery
-    </h2>
-    <p className="text-xl text-center text-gray-600 mb-14 max-w-5xl mx-auto animate-fade-in delay-100">
-      Reach thousands of anglers every month. Choose the perfect plan and get your fishery in front of the UK’s most passionate fishing community.
-    </p>
-
-    {/* Pricing Table */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-      {/* Free Listing */}
-      <div className="relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-blue-100 hover:scale-105 hover:shadow-2xl transition-transform duration-300 ease-out animate-fade-in delay-150">
-        <span className="absolute top-4 right-4 text-xs bg-blue-50 text-blue-800 px-2 py-1 rounded uppercase tracking-wider font-semibold">Most Popular</span>
-        <span className="text-2xl font-bold text-blue-600 mb-2">Free</span>
-        <div className="text-4xl font-extrabold mb-3 text-blue-900">£0</div>
-        <ul className="text-blue-800 text-base mb-6 space-y-2">
-          <li>✔ Basic directory listing</li>
-          <li>✔ Appear in search results</li>
-          <li>✔ Add contact details</li>
-        </ul>
-        <a
-          href="/contact"
-          className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow transition-all duration-200"
-        >
-          List for Free
-        </a>
-      </div>
-      {/* Featured Listing */}
-      <div className="relative bg-gradient-to-br from-blue-100 via-white to-blue-50 rounded-2xl shadow-2xl p-8 flex flex-col items-center border-2 border-blue-300 hover:scale-110 hover:shadow-blue-400/40 transition-transform duration-300 ease-out animate-fade-in delay-200">
-        <span className="absolute top-4 right-4 text-xs bg-blue-200 text-blue-900 px-2 py-1 rounded uppercase tracking-wider font-semibold">Featured</span>
-        <span className="text-2xl font-bold text-blue-700 mb-2">Featured</span>
-        <div className="text-4xl font-extrabold mb-3 text-blue-900">£15<span className="text-base font-normal">/mo</span></div>
-        <ul className="text-blue-900 text-base mb-6 space-y-2">
-          <li>✔ Priority placement</li>
-          <li>✔ Appear on homepage</li>
-          <li>✔ Add images, videos & links</li>
-          <li>✔ Highlighted in search</li>
-        </ul>
-        <a
-          href="/contact"
-          className="mt-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg shadow transition-all duration-200"
-        >
-          Get Featured
-        </a>
-      </div>
-      {/* Premium Listing */}
-      <div className="relative bg-gradient-to-br from-green-100 via-white to-green-50 rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-green-300 hover:scale-105 hover:shadow-green-400/40 transition-transform duration-300 ease-out animate-fade-in delay-300">
-        <span className="absolute top-4 right-4 text-xs bg-green-200 text-green-900 px-2 py-1 rounded uppercase tracking-wider font-semibold">Best Value</span>
-        <span className="text-2xl font-bold text-green-700 mb-2">Premium</span>
-        <div className="text-4xl font-extrabold mb-3 text-green-900">£99<span className="text-base font-normal">/yr</span></div>
-        <ul className="text-green-900 text-base mb-6 space-y-2">
-          <li>✔ All Featured benefits</li>
-          <li>✔ Social media promotion</li>
-          <li>✔ Analytics & insights</li>
-          <li>✔ Direct booking link</li>
-        </ul>
-        <a
-          href="/list-your-fishery?premium=true"
-          className="mt-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg shadow transition-all duration-200"
-        >
-          Go Premium
-        </a>
-      </div>
-    </div>
-
-    <p className="text-gray-500 text-base text-center mt-12 animate-fade-in delay-500">
-      Have questions? <a href="/contact" className="text-blue-700 underline hover:text-blue-900">Contact us</a> for more details about listing options.
-    </p>
-  </div>
-
-  {/* Animations */}
-  <style>
-    {`
-      @keyframes fade-in {
-        from { opacity: 0; transform: translateY(40px);}
-        to { opacity: 1; transform: translateY(0);}
-      }
-      .animate-fade-in { animation: fade-in 1s cubic-bezier(.4,0,.2,1) both; }
-      .delay-100 { animation-delay: .1s; }
-      .delay-150 { animation-delay: .15s; }
-      .delay-200 { animation-delay: .2s; }
-      .delay-300 { animation-delay: .3s; }
-      .delay-500 { animation-delay: .5s; }
-    `}
-  </style>
-</section>
-{/* --- End List Your Fishery Section --- */}
-
 
 {/* CTA Banner with Blurred Image Background */}
 <section className="relative py-16 px-4 overflow-hidden">

@@ -408,7 +408,7 @@ const Directory: React.FC = () => {
            {/* Column 3: Collapsible Checkboxes with Section Headers */}
             <div className="flex flex-col gap-3">
               {/* Advanced Filters Title */}
-              <h3 className="text-sm font-bold text-gray-800 mb-2 border-b border-gray-200 pb-2">
+              <h3 className="block text-xs font-semibold text-gray-600 mb-1">
                 Advanced Filters
               </h3>
               {/* CARP Section */}

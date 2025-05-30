@@ -332,7 +332,7 @@ const Directory: React.FC = () => {
                 settackleHire(false);
                 setcoaching(false);
               }}
-              className="px-5 py-2 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
+              className="px-5 py-2 bg-customBlue/50  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
             >
               Reset Filters
             </button>

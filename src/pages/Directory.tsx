@@ -359,7 +359,7 @@ const Directory: React.FC = () => {
                 <select
                   value={selectedDistrict}
                   onChange={e => setSelectedDistrict(e.target.value as UKDistrict | '')}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-customBlue/50 "
                 >
                   <option value="">All Regions</option> 
                   {districts.map((district) => (
@@ -372,7 +372,7 @@ const Directory: React.FC = () => {
                 <select
                   value={selectedFishingType}
                   onChange={e => setSelectedFishingType(e.target.value)}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-customBlue/50 "
                 >
                   <option value="">All Types</option>
                   {Array.from(new Set(fisheries.flatMap(f => f.fishingType))).sort().map(type => (
@@ -385,7 +385,7 @@ const Directory: React.FC = () => {
                 <select
                   value={bookingType}
                   onChange={e => setBookingType(e.target.value)}
-                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm"
+                  className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-customBlue/50 "
                 >
                   <option value="">All</option>
                   <option value="booking required">Booking Required</option>

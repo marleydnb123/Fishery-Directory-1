@@ -19,7 +19,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="bg-gradient-to-b from-blue-50 via-white to-blue-100 rounded-xl shadow-md overflow-hidden h-full"
       style={{ minHeight: 450, maxHeight: 450 }}
-    >
+    > 
       <Link to={`/directory/${fishery.slug}`} className="block h-full" onClick={handleScrollTop}>
         <div className="h-48 overflow-hidden relative">
           <img
@@ -70,7 +70,7 @@ const FisheryCard: React.FC<FisheryCardProps> = ({ fishery }) => {
 
           {/* Features badges (hidden on mobile, flex on md+) */}
             {fishery.features && fishery.features.length > 0 && (
-            <div className="hidden md:flex flex-wrap gap-2 mt-3"> 
+            <div className="hidden md:flex flex-wrap gap-2 mt-3 mb-2"> 
             {fishery.features.map((feature: string, idx: number) => (
             <span
             key={idx}

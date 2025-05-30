@@ -62,14 +62,14 @@ const AccommodationCard: React.FC<AccommodationCardProps> = ({ accommodation, fi
             <span className="text-gray-500 text-sm font-normal">/night</span>
           </div>
         </div>
-        <div className="flex items-center text-gray-600 mb-3">
+        <div className="flex items-center text-gray-600 mb-2">
           <Home className="h-4 w-4 mr-1 text-primary-600" />
           <span className="text-sm truncate">{fishery.name}, {fishery.district}</span>
         </div>
-        <p className="text-gray-600 mb-2 line-clamp-2 flex-1">
+        <p className="text-gray-600 mb-2 line-clamp-2 flex-1"> 
           {accommodation.notes || <span className="opacity-50">No notes</span>}
         </p>
-        <div className="hidden md:flex flex-nowrap overflow-hidden gap-2 mt-2"> 
+        <div className="hidden md:flex flex-nowrap overflow-hidden gap-2 mt-2 mb-4"> 
           {fishery.species.map((species, index) => ( 
             <span
               key={index}

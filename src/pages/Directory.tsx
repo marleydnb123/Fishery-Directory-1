@@ -539,6 +539,8 @@ const Directory: React.FC = () => {
                 )}
               </div>
 
+
+              {/* COARSE FISHING FILTERS */}
               <div className="border border-gray-200 rounded-lg">
                 <button
                   type="button"

@@ -535,7 +535,7 @@ const Directory: React.FC = () => {
         <input
           type="checkbox"
           checked={Access_All_Hours}
-          onChange={() => setAccessAllHours(!accessAllHours)}
+          onChange={() => setAccessAllHours(!accessallhours)}
           className="w-4 h-4 accent-blue-600 rounded border-gray-300"
           id="24-hour-access"
         />

@@ -497,7 +497,7 @@ const Directory: React.FC = () => {
         <div className="flex items-center gap-2">
         <input
           type="checkbox"
-          checked={accessAllHours}
+          checked={guestsAllowed}
           onChange={() => setguestsAllowed(!guestsAllowed)}
           className="w-4 h-4 accent-blue-600 rounded border-gray-300"
           id="Guests Allowed"

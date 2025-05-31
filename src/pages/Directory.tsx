@@ -41,6 +41,7 @@ const Directory: React.FC = () => {
   const [coarseOpen, setCoarseOpen] = useState(false);
   const [generalOpen, setGeneralOpen] = useState(false);
   const [guestsAllowed, setguestsAllowed] = useState(false);
+  const [under18, setunder18] = useState(false);
 
   const districts: UKDistrict[] = [
     'Cumbria', 'Dumfries & Galloway', 'Yorkshire', 'Hampshire', 'Kent', 'Essex', 'Sussex', 'Dorset',
@@ -99,7 +100,8 @@ const Directory: React.FC = () => {
             coaching: !!f.coaching,
             keepnetsAllowed: !!f.keepnets_allowed,
             accessAllHours: !!f.access_all_hours, 
-            guestsAllowed: !!f.guests_allowed
+            guestsAllowed: !!f.guests_allowed,
+            under18: !!f.under_18,
           }))
         );
       }
@@ -215,6 +217,9 @@ const Directory: React.FC = () => {
     if (guestsAllowed) {
       results = results.filter(fishery => fishery.guestsAllowed)
     }
+    if (under18) {
+      results = results.filter(fishery => fishery.under18)
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -244,6 +249,7 @@ const Directory: React.FC = () => {
     keepnetsAllowed,
     accessAllHours,
     guestsAllowed,
+    under18,
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value); 
@@ -350,6 +356,7 @@ const Directory: React.FC = () => {
                 setcoaching(false);
                 setaccessAllHours(false);
                 setguestsAllowed(false);
+                setunder18(false);
               }}
               className="px-5 py-2 bg-customBlue  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
             >
@@ -508,10 +515,10 @@ const Directory: React.FC = () => {
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
-          checked={}
-          onChange={() => set(!)}
+          checked={under18}
+          onChange={() => setunder18(!under18)}
           className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-          id="family-friendly"
+          id="under-18"
         />
         <label htmlFor="under-18's" className="text-xs text-gray-700 font-medium">Under 18's</label>
                   </div>

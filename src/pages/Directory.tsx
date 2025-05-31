@@ -33,7 +33,7 @@ const Directory: React.FC = () => {
   const [tackleHire, settackleHire] = useState(false);
   const [coaching, setcoaching] = useState(false);
   const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
-  const [24Hour, set24Hour] = useState(false);
+  const [Access_All_Hours, setAccess_All_Hours] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
   const [carpOpen, setCarpOpen] = useState(false);
@@ -97,7 +97,7 @@ const Directory: React.FC = () => {
             tackleHire: !!f.tackle_hire,
             coaching: !!f.coaching,
             keepnetsAllowed: !!f.keepnets_allowed,
-            24Hour: !!f.24_hour, 
+            accessAllHours: !!f.access_all_hours, 
           }))
         );
       }
@@ -207,8 +207,8 @@ const Directory: React.FC = () => {
     if (keepnetsAllowed) {
       results = results.filter(fishery => fishery.keepnetsAllowed);
     }
-    if (24Hour) {
-      results = results.filter(fishery => fishery.24Hour);
+    if (accessAllHours) {
+      results = results.filter(fishery => fishery.accessAllHours);
     }
     setFilteredFisheries(results);
   }, [
@@ -237,7 +237,7 @@ const Directory: React.FC = () => {
     tackleHire,
     coaching,
     keepnetsAllowed,
-    24Hour,
+    accessAllHours,
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value); 
@@ -342,7 +342,7 @@ const Directory: React.FC = () => {
                 setprivateHire(false);
                 settackleHire(false);
                 setcoaching(false);
-                set24Hour(false);
+                setAccess_All_Hours(false);
               }}
               className="px-5 py-2 bg-customBlue  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
             >
@@ -534,8 +534,8 @@ const Directory: React.FC = () => {
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
-          checked={24hour}
-          onChange={() => set24Hour(!24Hour)}
+          checked={Access_All_Hours}
+          onChange={() => setAccess_All_Hours(!Access_All_Hours)}
           className="w-4 h-4 accent-blue-600 rounded border-gray-300"
           id="24-hour-access"
         />

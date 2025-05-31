@@ -40,7 +40,7 @@ const Directory: React.FC = () => {
   const [matchOpen, setMatchOpen] = useState(false); 
   const [coarseOpen, setCoarseOpen] = useState(false);
   const [generalOpen, setGeneralOpen] = useState(false);
-  const [guestsAllowed, setGuestsAllowed] = useState(false);
+  const [guestsAllowed, setguestsAllowed] = useState(false);
 
   const districts: UKDistrict[] = [
     'Cumbria', 'Dumfries & Galloway', 'Yorkshire', 'Hampshire', 'Kent', 'Essex', 'Sussex', 'Dorset',

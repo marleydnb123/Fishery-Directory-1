@@ -500,7 +500,7 @@ const FisheryDetail: React.FC = () => {
           </div>
 
           {/* Right Column - Stats Card */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 flex justify-center lg:justify-end">
             <div className="w-full max-w-xs bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl shadow-lg border border-slate-200/50 p-6"> 
               {/* Visitors */}
               <div className="flex flex-col items-center"> 

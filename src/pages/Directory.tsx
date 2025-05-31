@@ -157,7 +157,7 @@ const Directory: React.FC = () => {
     }
     if (selectedBookingType) {
       results = results.filter(fishery =>
-        Array.isArray(fishery.bookingType) && 
+        Array.isArray(fishery.bookingType) &&  
         fishery.bookingType.includes(selectedbookingType)
       ); 
     }

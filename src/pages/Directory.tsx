@@ -314,7 +314,7 @@ const Directory: React.FC = () => {
                 setSelectedSpecies('');
                 setSelectedDistrict('');
                 setSelectedFishingType('');
-                setBookingType('');
+                setbookingType('');
                 setFeatureSearchTerm('');
                 setFacilities('');
                 setPriceRange('');

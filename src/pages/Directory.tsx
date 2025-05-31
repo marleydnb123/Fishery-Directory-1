@@ -384,7 +384,7 @@ const Directory: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Booking</label>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Booking Type</label>
                 <select
                   value={selectedbookingType}
                   onChange={e => setbookingType(e.target.value)}

@@ -561,7 +561,7 @@ const FisheryDetail: React.FC = () => {
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className="flex items-center text-xs font-medium text-indigo-700 uppercase tracking-wide hover:text-indigo-800 transition-colors duration-200"
-                    >
+                    >z
                       <span>{currentStat.label}</span>
                       <ChevronDown 
                         className={`h-3 w-3 ml-1 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} 

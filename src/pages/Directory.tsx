@@ -46,6 +46,14 @@ const Directory: React.FC = () => {
   const species: FishSpecies[] = [
     'Carp', 'Pike', 'Tench', 'Bream', 'Roach', 'Perch', 'Trout', 'Catfish', 'Eel', 'Barbel', 'Gudgeon'
   ];
+
+  const bookingTypes: string[] = [
+  'Day Ticket',
+  'Season Ticket', 
+  'Membership Required',
+  'Private Hire Only',
+  'Advanced Booking',
+    ];
   
   // Get unique booking types from fisheries data
   const bookingTypes = React.useMemo(() => {

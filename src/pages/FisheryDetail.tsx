@@ -510,13 +510,13 @@ const FisheryDetail: React.FC = () => {
               
               {/* Visitors */}
               <div className="flex flex-col items-center mb-6 p-4 rounded-xl bg-gradient-to-b from-blue-50 via-white to-blue-100 border border-slate-100"> 
-                <span className="text-3xl font-bold text-slate-700">{fishery.visit_count}</span>
+                <span className="text-2xl font-bold text-slate-700">{fishery.visit_count}</span>
                 <span className="text-sm text-slate-600 mt-2">Visitors (Monthly)</span>
               </div>
                
               {/* Record Fish */}
               <div className="flex flex-col items-center mb-6 p-4 rounded-xl bg-gradient-to-b from-blue-50 via-white to-blue-100 border border-slate-100">
-                <span className="text-3xl font-bold text-slate-700">{fishery.record_biggest_fish ?? '—'}</span>
+                <span className="text-2xl font-bold text-slate-700">{fishery.record_biggest_fish ?? '—'}</span>
                 <span className="text-sm text-slate-600 mt-2">Record/Biggest Fish</span>
               </div> 
                

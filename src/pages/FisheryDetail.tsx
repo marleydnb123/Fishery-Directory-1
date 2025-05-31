@@ -273,6 +273,8 @@ const FisheryDetail: React.FC = () => {
     };
   };
 
+  const [expandedImage, setExpandedImage] = useState(null);
+
   // Get current stat display
   const getCurrentStatDisplay = () => {
     if (!fishery) return { value: '—', label: 'N/A' };

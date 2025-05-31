@@ -528,7 +528,7 @@ const Directory: React.FC = () => {
                         onChange={() => setDisabledAccess(!disabledAccess)}
                         className="w-4 h-4 accent-blue-600 rounded border-gray-300"
                         id="disabled-access"
-                      />
+                      /> 
                       <label htmlFor="disabled-access" className="text-xs text-gray-700 font-medium">Disabled Access</label>
                   </div>
                 </div>

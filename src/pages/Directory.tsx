@@ -535,7 +535,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCoarseOpen(!coarseOpen)}
-                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl  transition-colors"
+                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:rounded-xl  transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">COARSE</h3>
                   <svg

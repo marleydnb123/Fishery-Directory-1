@@ -143,10 +143,10 @@ const AdminFisheries: React.FC = () => {
 
     // Handle array fields (comma-separated values)
     if (arrayFields.includes(name)) {
-      const arrayValue = value.trim() === '' ? [] : value.split(',').map(item => item.trim()).filter(Boolean);
+      // Allow typing commas by not immediately splitting the input
       setFormData(prev => ({
         ...prev,
-        [name]: arrayValue,
+        [name]: value,
       }));
       return;
     }
@@ -194,9 +194,14 @@ const AdminFisheries: React.FC = () => {
 
       // Ensure all array fields are properly formatted
       arrayFields.forEach(field => {
-        submissionData[field] = Array.isArray(submissionData[field]) 
-          ? submissionData[field] 
-          : (submissionData[field] ? String(submissionData[field]).split(',').map(item => item.trim()).filter(Boolean) : []);
+        // Convert string input to array only when submitting
+        if (typeof submissionData[field] === 'string') {
+          submissionData[field] = submissionData[field].trim() === '' 
+            ? [] 
+            : submissionData[field].split(',').map(item => item.trim()).filter(Boolean);
+        } else if (!Array.isArray(submissionData[field])) {
+          submissionData[field] = [];
+        }
       });
 
       // Handle numeric fields
@@ -440,7 +445,7 @@ const AdminFisheries: React.FC = () => {
                       <input
                         type="text"
                         name="species"
-                        value={formData.species?.join(', ') || ''}
+                        value={typeof formData.species === 'string' ? formData.species : (formData.species?.join(', ') || '')}
                         onChange={handleInputChange}
                         className="w-full p-2 border rounded"
                         placeholder="Carp, Pike, Tench"
@@ -453,7 +458,7 @@ const AdminFisheries: React.FC = () => {
                       <input
                         type="text"
                         name="features"
-                        value={formData.features?.join(', ') || ''}
+                        value={typeof formData.features === 'string' ? formData.features : (formData.features?.join(', ') || '')}
                         onChange={handleInputChange}
                         className="w-full p-2 border rounded"
                         placeholder="Car Park, Toilets, Cafe"
@@ -473,7 +478,7 @@ const AdminFisheries: React.FC = () => {
                       <input
                         type="text"
                         name="fishing_type"
-                        value={formData.fishing_type?.join(', ') || ''}
+                        value={typeof formData.fishing_type === 'string' ? formData.fishing_type : (formData.fishing_type?.join(', ') || '')}
                         onChange={handleInputChange}
                         className="w-full p-2 border rounded"
                         placeholder="Match, Pleasure, Specimen"
@@ -539,7 +544,7 @@ const AdminFisheries: React.FC = () => {
                       <input
                         type="text"
                         name="facilities"
-                        value={formData.facilities?.join(', ') || ''}
+                        value={typeof formData.facilities === 'string' ? formData.facilities : (formData.facilities?.join(', ') || '')}
                         onChange={handleInputChange}
                         className="w-full p-2 border rounded"
                         placeholder="Toilets, Showers, Cafe"
@@ -592,7 +597,7 @@ const AdminFisheries: React.FC = () => {
                       <input
                         type="text"
                         name="booking_type"
-                        value={formData.booking_type?.join(', ') || ''}
+                        value={typeof formData.booking_type === 'string' ? formData.booking_type : (formData.booking_type?.join(', ') || '')}
                         onChange={handleInputChange}
                         className="w-full p-2 border rounded"
                         placeholder="Day Ticket, Season Ticket"
@@ -605,7 +610,7 @@ const AdminFisheries: React.FC = () => {
                       <input
                         type="text"
                         name="payment"
-                        value={formData.payment?.join(', ') || ''}
+                        value={typeof formData.payment === 'string' ? formData.payment : (formData.payment?.join(', ') || '')}
                         onChange={handleInputChange}
                         className="w-full p-2 border rounded"
                         placeholder="Cash, Card"

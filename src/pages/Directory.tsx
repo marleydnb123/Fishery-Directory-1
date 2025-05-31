@@ -39,7 +39,6 @@ const Directory: React.FC = () => {
   const [matchOpen, setMatchOpen] = useState(false); 
   const [coarseOpen, setCoarseOpen] = useState(false);
 
-  // Available districts and species
   const districts: UKDistrict[] = [
     'Cumbria', 'Dumfries & Galloway', 'Yorkshire', 'Hampshire', 'Kent', 'Essex', 'Sussex', 'Dorset',
     'Wiltshire', 'Devon', 'Cornwall', 'Norfolk', 'Suffolk', 'Lancashire', 'Cheshire', 'Wales'
@@ -72,7 +71,7 @@ const Directory: React.FC = () => {
             dogFriendly: !!f.dog_friendly,
             priceRange: f.price_range,
             firePitsAllowed: !!f.fire_pits_allowed,
-            bookingType: f.booking_type ? f.booking_type.toLowerCase() : '',
+            bookingType: Array.isArray(f.booking_type) ? f.booking_type : [f.booking_type].filter(Boolean),
             parkingClose: !!f.parking_close,
             campingAllowed: !!f.camping_allowed,
             catchPhotos: !!f.catch_photos,
@@ -157,7 +156,10 @@ const Directory: React.FC = () => {
     }
     if (selectedbookingType) {
       results = results.filter(fishery =>
-        fishery.bookingType && fishery.bookingType.toLowerCase() === selectedbookingType
+        Array.isArray(fishery.bookingType) && 
+        fishery.bookingType.some(type => 
+          type?.toLowerCase() === selectedbookingType.toLowerCase()
+        )
       );
     }
     if (parkingClose) {
@@ -243,12 +245,10 @@ const Directory: React.FC = () => {
     }
   };
 
-  // Only show the first 4 featured fisheries
   const featuredFisheries = fisheries.filter(f => f.isFeatured).slice(0, 4);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100 pb-16">
-      {/* --- Image Banner Start --- */}
       <div className="relative w-full h-56 md:h-[380px] lg:h-[500px] mb-12">
         <img
           src="https://static.wixstatic.com/media/cc739e_696f733ac6a049babd9117b1375fd439~mv2.jpg/v1/fill/w_1189,h_797,al_c,q_85,enc_avif,quality_auto/cc739e_696f733ac6a049babd9117b1375fd439~mv2.jpg"
@@ -264,8 +264,6 @@ const Directory: React.FC = () => {
           </p>
         </div>
       </div>
-      {/* --- Image Banner End --- */}
-            
 
       <div className="container mx-auto px-4 pb-8" style={{ marginTop: '3rem' }}>
         <motion.div
@@ -282,7 +280,6 @@ const Directory: React.FC = () => {
           </p>
         </motion.div>
 
-{/* --- Modern Search Bar & Filters --- */}
         <div className="bg-customBlue/40 rounded-xl shadow-md p-6 mb-16">
           <form
             className="flex flex-wrap gap-2 mb-4"
@@ -339,7 +336,6 @@ const Directory: React.FC = () => {
           </form>
  
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4"> 
-            {/* Column 1: Dropdowns */}
             <div className="flex flex-col gap-3"> 
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">Fish Species</label>
@@ -394,7 +390,6 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
-            {/* Column 2: Text Inputs */}
             <div className="flex flex-col gap-3">
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1 ">Water Features</label> 
@@ -438,13 +433,10 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
-           {/* Column 3: Collapsible Checkboxes with Section Headers */}
             <div className="flex flex-col gap-3">
-              {/* Advanced Filters Title */}
               <h3 className="block text-xs font-semibold text-gray-600">
                 Advanced Filters
               </h3>
-              {/* CARP Section */}
               <div className="border border-gray-200 rounded-lg">
                 <button
                   type="button"
@@ -497,7 +489,6 @@ const Directory: React.FC = () => {
                 )}
               </div>
 
-              {/* MATCH Section */}
               <div className="border border-gray-200 rounded-lg">
                 <button
                   type="button"
@@ -530,7 +521,6 @@ const Directory: React.FC = () => {
                 )}
               </div>
 
-              {/* COARSE Section */}
               <div className="border border-gray-200 rounded-lg">
                 <button
                   type="button"
@@ -628,7 +618,6 @@ const Directory: React.FC = () => {
                         id="tackleshop"
                       />
                       <label htmlFor="tackleshop" className="text-xs text-gray-700 font-medium">Tackle Shop On-site</label>
-                    
                     </div>
                     <div className="flex items-center gap-2">
                       <input
@@ -677,8 +666,6 @@ const Directory: React.FC = () => {
           </div> 
         </div>
 
-
-        {/* --- Fisheries Grid --- */}
         {loading ? (
           <div className="text-center py-16 text-lg font-semibold text-gray-500">Loading fisheries...</div>
         ) : error ? (
@@ -706,10 +693,8 @@ const Directory: React.FC = () => {
         )}
       </div>
 
-      {/* --- Featured Fisheries Section --- */}
       <section className="py-12 px-4 bg-gradient-to-br from-blue-100 via-white to-blue-50 border border-blue-200"> 
         <div className="container mx-auto rounded-xl shadow-lg overflow-hidden">
-          {/* Header Bar */}
           <div
             className="p-6"
             style={{
@@ -735,7 +720,6 @@ const Directory: React.FC = () => {
               Explore our handpicked selection of the finest fishing spots across the UK
             </motion.p>
           </div>
-          {/* Cards Grid */}
           <div className="p-6 bg-gray-50">
             {loading ? (
               <div className="text-center py-8 text-gray-600">Loading featured fisheries...</div>
@@ -779,7 +763,6 @@ const Directory: React.FC = () => {
           </div>
         </div>
       </section>
-      {/* --- End Featured Fisheries Section --- */}
     </div>
   );
 };

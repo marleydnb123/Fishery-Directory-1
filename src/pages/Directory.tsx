@@ -72,7 +72,7 @@ const Directory: React.FC = () => {
             dogFriendly: !!f.dog_friendly,
             priceRange: f.price_range,
             firePitsAllowed: !!f.fire_pits_allowed,
-            bookingType: f.booking_type ? f.booking_type.toLowerCase() : '',
+            bookingType: Array.isArray(f.booking_type) ? f.booking_type : [],
             parkingClose: !!f.parking_close,
             campingAllowed: !!f.camping_allowed,
             catchPhotos: !!f.catch_photos,
@@ -155,10 +155,11 @@ const Directory: React.FC = () => {
     if (firePitsAllowed) {
       results = results.filter(fishery => fishery.firePitsAllowed);
     }
-    if (bookingType) {
+    if (selectedbookingType) {
       results = results.filter(fishery =>
-        fishery.bookingType && fishery.bookingType.toLowerCase() === bookingType
-      );
+        Array.isArray(fishery.bookingType) && 
+        fishery.bookingType.includes(selectedbookingType)
+      ); 
     }
     if (parkingClose) {
       results = results.filter(fishery => fishery.parkingClose);
@@ -310,7 +311,7 @@ const Directory: React.FC = () => {
                 setSelectedSpecies('');
                 setSelectedDistrict('');
                 setSelectedFishingType('');
-                setBookingType('');
+                setSelectedBookingType('');
                 setFeatureSearchTerm('');
                 setFacilities('');
                 setPriceRange('');

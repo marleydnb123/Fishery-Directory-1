@@ -20,19 +20,19 @@ const Directory: React.FC = () => {
   const [facilities, setFacilities] = useState('');
   const [dogFriendly, setDogFriendly] = useState(false);
   const [priceRange, setPriceRange] = useState('');
-  const [firePitsAllowed, setFirePitsAllowed] = useState(false);
-  const [selectedBookingType, setSelectedBookingType] = useState('');
+  const [firePitsAllowed, setFirePitsAllowed] = useState(false); 
+  const [bookingType, setBookingType] = useState('');
   const [parkingClose, setParkingClose] = useState(false); 
-  const [campingAllowed, setCampingAllowed] = useState(false); 
+  const [campingAllowed, setCampingAllowed] = useState(false);
   const [catchPhotos, setCatchPhotos] = useState(false); 
   const [wifiSignal, setWifiSignal] = useState('');
   const [baitBoats, setBaitBoats] = useState(false);
   const [magicTwig, setMagicTwig] = useState(false);
-  const [tackleShop, setTackleShop] = useState(false);
-  const [privateHire, setPrivateHire] = useState(false);
-  const [tackleHire, setTackleHire] = useState(false);
-  const [coaching, setCoaching] = useState(false);
-  const [keepnetsAllowed, setKeepnetsAllowed] = useState(false);
+  const [tackleShop, settackleShop] = useState(false);
+  const [privateHire, setprivateHire] = useState(false);
+  const [tackleHire, settackleHire] = useState(false);
+  const [coaching, setcoaching] = useState(false);
+  const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
   const [carpOpen, setCarpOpen] = useState(false);
@@ -46,14 +46,6 @@ const Directory: React.FC = () => {
   ];
   const species: FishSpecies[] = [
     'Carp', 'Pike', 'Tench', 'Bream', 'Roach', 'Perch', 'Trout', 'Catfish', 'Eel', 'Barbel', 'Gudgeon'
-  ];
-
-  const bookingTypes: string[] = [
-    'Day Ticket',
-    'Season Ticket', 
-    'Membership Required',
-    'Private Hire Only',
-    'Advanced Booking',
   ];
 
   useEffect(() => {
@@ -73,14 +65,14 @@ const Directory: React.FC = () => {
             isFeatured: !!f.isfeatured,
             hasAccommodation: !!f.hasaccommodation,
             nightFishingAllowed: !!f.night_fishing_allowed,
-            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type : (f.fishing_type ? f.fishing_type.split(',') : []),
+            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type : [],
             matchFishingFriendly: !!f.match_fishing_friendly,
             disabledAccess: !!f.disabled_access,
             facilities: Array.isArray(f.facilities) ? f.facilities : (f.facilities ? f.facilities.split(',') : []),
             dogFriendly: !!f.dog_friendly,
             priceRange: f.price_range,
             firePitsAllowed: !!f.fire_pits_allowed,
-            bookingType: Array.isArray(f.booking_type) ? f.booking_type : (f.booking_type ? f.booking_type.split(',') : []),
+            bookingType: f.booking_type ? f.booking_type.toLowerCase() : '',
             parkingClose: !!f.parking_close,
             campingAllowed: !!f.camping_allowed,
             catchPhotos: !!f.catch_photos,
@@ -163,11 +155,10 @@ const Directory: React.FC = () => {
     if (firePitsAllowed) {
       results = results.filter(fishery => fishery.firePitsAllowed);
     }
-    if (selectedBookingType) {
+    if (bookingType) {
       results = results.filter(fishery =>
-        Array.isArray(fishery.bookingType) &&  
-        fishery.bookingType.includes(selectedBookingType)
-      ); 
+        fishery.bookingType && fishery.bookingType.toLowerCase() === bookingType
+      );
     }
     if (parkingClose) {
       results = results.filter(fishery => fishery.parkingClose);
@@ -219,7 +210,7 @@ const Directory: React.FC = () => {
     dogFriendly,
     priceRange,
     firePitsAllowed,
-    selectedBookingType,
+    bookingType,
     parkingClose,
     campingAllowed,
     catchPhotos,
@@ -319,7 +310,7 @@ const Directory: React.FC = () => {
                 setSelectedSpecies('');
                 setSelectedDistrict('');
                 setSelectedFishingType('');
-                setSelectedbookingType('');
+                setBookingType('');
                 setFeatureSearchTerm('');
                 setFacilities('');
                 setPriceRange('');
@@ -393,7 +384,7 @@ const Directory: React.FC = () => {
                 <label className="block text-xs font-semibold text-gray-600 mb-1">Booking</label>
                 <select
                   value={bookingType}
-                  onChange={e => setbookingType(e.target.value)}
+                  onChange={e => setBookingType(e.target.value)}
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-transparent"
                 >
                   <option value="">All</option>
@@ -458,7 +449,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCarpOpen(!carpOpen)}
-                  className="w-full flex items-center justify-between p-2 rounded-xl text-left  hover:rounded-xl transition-colors"
+                  className="w-full flex items-center justify-between p-3 rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">CARP</h3>
                   <svg
@@ -502,16 +493,6 @@ const Directory: React.FC = () => {
                       />
                       <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <input 
-                        type="checkbox"
-                        checked={firePitsAllowed}
-                        onChange={() => setFirePitsAllowed(!firePitsAllowed)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="fire-pits"
-                      />
-                      <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
-                    </div>
                   </div>
                 )}
               </div>
@@ -521,7 +502,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setMatchOpen(!matchOpen)}
-                  className="w-full flex items-center justify-between p-2 text-left rounded-xl text-left hover:rounded-xl  transition-colors"
+                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl  transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">MATCH</h3>
                   <svg
@@ -554,7 +535,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCoarseOpen(!coarseOpen)}
-                  className="w-full flex items-center justify-between p-2 text-left rounded-xl text-left hover:rounded-xl transition-colors"
+                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl  transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">COARSE</h3>
                   <svg
@@ -607,6 +588,16 @@ const Directory: React.FC = () => {
                         id="dog-friendly"
                       />
                       <label htmlFor="dog-friendly" className="text-xs text-gray-700 font-medium">Dog Friendly</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input 
+                        type="checkbox"
+                        checked={firePitsAllowed}
+                        onChange={() => setFirePitsAllowed(!firePitsAllowed)}
+                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                        id="fire-pits"
+                      />
+                      <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
                     </div>
                     <div className="flex items-center gap-2">
                       <input

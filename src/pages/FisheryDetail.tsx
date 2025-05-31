@@ -635,8 +635,8 @@ const FisheryDetail: React.FC = () => {
   to { opacity: 1; }
 }
 .modal-content {
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 60vw;
+  max-height: 60vh;
   position: relative;
   transform: scale(0.8);
   animation: scaleInModal 0.3s forwards;

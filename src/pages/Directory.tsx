@@ -20,19 +20,19 @@ const Directory: React.FC = () => {
   const [facilities, setFacilities] = useState('');
   const [dogFriendly, setDogFriendly] = useState(false);
   const [priceRange, setPriceRange] = useState('');
-  const [firePitsAllowed, setFirePitsAllowed] = useState(false); 
-  const [bookingType, setBookingType] = useState('');
+  const [firePitsAllowed, setFirePitsAllowed] = useState(false);
+  const [selectedBookingType, setSelectedBookingType] = useState('');
   const [parkingClose, setParkingClose] = useState(false); 
-  const [campingAllowed, setCampingAllowed] = useState(false);
+  const [campingAllowed, setCampingAllowed] = useState(false); 
   const [catchPhotos, setCatchPhotos] = useState(false); 
   const [wifiSignal, setWifiSignal] = useState('');
   const [baitBoats, setBaitBoats] = useState(false);
   const [magicTwig, setMagicTwig] = useState(false);
-  const [tackleShop, settackleShop] = useState(false);
-  const [privateHire, setprivateHire] = useState(false);
-  const [tackleHire, settackleHire] = useState(false);
-  const [coaching, setcoaching] = useState(false);
-  const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
+  const [tackleShop, setTackleShop] = useState(false);
+  const [privateHire, setPrivateHire] = useState(false);
+  const [tackleHire, setTackleHire] = useState(false);
+  const [coaching, setCoaching] = useState(false);
+  const [keepnetsAllowed, setKeepnetsAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
   const [carpOpen, setCarpOpen] = useState(false);
@@ -46,6 +46,14 @@ const Directory: React.FC = () => {
   ];
   const species: FishSpecies[] = [
     'Carp', 'Pike', 'Tench', 'Bream', 'Roach', 'Perch', 'Trout', 'Catfish', 'Eel', 'Barbel', 'Gudgeon'
+  ];
+
+  const bookingTypes: string[] = [
+    'Day Ticket',
+    'Season Ticket', 
+    'Membership Required',
+    'Private Hire Only',
+    'Advanced Booking',
   ];
 
   useEffect(() => {
@@ -65,14 +73,14 @@ const Directory: React.FC = () => {
             isFeatured: !!f.isfeatured,
             hasAccommodation: !!f.hasaccommodation,
             nightFishingAllowed: !!f.night_fishing_allowed,
-            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type : [],
+            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type : (f.fishing_type ? f.fishing_type.split(',') : []),
             matchFishingFriendly: !!f.match_fishing_friendly,
             disabledAccess: !!f.disabled_access,
             facilities: Array.isArray(f.facilities) ? f.facilities : (f.facilities ? f.facilities.split(',') : []),
             dogFriendly: !!f.dog_friendly,
             priceRange: f.price_range,
             firePitsAllowed: !!f.fire_pits_allowed,
-            bookingType: f.booking_type ? f.booking_type.toLowerCase() : '',
+            bookingType: Array.isArray(f.booking_type) ? f.booking_type : (f.booking_type ? f.booking_type.split(',') : []),
             parkingClose: !!f.parking_close,
             campingAllowed: !!f.camping_allowed,
             catchPhotos: !!f.catch_photos,
@@ -155,10 +163,11 @@ const Directory: React.FC = () => {
     if (firePitsAllowed) {
       results = results.filter(fishery => fishery.firePitsAllowed);
     }
-    if (bookingType) {
+    if (selectedBookingType) {
       results = results.filter(fishery =>
-        fishery.bookingType && fishery.bookingType.toLowerCase() === bookingType
-      );
+        Array.isArray(fishery.bookingType) &&  
+        fishery.bookingType.includes(selectedBookingType)
+      ); 
     }
     if (parkingClose) {
       results = results.filter(fishery => fishery.parkingClose);
@@ -210,7 +219,7 @@ const Directory: React.FC = () => {
     dogFriendly,
     priceRange,
     firePitsAllowed,
-    bookingType,
+    selectedBookingType,
     parkingClose,
     campingAllowed,
     catchPhotos,

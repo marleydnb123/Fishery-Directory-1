@@ -21,7 +21,7 @@ const Directory: React.FC = () => {
   const [dogFriendly, setDogFriendly] = useState(false);
   const [priceRange, setPriceRange] = useState('');
   const [firePitsAllowed, setFirePitsAllowed] = useState(false);
-  const [selectedbookingType, setSelectedbookingType] = useState('');
+  const [selectedBookingType, setSelectedBookingType] = useState('');
   const [parkingClose, setParkingClose] = useState(false); 
   const [campingAllowed, setCampingAllowed] = useState(false); 
   const [catchPhotos, setCatchPhotos] = useState(false); 

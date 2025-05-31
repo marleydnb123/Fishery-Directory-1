@@ -51,6 +51,7 @@ export interface Fishery {
   record_biggest_fish?: string;
   record_match_weight?: string;
   access_all_hours?: boolean;
+  guests_allowed?: boolean;
 }
 
 export interface Lake {

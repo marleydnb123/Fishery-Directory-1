@@ -435,7 +435,7 @@ const FisheryDetail: React.FC = () => {
           {/* Left Content - Takes up 2 columns */}
           <div className="lg:col-span-2">
             {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
-              <p key={i} className="text-gray-700 mt-6 mb-6 max-w-4xl">{line}</p>
+              <p key={i} className="text-gray-700 mt-4 mb-6 max-w-4xl">{line}</p>
             ))} 
               
             <div className="flex flex-col gap-6">

@@ -504,6 +504,16 @@ const Directory: React.FC = () => {
           id="Guests Allowed"
             />
           <label htmlFor="guests-allowed" className="text-xs text-gray-700 font-medium">Guests Allowed</label>
+            </div>
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={familyFriendly}
+          onChange={() => setFamilyFriendly(!familyFriendly)}
+          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+          id="family-friendly"
+        />
+        <label htmlFor="under-18's" className="text-xs text-gray-700 font-medium">Under 18's</label>
                   </div>
                 </div>
                 )}

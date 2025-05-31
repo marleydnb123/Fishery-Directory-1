@@ -46,11 +46,14 @@ const Directory: React.FC = () => {
   const species: FishSpecies[] = [
     'Carp', 'Pike', 'Tench', 'Bream', 'Roach', 'Perch', 'Trout', 'Catfish', 'Eel', 'Barbel', 'Gudgeon'
   ];
-
-  const bookingTypes: string[] = [
-    'booking required',
-    'day tickets'
-  ];
+  
+  // Get unique booking types from fisheries data
+  const bookingTypes = React.useMemo(() => {
+    const types = fisheries
+      .filter(f => Array.isArray(f.booking_type) && f.booking_type.length > 0)
+      .flatMap(f => f.booking_type);
+    return Array.from(new Set(types)).sort();
+  }, [fisheries]);
 
   useEffect(() => {
     const fetchFisheries = async () => {
@@ -387,11 +390,13 @@ const Directory: React.FC = () => {
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-transparent"
                 >
                   <option value="">All</option>
-                  {bookingTypes.map(type => (
+                  {bookingTypes.length > 0 ? bookingTypes.map(type => (
                     <option key={type} value={type}>
                       {type.charAt(0).toUpperCase() + type.slice(1)}
                     </option>
-                  ))}
+                  )) : (
+                    <option disabled>No booking types found</option>
+                  )}
                 </select>
               </div>
             </div>

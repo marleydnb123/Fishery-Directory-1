@@ -40,6 +40,7 @@ const Directory: React.FC = () => {
   const [matchOpen, setMatchOpen] = useState(false); 
   const [coarseOpen, setCoarseOpen] = useState(false);
   const [generalOpen, setGeneralOpen] = useState(false);
+  const [guestsAllowed, setGuestsAllowed] = useState(false);
 
   const districts: UKDistrict[] = [
     'Cumbria', 'Dumfries & Galloway', 'Yorkshire', 'Hampshire', 'Kent', 'Essex', 'Sussex', 'Dorset',
@@ -98,6 +99,7 @@ const Directory: React.FC = () => {
             coaching: !!f.coaching,
             keepnetsAllowed: !!f.keepnets_allowed,
             accessAllHours: !!f.access_all_hours, 
+            guestsAllowed: !!f.guests_allowed
           }))
         );
       }
@@ -210,6 +212,9 @@ const Directory: React.FC = () => {
     if (accessAllHours) {
       results = results.filter(fishery => fishery.accessAllHours);
     }
+    if (guestsAllowed) {
+      results = results.filter(fishery => fishery.guestsAllowed)
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -238,6 +243,7 @@ const Directory: React.FC = () => {
     coaching,
     keepnetsAllowed,
     accessAllHours,
+    guestsAllowed,
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value); 
@@ -343,6 +349,7 @@ const Directory: React.FC = () => {
                 settackleHire(false);
                 setcoaching(false);
                 setaccessAllHours(false);
+                setguestsAllowed(false);
               }}
               className="px-5 py-2 bg-customBlue  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
             >
@@ -492,11 +499,11 @@ const Directory: React.FC = () => {
         <input
           type="checkbox"
           checked={accessAllHours}
-          onChange={() => setaccessAllHours(!accessAllHours)}
+          onChange={() => setguestsAllowed(!guestsAllowed)}
           className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-          id="24-hour-access"
+          id="Guests Allowed"
             />
-          <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
+          <label htmlFor="guests-allowed" className="text-xs text-gray-700 font-medium">Guests Allowed</label>
                   </div>
                 </div>
                 )}

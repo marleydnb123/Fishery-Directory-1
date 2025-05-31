@@ -777,3 +777,5 @@ const Directory: React.FC = () => {
 };
 
 export default Directory;
+
+export default Directory

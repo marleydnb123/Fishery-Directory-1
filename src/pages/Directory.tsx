@@ -34,6 +34,7 @@ const Directory: React.FC = () => {
   const [coaching, setcoaching] = useState(false);
   const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
   const [accessAllHours, setaccessAllHours] = useState(false);
+  const [guestsAllowed, setguestsAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
   const [carpOpen, setCarpOpen] = useState(false);
@@ -98,6 +99,7 @@ const Directory: React.FC = () => {
             coaching: !!f.coaching,
             keepnetsAllowed: !!f.keepnets_allowed,
             accessAllHours: !!f.access_all_hours, 
+            guestsAllowed: !!f.guestsAllowed,
           }))
         );
       }
@@ -210,7 +212,10 @@ const Directory: React.FC = () => {
     if (accessAllHours) {
       results = results.filter(fishery => fishery.accessAllHours);
     }
-    setFilteredFisheries(results);
+    if (guestsAllowed) {
+      results = results.filter(fishery => fishery.guestsAllowed)
+    }
+    
   }, [
     fisheries,
     searchTerm,
@@ -238,6 +243,7 @@ const Directory: React.FC = () => {
     coaching,
     keepnetsAllowed,
     accessAllHours,
+    guestsAllowed,
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value); 
@@ -343,6 +349,7 @@ const Directory: React.FC = () => {
                 settackleHire(false);
                 setcoaching(false);
                 setaccessAllHours(false);
+                setguestsAllowed(false);
               }}
               className="px-5 py-2 bg-customBlue  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
             >
@@ -492,6 +499,16 @@ const Directory: React.FC = () => {
             />
           <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
                   </div>
+                    <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                checked={guestsAllowed}
+                onChange={() => setguestsAllowed(!guestsAllowed)}
+                  className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+              id="guests-allowed"
+              />
+              <label htmlFor="guests-allowed" className="text-xs text-gray-700 font-medium">Guests Allowed</label>
+                </div>
                 </div>
                 )}
               </div>

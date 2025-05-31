@@ -494,8 +494,7 @@ const Directory: React.FC = () => {
           id="24-hour-access"
             />
           <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
-                  </div>
-          <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
         <input
           type="checkbox"
           checked={accessAllHours}
@@ -504,6 +503,7 @@ const Directory: React.FC = () => {
           id="Guests Allowed"
             />
           <label htmlFor="guests-allowed" className="text-xs text-gray-700 font-medium">Guests Allowed</label>
+                  </div>
                   </div>
                 </div>
                 )}

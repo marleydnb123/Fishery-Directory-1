@@ -26,7 +26,7 @@ export interface Fishery {
   dog_friendly?: boolean;
   price_range?: string;
   fire_pits_allowed?: boolean;
-  booking_type?: string;
+  booking_type?: string[];
   parking_close?: boolean;
   camping_allowed?: boolean;
   catch_photos?: boolean;

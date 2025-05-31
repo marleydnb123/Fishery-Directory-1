@@ -99,7 +99,7 @@ const Directory: React.FC = () => {
             coaching: !!f.coaching,
             keepnetsAllowed: !!f.keepnets_allowed,
             accessAllHours: !!f.access_all_hours, 
-            guestsAllowed: !!f.guestsAllowed,
+            guestsAllowed: !!f.guests_allowed,
           }))
         );
       }

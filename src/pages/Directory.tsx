@@ -502,10 +502,6 @@ const Directory: React.FC = () => {
                   </div>
                 )}
               </div>
-
-
-           
-
              
               <div className="border border-gray-200 rounded-lg">
                 <button

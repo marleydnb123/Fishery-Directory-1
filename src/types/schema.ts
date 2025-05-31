@@ -2,14 +2,13 @@ export interface Fishery {
   id: string;
   name: string;
   slug: string;
-  visit_count?: number;
   description: string;
   rules: string;
   image: string;
   species: string[];
   district: string;
-  isFeatured: boolean;
-  hasAccommodation: boolean;
+  isfeatured: boolean;
+  hasaccommodation: boolean;
   created_at: string;
   website?: string;
   contact_phone?: string;
@@ -26,7 +25,7 @@ export interface Fishery {
   dog_friendly?: boolean;
   price_range?: string;
   fire_pits_allowed?: boolean;
-  bookingType: string[];
+  booking_type: string[];
   parking_close?: boolean;
   camping_allowed?: boolean;
   catch_photos?: boolean;

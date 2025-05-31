@@ -22,6 +22,14 @@ export interface Database {
           isfeatured: boolean
           hasaccommodation: boolean
           created_at: string
+          fishing_type: string[]
+          facilities: string[]
+          booking_type: string[]
+          features: string[]
+          pricing: string[]
+          opening_times: string[]
+          day_tickets: string[]
+          payment: string[]
           website?: string
           contact_phone?: string
           contact_email?: string
@@ -41,6 +49,14 @@ export interface Database {
           isfeatured?: boolean
           hasaccommodation?: boolean
           created_at?: string
+          fishing_type?: string[]
+          facilities?: string[]
+          booking_type?: string[]
+          features?: string[]
+          pricing?: string[]
+          opening_times?: string[]
+          day_tickets?: string[]
+          payment?: string[]
           website?: string
           contact_phone?: string
           contact_email?: string

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Fish, Info, Book, Phone, Waves, ChevronDown } from 'lucide-react';
+import { MapPin, Fish, Info, Book, Phone, Waves, ChevronDown, Users, Trophy, Barchart } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
 import GoogleMap from '../components/common/GoogleMap'; 
@@ -500,24 +500,75 @@ const FisheryDetail: React.FC = () => {
           </div>
 
           {/* Right Column - Stats Card */}
-          <div className="lg:col-span-1">
-            <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col items-center gap-6 px-8 py-6"> 
-              {/* Visitors */}
-              <div className="flex flex-col items-center"> 
-                <span className="text-3xl font-bold text-grey-600">{fishery.visit_count}</span>
-                <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
+          <div className="lg:col-span-1 flex justify-center lg:justify-end">
+            <div className="w-full max-w-xs bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl shadow-lg border border-slate-200/50 p-6">
+              {/* Title */}
+              <div className="text-center mb-6">
+                <h3 className="text-lg font-bold text-slate-800 mb-1">Quick Stats</h3>
+                <div className="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-blue-400 mx-auto rounded-full"></div>
               </div>
-              
-              {/* Record Fish */}
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-grey-600">{fishery.record_biggest_fish ?? '—'}</span>
-                <span className="text-sm text-grey-600 mt-1">Record/Biggest Fish</span>
-              </div> 
-              
-              {/* Dynamic Third Stat with Dropdown */}
-              <div className="flex flex-col items-center relative">
-                <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span> 
+
+              <div className="space-y-5">
+                {/* Visitors */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100"> 
+                  <div className="flex items-center justify-center mb-1">
+                    <Users className="h-4 w-4 text-emerald-600 mr-2" />
+                    <span className="text-xs font-medium text-emerald-700 uppercase tracking-wide">Monthly Visitors</span>
+                  </div>
+                  <span className="text-2xl font-bold text-emerald-800">{fishery.visit_count}</span>
+                </div>
                 
+                {/* Record Fish */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-100">
+                  <div className="flex items-center justify-center mb-1">
+                    <Trophy className="h-4 w-4 text-orange-600 mr-2" />
+                    <span className="text-xs font-medium text-orange-700 uppercase tracking-wide">Record Fish</span>
+                  </div>
+                  <span className="text-2xl font-bold text-orange-800">{fishery.record_biggest_fish ?? '—'}</span>
+                </div> 
+
+                {/* Fish Species Count */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-100">
+                  <div className="flex items-center justify-center mb-1">
+                    <Fish className="h-4 w-4 text-purple-600 mr-2" />
+                    <span className="text-xs font-medium text-purple-700 uppercase tracking-wide">Species Available</span>
+                  </div>
+                  <span className="text-2xl font-bold text-purple-800">{fishery.species?.length || 0}</span>
+                </div>
+
+                {/* Water Features Count */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-100">
+                  <div className="flex items-center justify-center mb-1">
+                    <Waves className="h-4 w-4 text-cyan-600 mr-2" />
+                    <span className="text-xs font-medium text-cyan-700 uppercase tracking-wide">Water Features</span>
+                  </div>
+                  <span className="text-2xl font-bold text-cyan-800">{fishery.features?.length || 0}</span>
+                </div>
+
+                {/* Facilities Count */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-rose-50 to-pink-50 border border-rose-100">
+                  <div className="flex items-center justify-center mb-1">
+                    <MapPin className="h-4 w-4 text-rose-600 mr-2" />
+                    <span className="text-xs font-medium text-rose-700 uppercase tracking-wide">Facilities</span>
+                  </div>
+                  <span className="text-2xl font-bold text-rose-800">{fishery.facilities?.length || 0}</span>
+                </div>
+                
+                {/* Dynamic Stat with Dropdown */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-100 relative">
+                  <div className="flex items-center justify-center mb-1">
+                    <BarChart3 className="h-4 w-4 text-indigo-600 mr-2" />
+                    <button
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      className="flex items-center text-xs font-medium text-indigo-700 uppercase tracking-wide hover:text-indigo-800 transition-colors duration-200"
+                    >
+                      <span>{currentStat.label}</span>
+                      <ChevronDown 
+                        className={`h-3 w-3 ml-1 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} 
+                      />
+                    </button>
+                  </div>
+                  <span className="text-2xl font-bold text-indigo-800">{currentStat.value}</span>
                 {/* Dropdown Toggle */}
                 <div className="relative mt-1">
                   <button

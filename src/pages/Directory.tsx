@@ -211,7 +211,7 @@ const Directory: React.FC = () => {
     dogFriendly,
     priceRange,
     firePitsAllowed,
-    bookingType,
+    selectedBookingType,
     parkingClose,
     campingAllowed,
     catchPhotos,

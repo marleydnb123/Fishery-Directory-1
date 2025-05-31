@@ -36,6 +36,39 @@ export interface Database {
           address?: string
           postcode?: string
           day_ticket_price?: number
+          night_fishing_allowed?: boolean
+          match_fishing_friendly?: boolean
+          disabled_access?: boolean
+          dog_friendly?: boolean
+          price_range?: string
+          fire_pits_allowed?: boolean
+          parking_close?: boolean
+          camping_allowed?: boolean
+          catch_photos?: boolean
+          wifi_signal?: string
+          descriptionpage?: string
+          fisheryimages1?: string
+          fisheryimages2?: string
+          fisheryimages3?: string
+          fisheryvideo?: string
+          bait_boats?: boolean
+          magic_twig?: boolean
+          tackle_shop?: boolean
+          private_hire?: boolean
+          tackle_hire?: boolean
+          coaching?: boolean
+          keepnets_allowed?: boolean
+          tactics?: string
+          fishery_of_the_week?: boolean
+          record_biggest_fish?: string
+          record_match_weight?: string
+          stock?: string
+          average_weight?: string
+          access_all_hours?: boolean
+          guests_allowed?: boolean
+          under_18?: boolean
+          latitude?: number
+          longitude?: number
         }
         Insert: {
           id?: string
@@ -63,6 +96,39 @@ export interface Database {
           address?: string
           postcode?: string
           day_ticket_price?: number
+          night_fishing_allowed?: boolean
+          match_fishing_friendly?: boolean
+          disabled_access?: boolean
+          dog_friendly?: boolean
+          price_range?: string
+          fire_pits_allowed?: boolean
+          parking_close?: boolean
+          camping_allowed?: boolean
+          catch_photos?: boolean
+          wifi_signal?: string
+          descriptionpage?: string
+          fisheryimages1?: string
+          fisheryimages2?: string
+          fisheryimages3?: string
+          fisheryvideo?: string
+          bait_boats?: boolean
+          magic_twig?: boolean
+          tackle_shop?: boolean
+          private_hire?: boolean
+          tackle_hire?: boolean
+          coaching?: boolean
+          keepnets_allowed?: boolean
+          tactics?: string
+          fishery_of_the_week?: boolean
+          record_biggest_fish?: string
+          record_match_weight?: string
+          stock?: string
+          average_weight?: string
+          access_all_hours?: boolean
+          guests_allowed?: boolean
+          under_18?: boolean
+          latitude?: number
+          longitude?: number
         }
         Update: {
           id?: string
@@ -82,6 +148,47 @@ export interface Database {
           address?: string
           postcode?: string
           day_ticket_price?: number
+          fishing_type?: string[]
+          facilities?: string[]
+          booking_type?: string[]
+          features?: string[]
+          pricing?: string[]
+          opening_times?: string[]
+          day_tickets?: string[]
+          payment?: string[]
+          night_fishing_allowed?: boolean
+          match_fishing_friendly?: boolean
+          disabled_access?: boolean
+          dog_friendly?: boolean
+          price_range?: string
+          fire_pits_allowed?: boolean
+          parking_close?: boolean
+          camping_allowed?: boolean
+          catch_photos?: boolean
+          wifi_signal?: string
+          descriptionpage?: string
+          fisheryimages1?: string
+          fisheryimages2?: string
+          fisheryimages3?: string
+          fisheryvideo?: string
+          bait_boats?: boolean
+          magic_twig?: boolean
+          tackle_shop?: boolean
+          private_hire?: boolean
+          tackle_hire?: boolean
+          coaching?: boolean
+          keepnets_allowed?: boolean
+          tactics?: string
+          fishery_of_the_week?: boolean
+          record_biggest_fish?: string
+          record_match_weight?: string
+          stock?: string
+          average_weight?: string
+          access_all_hours?: boolean
+          guests_allowed?: boolean
+          under_18?: boolean
+          latitude?: number
+          longitude?: number
         }
       }
       lakes: {

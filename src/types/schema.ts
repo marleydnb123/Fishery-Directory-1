@@ -37,6 +37,7 @@ export interface Fishery {
   fisheryvideo?: string;
   bait_boats?: boolean;
   magic_twig?: boolean;
+  tackle_shop?: boolean;
   private_hire?: boolean;  
   tackle_hire?: boolean;   
   coaching?: boolean;      
@@ -45,13 +46,17 @@ export interface Fishery {
   pricing?: string[];
   opening_times?: string[];
   day_tickets?: string[];
-  payments?: string[];
+  payment?: string[];
   fishery_of_the_week?: boolean;
   record_biggest_fish?: string;
   record_match_weight?: string;
+  stock?: string;
+  average_weight?: string;
   access_all_hours?: boolean;
   guests_allowed?: boolean;
   under_18?: boolean;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface Lake {

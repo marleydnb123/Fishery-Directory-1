@@ -19,8 +19,8 @@ export interface Database {
           image: string
           species: string[]
           district: string
-          isFeatured: boolean
-          hasAccommodation: boolean
+          isfeatured: boolean
+          hasaccommodation: boolean
           created_at: string
           website?: string
           contact_phone?: string
@@ -38,8 +38,8 @@ export interface Database {
           image: string
           species: string[]
           district: string
-          isFeatured?: boolean
-          hasAccommodation?: boolean
+          isfeatured?: boolean
+          hasaccommodation?: boolean
           created_at?: string
           website?: string
           contact_phone?: string
@@ -57,8 +57,8 @@ export interface Database {
           image?: string
           species?: string[]
           district?: string
-          isFeatured?: boolean
-          hasAccommodation?: boolean
+          isfeatured?: boolean
+          hasaccommodation?: boolean
           created_at?: string
           website?: string
           contact_phone?: string

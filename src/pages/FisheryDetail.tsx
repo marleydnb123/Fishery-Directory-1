@@ -542,6 +542,8 @@ const FisheryDetail: React.FC = () => {
                   <div className="flex items-center justify-center mt-2">
                     <MapPin className="h-4 w-4 text-slate-600 mr-2" />
                     <span className="text-xs font-medium text-slate-700 uppercase tracking-wide">Facilities</span>
+                    </div>
+              </div> 
               {/* Dynamic Third Stat with Dropdown */}
               <div className="flex flex-col items-center relative">
                 <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>  

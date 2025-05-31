@@ -445,7 +445,9 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
-            // Advanced Filters Component
+            <div className="flex flex-col gap-3">
+              <h3 className="block text-xs font-semibold text-gray-600">
+                // Advanced Filters Component
 <h3 className="text-lg font-bold text-gray-900 mb-4">
   Advanced Filters
 </h3>
@@ -737,7 +739,7 @@ const Directory: React.FC = () => {
           id="family-friendly"
         />
         <label htmlFor="family-friendly" className="text-xs text-gray-700 font-medium">Family Friendly</label>
-      </div>
+                    </div>
                   </div>
                 )}
               </div>

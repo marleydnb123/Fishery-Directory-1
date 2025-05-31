@@ -48,12 +48,7 @@ const Directory: React.FC = () => {
     'Carp', 'Pike', 'Tench', 'Bream', 'Roach', 'Perch', 'Trout', 'Catfish', 'Eel', 'Barbel', 'Gudgeon'
   ];
 
-  const bookingTypes: string[] = [
-  'Day Ticket',
-  'Season Ticket', 
-  'Membership Required',
-  'Private Hire Only',
-  'Advanced Booking',
+ 
 
   useEffect(() => {
     const fetchFisheries = async () => {

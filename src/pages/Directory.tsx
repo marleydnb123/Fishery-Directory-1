@@ -41,7 +41,7 @@ const Directory: React.FC = () => {
 
   const districts: UKDistrict[] = [
     'Cumbria', 'Dumfries & Galloway', 'Yorkshire', 'Hampshire', 'Kent', 'Essex', 'Sussex', 'Dorset',
-    'Wiltshire', 'Devon', 'Cornwall', 'Norfolk', 'Suffolk', 'Lancashire', 'Cheshire', 'Wales'
+    'Wiltshire', 'Devon', 'Cornwall', 'Norfolk', 'Suffolk', 'Lancashire', 'Cheshire', 'Wales', 'France'
   ];
   const species: FishSpecies[] = [
     'Carp', 'Pike', 'Tench', 'Bream', 'Roach', 'Perch', 'Trout', 'Catfish', 'Eel', 'Barbel', 'Gudgeon', 'Sturgeon'

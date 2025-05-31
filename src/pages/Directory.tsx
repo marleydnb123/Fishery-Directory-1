@@ -33,7 +33,7 @@ const Directory: React.FC = () => {
   const [tackleHire, settackleHire] = useState(false);
   const [coaching, setcoaching] = useState(false);
   const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
-  const [Access_All_Hours, setAccess_All_Hours] = useState(false);
+  const [accessAllHours, setaccessAllHours] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
   const [carpOpen, setCarpOpen] = useState(false);

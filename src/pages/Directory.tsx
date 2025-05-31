@@ -33,14 +33,12 @@ const Directory: React.FC = () => {
   const [tackleHire, settackleHire] = useState(false);
   const [coaching, setcoaching] = useState(false);
   const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
-  const [accessAllHours, setaccessAllHours] = useState(false);
-  const [guestsAllowed, setguestsAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
   const [carpOpen, setCarpOpen] = useState(false);
   const [matchOpen, setMatchOpen] = useState(false); 
   const [coarseOpen, setCoarseOpen] = useState(false);
-  const [generalOpen, setGeneralOpen] = useState(false);
+  const [generalOpen, setgeneralOpen] = useState(false);
 
   const districts: UKDistrict[] = [
     'Cumbria', 'Dumfries & Galloway', 'Yorkshire', 'Hampshire', 'Kent', 'Essex', 'Sussex', 'Dorset',
@@ -98,8 +96,6 @@ const Directory: React.FC = () => {
             tackleHire: !!f.tackle_hire,
             coaching: !!f.coaching,
             keepnetsAllowed: !!f.keepnets_allowed,
-            accessAllHours: !!f.access_all_hours, 
-            guestsAllowed: !!f.guests_allowed
           }))
         );
       }
@@ -209,13 +205,7 @@ const Directory: React.FC = () => {
     if (keepnetsAllowed) {
       results = results.filter(fishery => fishery.keepnetsAllowed);
     }
-    if (accessAllHours) {
-      results = results.filter(fishery => fishery.accessAllHours);
-    }
-    if (guestsAllowed) {
-      results = results.filter(fishery => fishery.guestsAllowed);
-    }
-    
+    setFilteredFisheries(results);
   }, [
     fisheries,
     searchTerm,
@@ -239,11 +229,9 @@ const Directory: React.FC = () => {
     magicTwig,
     tackleShop,
     privateHire,
-    tackleHire,
+    tackleHire, 
     coaching,
     keepnetsAllowed,
-    accessAllHours,
-    guestsAllowed,
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value); 
@@ -348,16 +336,13 @@ const Directory: React.FC = () => {
                 setprivateHire(false);
                 settackleHire(false);
                 setcoaching(false);
-                setaccessAllHours(false);
-                setguestsAllowed(false);
               }}
               className="px-5 py-2 bg-customBlue  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
             >
               Reset Filters
             </button>
           </form>
-
-          {/* DROPDOWN FILTERS */}
+ 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4"> 
             <div className="flex flex-col gap-3"> 
               <div>
@@ -418,8 +403,6 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
-
-            {/* SEARCH FILTERS */}
             <div className="flex flex-col gap-3">
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1 ">Water Features</label> 
@@ -463,54 +446,17 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-3"> 
+            <div className="flex flex-col gap-3">
               <h3 className="block text-xs font-semibold text-gray-600">
                 Advanced Filters
               </h3>
- 
 
-              {/* CHECKBOXES FILTERS */}
-              {/* GENERAL FACTS FILTERS */}
-            <div className="border border-gray-200 rounded-lg ">
-            <button
-            type="button"
-            onClick={() => setGeneralOpen(!generalOpen)}
-          className="w-full flex items-center justify-between p-3 text-left rounded-xl hover:bg-customBlue/10 hover:rounded-xl transition-colors"
-          >
-          <h3 className="text-sm font-bold text-gray-800">GENERAL FACTS</h3>
-          <svg
-          className={`w-4 h-4 transition-transform ${generalOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-      </svg>
-      </button>
-        {generalOpen && (
-        <div className="px-3 pb-3 space-y-2">
-      <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          checked={accessAllHours}
-          onChange={() => setaccessAllHours(!accessAllHours)}
-          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-          id="24-hour-access"
-            />
-          <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
-                  </div>
-                  
-                </div>
-                )}
-              </div>
-
-              
               {/* CARP FISHING FILTERS */}
               <div className="border border-gray-200 rounded-lg">
                 <button
                   type="button"
                   onClick={() => setCarpOpen(!carpOpen)}
-                  className="w-full flex items-center justify-between p-3 rounded-xl text-left hover:bg-customBlue/10 hover:rounded-xl transition-colors"
+                  className="w-full flex items-center justify-between p-3 rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">CARP</h3>
                   <svg
@@ -554,22 +500,73 @@ const Directory: React.FC = () => {
                       />
                       <label htmlFor="catch-photos" className="text-xs text-gray-700 font-medium">Catch Photos</label>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <input 
-                        type="checkbox"
-                        checked={firePitsAllowed}
-                        onChange={() => setFirePitsAllowed(!firePitsAllowed)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="fire-pits"
-                      />
-                      <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
-                    </div>
                   </div>
                 )}
               </div>
 
               
-              
+              {/* GENERAL FACTS FILTERS */}
+<div className="border border-gray-200 rounded-lg mb-4">
+  <button
+    type="button"
+    onClick={() => setGeneralOpen(!generalOpen)}
+    className="w-full flex items-center justify-between p-3 text-left rounded-xl hover:bg-customBlue/50 hover:rounded-xl transition-colors"
+  >
+    <h3 className="text-sm font-bold text-gray-800">GENERAL FACTS</h3>
+    <svg
+      className={`w-4 h-4 transition-transform ${generalOpen ? 'rotate-180' : ''}`}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  {generalOpen && (
+    <div className="px-3 pb-3 space-y-2">
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={twentyFourHourAccess}
+          onChange={() => setTwentyFourHourAccess(!twentyFourHourAccess)}
+          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+          id="24-hour-access"
+        />
+        <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
+      </div>
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={guestsAllowed}
+          onChange={() => setGuestsAllowed(!guestsAllowed)}
+          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+          id="guests-allowed"
+        />
+        <label htmlFor="guests-allowed" className="text-xs text-gray-700 font-medium">Guests Allowed</label>
+      </div>
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={underEighteens}
+          onChange={() => setUnderEighteens(!underEighteens)}
+          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+          id="under-18s"
+        />
+        <label htmlFor="under-18s" className="text-xs text-gray-700 font-medium">Under 18's</label>
+      </div>
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={familyFriendly}
+          onChange={() => setFamilyFriendly(!familyFriendly)}
+          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+          id="family-friendly"
+        />
+        <label htmlFor="family-friendly" className="text-xs text-gray-700 font-medium">Family Friendly</label>
+      </div>
+      </div>
+                )}
+              </div>
 
               {/* MATCH FISHING FILTERS */}
              
@@ -577,7 +574,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setMatchOpen(!matchOpen)}
-                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:bg-customBlue/10 hover:rounded-xl  transition-colors"
+                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl  transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">MATCH</h3>
                   <svg
@@ -612,7 +609,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCoarseOpen(!coarseOpen)}
-                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:bg-customBlue/10 hover:rounded-xl  transition-colors"
+                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:bg-customBlue/50 hover:rounded-xl  transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">COARSE</h3>
                   <svg
@@ -666,7 +663,16 @@ const Directory: React.FC = () => {
                       />
                       <label htmlFor="dog-friendly" className="text-xs text-gray-700 font-medium">Dog Friendly</label>
                     </div>
-                    
+                    <div className="flex items-center gap-2">
+                      <input 
+                        type="checkbox"
+                        checked={firePitsAllowed}
+                        onChange={() => setFirePitsAllowed(!firePitsAllowed)}
+                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                        id="fire-pits"
+                      />
+                      <label htmlFor="fire-pits" className="text-xs text-gray-700 font-medium">Fire Pits Allowed</label>
+                    </div>
                     <div className="flex items-center gap-2">
                       <input
                         type="checkbox"

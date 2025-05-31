@@ -549,7 +549,7 @@ const FisheryDetail: React.FC = () => {
 
     {/* Dynamic Third Stat with Dropdown */}
     <div className="flex items-center justify-between relative mb-4 p-4 rounded-xl bg-gradient-to-b from-blue-50 via-white to-blue-100 border border-slate-100">
-      <span className="text-sm text-slate-600">Current Stat</span>
+      <span className="text-sm text-slate-600"></span>
       <span className="text-2xl font-bold text-grey-600">{currentStat.value}</span>
                
                   

@@ -521,7 +521,8 @@ const Directory: React.FC = () => {
           id="under-18"
         />
         <label htmlFor="under-18's" className="text-xs text-gray-700 font-medium">Under 18's</label>
-        <div className="flex items-center gap-2">
+                  </div>
+          <div className="flex items-center gap-2">
                       <input
                         type="checkbox"
                         checked={disabledAccess}
@@ -531,7 +532,6 @@ const Directory: React.FC = () => {
                       />
                       <label htmlFor="disabled-access" className="text-xs text-gray-700 font-medium">Disabled Access</label>
                     </div>
-                  </div>
                 </div>
                 )}
               </div>

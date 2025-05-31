@@ -52,8 +52,8 @@ const Directory: React.FC = () => {
   'Season Ticket', 
   'Membership Required',
   'Private Hire Only',
-  'Advanced Booking',
-    ];
+  'Advanced Booking'
+  ];
   
   // Get unique booking types from fisheries data
   const bookingTypes = React.useMemo(() => {

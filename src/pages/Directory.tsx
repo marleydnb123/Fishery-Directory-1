@@ -23,7 +23,7 @@ const Directory: React.FC = () => {
   const [firePitsAllowed, setFirePitsAllowed] = useState(false);
   const [selectedbookingType, setSelectedbookingType] = useState('');
   const [parkingClose, setParkingClose] = useState(false); 
-  const [campingAllowed, setCampingAllowed] = useState(false);
+  const [campingAllowed, setCampingAllowed] = useState(false); 
   const [catchPhotos, setCatchPhotos] = useState(false); 
   const [wifiSignal, setWifiSignal] = useState('');
   const [baitBoats, setBaitBoats] = useState(false);

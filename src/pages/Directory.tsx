@@ -38,6 +38,7 @@ const Directory: React.FC = () => {
   const [carpOpen, setCarpOpen] = useState(false);
   const [matchOpen, setMatchOpen] = useState(false); 
   const [coarseOpen, setCoarseOpen] = useState(false);
+  const [generalOpen, setgeneralOpen] = useState(false);
 
   const districts: UKDistrict[] = [
     'Cumbria', 'Dumfries & Galloway', 'Yorkshire', 'Hampshire', 'Kent', 'Essex', 'Sussex', 'Dorset',

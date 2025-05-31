@@ -50,6 +50,7 @@ export interface Fishery {
   fishery_of_the_week?: boolean;
   record_biggest_fish?: string;
   record_match_weight?: string;
+  access_all_hours?: boolean;
 }
 
 export interface Lake {

@@ -596,6 +596,9 @@ const Directory: React.FC = () => {
         />
         <label htmlFor="family-friendly" className="text-xs text-gray-700 font-medium">Family Friendly</label>
       </div>
+      </div>
+                )}
+              </div>
                
 
               {/* COARSE FISHING FILTERS */}

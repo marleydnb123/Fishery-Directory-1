@@ -464,7 +464,7 @@ const Directory: React.FC = () => {
             <button
             type="button"
             onClick={() => setGeneralOpen(!generalOpen)}
-          className="w-full flex items-center justify-between p-3 text-left rounded-xl hover:bg-customBlue/50 hover:rounded-xl transition-colors"
+          className="w-full flex items-center justify-between p-3 text-left rounded-xl hover:bg-customBlue/10 hover:rounded-xl transition-colors"
           >
           <h3 className="text-sm font-bold text-gray-800">GENERAL FACTS</h3>
           <svg

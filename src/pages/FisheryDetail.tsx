@@ -561,10 +561,7 @@ const FisheryDetail: React.FC = () => {
           </div>
           <span className="text-2xl font-bold text-rose-800">{fishery.facilities?.length || 0}</span>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+     
                 {/* Dropdown Toggle */}
                 <div className="relative mt-1">
                   <button

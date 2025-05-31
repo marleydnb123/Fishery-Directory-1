@@ -52,6 +52,7 @@ export interface Fishery {
   record_match_weight?: string;
   access_all_hours?: boolean;
   guests_allowed?: boolean;
+  under_18?: boolean;
 }
 
 export interface Lake {

@@ -349,7 +349,8 @@ const Directory: React.FC = () => {
               Reset Filters
             </button>
           </form>
- 
+
+          {/* DROPDOWN FILTERS */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4"> 
             <div className="flex flex-col gap-3"> 
               <div>
@@ -410,6 +411,8 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
+
+            {/* SEARCH FILTERS */}
             <div className="flex flex-col gap-3">
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1 ">Water Features</label> 

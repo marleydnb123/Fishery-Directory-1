@@ -521,6 +521,15 @@ const Directory: React.FC = () => {
           id="under-18"
         />
         <label htmlFor="under-18's" className="text-xs text-gray-700 font-medium">Under 18's</label>
+         <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={disabledAccess}
+                        onChange={() => setDisabledAccess(!disabledAccess)}
+                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+                        id="disabled-access"
+                      />
+                      <label htmlFor="disabled-access" className="text-xs text-gray-700 font-medium">Disabled Access</label>
                   </div>
                 </div>
                 )}
@@ -658,15 +667,7 @@ const Directory: React.FC = () => {
                       />
                       <label htmlFor="night-fishing" className="text-xs text-gray-700 font-medium">Night Fishing Allowed</label>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={disabledAccess}
-                        onChange={() => setDisabledAccess(!disabledAccess)}
-                        className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-                        id="disabled-access"
-                      />
-                      <label htmlFor="disabled-access" className="text-xs text-gray-700 font-medium">Disabled Access</label>
+                   
                     </div>
                     <div className="flex items-center gap-2">
                       <input

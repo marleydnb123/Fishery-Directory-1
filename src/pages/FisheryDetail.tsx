@@ -517,6 +517,33 @@ const FisheryDetail: React.FC = () => {
               {/* Dynamic Third Stat with Dropdown */}
               <div className="flex flex-col items-center relative">
                 <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>  
+
+                {/* Fish Species Count */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-100">
+                  <div className="flex items-center justify-center mb-1">
+                    <Fish className="h-4 w-4 text-purple-600 mr-2" />
+                    <span className="text-xs font-medium text-purple-700 uppercase tracking-wide">Species Available</span>
+                  </div>
+                  <span className="text-2xl font-bold text-purple-800">{fishery.species?.length || 0}</span>
+                </div>
+
+                {/* Water Features Count */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-100">
+                  <div className="flex items-center justify-center mb-1">
+                    <Waves className="h-4 w-4 text-cyan-600 mr-2" />
+                    <span className="text-xs font-medium text-cyan-700 uppercase tracking-wide">Water Features</span>
+                  </div>
+                  <span className="text-2xl font-bold text-cyan-800">{fishery.features?.length || 0}</span>
+                </div>
+
+                {/* Facilities Count */}
+                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-rose-50 to-pink-50 border border-rose-100">
+                  <div className="flex items-center justify-center mb-1">
+                    <MapPin className="h-4 w-4 text-rose-600 mr-2" />
+                    <span className="text-xs font-medium text-rose-700 uppercase tracking-wide">Facilities</span>
+                  </div>
+                  <span className="text-2xl font-bold text-rose-800">{fishery.facilities?.length || 0}</span>
+                </div>
                 
                 {/* Dropdown Toggle */}
                 <div className="relative mt-1">

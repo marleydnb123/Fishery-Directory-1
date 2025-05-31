@@ -458,6 +458,41 @@ const Directory: React.FC = () => {
                 Advanced Filters
               </h3>
 
+
+              {/* GENERAL FACTS FILTERS */}
+            <div className="border border-gray-200 rounded-lg mb-4">
+            <button
+            type="button"
+            onClick={() => setGeneralOpen(!generalOpen)}
+          className="w-full flex items-center justify-between p-3 text-left rounded-xl hover:bg-customBlue/50 hover:rounded-xl transition-colors"
+          >
+          <h3 className="text-sm font-bold text-gray-800">GENERAL FACTS</h3>
+          <svg
+          className={`w-4 h-4 transition-transform ${generalOpen ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+      </svg>
+      </button>
+        {generalOpen && (
+        <div className="px-3 pb-3 space-y-2">
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={accessAllHours}
+          onChange={() => setaccessAllHours(!accessAllHours)}
+          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+          id="24-hour-access"
+            />
+          <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
+                  </div>
+                </div>
+                )}
+              </div>
+
+              
               {/* CARP FISHING FILTERS */}
               <div className="border border-gray-200 rounded-lg">
                 <button
@@ -512,38 +547,7 @@ const Directory: React.FC = () => {
               </div>
 
               
-              {/* GENERAL FACTS FILTERS */}
-            <div className="border border-gray-200 rounded-lg mb-4">
-            <button
-            type="button"
-            onClick={() => setGeneralOpen(!generalOpen)}
-          className="w-full flex items-center justify-between p-3 text-left rounded-xl hover:bg-customBlue/50 hover:rounded-xl transition-colors"
-          >
-          <h3 className="text-sm font-bold text-gray-800">GENERAL FACTS</h3>
-          <svg
-          className={`w-4 h-4 transition-transform ${generalOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-      </svg>
-      </button>
-        {generalOpen && (
-        <div className="px-3 pb-3 space-y-2">
-      <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          checked={accessAllHours}
-          onChange={() => setaccessAllHours(!accessAllHours)}
-          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-          id="24-hour-access"
-            />
-          <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
-                  </div>
-                </div>
-                )}
-              </div>
+              
 
               {/* MATCH FISHING FILTERS */}
              

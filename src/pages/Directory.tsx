@@ -223,7 +223,6 @@ const Directory: React.FC = () => {
     tackleHire,
     coaching,
     keepnetsAllowed,
-    bookingType,
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value); 

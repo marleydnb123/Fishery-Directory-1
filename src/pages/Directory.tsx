@@ -462,6 +462,7 @@ const Directory: React.FC = () => {
               </h3>
 
 
+              {/* CHECKBOXES FILTERS */}
               {/* GENERAL FACTS FILTERS */}
             <div className="border border-gray-200 rounded-lg ">
             <button

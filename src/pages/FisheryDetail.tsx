@@ -503,7 +503,7 @@ const FisheryDetail: React.FC = () => {
           <div className="lg:col-span-1 flex justify-center lg:justify-end">
             <div className="w-full max-w-xs bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl shadow-lg border border-slate-200/50 p-6">
               {/* Title */}
-              <div className="text-center mb-8">
+              <div className="text-center mb-4">
                 <h3 className="text-lg font-bold text-slate-800 ">Quick Stats</h3>
                 <div className="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-blue-400 mx-auto rounded-full"></div>
               </div>

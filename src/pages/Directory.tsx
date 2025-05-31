@@ -456,7 +456,10 @@ const Directory: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  
+  {/* LEFT COLUMN */}
+  <div className="space-y-4">
               <h3 className="block text-xs font-semibold text-gray-600">
                 Advanced Filters
               </h3>

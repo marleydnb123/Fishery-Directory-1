@@ -342,7 +342,7 @@ const Directory: React.FC = () => {
                 setprivateHire(false);
                 settackleHire(false);
                 setcoaching(false);
-                setAccess_All_Hours(false);
+                setaccessAllHours(false);
               }}
               className="px-5 py-2 bg-customBlue  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
             >
@@ -535,7 +535,7 @@ const Directory: React.FC = () => {
         <input
           type="checkbox"
           checked={Access_All_Hours}
-          onChange={() => setAccessAllHours(!Access_All_Hours)}
+          onChange={() => setaccessAllHours(!accessAllHours)}
           className="w-4 h-4 accent-blue-600 rounded border-gray-300"
           id="24-hour-access"
         />

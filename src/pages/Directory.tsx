@@ -449,7 +449,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCarpOpen(!carpOpen)}
-                  className="w-full flex items-center justify-between p-3 rounded-xl text-left  hover:rounded-xl transition-colors"
+                  className="w-full flex items-center justify-between p-2 rounded-xl text-left  hover:rounded-xl transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">CARP</h3>
                   <svg
@@ -502,7 +502,7 @@ const Directory: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setMatchOpen(!matchOpen)}
-                  className="w-full flex items-center justify-between p-3 text-left rounded-xl text-left hover:rounded-xl  transition-colors"
+                  className="w-full flex items-center justify-between p-2 text-left rounded-xl text-left hover:rounded-xl  transition-colors"
                 >
                   <h3 className="text-sm font-bold text-gray-800">MATCH</h3>
                   <svg

@@ -501,7 +501,12 @@ const FisheryDetail: React.FC = () => {
 
           {/* Right Column - Stats Card */}
           <div className="lg:col-span-1 flex justify-center lg:justify-end">
-            <div className="w-full max-w-xs bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl shadow-lg border border-slate-200/50 p-6"> 
+            <div className="w-full max-w-xs bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl shadow-lg border border-slate-200/50 p-6">
+              {/* Title */}
+              <div className="text-center mb-6">
+                <h3 className="text-lg font-bold text-slate-800 mb-1">Quick Stats</h3>
+                <div className="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-blue-400 mx-auto rounded-full"></div>
+              </div>
               {/* Visitors */}
               <div className="flex flex-col items-center"> 
                 <span className="text-3xl font-bold text-grey-600">{fishery.visit_count}</span>

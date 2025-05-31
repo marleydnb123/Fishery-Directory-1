@@ -537,7 +537,7 @@ const FisheryDetail: React.FC = () => {
                 </div>
               </div> 
               {/* Facilities Count */}
-                <div className="w-full text-center p-4 rounded-xl bg-gradient-to-b from-blue-50 via-white to-blue-100 border border-slate-100">
+                <div className="w-full mb-4 text-center p-4 rounded-xl bg-gradient-to-b from-blue-50 via-white to-blue-100 border border-slate-100">
                   <span className="text-2xl font-bold text-slate-800">{fishery.facilities?.length || 0}</span>
                   <div className="flex items-center justify-center mt-2">
                     <MapPin className="h-4 w-4 text-slate-600 mr-2" />

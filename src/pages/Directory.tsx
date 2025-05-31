@@ -213,7 +213,7 @@ const Directory: React.FC = () => {
       results = results.filter(fishery => fishery.accessAllHours);
     }
     if (guestsAllowed) {
-      results = results.filter(fishery => fishery.guestsAllowed)
+      results = results.filter(fishery => fishery.guestsAllowed);
     }
     
   }, [

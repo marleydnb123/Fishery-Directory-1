@@ -33,6 +33,7 @@ const Directory: React.FC = () => {
   const [tackleHire, settackleHire] = useState(false);
   const [coaching, setcoaching] = useState(false);
   const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
+  const [24Hour, set24Hour] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
   const [carpOpen, setCarpOpen] = useState(false);
@@ -96,6 +97,7 @@ const Directory: React.FC = () => {
             tackleHire: !!f.tackle_hire,
             coaching: !!f.coaching,
             keepnetsAllowed: !!f.keepnets_allowed,
+            24Hour: !!f.24_hour, 
           }))
         );
       }
@@ -205,6 +207,9 @@ const Directory: React.FC = () => {
     if (keepnetsAllowed) {
       results = results.filter(fishery => fishery.keepnetsAllowed);
     }
+    if (24Hour) {
+      results = results.filter(fishery => fishery.24Hour);
+    }
     setFilteredFisheries(results);
   }, [
     fisheries,
@@ -232,6 +237,7 @@ const Directory: React.FC = () => {
     tackleHire,
     coaching,
     keepnetsAllowed,
+    24Hour,
   ]);
 
   const handleFeatureSearch = (e: React.ChangeEvent<HTMLInputElement>) => setFeatureSearchTerm(e.target.value); 
@@ -336,6 +342,7 @@ const Directory: React.FC = () => {
                 setprivateHire(false);
                 settackleHire(false);
                 setcoaching(false);
+                set24Hour(false);
               }}
               className="px-5 py-2 bg-customBlue  hover:bg-gray-600 text-white font-medium rounded-lg shadow text-sm"
             >
@@ -527,42 +534,12 @@ const Directory: React.FC = () => {
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
-          checked={twentyFourHourAccess}
-          onChange={() => setTwentyFourHourAccess(!twentyFourHourAccess)}
+          checked={24hour}
+          onChange={() => set24Hour(!24Hour)}
           className="w-4 h-4 accent-blue-600 rounded border-gray-300"
           id="24-hour-access"
         />
         <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
-      </div>
-      <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          checked={guestsAllowed}
-          onChange={() => setGuestsAllowed(!guestsAllowed)}
-          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-          id="guests-allowed"
-        />
-        <label htmlFor="guests-allowed" className="text-xs text-gray-700 font-medium">Guests Allowed</label>
-      </div>
-      <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          checked={underEighteens}
-          onChange={() => setUnderEighteens(!underEighteens)}
-          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-          id="under-18s"
-        />
-        <label htmlFor="under-18s" className="text-xs text-gray-700 font-medium">Under 18's</label>
-      </div>
-      <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          checked={familyFriendly}
-          onChange={() => setFamilyFriendly(!familyFriendly)}
-          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
-          id="family-friendly"
-        />
-        <label htmlFor="family-friendly" className="text-xs text-gray-700 font-medium">Family Friendly</label>
       </div>
       </div>
                 )}

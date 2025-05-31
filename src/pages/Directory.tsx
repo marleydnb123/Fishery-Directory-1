@@ -155,9 +155,9 @@ const Directory: React.FC = () => {
     if (firePitsAllowed) {
       results = results.filter(fishery => fishery.firePitsAllowed);
     }
-    if (bookingType) {
+    if (selectedbookingType) {
       results = results.filter(fishery =>
-        fishery.bookingType && fishery.bookingType.toLowerCase() === bookingType
+        fishery.bookingType && fishery.bookingType.toLowerCase() === selectedbookingType
       );
     }
     if (parkingClose) {
@@ -210,7 +210,7 @@ const Directory: React.FC = () => {
     dogFriendly,
     priceRange,
     firePitsAllowed,
-    bookingType,
+    selectedbookingType,
     parkingClose,
     campingAllowed,
     catchPhotos,
@@ -383,8 +383,8 @@ const Directory: React.FC = () => {
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">Booking</label>
                 <select
-                  value={bookingType}
-                  onChange={e => setBookingType(e.target.value)}
+                  value={selectedbookingType}
+                  onChange={e => setbookingType(e.target.value)}
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-transparent"
                 >
                   <option value="">All</option>
@@ -628,6 +628,7 @@ const Directory: React.FC = () => {
                         id="tackleshop"
                       />
                       <label htmlFor="tackleshop" className="text-xs text-gray-700 font-medium">Tackle Shop On-site</label>
+                    
                     </div>
                     <div className="flex items-center gap-2">
                       <input

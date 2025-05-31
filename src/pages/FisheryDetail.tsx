@@ -581,8 +581,7 @@ const FisheryDetail: React.FC = () => {
             {/* --- End Water Features Section --- */}
 
             </div>
-
-           {/* --- Images Section (Animated, Scalable on Hover) --- */}
+{/* --- Images Section (Animated, Scalable on Hover, Expandable) --- */}
 <style>
 {`
 .img-hover-zoom {
@@ -591,6 +590,7 @@ const FisheryDetail: React.FC = () => {
   box-shadow: 0 4px 24px rgba(0,0,0,0.07);
   position: relative;
   background: #f3f4f6;
+  cursor: pointer;
 }
 .img-hover-zoom img {
   width: 100%;
@@ -618,9 +618,56 @@ const FisheryDetail: React.FC = () => {
 .img-hover-zoom:hover::after {
   background: rgba(0,0,0,0.03);
 }
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeInModal 0.3s forwards;
+}
+@keyframes fadeInModal {
+  to { opacity: 1; }
+}
+.modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+  transform: scale(0.8);
+  animation: scaleInModal 0.3s forwards;
+}
+@keyframes scaleInModal {
+  to { transform: scale(1); }
+}
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+.close-button {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.close-button:hover {
+  background: rgba(255, 255, 255, 1);
+}
 `}
 </style>
-
 <div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-0 mb-16 overflow-hidden">
   {/* Gradient Header Bar */}
   <div
@@ -635,19 +682,19 @@ const FisheryDetail: React.FC = () => {
   {/* Images Content */}
   <div className="p-6">
     <div className="flex flex-col md:flex-row gap-6">
-      <div className="img-hover-zoom flex-1">
+      <div className="img-hover-zoom flex-1" onClick={() => setExpandedImage(fishery.fisheryimages1 || "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80")}>
         <img
           src={fishery.fisheryimages1 || "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"}
           alt="Fishery image 1"
         />
       </div>
-      <div className="img-hover-zoom flex-1">
+      <div className="img-hover-zoom flex-1" onClick={() => setExpandedImage(fishery.fisheryimages2 || "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80")}>
         <img
           src={fishery.fisheryimages2 || "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80"}
           alt="Fishery image 2"
         />
       </div>
-      <div className="img-hover-zoom flex-1">
+      <div className="img-hover-zoom flex-1" onClick={() => setExpandedImage(fishery.fisheryimages3 || "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80")}>
         <img
           src={fishery.fisheryimages3 || "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"}
           alt="Fishery image 3"
@@ -656,8 +703,23 @@ const FisheryDetail: React.FC = () => {
     </div>
   </div>
 </div>
-{/* --- End Images Section --- */}
 
+{/* Modal for expanded image */}
+{expandedImage && (
+  <div className="modal-overlay" onClick={() => setExpandedImage(null)}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <button className="close-button" onClick={() => setExpandedImage(null)}>
+        ×
+      </button>
+      <img
+        src={expandedImage}
+        alt="Expanded view"
+        className="modal-image"
+      />
+    </div>
+  </div>
+)}
+{/* --- End Images Section --- */}
              
 
                       {/* --- Video Section (supports YouTube, Vimeo, MP4, etc.) --- */}

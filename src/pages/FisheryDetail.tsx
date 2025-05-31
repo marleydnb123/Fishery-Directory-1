@@ -536,15 +536,15 @@ const FisheryDetail: React.FC = () => {
                   <span className="text-xs font-medium text-slate-700 uppercase tracking-wide">Water Features</span>
                 </div>
               </div> 
-              {/* Dynamic Third Stat with Dropdown */}
-              <div className="flex flex-col items-center relative">
-                <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>  
-                {/* Facilities Count */}
+               {/* Facilities Count */}
                 <div className="w-full text-center p-4 rounded-xl bg-gradient-to-b from-blue-50 via-white to-blue-100 border border-slate-100">
                   <span className="text-2xl font-bold text-slate-800">{fishery.facilities?.length || 0}</span>
                   <div className="flex items-center justify-center mt-2">
                     <MapPin className="h-4 w-4 text-slate-600 mr-2" />
                     <span className="text-xs font-medium text-slate-700 uppercase tracking-wide">Facilities</span>
+              {/* Dynamic Third Stat with Dropdown */}
+              <div className="flex flex-col items-center relative">
+                <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>  
                   </div>
                 </div>
                 

@@ -41,6 +41,7 @@ type Fishery = {
   payments: string[];
   // Add these new fields
   fishing_type: string[];
+  booking_type: string[];
   record_biggest_fish?: string | null;
   record_match_weight?: string | null;
   stock?: string | null;

@@ -28,11 +28,11 @@ const Directory: React.FC = () => {
   const [wifiSignal, setWifiSignal] = useState('');
   const [baitBoats, setBaitBoats] = useState(false);
   const [magicTwig, setMagicTwig] = useState(false);
-  const [tackleShop, settackleShop] = useState(false);
-  const [privateHire, setprivateHire] = useState(false);
-  const [tackleHire, settackleHire] = useState(false);
-  const [coaching, setcoaching] = useState(false);
-  const [keepnetsAllowed, setkeepnetsAllowed] = useState(false);
+  const [tackleShop, setTackleShop] = useState(false);
+  const [privateHire, setPrivateHire] = useState(false);
+  const [tackleHire, setTackleHire] = useState(false);
+  const [coaching, setCoaching] = useState(false);
+  const [keepnetsAllowed, setKeepnetsAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
   const [carpOpen, setCarpOpen] = useState(false);
@@ -48,7 +48,13 @@ const Directory: React.FC = () => {
     'Carp', 'Pike', 'Tench', 'Bream', 'Roach', 'Perch', 'Trout', 'Catfish', 'Eel', 'Barbel', 'Gudgeon'
   ];
 
- 
+  const bookingTypes: string[] = [
+    'Day Ticket',
+    'Season Ticket', 
+    'Membership Required',
+    'Private Hire Only',
+    'Advanced Booking',
+  ];
 
   useEffect(() => {
     const fetchFisheries = async () => {
@@ -67,14 +73,14 @@ const Directory: React.FC = () => {
             isFeatured: !!f.isfeatured,
             hasAccommodation: !!f.hasaccommodation,
             nightFishingAllowed: !!f.night_fishing_allowed,
-            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type : [],
+            fishingType: Array.isArray(f.fishing_type) ? f.fishing_type : (f.fishing_type ? f.fishing_type.split(',') : []),
             matchFishingFriendly: !!f.match_fishing_friendly,
             disabledAccess: !!f.disabled_access,
             facilities: Array.isArray(f.facilities) ? f.facilities : (f.facilities ? f.facilities.split(',') : []),
             dogFriendly: !!f.dog_friendly,
             priceRange: f.price_range,
             firePitsAllowed: !!f.fire_pits_allowed,
-            bookingType: Array.isArray(f.booking_type) ? f.booking_type : [],
+            bookingType: Array.isArray(f.booking_type) ? f.booking_type : (f.booking_type ? f.booking_type.split(',') : []),
             parkingClose: !!f.parking_close,
             campingAllowed: !!f.camping_allowed,
             catchPhotos: !!f.catch_photos,

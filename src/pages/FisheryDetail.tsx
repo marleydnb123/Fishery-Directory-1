@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Fish, Info, Book, Phone, Waves, ChevronDown, Users } from 'lucide-react';
+import { MapPin, Fish, Info, Book, Phone, Waves, ChevronDown, Users, Trophy } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
 import GoogleMap from '../components/common/GoogleMap'; 

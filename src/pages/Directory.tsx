@@ -48,11 +48,8 @@ const Directory: React.FC = () => {
   ];
 
   const bookingTypes: string[] = [
-  'Day Ticket',
-  'Season Ticket', 
-  'Membership Required',
-  'Private Hire Only',
-  'Advanced Booking',
+  'booking required',
+  'day tickets'
   // Add other booking types as needed
 ];
 
@@ -166,9 +163,7 @@ const Directory: React.FC = () => {
     if (selectedbookingType) {
       results = results.filter(fishery =>
         Array.isArray(fishery.bookingType) && 
-        fishery.bookingType.some(type => 
-          type?.toLowerCase() === selectedbookingType.toLowerCase()
-        )
+        fishery.booking_type.includes(selectedbookingType)
       );
     }
     if (parkingClose) {
@@ -393,8 +388,11 @@ const Directory: React.FC = () => {
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-transparent"
                 >
                   <option value="">All</option>
-                  <option value="booking required">Booking Required</option>
-                  <option value="day tickets">Day Tickets</option>
+                  {bookingTypes.map(type => (
+                    <option key={type} value={type}>
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

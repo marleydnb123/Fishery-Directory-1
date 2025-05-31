@@ -460,7 +460,7 @@ const Directory: React.FC = () => {
 
 
               {/* GENERAL FACTS FILTERS */}
-            <div className="border border-gray-200 rounded-lg mb-4">
+            <div className="border border-gray-200 rounded-lg mb-1">
             <button
             type="button"
             onClick={() => setGeneralOpen(!generalOpen)}

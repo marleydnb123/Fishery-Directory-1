@@ -502,6 +502,8 @@ const Directory: React.FC = () => {
                   </div>
                 )}
               </div>
+
+              {/* MATCH FISHING FILTERS */}
              
               <div className="border border-gray-200 rounded-lg">
                 <button

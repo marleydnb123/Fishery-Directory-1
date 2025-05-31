@@ -164,6 +164,7 @@ const FisheryDetail: React.FC = () => {
         species: Array.isArray(fisheryData.species) ? fisheryData.species : [],
         features: Array.isArray(fisheryData.features) ? fisheryData.features : [],
         fishing_type: Array.isArray(fisheryData.fishing_type) ? fisheryData.fishing_type : [],
+        booking_type: Array.isArray(fisheryData.booking_type) ? fisheryData.booking_type : [],
         pricing: Array.isArray(fisheryData.pricing) ? fisheryData.pricing : [], 
         opening_times: Array.isArray(fisheryData.opening_times) ? fisheryData.opening_times : [],
         day_tickets: Array.isArray(fisheryData.day_tickets) ? fisheryData.day_tickets : [],

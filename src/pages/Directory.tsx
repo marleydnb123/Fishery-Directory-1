@@ -48,10 +48,9 @@ const Directory: React.FC = () => {
   ];
 
   const bookingTypes: string[] = [
-  'booking required',
-  'day tickets'
-  // Add other booking types as needed
-];
+    'booking required',
+    'day tickets'
+  ];
 
   useEffect(() => {
     const fetchFisheries = async () => {
@@ -77,7 +76,7 @@ const Directory: React.FC = () => {
             dogFriendly: !!f.dog_friendly,
             priceRange: f.price_range,
             firePitsAllowed: !!f.fire_pits_allowed,
-            bookingType: Array.isArray(f.booking_type) ? f.booking_type : [f.booking_type].filter(Boolean),
+            bookingType: Array.isArray(f.booking_type) ? f.booking_type : [],
             parkingClose: !!f.parking_close,
             campingAllowed: !!f.camping_allowed,
             catchPhotos: !!f.catch_photos,
@@ -163,7 +162,7 @@ const Directory: React.FC = () => {
     if (selectedbookingType) {
       results = results.filter(fishery =>
         Array.isArray(fishery.bookingType) && 
-        fishery.booking_type.includes(selectedbookingType)
+        fishery.bookingType.includes(selectedbookingType)
       );
     }
     if (parkingClose) {
@@ -775,4 +774,3 @@ const Directory: React.FC = () => {
 };
 
 export default Directory;
-

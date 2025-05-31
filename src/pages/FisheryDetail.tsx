@@ -540,7 +540,7 @@ const FisheryDetail: React.FC = () => {
               <div className="flex flex-col items-center relative">
                 <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>  
                
-                  </div>
+                  
                
                 {/* Dropdown Toggle */}
                 <div className="relative mt-1">

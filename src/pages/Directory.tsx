@@ -488,6 +488,16 @@ const Directory: React.FC = () => {
             />
           <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
                   </div>
+          <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={accessAllHours}
+          onChange={() => setaccessAllHours(!accessAllHours)}
+          className="w-4 h-4 accent-blue-600 rounded border-gray-300"
+          id="24-hour-access"
+            />
+          <label htmlFor="24-hour-access" className="text-xs text-gray-700 font-medium">24 Hour Access</label>
+                  </div>
                 </div>
                 )}
               </div>

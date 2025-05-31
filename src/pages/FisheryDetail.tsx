@@ -500,7 +500,7 @@ const FisheryDetail: React.FC = () => {
           onClick={() => setIsDropdownOpen(false)}
         />
       )}
-    </div>
+
                     {/* Show multiple types indicator for auto mode */}
                     {selectedStat === 'auto' && getAutoStatValue(fishery).hasMultipleTypes && (
                       <span className="text-xs text-blue-500 mt-1 text-center">

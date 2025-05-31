@@ -386,7 +386,7 @@ const Directory: React.FC = () => {
                 <label className="block text-xs font-semibold text-gray-600 mb-1">Booking</label>
                 <select
                   value={bookingType}
-                  onChange={e => setBookingType(e.target.value)}
+                  onChange={e => setbookingType(e.target.value)}
                   className="w-full p-2 border border-gray-200 rounded focus:ring-1 focus:ring-blue-400 text-sm bg-transparent"
                 >
                   <option value="">All</option>

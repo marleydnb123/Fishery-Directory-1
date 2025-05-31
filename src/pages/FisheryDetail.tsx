@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Fish, Info, Book, Phone, Waves } from 'lucide-react';
+import { MapPin, Fish, Info, Book, Phone, Waves, ChevronDown } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ReactPlayer from 'react-player';
 import GoogleMap from '../components/common/GoogleMap'; 
@@ -70,6 +70,14 @@ type FisheryVisit = {
   last_visited: string;
 }
 
+// Define available stats
+type StatOption = {
+  key: string;
+  label: string;
+  value: (fishery: Fishery) => string;
+  condition?: (fishery: Fishery) => boolean;
+};
+
 const FisheryDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [fishery, setFishery] = useState<Fishery | null>(null);
@@ -78,6 +86,10 @@ const FisheryDetail: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'lakes' | 'accommodation' | 'rules'>('overview');
   const [loading, setLoading] = useState(true);
   const [visitUpdated, setVisitUpdated] = useState(false);
+  
+  // New state for stat selection
+  const [selectedStat, setSelectedStat] = useState<string>('auto');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Function to update visit count
   const updateVisitCount = async (fisheryId: string) => {
@@ -190,13 +202,43 @@ const FisheryDetail: React.FC = () => {
     }
   }, [fishery, visitUpdated]);
 
-  // Helper function to render the third stat based on fishing type
-  const renderThirdStat = () => {
+  // Define available stat options
+  const getStatOptions = (fishery: Fishery): StatOption[] => {
+    if (!fishery) return [];
+
+    return [
+      {
+        key: 'auto',
+        label: 'Auto (Smart)',
+        value: () => getAutoStatValue(fishery).value,
+      },
+      {
+        key: 'match_weight',
+        label: 'Match Weight',
+        value: (f) => f.record_match_weight || '—',
+        condition: (f) => f.fishing_type.includes('Match'),
+      },
+      {
+        key: 'stock',
+        label: 'Stock Info',
+        value: (f) => f.stock || '—',
+        condition: (f) => f.fishing_type.includes('Specimen'),
+      },
+      {
+        key: 'average_weight',
+        label: 'Average Weight',
+        value: (f) => f.average_weight || '—',
+        condition: (f) => f.fishing_type.includes('Coarse'),
+      },
+    ].filter(option => !option.condition || option.condition(fishery));
+  };
+
+  // Auto stat logic (your existing logic)
+  const getAutoStatValue = (fishery: Fishery) => {
     if (!fishery || !fishery.fishing_type || fishery.fishing_type.length === 0) {
       return { value: '—', label: 'N/A' };
     }
 
-    // Check for multiple types and prioritize
     const hasMatch = fishery.fishing_type.includes('Match');
     const hasSpecimen = fishery.fishing_type.includes('Specimen');
     const hasCoarse = fishery.fishing_type.includes('Coarse');
@@ -204,11 +246,9 @@ const FisheryDetail: React.FC = () => {
     let value: string | null = null;
     let label = '';
 
-    // Priority order: Match > Specimen > Coarse
     if (hasMatch) {
       value = fishery.record_match_weight ?? null;
       label = 'Record Match Weight';
-      // If multiple types, add indicator
       if (hasSpecimen || hasCoarse) {
         label += ' (Primary)';
       }
@@ -233,6 +273,25 @@ const FisheryDetail: React.FC = () => {
     };
   };
 
+  // Get current stat display
+  const getCurrentStatDisplay = () => {
+    if (!fishery) return { value: '—', label: 'N/A' };
+
+    const statOptions = getStatOptions(fishery);
+    const currentOption = statOptions.find(opt => opt.key === selectedStat);
+    
+    if (!currentOption) return { value: '—', label: 'N/A' };
+
+    if (selectedStat === 'auto') {
+      return getAutoStatValue(fishery);
+    }
+
+    return {
+      value: currentOption.value(fishery),
+      label: currentOption.label,
+    };
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center">
@@ -248,6 +307,9 @@ const FisheryDetail: React.FC = () => {
       </div>
     );
   }
+
+  const statOptions = getStatOptions(fishery);
+  const currentStat = getCurrentStatDisplay();
 
   return (
     <div className="min-h-screen pb-16 bg-gray-50">
@@ -365,7 +427,7 @@ const FisheryDetail: React.FC = () => {
                 About {fishery.name} 
               </h2> 
 
-              {/* Stats Card */}
+              {/* Enhanced Stats Card with Dropdown */}
               <div className="mb-8">
                 <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
                   {/* Visitors */}
@@ -382,62 +444,64 @@ const FisheryDetail: React.FC = () => {
                   </div> 
                   <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
                   
-                  {/* Dynamic Third Stat */}
-                  <div className="flex-1 flex flex-col items-center">
-                    <span className="text-3xl font-bold text-grey-600">{renderThirdStat().value}</span>
-                    <span className="text-sm text-grey-600 mt-1 text-center">{renderThirdStat().label}</span>
-                    {renderThirdStat().hasMultipleTypes && (
-                      <span className="text-xs text-blue-500 mt-1">
+                  {/* Dynamic Third Stat with Dropdown */}
+                  <div className="flex-1 flex flex-col items-center relative">
+                    <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>
+                    
+                    {/* Dropdown Toggle */}
+                    <div className="relative mt-1">
+                      <button
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        className="flex items-center text-sm text-grey-600 hover:text-primary-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-white/50"
+                      >
+                        <span className="text-center">{currentStat.label}</span>
+                        <ChevronDown 
+                          className={`h-4 w-4 ml-1 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} 
+                        />
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      {isDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-48 z-10"
+                        >
+                          {statOptions.map((option) => (
+                            <button
+                              key={option.key}
+                              onClick={() => {
+                                setSelectedStat(option.key);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-2 text-sm hover:bg-primary-50 transition-colors duration-150 ${
+                                selectedStat === option.key 
+                                  ? 'bg-primary-100 text-primary-900 font-medium' 
+                                  : 'text-gray-700'
+                              }`}
+                            >
+                              {option.label}
+                              {option.key === 'auto' && (
+                                <span className="text-xs text-gray-500 block">
+                                  Automatically selects best stat
+                                </span>
+                              )}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </div>
+                    
+                    {/* Show multiple types indicator for auto mode */}
+                    {selectedStat === 'auto' && getAutoStatValue(fishery).hasMultipleTypes && (
+                      <span className="text-xs text-blue-500 mt-1 text-center">
                         Multiple types: {fishery.fishing_type.join(', ')}
                       </span>
                     )}
                   </div> 
                 </div>
               </div>
-        
-        {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
-          <p key={i} className="text-gray-700 mb-6">{line}</p>
-        ))} 
-          
-        <div className="flex flex-col gap-6">
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
-              {fishery.facilities && fishery.facilities.length > 0 ? (
-                <ul className="space-y-2 text-gray-700">
-                  {fishery.facilities.map((facility, index) => (
-                    <li key={index} className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                      <span>{facility}</span>
-                    </li>
-                  ))}
-                  {fishery.hasAccommodation && (
-                    <li className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                      <span>Accommodation available</span>
-                    </li>
-                  )}
-                </ul>
-              ) : (
-                <p className="text-gray-500 italic">No facilities information available</p>
-              )}
-          </div>
-                
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
-            <div className="flex flex-wrap gap-2">
-              {(fishery.species || []).map((species, index) => (
-                <span 
-                  key={index}
-                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
-                >
-                  <Fish className="h-4 w-4 mr-1" />
-                  {species}
-                </span> 
-              ))}
-            </div>  
-          </div> 
-        </div> 
- 
 
 
  
@@ -1231,6 +1295,14 @@ rel="noopener noreferrer"
           </div>
         </div> 
       </div>
+    </div>
+  {/* Click outside to close dropdown */}
+      {isDropdownOpen && (
+        <div 
+          className="fixed inset-0 z-5" 
+          onClick={() => setIsDropdownOpen(false)}
+        />
+      )}
     </div>
   );
 };

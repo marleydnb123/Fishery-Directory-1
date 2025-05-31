@@ -581,10 +581,8 @@ const FisheryDetail: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-    </motion.div>
-  )}
-</div>
+   
+
 
             </div>
 {/* --- Images Section (Animated, Scalable on Hover, Expandable) --- */}

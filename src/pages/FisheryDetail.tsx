@@ -411,186 +411,176 @@ const FisheryDetail: React.FC = () => {
       </div>
 
       {/* Content */} 
-<div className="container mx-auto px-4 py-8"> 
-  {activeTab === 'overview' && (
-    <motion.div 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-6 mb-8">
-        
-        <h2
-          className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
-          style={{
-            background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
-          }}
-        >
-          About {fishery.name} 
-        </h2> 
+      <div className="container mx-auto px-4 py-8"> 
+        {activeTab === 'overview' && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="bg-gradient-to-b from-blue-50 via-white to-blue-50 rounded-xl shadow-md p-6 mb-8">
+              
+              <h2
+                className="w-[calc(100%+3rem)] -ml-6 -mr-6 -mt-6 text-3xl font-bebas font-bold rounded-t-lg mb-4 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 text-white px-6 py-4"
+                style={{
+                  background: "linear-gradient(90deg, #1e293b 0%, #334155 60%, #64748b 100%)"
+                }}
+              >
+                About {fishery.name} 
+              </h2> 
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          
-          {/* Left Content - Takes up 2 columns */}
-          <div className="lg:col-span-2">
-            {/* Description */}
-            <div className="mb-6">
-              {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
-                <p key={i} className="text-gray-700 mb-4">{line}</p>
-              ))} 
-            </div>
-            
-            {/* Facilities and Species */}
-            <div className="flex flex-col gap-6">
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
-                {fishery.facilities && fishery.facilities.length > 0 ? (
-                  <ul className="space-y-2 text-gray-700">
-                    {fishery.facilities.map((facility, index) => (
-                      <li key={index} className="flex items-center">
-                        <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                        <span>{facility}</span>
-                      </li>
-                    ))}
-                    {fishery.hasAccommodation && (
-                      <li className="flex items-center">
-                        <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
-                        <span>Accommodation available</span>
-                      </li>
-                    )}
-                  </ul>
-                ) : (
-                  <p className="text-gray-500 italic">No facilities information available</p>
-                )}
-              </div>
-                    
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold mb-3">Available Species</h3>
-                <div className="flex flex-wrap gap-2">
-                  {(fishery.species || []).map((species, index) => (
-                    <span 
-                      key={index}
-                      className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
-                    >
-                      <Fish className="h-4 w-4 mr-1" />
-                      {species}
-                    </span> 
-                  ))}
-                </div>  
-              </div> 
-
-              {/* Water Features Section */}
-              {fishery.features && fishery.features.length > 0 && (
-                <div className="mt-4">
-                  <h3 className="text-lg font-semibold mb-3 flex items-center">
-                    Water Features 
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {fishery.features.map((feature, idx) => ( 
-                      <span
-                        key={idx}
-                        className="inline-flex items-center text-sm bg-blue-100 text-blue-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
-                      >
-                        <Waves className="h-4 w-4 mr-1" />
-                        {feature}
-                      </span>
-                    ))}
+              {/* Enhanced Stats Card with Dropdown */}
+              <div className="mb-8">
+                <div className="bg-gradient-to-r from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6">
+                  {/* Visitors */}
+                  <div className="flex-1 flex flex-col items-center"> 
+                    <span className="text-3xl font-bold text-grey-600">{fishery.visit_count}</span>
+                    <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
                   </div>
-                </div>
-              )}
-            </div>
-          </div>
+                  <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+                  
+                  {/* Record Fish */}
+                  <div className="flex-1 flex flex-col items-center">
+                    <span className="text-3xl font-bold text-grey-600">{fishery.record_biggest_fish ?? '—'}</span>
+                    <span className="text-sm text-grey-600 mt-1">Record/Biggest Fish</span>
+                  </div> 
+                  <div className="hidden sm:block h-12 w-px bg-blue-300 mx-4" />
+                  
+                  {/* Dynamic Third Stat with Dropdown */}
+                  <div className="flex-1 flex flex-col items-center relative">
+                    <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>
+                    
+                    {/* Dropdown Toggle */}
+                    <div className="relative mt-1">
+                      <button
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        className="flex items-center text-sm text-grey-600 hover:text-primary-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-white/50"
+                      >
+                        <span className="text-center">{currentStat.label}</span>
+                        <ChevronDown 
+                          className={`h-4 w-4 ml-1 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} 
+                        />
+                      </button>
 
-          {/* Right Column - Stats Card */}
-          <div className="lg:col-span-1 flex flex-col justify-end">
-            <div className="bg-gradient-to-b from-blue-100 via-blue-50 to-blue-200 rounded-2xl shadow-lg p-6 sticky top-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">Quick Stats</h3>
-              
-              {/* Visitors */}
-              <div className="flex flex-col items-center mb-6 pb-4 border-b border-blue-200"> 
-                <span className="text-3xl font-bold text-grey-600">{fishery.visit_count}</span>
-                <span className="text-sm text-grey-600 mt-1 text-center">Visitors (Monthly)</span>
-              </div>
-              
-              {/* Record Fish */}
-              <div className="flex flex-col items-center mb-6 pb-4 border-b border-blue-200">
-                <span className="text-3xl font-bold text-grey-600">{fishery.record_biggest_fish ?? '—'}</span>
-                <span className="text-sm text-grey-600 mt-1 text-center">Record/Biggest Fish</span>
-              </div> 
-              
-              {/* Dynamic Third Stat with Dropdown */}
-              <div className="flex flex-col items-center relative">
-                <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>
-                
-                {/* Dropdown Toggle */}
-                <div className="relative mt-1">
-                  <button
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="flex items-center text-sm text-grey-600 hover:text-primary-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-white/50"
-                  >
-                    <span className="text-center">{currentStat.label}</span>
-                    <ChevronDown 
-                      className={`h-4 w-4 ml-1 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} 
-                    />
-                  </button>
-
-                  {/* Dropdown Menu */}
-                  {isDropdownOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-48 z-10"
-                    >
-                      {statOptions.map((option) => (
-                        <button
-                          key={option.key}
-                          onClick={() => {
-                            setSelectedStat(option.key);
-                            setIsDropdownOpen(false);
-                          }}
-                          className={`w-full text-left px-4 py-2 text-sm hover:bg-primary-50 transition-colors duration-150 ${
-                            selectedStat === option.key 
-                              ? 'bg-primary-100 text-primary-900 font-medium' 
-                              : 'text-gray-700'
-                          }`}
+                      {/* Dropdown Menu */}
+                      {isDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-48 z-10"
                         >
-                          {option.label}
-                          {option.key === 'auto' && (
-                            <span className="text-xs text-gray-500 block">
-                              Automatically selects best stat
-                            </span>
-                          )}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
+                          {statOptions.map((option) => (
+                            <button
+                              key={option.key}
+                              onClick={() => {
+                                setSelectedStat(option.key);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-2 text-sm hover:bg-primary-50 transition-colors duration-150 ${
+                                selectedStat === option.key 
+                                  ? 'bg-primary-100 text-primary-900 font-medium' 
+                                  : 'text-gray-700'
+                              }`}
+                            >
+                              {option.label}
+                              {option.key === 'auto' && (
+                                <span className="text-xs text-gray-500 block">
+                                  Automatically selects best stat
+                                </span>
+                              )}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </div>
+
+                    {/* Click outside to close dropdown */}
+      {isDropdownOpen && (
+        <div 
+          className="fixed inset-0 z-5" 
+          onClick={() => setIsDropdownOpen(false)}
+        />
+      )}
+
+                    {/* Show multiple types indicator for auto mode */}
+                    {selectedStat === 'auto' && getAutoStatValue(fishery).hasMultipleTypes && (
+                      <span className="text-xs text-blue-500 mt-1 text-center">
+                        Multiple types: {fishery.fishing_type.join(', ')}
+                      </span>
+                    )}
+                  </div> 
                 </div>
-
-                {/* Show multiple types indicator for auto mode */}
-                {selectedStat === 'auto' && getAutoStatValue(fishery).hasMultipleTypes && (
-                  <span className="text-xs text-blue-500 mt-1 text-center">
-                    Multiple types: {fishery.fishing_type.join(', ')}
-                  </span>
-                )}
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Click outside to close dropdown */}
-        {isDropdownOpen && (
-          <div 
-            className="fixed inset-0 z-5" 
-            onClick={() => setIsDropdownOpen(false)}
-          />
-        )}
         
-      </div>
-    </motion.div>
-  )}
-</div>
+        {fishery.descriptionpage.split(/\r?\n/).map((line, i) => ( 
+          <p key={i} className="text-gray-700 mb-6">{line}</p>
+        ))} 
+          
+        <div className="flex flex-col gap-6">
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Facilities</h3> 
+              {fishery.facilities && fishery.facilities.length > 0 ? (
+                <ul className="space-y-2 text-gray-700">
+                  {fishery.facilities.map((facility, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>{facility}</span>
+                    </li>
+                  ))}
+                  {fishery.hasAccommodation && (
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 rounded-full bg-primary-600 mr-2"></div>
+                      <span>Accommodation available</span>
+                    </li>
+                  )}
+                </ul>
+              ) : (
+                <p className="text-gray-500 italic">No facilities information available</p>
+              )}
+          </div>
+                
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-3">Available Species</h3>
+            <div className="flex flex-wrap gap-2">
+              {(fishery.species || []).map((species, index) => (
+                <span 
+                  key={index}
+                  className="inline-flex items-center text-sm bg-primary-100 text-primary-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
+                >
+                  <Fish className="h-4 w-4 mr-1" />
+                  {species}
+                </span> 
+              ))}
+            </div>  
+          </div> 
+        </div> 
+ 
+
+
+ 
+
+              {/* --- Water Features Section --- */}
+            {fishery.features && fishery.features.length > 0 && (
+            <div className="mt-4">
+            <h3 className="text-lg font-semibold mb-3 flex items-center">
+          
+            Water Features 
+            </h3>
+            <div className="flex flex-wrap gap-2">
+            {fishery.features.map((feature, idx) => ( 
+            <span
+            key={idx}
+            className="inline-flex items-center text-sm bg-blue-100 text-blue-900 px-3 py-1 rounded-full transition-transform duration-200 hover:scale-[1.04]"
+            >
+            <Waves className="h-4 w-4 mr-1" />
+            {feature}
+            </span>
+            ))}
+            </div>
+            </div> 
+            )}
+            {/* --- End Water Features Section --- */}
 
             </div>
 {/* --- Images Section (Animated, Scalable on Hover, Expandable) --- */}

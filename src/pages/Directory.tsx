@@ -155,7 +155,7 @@ const Directory: React.FC = () => {
     if (firePitsAllowed) {
       results = results.filter(fishery => fishery.firePitsAllowed);
     }
-    if (selectedBookingType) {
+    if (selectedbookingType) {
       results = results.filter(fishery =>
         Array.isArray(fishery.bookingType) && 
         fishery.bookingType.includes(selectedbookingType)

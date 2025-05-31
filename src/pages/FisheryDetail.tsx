@@ -1297,7 +1297,14 @@ rel="noopener noreferrer"
 </div>
 {/* --- End Reviews Section --- */}
 
-        
+        {/* Click outside to close dropdown */}
+      {isDropdownOpen && (
+        <div 
+          className="fixed inset-0 z-5" 
+          onClick={() => setIsDropdownOpen(false)}
+        />
+      )}
+    </div>
                {/* Contact Bar */}
         <div className="mt-8 rounded-xl shadow-lg p-0 overflow-hidden">
           <div
@@ -1342,13 +1349,6 @@ rel="noopener noreferrer"
     </div>
   );
 };
-{/* Click outside to close dropdown */}
-      {isDropdownOpen && (
-        <div 
-          className="fixed inset-0 z-5" 
-          onClick={() => setIsDropdownOpen(false)}
-        />
-      )}
-    </div>
+
 
 export default FisheryDetail;

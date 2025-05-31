@@ -500,55 +500,49 @@ const FisheryDetail: React.FC = () => {
           </div>
 
           {/* Right Column - Stats Card */}
-          <div className="lg:col-span-1 flex justify-center lg:justify-end">
-            <div className="w-full max-w-xs bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl shadow-lg border border-slate-200/50 p-6">
-              {/* Title */}
-              <div className="text-center mb-6">
-                <h3 className="text-lg font-bold text-slate-800 mb-1">Quick Stats</h3>
-                <div className="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-blue-400 mx-auto rounded-full"></div>
-              </div>
-              
-              {/* Visitors */}
-              <div className="flex flex-col items-center"> 
-                <span className="text-3xl font-bold text-grey-600">{fishery.visit_count}</span>
-                <span className="text-sm text-grey-600 mt-1">Visitors (Monthly)</span>
-              </div>
-               
-              {/* Record Fish */}
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-grey-600">{fishery.record_biggest_fish ?? '—'}</span>
-                <span className="text-sm text-grey-600 mt-1">Record/Biggest Fish</span>
-              </div> 
-               
-              {/* Dynamic Third Stat with Dropdown */}
-              <div className="flex flex-col items-center relative">
-                <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>  
-
-                {/* Fish Species Count */}
-                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-100">
-                  <div className="flex items-center justify-center mb-1">
-                    <Fish className="h-4 w-4 text-purple-600 mr-2" />
-                    <span className="text-xs font-medium text-purple-700 uppercase tracking-wide">Species Available</span>
-                  </div>
-                  <span className="text-2xl font-bold text-purple-800">{fishery.species?.length || 0}</span>
-                </div>
-
-                {/* Water Features Count */}
-                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-100">
-                  <div className="flex items-center justify-center mb-1">
-                    <Waves className="h-4 w-4 text-cyan-600 mr-2" />
-                    <span className="text-xs font-medium text-cyan-700 uppercase tracking-wide">Water Features</span>
-                  </div>
-                  <span className="text-2xl font-bold text-cyan-800">{fishery.features?.length || 0}</span>
-                </div> 
-
-                {/* Facilities Count */}
-                <div className="text-center p-3 rounded-xl bg-gradient-to-r from-rose-50 to-pink-50 border border-rose-100">
-                  <div className="flex items-center justify-center mb-1">
-                    <MapPin className="h-4 w-4 text-rose-600 mr-2" />
-                    <span className="text-xs font-medium text-rose-700 uppercase tracking-wide">Facilities</span>
-                  </div>
-                  <span className="text-2xl font-bold text-rose-800">{fishery.facilities?.length || 0}</span>
+<div className="lg:col-span-1 flex justify-center lg:justify-end">
+  <div className="w-full max-w-xs bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl shadow-lg border border-slate-200/50 p-6">
+    {/* Title */}
+    <div className="text-center mb-6">
+      <h3 className="text-lg font-bold text-slate-800 mb-2">Quick Stats</h3>
+      <div className="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-blue-400 mx-auto rounded-full"></div>
+    </div>
+    
+    {/* Stats Grid */}
+    <div className="space-y-5">
+      {/* Main Stats Row */}
+      <div className="grid grid-cols-2 gap-4">
+        {/* Visitors */}
+        <div className="text-center p-4 rounded-xl bg-white/80 border border-slate-200">
+          <span className="text-3xl font-bold text-slate-700">{fishery.visit_count}</span>
+          <div className="text-sm text-slate-600 mt-2">Visitors (Monthly)</div>
+        </div>
+        
+        {/* Record Fish */}
+        <div className="text-center p-4 rounded-xl bg-white/80 border border-slate-200">
+          <span className="text-3xl font-bold text-slate-700">{fishery.record_biggest_fish ?? '—'}</span>
+          <div className="text-sm text-slate-600 mt-2">Record Fish</div>
+        </div>
+      </div>
+      
+      {/* Feature Stats */}
+      <div className="space-y-4">
+        {/* Fish Species Count */}
+        <div className="text-center p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200">
+          <span className="text-sm font-medium text-blue-700 uppercase tracking-wide">Species Available</span>
+          <div className="text-2xl font-bold text-blue-800 mt-2">{fishery.species?.length || 0}</div>
+        </div>
+        
+        {/* Water Features Count */}
+        <div className="text-center p-4 rounded-xl bg-gradient-to-r from-teal-50 to-cyan-50 border border-teal-200">
+          <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">Water Features</span>
+          <div className="text-2xl font-bold text-teal-800 mt-2">{fishery.features?.length || 0}</div>
+        </div>
+        
+        {/* Facilities Count */}
+        <div className="text-center p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200">
+          <span className="text-sm font-medium text-emerald-700 uppercase tracking-wide">Facilities</span>
+          <div className="text-2xl font-bold text-emerald-800 mt-2">{fishery.facilities?.length || 0}</div>
                 </div>
                 
                 {/* Dropdown Toggle */}

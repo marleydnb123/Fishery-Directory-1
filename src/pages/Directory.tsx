@@ -563,7 +563,7 @@ const Directory: React.FC = () => {
           id="family-friendly"
         />
         <label htmlFor="family-friendly" className="text-xs text-gray-700 font-medium">Family Friendly</label>
-      </div>
+      </div> 
       </div>
                 )}
               </div>

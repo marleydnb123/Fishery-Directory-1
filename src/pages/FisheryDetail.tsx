@@ -1296,16 +1296,8 @@ rel="noopener noreferrer"
         </div> 
       </div>
     </div>
-  {/* Click outside to close dropdown */}
-      {isDropdownOpen && (
-        <div 
-          className="fixed inset-0 z-5" 
-          onClick={() => setIsDropdownOpen(false)}
-        />
-      )}
-    </div>
   );
 };
-
+ 
 
 export default FisheryDetail;

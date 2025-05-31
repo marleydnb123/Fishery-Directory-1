@@ -541,8 +541,7 @@ const FisheryDetail: React.FC = () => {
                 <span className="text-3xl font-bold text-grey-600">{currentStat.value}</span>  
                
                   </div>
-                </div>
-                
+               
                 {/* Dropdown Toggle */}
                 <div className="relative mt-1">
                   <button
